@@ -24,8 +24,11 @@ $debug_cursor_line = New-Object System.Management.Automation.Host.Coordinates 0,
 $Host.UI.RawUI.BufferSize = $gb_size
 $Host.UI.RawUI.WindowSize = $gb_size
 
+
 $colors = [enum]::GetValues([System.ConsoleColor])
 $bufferCellType = [enum]::GetValues([System.Management.Automation.Host.BufferCellType])
+
+$Host.UI.RawUI.BackgroundColor = $($colors[[System.ConsoleColor]::Black])
 
 $pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
 $target_mon = $pokedex | Where-Object {$_.pokedex -eq $pokedexnum}
