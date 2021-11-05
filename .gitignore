@@ -1,0 +1,16 @@
+#python environment stuff
+poshmon-tools/bin
+poshmon-tools/include
+poshmon-tools/lib
+poshmon-tools/pyvenv.cfg
+poshmon-tools/share
+poshmon-tools/lib64
+
+# Python Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+#block the rom
+*.gb
+*.gbc
