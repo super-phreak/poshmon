@@ -12,22 +12,71 @@ param(
     $flip
 )
 
+function Decode-Sprite{
+    param(
+        [parameter(Mandatory=$true)]
+        $Sprite
+    )
+    $sprite_raw = New-Object 'int[]'  ($Sprite.height*$Sprite.width*$TILE_SIZE_RAW)
+    $sprite_decoded = [System.Convert]::FromBase64String($Sprite.data)
+    for ($bytenum=0;$bytenum -lt $sprite_decoded.Length;$bytenum++) {
+        for ($div=0;$div -lt 4;$div++) {
+            $sprite_raw[($bytenum*4)+$div] = (($sprite_decoded[$bytenum] -shr (6 - ($div*2))) -band 3)
+        }
+    }
+    return $sprite_raw
+}
+
+function Add-VBuff{
+    param(
+        [parameter(Mandatory=$true)]
+        $Sprite,
+        [parameter(Mandatory=$true)]
+        [int]$X,
+        [parameter(Mandatory=$true)]
+        [int]$Y,
+        [parameter(Mandatory=$false)][Switch]
+        $Flip
+    )
+
+    if ($flip) {
+        $FLIP_SIGN = -1
+        $FLIP_OFFSET = $sprite.width*$TILE_SIDE_RAW-1
+    } else {
+        $FLIP_SIGN = 1
+        $FLIP_OFFSET = 0
+    }
+    $offset = $X + ($CANVAS_WIDTH*$Y)
+    ##Temp function for now
+    ##WHY ARRAY MATH SO HARD FOR ME SOMETIMES
+    for ($index=0;$index -lt ($sprite.height*$sprite.width*$TILE_SIZE_RAW);$index++) {
+            $v_buff[([MATH]::Floor($index/($sprite.width*$TILE_SIDE_RAW))*$CANVAS_WIDTH)+$offset+(($index%($sprite.width*$TILE_SIDE_RAW))*$FLIP_SIGN)+$FLIP_OFFSET] = $sprite.data[$index]
+    }
+}
+
 
 #PoshMon Tests#
-$TILE_SIZE_RAW = 64
-$TILE_SIDE_RAW = 8
-$TILE_HIEGHT_POSH = 4
+$Script:Logfile = "debug.log"
+Set-Content -Path $Logfile -Value ""
+$script:TILE_SIZE_RAW = 64
+$script:TILE_SIDE_RAW = 8
+$script:TILE_HIEGHT_POSH = 4
 
-$colors = [enum]::GetValues([System.ConsoleColor])
-$bufferCellType = [enum]::GetValues([System.Management.Automation.Host.BufferCellType])
+$script:colors = [enum]::GetValues([System.ConsoleColor])
+$script:bufferCellType = [enum]::GetValues([System.Management.Automation.Host.BufferCellType])
 
-$half_pixel = [char][int]"0x2584"
-$poke_e = [char][int]"0x00e9"
+$script:half_pixel = [char][int]"0x2584"
+$script:poke_e = [char][int]"0x00e9"
 
-$gb_size = New-Object System.Management.Automation.Host.Size(160,72)
+$script:CANVAS_WIDTH = 160
+$script:CANVAS_HEIGHT = 72
+
+$script:v_buff = New-Object 'int[]' ($CANVAS_WIDTH * $CANVAS_HEIGHT * 2)
+
+$script:gb_size = New-Object System.Management.Automation.Host.Size($CANVAS_WIDTH,$CANVAS_HEIGHT)
 $debug_cursor_line = New-Object System.Management.Automation.Host.Coordinates 0, 71
 
-$PIXELS = @(
+$script:PIXELS = @(
     #data packet 0x0 [00,00] [wh,wh]
     [System.Management.Automation.Host.BufferCell]::new($($half_pixel), $($colors[[System.ConsoleColor]::White]),$($colors[[System.ConsoleColor]::White]),$bufferCellType[[System.Management.Automation.Host.BufferCellType]::Complete]),
     #data packet 0x1 [00,01] [wh,gr]
@@ -69,8 +118,17 @@ $Host.UI.RawUI.BackgroundColor = $($colors[[System.ConsoleColor]::Black])
 $Host.UI.RawUI.BufferSize = $gb_size
 $Host.UI.RawUI.WindowSize = $gb_size
 
+
 $pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
-$font = Get-Content '../data/font.json' | ConvertFrom-Json
+$font_file = Get-Content '../data/font.json' | ConvertFrom-Json
+
+$alphabet = New-Object -TypeName System.Collections.Hashtable
+
+
+foreach($letter in $font_file) {
+    $alphabet.add($letter.char, (Decode-Sprite($letter.sprite)))
+}
+
 
 if($PSBoundParameters.ContainsKey('PokedexIndex')) {
     $target_mon = $pokedex | Where-Object {$_.pokedex -eq $PokedexIndex}
@@ -92,10 +150,11 @@ if($PSBoundParameters.ContainsKey('PokedexIndex')) {
     }
 }
 
-$sprite_buffer = New-Object 'System.Management.Automation.Host.BufferCell[,]' ($target_mon.front_sprite.height*4), ($target_mon.front_sprite.width*8)
+$sprite_buffer = New-Object 'System.Management.Automation.Host.BufferCell[,]' ($CANVAS_HEIGHT, $CANVAS_WIDTH)
 
 $sprite_raw = New-Object 'int[]'  ($target_mon.front_sprite.height*$target_mon.front_sprite.width*$TILE_SIZE_RAW)
 $sprite_decoded = [System.Convert]::FromBase64String($target_mon.front_sprite.data)
+
 
 for ($bytenum=0;$bytenum -lt $sprite_decoded.Length;$bytenum++) {
     for ($div=0;$div -lt 4;$div++) {
@@ -103,25 +162,27 @@ for ($bytenum=0;$bytenum -lt $sprite_decoded.Length;$bytenum++) {
     }
 }
 
-if ($flip) {
-    $FLIP_SIGN = -1
-    $FLIP_OFFSET = 1-$target_mon.front_sprite.width*$TILE_SIDE_RAW
-} else {
-    $FLIP_SIGN = 1
-    $FLIP_OFFSET = 0
+$sprite_test_data = @{
+    height = $target_mon.front_sprite.height
+    width = $target_mon.front_sprite.width
+    data = $sprite_raw
 }
 
-##Temp function for now
-##WHY ARRAY MATH SO HARD FOR ME SOMETIMES
-for ($row=0;$row -lt ($target_mon.front_sprite.height*$TILE_HIEGHT_POSH);$row++) {
-    for ($col=0;$col -lt ($target_mon.front_sprite.width*$TILE_SIDE_RAW);$col++) {
-        $sprite_buffer[$row,$col] = $PIXELS[($sprite_raw[((($row * 2)    ) * $target_mon.front_sprite.width*$TILE_SIDE_RAW) + (($FLIP_OFFSET+$col)*$FLIP_SIGN)] -shl 2) + 
-                                             $sprite_raw[((($row * 2) + 1) * $target_mon.front_sprite.width*$TILE_SIDE_RAW) + (($FLIP_OFFSET+$col)*$FLIP_SIGN)]]
+Add-VBuff -Sprite $sprite_test_data -X 0 -Y 0 -Flip
+
+for ($row=0;$row -lt ($CANVAS_HEIGHT);$row++) {
+    for ($col=0;$col -lt ($CANVAS_WIDTH);$col++) {
+        $sprite_buffer[$row,$col] = $PIXELS[($v_buff[((($row * 2)    ) * $CANVAS_WIDTH) + $col] -shl 2) + 
+                                             $v_buff[((($row * 2) + 1) * $CANVAS_WIDTH) + $col]]
     }
 }
+
+
+#Write-Host $v_buff[0..2000]
 # Write-Host ($font | Where-Object {$_.char -ceq $target_mon.pokedex_entry.text[50]})
-Write-Host $target_mon.name $target_mon.index
-Write-Host $target_mon.pokedex_entry.text
-$coords = [System.Management.Automation.Host.Coordinates]::new(16,4)
+# Write-Host $alphabet['a']
+# Write-Host $target_mon.name $target_mon.index
+# Write-Host $target_mon.pokedex_entry.text
+$coords = [System.Management.Automation.Host.Coordinates]::new(0,0)
 $Host.UI.RawUI.SetBufferContents($coords,$sprite_buffer)
 $Host.UI.RawUI.CursorPosition = $debug_cursor_line
