@@ -6,6 +6,7 @@ If you want to run the Powershell command to test the Pokédex you must search b
 * `-Name`
 * `-PokedexIndex`
 * `-InternalIndex`
+
 You cannot combine the switches. There is also a `-Flip` switch to mirror the Sprite horizontally
 
 ## Current Objectives
