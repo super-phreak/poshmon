@@ -1,39 +1,31 @@
 param(
-    [parameter(Mandatory=$false)][ValidateRange(1,151)]
-    [Int]$pokedexnum,
+    [parameter(Mandatory=$false,ParameterSetName="PokedexIndex")]
+    [Int]$PokedexIndex,
+
+    [parameter(Mandatory=$false,ParameterSetName="InternalIndex")]
+    [Int]$InternalIndex,
+
+    [parameter(Mandatory=$false,ParameterSetName="Name")]
+    [String]$Name,
 
     [parameter(Mandatory=$false)][Switch]
     $flip
 )
 
-if(!$PSBoundParameters.ContainsKey('pokedexnum')) {
-    $pokedexnum = Get-Random -Minimum 1 -Maximum 151
-}
 
 #PoshMon Tests#
 $TILE_SIZE_RAW = 64
 $TILE_SIDE_RAW = 8
 $TILE_HIEGHT_POSH = 4
 
-Clear-Host
-
-$half_pixel = [char][int]"0x2584"
-
-$gb_size = New-Object System.Management.Automation.Host.Size(160,72)
-$debug_cursor_line = New-Object System.Management.Automation.Host.Coordinates 0, 71
-$Host.UI.RawUI.BufferSize = $gb_size
-$Host.UI.RawUI.WindowSize = $gb_size
-
-
 $colors = [enum]::GetValues([System.ConsoleColor])
 $bufferCellType = [enum]::GetValues([System.Management.Automation.Host.BufferCellType])
 
-$Host.UI.RawUI.BackgroundColor = $($colors[[System.ConsoleColor]::Black])
+$half_pixel = [char][int]"0x2584"
+$poke_e = [char][int]"0x00e9"
 
-$pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
-$target_mon = $pokedex | Where-Object {$_.pokedex -eq $pokedexnum}
-
-$logo = [char[]] '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002fb1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001bfdef20000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000017fd555df71000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011101200000000003fe55567bed400000000000000000000000000000000000000000000000000000000000000000112223332221000000000000000001237bfff51bfb20000001bfa67bfeea10000122222227fffffff600000000000000000000000000000000000000000123bbffeedddddeeffb2100000000007bffedd99ef6bf9dfb300006afffffbbbb50000bfeddddefff5555fb000000000abb7321100000000000000000000127bfedd95555555555559def7100000000ff5555555affe5555def727ffed99999ddff711ff555555efd5555ff000000000afddddeefbb7012110000000001bfed9555555555555555555559ff2000006aefff55555af95555555affe9555666655559fbbfa5555559f55555ef6000000aaaf76555555ef5afeffb77321001afb655555555555566666555559fb10000aaaeef655559955555557ff95556bfffd5556bfeff955555559555555fb001122aaaefa5555559fffa555599fe41aaaaff6555555555559fffff75555ff50112baaaafa555555555557fffa5555fedd9556bffa9ff555555555555555ff7bfeddddeffa5555555fff555555bf9009aaaaef6676555555559ddeffa555ff7bedddddeffb5555555557beaff55555e55556bfedefbfe555555555555555bfd9566555559fb555555afe555556fe00009aaaaeffff655555555555af955bffd5566555559fb55555559efb7ff6555555559dd55559efb75555555555555bfd55bf55556559fa555555f555555ff4000004aaaaaaaff65555555556d556bfd555bf55555559fb55555555559def75555555555555567fe9555665555b55bf9555efb777f555ef555555955555bf900000004aaaaaaaff555555555556bff95555eff777f555af5556655555555dfb776555555677bffe55555af6556f65ff55555deeed5555fe555555555556fe0000000004804aaaaff555555556bfeef555555deeed5555bf555fffb765555559deffffffffeeaff955555bff65ffb5ff6555555555555bf555a55555555ff400000000000008aaaafb5555555efaaaf65555555555555bf9555ffaeeffb755555555efaaaaaaaff766656faefffff59fb65555555556fe5556f5555555bf90000000000000009aaaefb5555555ffaaef655555555556bff5555ffaaaaaaeefb76555afaaa98aaaeeeeeeefaaafeff559efbb77777bff95555bf5555556fe000000000000000009aaaefb555555efaaaefb76555567bfeff5555ff9aaaaaaaaaeffb7bf50001aaaaaaaaa8aaaaaaff55555dffeeeeaff55555ff555555bf40000000000000000009aaaef7555555ffaaaaeefffffeeaaaafbbffff50489aaaaaaaaaeef6000088999aaaa008a8aaefffffffffaaaaaffb777bff55555af900000000000000000000aaaaef655555afaaaaaaaaaaaaaaaaaaaaaa50000000489aaaaaa544000000000000000000aaaaaaaaaa99988aaaaaaaeeff55556fe0000000000000000000000aaaaef655677ff58aaaaaaa9840aaaaaaaa500000000000489aa60000000000000000000099aaaaaaaa50000aaaaaaaaaff7766bf4cfcf303f000000000000004aaaaffffeed88400044440000088844000000000000000000044000000000000000000000000004488400004488889aaaaaeeef900f0f0c0f0000000000000004aaaaeeaaaa10000000000000000000000000000000000000000000000000000000000000000000000000000000005aaaaaaaa4000000000000000000000000004aaaaaa9884000000000000000000000000000000000000000000000000000000000000000000000000000000000048899aa900000000000000000000000000004884000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+$gb_size = New-Object System.Management.Automation.Host.Size(160,72)
+$debug_cursor_line = New-Object System.Management.Automation.Host.Coordinates 0, 71
 
 $PIXELS = @(
     #data packet 0x0 [00,00] [wh,wh]
@@ -68,7 +60,37 @@ $PIXELS = @(
     [System.Management.Automation.Host.BufferCell]::new($($half_pixel), $($colors[[System.ConsoleColor]::DarkGray]),$($colors[[System.ConsoleColor]::Black]),$bufferCellType[[System.Management.Automation.Host.BufferCellType]::Complete]),
     #data packet 0xF [11,11] [bl,bl]
     [System.Management.Automation.Host.BufferCell]::new($($half_pixel), $($colors[[System.ConsoleColor]::Black]),$($colors[[System.ConsoleColor]::Black]),$bufferCellType[[System.Management.Automation.Host.BufferCellType]::Complete])
-    )
+)
+
+
+
+Clear-Host
+$Host.UI.RawUI.BackgroundColor = $($colors[[System.ConsoleColor]::Black])
+$Host.UI.RawUI.BufferSize = $gb_size
+$Host.UI.RawUI.WindowSize = $gb_size
+
+$pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
+$font = Get-Content '../data/font.json' | ConvertFrom-Json
+
+if($PSBoundParameters.ContainsKey('PokedexIndex')) {
+    $target_mon = $pokedex | Where-Object {$_.pokedex -eq $PokedexIndex}
+    if ($target_mon -eq $null) {
+        Write-Error "There is no Pok$($poke_e)mon with Pok$($poke_e)dex of $PokedexIndex"
+        exit 1
+    }
+} elseif($PSBoundParameters.ContainsKey('InternalIndex')) {
+    $target_mon = $pokedex | Where-Object {$_.index -eq $InternalIndex}
+    if ($target_mon -eq $null) {
+        Write-Error "There is no Pok$($poke_e)mon with index of $InternalIndex"
+        exit 1
+    }
+} elseif($PSBoundParameters.ContainsKey('Name')) {
+    $target_mon = $pokedex | Where-Object {$_.name -eq $Name}
+    if ($target_mon -eq $null) {
+        Write-Error "There is no Pok$($poke_e)mon with name of $Name"
+        exit 1
+    }
+}
 
 $sprite_buffer = New-Object 'System.Management.Automation.Host.BufferCell[,]' ($target_mon.front_sprite.height*4), ($target_mon.front_sprite.width*8)
 
@@ -97,7 +119,9 @@ for ($row=0;$row -lt ($target_mon.front_sprite.height*$TILE_HIEGHT_POSH);$row++)
                                              $sprite_raw[((($row * 2) + 1) * $target_mon.front_sprite.width*$TILE_SIDE_RAW) + (($FLIP_OFFSET+$col)*$FLIP_SIGN)]]
     }
 }
-
+# Write-Host ($font | Where-Object {$_.char -ceq $target_mon.pokedex_entry.text[50]})
+Write-Host $target_mon.name $target_mon.index
+Write-Host $target_mon.pokedex_entry.text
 $coords = [System.Management.Automation.Host.Coordinates]::new(16,4)
 $Host.UI.RawUI.SetBufferContents($coords,$sprite_buffer)
 $Host.UI.RawUI.CursorPosition = $debug_cursor_line

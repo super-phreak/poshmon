@@ -61,8 +61,8 @@ class Pokemon:
         type2 = data.get_static_data(addr+0x07,pokedata.BYTE,1).collapse()
         catch_rate = data.get_static_data(addr+0x08,pokedata.BYTE,1).collapse()
         base_exp_yeild = data.get_static_data(addr+0x09,pokedata.BYTE,1).collapse()
-        front_sprite = Sprite.parse_pkmn_sprite(Addr(bank=cls.__get_sprite_bank(internal_index-1),addr=data.get_static_data(addr+0x0B,pokedata.BYTE,2).collapse(rev=True)))
-        back_sprite = Sprite.parse_pkmn_sprite(Addr(bank=cls.__get_sprite_bank(internal_index-1),addr=data.get_static_data(addr+0x0D,pokedata.BYTE,2).collapse(rev=True)))
+        front_sprite = Sprite.parse_pkmn_sprite(Addr(bank=cls.__get_sprite_bank(internal_index),addr=data.get_static_data(addr+0x0B,pokedata.BYTE,2).collapse(rev=True)))
+        back_sprite = Sprite.parse_pkmn_sprite(Addr(bank=cls.__get_sprite_bank(internal_index),addr=data.get_static_data(addr+0x0D,pokedata.BYTE,2).collapse(rev=True)))
         attacks_lvl_1 = data.get_static_data(addr+0x0F,pokedata.BYTE,4).data
         growth_rate = data.get_static_data(addr+0x13,pokedata.BYTE,1).collapse()
         learnable_moves = cls.get_move_list(data.get_static_data(addr+0x14,pokedata.BYTE,7).collapse(rev=True))
@@ -83,15 +83,15 @@ class Pokemon:
         ; $74 ≤ index < $99:       bank $C ("Pics 4")
         ; $99 ≤ index:             bank $D ("Pics 5")
         '''
-        if   index == 0x13:
+        if   index == 0x15:
             return 0x01
         elif index < 0x1F:
             return 0x09
-        elif index < 0x49:
+        elif index < 0x4A:
             return 0x0A
-        elif index < 0x73:
+        elif index < 0x74:
             return 0x0B
-        elif index < 0x98:
+        elif index < 0x99:
             return 0x0C
         else:
             return 0x0D

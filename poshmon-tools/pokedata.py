@@ -210,7 +210,7 @@ class Sprite:
 
     def to_base64(self) -> str:
         num = self.__to_bignum()
-        num_bytes = num.to_bytes((int(self.height*self.width*TWO_BPP_TILE_SIZE/BYTE)),'big')
+        num_bytes = num.to_bytes((int(self.height*self.width*TWO_BPP_TILE_SIZE)),'big')
         return base64.b64encode(num_bytes).decode()
     
     @classmethod
@@ -228,7 +228,7 @@ class Sprite:
 
     @classmethod
     def __parseData(cls, packet_type, width, height, bit_plane):
-        while bit_plane.len < (width*height*ONE_BPP_TILE_SIZE):
+        while bit_plane.len < (width*height*ONE_BPP_TILE_SIZE*BYTE):
             if packet_type == 0:
                 length = cls.__findRLEBoundry(ROM)
                 value = ROM.read((f"uint:{length.len}"))
@@ -262,7 +262,6 @@ class Sprite:
 
         bit_planes[0] = cls.__fillMatrix(bit_planes[0],width,height)
         bit_planes[1] = cls.__fillMatrix(bit_planes[1],width,height)
-
         if zip_mode == 0:
             bit_planes = cls.__mode1(bit_planes,width)
         elif zip_mode == 2:
@@ -278,74 +277,36 @@ class Sprite:
         return cls(addr,width,height,sprite_data)
 
     @classmethod
-    def decode1BPP(cls, rom, start, finish, height, width):
-        rom.pos = start
-        output = Sprite(int(rom.pos/8),width,height,1)
-        for i in range(int((finish-start)/8)):
-            output.bit_planes[0].append(rom.peek('bits:8'))
-            output.bit_planes[1].append(rom.read('bits:8'))
+    def decode1BPP(cls,addr,width,height):
+        ROM.bytepos = addr.absolute_pos()
+        bit_planes = [BitArray(), BitArray()]
+        for i in range(width*height*BYTE):
+            bit_planes[0].append(ROM.peek('bits:8'))
+            bit_planes[1].append(ROM.read('bits:8'))
         
         for i in range(2):
-            output.bit_planes[i] = cls.__fillTileMatrix(output.bit_planes[i],height,width)
+            bit_planes[i] = cls.__fillTileMatrix(bit_planes[i],height,width)
 
-        output.sprite = cls.__combineBuffers(output)
+        sprite_data = cls.__combineBuffers(bit_planes,1)
+        
+        return cls(addr,width,height,sprite_data)
 
-        return output
 
     @classmethod
-    def decode2BPP(cls,rom, start, finish, height, width):
-        rom.pos = start
-        output = Sprite(int(rom.pos/8),width,height,1)
-        for i in range(int((finish-start)/16)):
-            output.bit_planes[0].append(rom.read('bits:8'))
-            output.bit_planes[1].append(rom.read('bits:8'))
+    def decode2BPP(cls,addr,width,height):
+        ROM.bytepos = addr.absolute_pos()
+        bit_planes = [BitArray(), BitArray()]
+        for i in range(width*height*BYTE*2):
+            bit_planes[0].append(ROM.read('bits:8'))
+            bit_planes[1].append(ROM.read('bits:8'))
         
         for i in range(2):
-            output.bit_planes[i] = cls.__fillTileMatrix(output.bit_planes[i],height,width)
+            bit_planes[i] = cls.__fillTileMatrix(bit_planes[i],height,width)
 
-        output.sprite = cls.__combineBuffers(output)
+        sprite_data = cls.__combineBuffers(bit_planes,0)
+        
+        return cls(addr,width,height,sprite_data)
 
-        return output
-
-    # def pwshOutput(sprite):
-    #     out = []
-    #     for row in range(len(sprite)):
-    #         if row % 2 == 0:
-    #             for top,bottom in zip(sprite[row],sprite[row+1]):
-    #                 out.append((top<<2)+bottom)
-
-    #     print("".join("{:01x}".format(num) for num in out))
-
-    # def poshOutputDebug(strArr):
-    #     out = []
-    #     for i in range(0,len(strArr),2):
-    #         out.append(strArr[i])
-    #         out.append(strArr[i+1])
-    #     return "".join(out)
-
-    # def printPkmnFront(pkmn):
-    #     ### Debug Prints ###
-    #     # print(pkmn.front_sprite)
-    #     # printPixels(pkmn.front_sprite.bit_planes[0])
-    #     # print()
-    #     # printPixels(pkmn.front_sprite.bit_planes[1])
-    #     # print()
-    #     ### Debug Prints ###
-    #     printPixels(pkmn.front_sprite.sprite)
-    # def printPkmnBack(pkmn):
-    #     ### Debug Prints ###
-    #     # print(pkmn.back_sprite)
-    #     # printPixels(pkmn.back_sprite.bit_planes[0])
-    #     # print()
-    #     # printPixels(pkmn.back_sprite.bit_planes[1])
-    #     # print()
-    #     ### Debug Prints ###
-    #     printPixels(pkmn.back_sprite.sprite)
-    # def printPkmn(pkmn,sprite):
-    #     if sprite == 0:
-    #         printPkmnBack(pkmn)
-    #     else:
-    #         printPkmnFront(pkmn)
 
 class GBText:
     STRING_END = 0x50
@@ -362,7 +323,7 @@ class GBText:
         0x51: "*",
         0x52: "A1",
         0x53: "A2",
-        0x54: "POKé",
+        0x54: "POKé", #This is fine to leave multichar as it was only short hand for all four characters anyway
         0x55: "+",
         0x58: "$",
         0x5F: "}",   #charmap "<DEXEND>"
@@ -427,17 +388,17 @@ class GBText:
         0xB8: "y",
         0xB9: "z",
         0xBA: "é",
-        0xBB: "'d",
-        0xBC: "'l",
-        0xBD: "'s",
-        0xBE: "'t",
-        0xBF: "'v",
+        0xBB: u"\u1E0B", #ḋ to represent 'd as one letter
+        0xBC: u"\u013A", #ĺ to represent 'l as one letter
+        0xBD: u"\u1E61", #ṡ to represent 's as one letter
+        0xBE: u"\u1E6B", #ṫ to represent 't as one letter
+        0xBF: u"\u1E7F", #ṿ to represent 'v as one letter
         0xE0: "'",
-        0xE1: "PK",
-        0xE2: "MN",
+        0xE1: u"\u1D18", #ᴘ to represent PK as one letter
+        0xE2: u"\u1D0D", #ᴍ to represent MN as one letter
         0xE3: "-",
-        0xE4: "'r",
-        0xE5: "'m",
+        0xE4: u"\u1E59", #ṙ to represent 'r as one letter
+        0xE5: u"\u1E41", #ṁ to represent 'm as one letter
         0xE6: "?",
         0xE7: "!",
         0xE8: ".",
@@ -687,8 +648,8 @@ class GBText:
 #Constants that have hard pointers in Red/Blue
 ROM = ConstBitStream(filename='pokered.gbc')
 BANK_SIZE = 0x4000
-TWO_BPP_TILE_SIZE = 128
-ONE_BPP_TILE_SIZE = 64
+TWO_BPP_TILE_SIZE = 16
+ONE_BPP_TILE_SIZE = 8
 BYTE = 8
 BIT = 1
 NYBBLE = 4
@@ -706,6 +667,7 @@ POKEMON_NAME_POINTER  = Addr(0x07,0x421e)
 MOVE_NAME_POINTER     = Addr(0x2C,0x4000)
 MOVES_DATA_POINTER    = Addr(0x0E,0x4000)
 TM_HM_LIST_POINTER    = Addr(0x04,0x7773)
+FONT_START_POINTER    = Addr(0x04,0x5a80)
 
 
 datamap = {'Index to Pokedex':  [],

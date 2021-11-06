@@ -1,0 +1,474 @@
+[
+  {
+    "char": "A",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AwAMwAzAMDA/8MAMwAwAAA=="
+    }
+  },
+  {
+    "char": "B",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "/8DAMMAw//DADMAM//AAAA=="
+    }
+  },
+  {
+    "char": "C",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "D/AwDMAAwADAADAMD/AAAA=="
+    }
+  },
+  {
+    "char": "D",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "/8DAMMAMwAzADMAw/8AAAA=="
+    }
+  },
+  {
+    "char": "E",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "//zAAMAA//DAAMAA//wAAA=="
+    }
+  },
+  {
+    "char": "F",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "//zAAMAA//DAAMAAwAAAAA=="
+    }
+  },
+  {
+    "char": "G",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "D/AwDMAAw/zADDAMD/AAAA=="
+    }
+  },
+  {
+    "char": "H",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "wAzADMAM//zADMAMwAwAAA=="
+    }
+  },
+  {
+    "char": "I",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "P/ADAAMAAwADAAMAP/AAAA=="
+    }
+  },
+  {
+    "char": "J",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "P/wAwADAAMDAwMDAPwAAAA=="
+    }
+  },
+  {
+    "char": "K",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "wDDAwMMAzwDwwMAwwAwAAA=="
+    }
+  },
+  {
+    "char": "L",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "wADAAMAAwADAAMAA//wAAA=="
+    }
+  },
+  {
+    "char": "M",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "wAzwPMzMwwzADMAMwAwAAA=="
+    }
+  },
+  {
+    "char": "N",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "wAzwDMwMwwzAzMA8wAwAAA=="
+    }
+  },
+  {
+    "char": "O",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "D8AwMMAMwAzADDAwD8AAAA=="
+    }
+  },
+  {
+    "char": "P",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "//DADMAM//DAAMAAwAAAAA=="
+    }
+  },
+  {
+    "char": "Q",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "D8AwMMAMwAzAzDAwD8wAAA=="
+    }
+  },
+  {
+    "char": "R",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "//DADMAM//DAwMAwwAwAAA=="
+    }
+  },
+  {
+    "char": "S",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "P8DAMMAAP/AADMAMP/AAAA=="
+    }
+  },
+  {
+    "char": "T",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "//wDAAMAAwADAAMAAwAAAA=="
+    }
+  },
+  {
+    "char": "U",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "wAzADMAMwAzADDAMD/wAAA=="
+    }
+  },
+  {
+    "char": "V",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "wAzADDAwMDAMwAzAAwAAAA=="
+    }
+  },
+  {
+    "char": "W",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "wAzDDMzMzMzwPPA8wAwAAA=="
+    }
+  },
+  {
+    "char": "X",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "8DwwMAzAAwAMwDAw8DwAAA=="
+    }
+  },
+  {
+    "char": "Y",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "wAwwMAzAAwADAAMAAwAAAA=="
+    }
+  },
+  {
+    "char": "Z",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "//wAMADAAwAMADAA//wAAA=="
+    }
+  },
+  {
+    "char": "(",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "ADwAwAMAAwADAADAADwAAA=="
+    }
+  },
+  {
+    "char": ")",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "8AAMAAMAAwADAAwA8AAAAA=="
+    }
+  },
+  {
+    "char": ":",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAADwAPAAAAAAAPAA8AAAA=="
+    }
+  },
+  {
+    "char": ";",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAADwAPAAAADwAPAAMADAA=="
+    }
+  },
+  {
+    "char": "[",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AD8AMAAwADAAMAAwAD8AAA=="
+    }
+  },
+  {
+    "char": "]",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "/AAMAAwADAAMAAwA/AAAAA=="
+    }
+  },
+  {
+    "char": "a",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAA/AADAP8DAwD/wAAA=="
+    }
+  },
+  {
+    "char": "b",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "MAAwADAAP/AwDDAMP/AAAA=="
+    }
+  },
+  {
+    "char": "c",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAA/wMAwwADAMD/AAAA=="
+    }
+  },
+  {
+    "char": "d",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAwADAAMD/wwDDAMD/wAAA=="
+    }
+  },
+  {
+    "char": "e",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAA/wMAw//DAAD/wAAA=="
+    }
+  },
+  {
+    "char": "f",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "APADDAMAP/wDAAMAAwAAAA=="
+    }
+  },
+  {
+    "char": "g",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAA/8MAwwDA/8AAw/8A=="
+    }
+  },
+  {
+    "char": "h",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "MAAwADAAP8AwMDAwMDAAAA=="
+    }
+  },
+  {
+    "char": "i",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAADAAAAAwADAAMAAwAAAA=="
+    }
+  },
+  {
+    "char": "j",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAwAAAAMAAwADAAMAPAA=="
+    }
+  },
+  {
+    "char": "k",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "MAAwADA8M8A8ADPAMDwAAA=="
+    }
+  },
+  {
+    "char": "l",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AwADAAMAAwADAAMAAwAAAA=="
+    }
+  },
+  {
+    "char": "m",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAPzwwwzDDMMMwwwAAA=="
+    }
+  },
+  {
+    "char": "n",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAA/wDAwMDAwMDAwAAA=="
+    }
+  },
+  {
+    "char": "o",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAA/wMAwwDDAMD/AAAA=="
+    }
+  },
+  {
+    "char": "p",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAD/wMAwwDD/wMAAwAA=="
+    }
+  },
+  {
+    "char": "q",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAA/8MAwwDA/8AAwADA=="
+    }
+  },
+  {
+    "char": "r",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAADD8MwA8ADAAMAAAAA=="
+    }
+  },
+  {
+    "char": "s",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAA/wMAAP8AAMP/AAAA=="
+    }
+  },
+  {
+    "char": "t",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAADAD/wAwADAAMAAPAAAA=="
+    }
+  },
+  {
+    "char": "u",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAADAwMDAwMDAwD/AAAA=="
+    }
+  },
+  {
+    "char": "v",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAADAwMDAwMAzAAwAAAA=="
+    }
+  },
+  {
+    "char": "w",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAMAMwwzDDMzMMDAAAA=="
+    }
+  },
+  {
+    "char": "x",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAPAwDMADAAzAMDwAAA=="
+    }
+  },
+  {
+    "char": "y",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAADAwMDAwMA/wADA/wA=="
+    }
+  },
+  {
+    "char": "z",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAD/8ADADwAwAP/wAAA=="
+    }
+  },
+  {
+    "char": "\u00e9",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAD/8ADADwAwAP/wAAA=="
+    }
+  }
+]

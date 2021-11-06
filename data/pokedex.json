@@ -149,7 +149,7 @@
         "inches": 3
       },
       "weight": 1760,
-      "text": "The infant rarely>ventures out of>its mother's^protective pouch>until it is 3>years old}"
+      "text": "The infant rarely>ventures out of>its mother\u1e61^protective pouch>until it is 3>years old}"
     }
   },
   {
@@ -491,7 +491,7 @@
         "inches": 7
       },
       "weight": 1370,
-      "text": "It uses its>powerful tail in>battle to smash,^constrict, then>break the prey's>bones}"
+      "text": "It uses its>powerful tail in>battle to smash,^constrict, then>break the prey\u1e61>bones}"
     }
   },
   {
@@ -573,7 +573,7 @@
         "inches": 3
       },
       "weight": 1730,
-      "text": "The SHELLDER that>is latched onto>SLOWPOKE's tail^is said to feed>on the host's left>over scraps}"
+      "text": "The SHELLDER that>is latched onto>SLOWPOKE\u1e61 tail^is said to feed>on the host\u1e61 left>over scraps}"
     }
   },
   {
@@ -776,7 +776,7 @@
         "inches": 11
       },
       "weight": 1440,
-      "text": "Its tongue can be>extended like a>chameleon's. It^leaves a tingling>sensation when it>licks enemies}"
+      "text": "Its tongue can be>extended like a>chameleon\u1e61. It^leaves a tingling>sensation when it>licks enemies}"
     }
   },
   {
@@ -1181,7 +1181,7 @@
         "inches": 4
       },
       "weight": 140,
-      "text": "Because it never>removes its skull>helmet, no one^has ever seen>this POK\u00e9MON's>real face}"
+      "text": "Because it never>removes its skull>helmet, no one^has ever seen>this POK\u00e9MON\u1e61>real face}"
     }
   },
   {
@@ -1340,14 +1340,14 @@
     "catch_rate": 75,
     "base_exp_yeild": 213,
     "front_sprite": {
-      "width": 3,
-      "height": 6,
-      "data": "ndSqqu/qAiq6//+qoqqAAFEdCChAAKqq4ACAAFVfAChAFX/qrq/V1VVfAKL/qmrqBqtVVVVfACp/v7//D/vV1VFdAKqFBX//CACAqq6iCoKu////QVVVVQVdAiqq/oAA7////7qgCAAAAX//2RVV////CqBVUVVVXRV////1AqBABAU/Cv/////3CoAABAQqAIAAqqqgAqqq+qqABICqqqv1CCqq7///BIAAAARdAKAAAAAAWKqqq//iAIAAAACqT5UVVVWfAAAFVVV/IAAAAAAgVVQBVVVVoAAVUAAIAAhEBVVVAABVVRXfXVURUVVVAAKqruqKQC/qqAAAAVVX+6qiFVUVH///Lqqqq/t3AK+u6q6qgqgVUUQqAC+u//v/"
+      "width": 7,
+      "height": 7,
+      "data": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/AAAAAAAAAAAAAAAAAowwAAAAAAAAAAAAAAADMN/AAAAAAAAAAAAAAMwvAXD8AaQAAAAAAAACMAABX6M7+kAAAAAAAAMAAVVevPXgAAAAAAAADQAX9Xvpw0AAAAAAAAAOVf8P76NBQAAgCAAAAAr/D86+jEPwACwsAAAAP/r8w//wAB4AMzMAAABzhqvDf9AAOADCwz8AAs4A6rKtAABwA4ACwsADAABur+kAAcAIAAAMAAJqUAb1ekABeCAEAAMAA7/pAAAelBVMMAQAAwAC38KQAAX1VQxAFQRAgADNz+QABV1QEIBVBZDAADg9fluBdQAwxFVF0MAADwAL/VCFVcIFVVWQwAADBAAAAAVXA0VVZpDAAAvBQAAEBVXDVVVaUIAAsLFVABQdVWNVVV1TAAMAL6VlXXNX91VVZUIACAApWV1b0f/41VV1TAAMACVVVqVXr/3VVaVwACQAFUFUBW6v/tlV1XAANAAUAFABVa/vuZblwAAkABAAEAAXr+v6mrXAAAQAUAAQYD6/qvqqteCADABAAABav/6r+qq1f8ABAQBABBVVvqv+qo1XAANQAIAIFVv6r/6qw/gAg3ABgAkF76q+rqtAAAA9cAZAFgP6qqqrv+AAAAv4BgAXW/7/6qv9wEQAADhZABeb/Gq+r8GDhAAAOl0AXt7wGqqvR0OEAAM+ewFe+7Raqr8HDcgAA/57BW7o1aqr/Ryx2AADP7rFeqzaqq/8XwXcAAMO6t7qs2qq//R4B1wAAw+q36/zaq//8HAWcAADA6tur8NqqqrRgF1gAADD7/+/B+v6q0QF5cAAANHv//0d+v/9AF5XAAAAMf+//B0Hv1AD5VwAAAA1/vvwXQAAAFQF4AAAAA26+7M/0AAAAF8AAAAAA6n6rcG9/ABV/QAAAAAMJ8KlwscbVf/4AAAAADgXWtXXCAa/q5AAAAAAN1d3V9ddFW2+AAAAAAA3d3dXl11VW9AAAAAAAA////gv///+QAAAAAA=="
     },
     "back_sprite": {
-      "width": 5,
-      "height": 5,
-      "data": "B8AIgAN1//1//woAAIAJX//1X/9V8A//8qAACooAH1/4D/3V//V//1/wB/AKtf/1X/+QD/3wCD3/9X//c///8+L9///f/y//8AJIP///X/+MAA/31QAAAIoAjAAPAig///91/8P/+cgIP/9////8D/c39T//3//3U///9f8//33/97P/9/3/AACigAgz//X3/P///393A//IAA/AAAAgggP/wgAPf//1/98AAAIADAAAAgAKD/81//P///X//QAACIAMAAACAAAAAAoAD///9//9P////A////3/V8A///zwwAAIAIDAP/APPAAACAAAQAAMA/Pf////dx8AAA/7/////1+////w/AAACgCAoAAP8vP///f/f3//8Ao8AAAAACC38/AKAIAAoAAiogAz/fN//1///YgADAD93/9ff/fV//AD/d//39//ogPwA2IgAACgAIAAAK83f///f/eAAP//N3///9/98/8AAAIgAACACDX/AMCKgAAgoAI///jACCAAqCAIn/9R/8KgAIIACg=="
+      "width": 4,
+      "height": 4,
+      "data": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDzwAwAAAAAz7Q8MwAAAAJD70fD/wAAA0A/wX6qwAAA0AAB2r/AAADUAADv6wAAAzUAAH+8AAAMzAAAe/AAAAwAAAB6cAAAA0AAAF5fAADA1AABb+nAAjM8AAW8PsADDPQAFv0VgADADkBVrl8AAwAA1VWvXAAIAAB1Vr9wAAwAAHV6/3AAIAABX5r+gAAwAAZea/3AADAAF12b3cAAMABHbrvfcAAwAV2u+0NYACAEXq//Q5wADAF6rv/Q5gAMBHq/q9T3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
     },
     "attacks_lvl_1": [
       46,
@@ -4292,7 +4292,7 @@
         "inches": 0
       },
       "weight": 90,
-      "text": "Capable of copying>an enemy's genetic>code to instantly^transform itself>into a duplicate>of the enemy}"
+      "text": "Capable of copying>an enemy\u1e61 genetic>code to instantly^transform itself>into a duplicate>of the enemy}"
     }
   },
   {
@@ -5744,7 +5744,7 @@
         "inches": 3
       },
       "weight": 640,
-      "text": "Lives close to>water. Its long>tail is ridged^with a fin which>is often mistaken>for a mermaid's}"
+      "text": "Lives close to>water. Its long>tail is ridged^with a fin which>is often mistaken>for a mermaid\u1e61}"
     }
   },
   {
@@ -8891,7 +8891,7 @@
         "inches": 7
       },
       "weight": 440,
-      "text": "The female's horn>develops slowly.>Prefers physical^attacks such as>clawing and>biting}"
+      "text": "The female\u1e61 horn>develops slowly.>Prefers physical^attacks such as>clawing and>biting}"
     }
   },
   {
@@ -9093,7 +9093,7 @@
         "inches": 11
       },
       "weight": 1300,
-      "text": "A ferocious, pre->historic POK\u00e9MON>that goes for the^enemy's throat>with its serrated>saw-like fangs}"
+      "text": "A ferocious, pre->historic POK\u00e9MON>that goes for the^enemy\u1e61 throat>with its serrated>saw-like fangs}"
     }
   },
   {
@@ -9628,7 +9628,7 @@
         "inches": 7
       },
       "weight": 190,
-      "text": "The fluid that>oozes from its>mouth isn't drool.^It is a nectar>that is used to>attract prey}"
+      "text": "The fluid that>oozes from its>mouth isn\u1e6b drool.^It is a nectar>that is used to>attract prey}"
     }
   },
   {
@@ -9876,9 +9876,9 @@
     }
   },
   {
-    "index": 20,
+    "index": 21,
     "pokedex": 151,
-    "name": "ARCANINE",
+    "name": "MEW",
     "base_stats": {
       "hp": 100,
       "attack": 100,
@@ -9967,13 +9967,13 @@
       148
     ],
     "pokedex_entry": {
-      "species": "LEGENDARY",
+      "species": "NEW SPECIE",
       "height": {
-        "feet": 6,
-        "inches": 3
+        "feet": 1,
+        "inches": 4
       },
-      "weight": 3420,
-      "text": "A POK\u00e9MON that>has been admired>since the past^for its beauty.>It runs agilely>as if on wings}"
+      "weight": 90,
+      "text": "So rare that it>is still said to>be a mirage by^many experts. Only>a few people have>seen it worldwide}"
     }
   }
 ]
