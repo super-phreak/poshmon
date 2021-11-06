@@ -11,9 +11,5 @@ list(map(lambda key: font.append(Font(pokedata.FONT_START_POINTER+((key-0x80)*po
 # #add blank space at the end
 font.append(Font(pokedata.FONT_START_POINTER+(pokedata.ONE_BPP_TILE_SIZE*80))," ").to_json())
 
-print(len(font))
-
-Sprite.decode_base64_sprite(font[-16]['sprite']['data'],1,1).print_pixels()
-
 with open('data/font.json', 'w') as font_file:
     json.dump(font, font_file, indent=2)
