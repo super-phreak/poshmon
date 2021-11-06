@@ -307,6 +307,24 @@ class Sprite:
         
         return cls(addr,width,height,sprite_data)
 
+    @classmethod
+    def decode_base64_sprite(cls, base64_sprite,width,height):
+        decoded_sprite_bytes = base64.b64decode(base64_sprite)
+
+        print(base64_sprite)
+
+        sprite_array = []
+
+        for data in decoded_sprite_bytes:
+            for i in range(3,-1,-1):
+                sprite_array.append((data >> (i*2)) & 0b11)
+
+        sprite = []
+        for i in range(0,int(len(sprite_array)),width*8):
+            sprite.append(sprite_array[i:i+(width*8)])
+
+        return cls(Addr(0,0),width,height,sprite)
+
 
 class GBText:
     STRING_END = 0x50

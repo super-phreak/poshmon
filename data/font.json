@@ -468,7 +468,47 @@
     "sprite": {
       "width": 1,
       "height": 1,
-      "data": "AAAAAD/8ADADwAwAP/wAAA=="
+      "data": "DwDwAA/wMAw//DAAD/wAAA=="
+    }
+  },
+  {
+    "char": "\u1e0b",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "8AwwDMAMD/wwDDAMD/wAAA=="
+    }
+  },
+  {
+    "char": "\u013a",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "8MAwwMDAAMAAwADAAMAAAA=="
+    }
+  },
+  {
+    "char": "\u1e61",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "8AAwAMP8DAAD/AADD/wAAA=="
+    }
+  },
+  {
+    "char": "\u1e6b",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "8AAwwM/8AMAAwADAADwAAA=="
+    }
+  },
+  {
+    "char": "\u1e7f",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "8AAwAMwMDAwMDAMwAMAAAA=="
     }
   }
 ]
