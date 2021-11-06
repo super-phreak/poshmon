@@ -510,5 +510,229 @@
       "height": 1,
       "data": "8AAwAMwMDAwMDAMwAMAAAA=="
     }
+  },
+  {
+    "char": "'",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "PAA8AAwAMAAAAAAAAAAAAA=="
+    }
+  },
+  {
+    "char": "\u1d18",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "/ADMAPwAwMzAzADwAMwAzA=="
+    }
+  },
+  {
+    "char": "\u1d0d",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "88DMwMDAwMDDDAPMAzwDDA=="
+    }
+  },
+  {
+    "char": "-",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAAAAAAA//AAAAAAAAA=="
+    }
+  },
+  {
+    "char": "\u1e59",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "8AAwAMMPAzADwAMAAwAAAA=="
+    }
+  },
+  {
+    "char": "\u1e41",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "8AAwAMM8DMMMwwzDDMMAAA=="
+    }
+  },
+  {
+    "char": "?",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAA//Pw/8PwDwAAAA8ADwA=="
+    }
+  },
+  {
+    "char": "!",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "A8AP8A/wD/ADwAAAA8ADwA=="
+    }
+  },
+  {
+    "char": ".",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAAAAAAAAADwAPAAAAA=="
+    }
+  },
+  {
+    "char": "=",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAA8ADMAMMAwMDDAMwA8AA=="
+    }
+  },
+  {
+    "char": ">",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAA8AD8AP8A/8D/APwA8AA=="
+    }
+  },
+  {
+    "char": "_",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAD//P/8P/APwAMAAAAAAA=="
+    }
+  },
+  {
+    "char": "\u2642",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AwAPwDMwwwwPwDAwMDAPwA=="
+    }
+  },
+  {
+    "char": "\u00a5",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "D/AMMA/wDAA/AAwAPwAMAA=="
+    }
+  },
+  {
+    "char": "\u00d7",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAADAwDMADAAzAMDAAAA=="
+    }
+  },
+  {
+    "char": "/",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAADAAwAMADAAwAMADAAA=="
+    }
+  },
+  {
+    "char": ",",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAAAAAAA8ADwADAAwAA=="
+    }
+  },
+  {
+    "char": "\u2640",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "D8AwMDAwD8ADAD/wAwADAA=="
+    }
+  },
+  {
+    "char": "0",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAPwDDw8DzwPDwwD8AAAA=="
+    }
+  },
+  {
+    "char": "1",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAADwA/AA8ADwAPAP/wAAA=="
+    }
+  },
+  {
+    "char": "2",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAA/8PA8APw/wPwA//wAAA=="
+    }
+  },
+  {
+    "char": "3",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAA//ADwD8AAPPA8P/AAAA=="
+    }
+  },
+  {
+    "char": "4",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAD8A/wPPDw8P/8APAAAA=="
+    }
+  },
+  {
+    "char": "5",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAD/8PAA//AAPPA8P/AAAA=="
+    }
+  },
+  {
+    "char": "6",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAA/8PAA//DwPPA8P/AAAA=="
+    }
+  },
+  {
+    "char": "7",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAD//PA8APADwA8ADwAAAA=="
+    }
+  },
+  {
+    "char": "8",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAA/8PA8P/DwPPA8P/AAAA=="
+    }
+  },
+  {
+    "char": "9",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAA/8PA88Dw//AA8P/AAAA=="
+    }
   }
 ]
