@@ -14,6 +14,7 @@ You cannot combine the switches. There is also a `-Flip` switch to mirror the Sp
 - [x] Python scripts to scrape Gameboy ROM binaries and gather the Pokémon
 - [x] Fonts is also there
 - [x] Powershell rudimentary graphics library is also functional
-- [ ] Display the Pokédex entry in native font from the ROM
+- [x] Display the Pokédex entry in native font from the ROM
 - [ ] Get keypress working
+- [ ] Add Pokedex scroll animation
 - [ ] Get game running

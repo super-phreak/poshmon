@@ -150,6 +150,24 @@ function Add-Border {
     Add-VBuff -Sprite $box -x 18 -y 9 -TILE
 }
 
+function Write-Text{
+    param(
+        [parameter(Mandatory=$true)]
+        $Text,
+        [parameter(Mandatory=$true)]
+        [int]$X,
+        [parameter(Mandatory=$true)]
+        [int]$Y,
+        [parameter(Mandatory=$false)][Switch]
+        $Tile
+    )
+
+    for ($i=0;$i -lt $Text.Length;$i++){
+        Add-VBuff -Sprite $alphabet["$($Text[$i])"] -x ($X+$i) -y $Y -TILE:$TILE
+    }
+
+}
+
 
 #PoshMon Tests#
 $Script:Logfile = "debug.log"
@@ -284,6 +302,28 @@ for ($i=0;$i -lt $target_mon.name.Length;$i++){
 for ($i=0;$i -lt $target_mon.pokedex_entry.species.Length;$i++){
     Add-VBuff -Sprite $alphabet["$($target_mon.pokedex_entry.species[$i])"] -x (9+$i) -y 4 -TILE
 }
+
+$pokedex_num = "$($target_mon.pokedex)".PadLeft(3,'0')
+$pokemon_height_feet = "$($target_mon.pokedex_entry.height.feet)".PadLeft(3,' ')
+$pokemon_height_inches = "$($target_mon.pokedex_entry.height.inches)".PadLeft(2,'0')
+$pokemon_weight_top = "$([int]($target_mon.pokedex_entry.weight/10))".PadLeft(4,' ')
+$pokemon_weight_bot = "$(($target_mon.pokedex_entry.weight%10))"
+
+Write-Text $pokedex_num -x 4 -y 8 -TILE
+Write-Text $pokemon_height_feet  -x 11 -y 6 -Tile
+Write-Text $pokemon_height_inches  -x 15 -y 6 -Tile
+Write-Text $pokemon_weight_top -x 11 -y 8 -Tile
+Add-VBuff -Sprite $alphabet["<DOT>"] -x 15 -y 8 -Tile
+Write-Text $pokemon_weight_bot -x 16 -y 8 -Tile
+
+$dex_entry_page = $target_mon.pokedex_entry.text.split("^")
+$dex_entry_line = $dex_entry_page[0].split("<")
+
+for ($i=0;$i -lt $dex_entry_line.Length; $i++) {
+    Write-Text $dex_entry_line[$i] -x 1 -y (11+($i*2)) -Tile
+}
+
+Write-Text '_' -x 18 -y 16 -tile
 
 Write-Screen
 
