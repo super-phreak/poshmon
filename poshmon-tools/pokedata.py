@@ -303,7 +303,7 @@ class Sprite:
         for i in range(2):
             bit_planes[i] = cls.__fillTileMatrix(bit_planes[i],height,width)
 
-        sprite_data = cls.__combineBuffers(bit_planes,0)
+        sprite_data = cls.__combineBuffers(bit_planes,1)
         
         return cls(addr,width,height,sprite_data)
 
@@ -462,6 +462,7 @@ class GBText:
 
         0xF0: "¥",
         0xF1: "×",
+        0xF2: "<DOT>",
         0xF3: "/",
         0xF4: ",",
         0xF5: "♀",

@@ -9,7 +9,7 @@ param(
     [String]$Name,
 
     [parameter(Mandatory=$false)][Switch]
-    $flip
+    $NoDisplay
 )
 
 function Decode-Sprite{
@@ -24,7 +24,20 @@ function Decode-Sprite{
             $sprite_raw[($bytenum*4)+$div] = (($sprite_decoded[$bytenum] -shr (6 - ($div*2))) -band 3)
         }
     }
-    return $sprite_raw
+    return @{
+        data = $sprite_raw
+        height = $Sprite.height
+        width = $Sprite.width
+    }
+}
+
+function Write-Screen{
+    for ($row=0;$row -lt ($CANVAS_HEIGHT);$row++) {
+        for ($col=0;$col -lt ($CANVAS_WIDTH);$col++) {
+            $canvas_buffer[$row,$col] = $PIXELS[($v_buff[((($row * 2)    ) * $CANVAS_WIDTH) + $col] * 4) + 
+                                                 $v_buff[((($row * 2) + 1) * $CANVAS_WIDTH) + $col]]
+        }
+    }
 }
 
 function Add-VBuff{
@@ -36,8 +49,14 @@ function Add-VBuff{
         [parameter(Mandatory=$true)]
         [int]$Y,
         [parameter(Mandatory=$false)][Switch]
-        $Flip
+        $Flip,
+        [parameter(Mandatory=$false)][Switch]
+        $Tile
     )
+    $offset = $X + ($CANVAS_WIDTH*$Y)
+    if ($Tile){
+        $offset *= $TILE_SIDE_RAW
+    }
 
     if ($flip) {
         $FLIP_SIGN = -1
@@ -46,12 +65,89 @@ function Add-VBuff{
         $FLIP_SIGN = 1
         $FLIP_OFFSET = 0
     }
-    $offset = $X + ($CANVAS_WIDTH*$Y)
+
     ##Temp function for now
     ##WHY ARRAY MATH SO HARD FOR ME SOMETIMES
     for ($index=0;$index -lt ($sprite.height*$sprite.width*$TILE_SIZE_RAW);$index++) {
             $v_buff[([MATH]::Floor($index/($sprite.width*$TILE_SIDE_RAW))*$CANVAS_WIDTH)+$offset+(($index%($sprite.width*$TILE_SIDE_RAW))*$FLIP_SIGN)+$FLIP_OFFSET] = $sprite.data[$index]
     }
+}
+
+function Add-Template {
+    Add-VBuff -Sprite $alphabet["H"] -x 9 -y 6 -TILE
+    Add-VBuff -Sprite $alphabet["T"] -x 10 -y 6 -TILE
+    Add-VBuff -Sprite $sprite_atlas.pokedex_tiles.sprite_sheet[0] -x 14 -y 6 -TILE
+    Add-VBuff -Sprite $sprite_atlas.pokedex_tiles.sprite_sheet[1] -x 17 -y 6 -TILE
+    
+    Add-VBuff -Sprite $alphabet["W"] -x 9 -y 8 -TILE
+    Add-VBuff -Sprite $alphabet["T"] -x 10 -y 8 -TILE
+    Add-VBuff -Sprite $alphabet["l"] -x 17 -y 8 -TILE
+    Add-VBuff -Sprite $alphabet["b"] -x 18 -y 8 -TILE
+
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[18] -x 2 -y 8 -TILE
+    Add-VBuff -Sprite $alphabet['<DOT>'] -x 3 -y 8 -TILE
+
+    Add-Border
+}
+
+function Add-Border {
+    $topLeftCorner = $sprite_atlas.pokedex_tiles.sprite_sheet[3]
+    $topRightCorner =$sprite_atlas.pokedex_tiles.sprite_sheet[5]
+    $botLeftCorner = $sprite_atlas.pokedex_tiles.sprite_sheet[12]
+    $botRightCorner = $sprite_atlas.pokedex_tiles.sprite_sheet[14]
+
+    $topBar = $sprite_atlas.pokedex_tiles.sprite_sheet[4]
+    $botBar = $sprite_atlas.pokedex_tiles.sprite_sheet[15]
+
+    $rightBar = $sprite_atlas.pokedex_tiles.sprite_sheet[7]
+    $leftBar = $sprite_atlas.pokedex_tiles.sprite_sheet[6]
+
+    $rightBarDash = $sprite_atlas.pokedex_tiles.sprite_sheet[10]
+    $leftBarDash = $sprite_atlas.pokedex_tiles.sprite_sheet[8]
+
+    $box = $sprite_atlas.pokedex_tiles.sprite_sheet[9]
+    $dash = $sprite_atlas.pokedex_tiles.sprite_sheet[11]
+
+    #Add in the four corners first
+    Add-VBuff -Sprite $topLeftCorner -x 0 -y 0
+    Add-VBuff -Sprite $topRightCorner -x 19 -y 0 -TILE
+    Add-VBuff -Sprite $botLeftCorner -x 0 -y 17 -TILE
+    Add-VBuff -Sprite $botRightCorner -x 19 -y 17 -TILE
+
+    #add top/bot border
+    for ($i=1;$i -lt 19;$i++) {
+        Add-VBuff -Sprite $topBar -x $i -y 0 -TILE
+        Add-VBuff -Sprite $botBar -x $i -y 17 -TILE
+    }
+
+    #side borders
+    for ($i=1;$i -lt 17;$i++) {
+        Add-VBuff -Sprite $leftBar -x 0 -y $i -TILE
+        Add-VBuff -Sprite $rightBar -x 19 -y $i -TILE
+    }
+
+    #overwrite the dashes
+    Add-VBuff -Sprite $leftBarDash -x 0 -y 9 -TILE
+    Add-VBuff -Sprite $rightBarDash -x 19 -y 9 -TILE
+
+    Add-VBuff -Sprite $box -x 1 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 2 -y 9 -TILE
+    Add-VBuff -Sprite $box -x 3 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 4 -y 9 -TILE
+    Add-VBuff -Sprite $box -x 5 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 6 -y 9 -TILE
+    Add-VBuff -Sprite $box -x 7 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 8 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 9 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 10 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 11 -y 9 -TILE
+    Add-VBuff -Sprite $box -x 12 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 13 -y 9 -TILE
+    Add-VBuff -Sprite $box -x 14 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 15 -y 9 -TILE
+    Add-VBuff -Sprite $box -x 16 -y 9 -TILE
+    Add-VBuff -Sprite $dash -x 17 -y 9 -TILE
+    Add-VBuff -Sprite $box -x 18 -y 9 -TILE
 }
 
 
@@ -121,12 +217,20 @@ $Host.UI.RawUI.WindowSize = $gb_size
 
 $pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
 $font_file = Get-Content '../data/font.json' | ConvertFrom-Json
+$script:sprite_atlas = Get-Content '../data/sprite_atlas.json' | ConvertFrom-Json
 
-$alphabet = New-Object -TypeName System.Collections.Hashtable
-
+$script:alphabet = New-Object -TypeName System.Collections.Hashtable
 
 foreach($letter in $font_file) {
     $alphabet.add($letter.char, (Decode-Sprite($letter.sprite)))
+}
+
+for($i=0;$i -lt $sprite_atlas.pokedex_tiles.sprite_sheet.Length;$i++) {
+    $sprite_atlas.pokedex_tiles.sprite_sheet[$i] = Decode-Sprite($sprite_atlas.pokedex_tiles.sprite_sheet[$i])
+}
+
+for($i=0;$i -lt $sprite_atlas.hpbar_status.sprite_sheet.Length;$i++) {
+    $sprite_atlas.hpbar_status.sprite_sheet[$i] = Decode-Sprite($sprite_atlas.hpbar_status.sprite_sheet[$i])
 }
 
 
@@ -150,7 +254,7 @@ if($PSBoundParameters.ContainsKey('PokedexIndex')) {
     }
 }
 
-$sprite_buffer = New-Object 'System.Management.Automation.Host.BufferCell[,]' ($CANVAS_HEIGHT, $CANVAS_WIDTH)
+$Script:canvas_buffer = New-Object 'System.Management.Automation.Host.BufferCell[,]' ($CANVAS_HEIGHT, $CANVAS_WIDTH)
 
 $sprite_raw = New-Object 'int[]'  ($target_mon.front_sprite.height*$target_mon.front_sprite.width*$TILE_SIZE_RAW)
 $sprite_decoded = [System.Convert]::FromBase64String($target_mon.front_sprite.data)
@@ -168,15 +272,24 @@ $sprite_test_data = @{
     data = $sprite_raw
 }
 
-Add-VBuff -Sprite $sprite_test_data -X 0 -Y 0 -Flip
+Add-Template
 
-for ($row=0;$row -lt ($CANVAS_HEIGHT);$row++) {
-    for ($col=0;$col -lt ($CANVAS_WIDTH);$col++) {
-        $sprite_buffer[$row,$col] = $PIXELS[($v_buff[((($row * 2)    ) * $CANVAS_WIDTH) + $col] -shl 2) + 
-                                             $v_buff[((($row * 2) + 1) * $CANVAS_WIDTH) + $col]]
-    }
+$dex_offset = (&{If($sprite_test_data.width -eq 5) {1} Else {0}})
+Add-VBuff -Sprite $sprite_test_data -X (1+$dex_offset) -Y (7-$sprite_test_data.width+1) -FLIP -TILE
+
+for ($i=0;$i -lt $target_mon.name.Length;$i++){
+    Add-VBuff -Sprite $alphabet["$($target_mon.Name[$i])"] -x (9+$i) -y 2 -TILE
 }
 
+for ($i=0;$i -lt $target_mon.pokedex_entry.species.Length;$i++){
+    Add-VBuff -Sprite $alphabet["$($target_mon.pokedex_entry.species[$i])"] -x (9+$i) -y 4 -TILE
+}
+
+Write-Screen
+
+
+
+ 
 
 #Write-Host $v_buff[0..2000]
 # Write-Host ($font | Where-Object {$_.char -ceq $target_mon.pokedex_entry.text[50]})
@@ -184,5 +297,8 @@ for ($row=0;$row -lt ($CANVAS_HEIGHT);$row++) {
 # Write-Host $target_mon.name $target_mon.index
 # Write-Host $target_mon.pokedex_entry.text
 $coords = [System.Management.Automation.Host.Coordinates]::new(0,0)
-$Host.UI.RawUI.SetBufferContents($coords,$sprite_buffer)
+if (!$NoDisplay) {
+    $Host.UI.RawUI.SetBufferContents($coords,$canvas_buffer)
+}
 $Host.UI.RawUI.CursorPosition = $debug_cursor_line
+

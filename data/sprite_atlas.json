@@ -1,0 +1,252 @@
+{
+  "pokedex_tiles": {
+    "name": "PokedexTileSet",
+    "sprite_sheet": [
+      {
+        "width": 1,
+        "height": 1,
+        "data": "DwA8AMAAAAAAAAAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "DwA8PMDwAwAAAAAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAD/w8PDw8D/wAPD/wA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "qqqqqqqqq/+rAKsAqwCrAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "qqqqqqqq//8AAAAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "qqqqqqqq/+oA6gDqAOoA6g=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "qwCrAKsAqwCrAKsAqwCrAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AOoA6gDqAOoA6gDqAOoA6g=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "qwCrAKsAq/+r/6sAqwCrAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAA//DVc8A/wDzVcP/wAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AOoA6gDq/+r/6gDqAOoA6g=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAAA/////wAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "qwCrAKsAq/+qqqqqqqqqqg=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAP8A/w//+qqqqqqqqqqg=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AOoA6gDq/+qqqqqqqqqqqg=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAAA//+qqqqqqqqqqg=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "A8A//DQcNBw0HDQcP/wDwA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "A8ADwAPAA8ADwAPAA8ADwA=="
+      }
+    ]
+  },
+  "hpbar_status": {
+    "name": "HPBarStatus",
+    "sprite_sheet": [
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAPAAMwPwAwMAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//AAAAAP//AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//gACAAP//AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//oACgAP//AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//qACoAP//AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//qgCqAP//AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//qoCqgP//AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//qqCqoP//AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//qqiqqP//AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//qqqqqv//AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAAAwADAAAAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "DMAMwAzAzMDMwAzADMAMwA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAPAM8ADwDPAA/wAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAADwD/D////wAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAMAD88DMMMwwzDAzwAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAADzPPM8/zzzPAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "D/wMDAz8DMAMwA/AAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAADPwMwwzDDMMM/AAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAMMA8z//M88zwz8AAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAAAAADDDAAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAAA//z//AAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "//z//AAAAAAAAAAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AADwAP8A//D//wAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAADwAzzP/wwDAwzA8wDMA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAP//AAD/////AAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAADwMzwP/wwDMwwM8AMwA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "DMAMwAzADMAMwAzADMAMwA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AzADzAzzP/wwDAwzA8AAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "DMAzwMzwP/wwDMwwA8AAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAAAAAAAAAAAAAAAAA=="
+      }
+    ]
+  }
+}

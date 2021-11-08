@@ -632,6 +632,14 @@
     }
   },
   {
+    "char": "<DOT>",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAAAAAAAAAA8ADwAAAA=="
+    }
+  },
+  {
     "char": "/",
     "sprite": {
       "width": 1,
@@ -733,6 +741,14 @@
       "width": 1,
       "height": 1,
       "data": "AAA/8PA88Dw//AA8P/AAAA=="
+    }
+  },
+  {
+    "char": " ",
+    "sprite": {
+      "width": 1,
+      "height": 1,
+      "data": "AAAAAAAAAAAAAAAAAAAAAA=="
     }
   }
 ]

@@ -151,7 +151,7 @@ class PokedexEntry:
         if (Addr(bank=text_bank.collapse(),addr=text_addr.collapse(rev=True))<pokedata.END_FILE):
             self.text = GBText(data.get_var_data(Addr(bank=text_bank.collapse(),addr=text_addr.collapse(rev=True)),pokedata.BYTE,f"0x{GBText.STRING_END:#02x}"))
         else:
-            self.text = "MISSING No. does>not exist.^Please look elsewere}"
+            self.text = "MISSING No. does<not exist.^Please look elsewere}"
 
     def __str__(self) -> str:
         height_str = f"{self.height[0]}' " + f'{self.height[1]}"'
