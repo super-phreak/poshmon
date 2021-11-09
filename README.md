@@ -8,8 +8,6 @@ If you want to run the Powershell command to test the Pokédex you must search b
 * `-PokedexIndex`
 * `-InternalIndex`
 
-You cannot combine the switches. There is also a `-Flip` switch to mirror the Sprite horizontally
-
 ## Current Objectives
 - [x] Python scripts to scrape Gameboy ROM binaries and gather the Pokémon
 - [x] Fonts is also there

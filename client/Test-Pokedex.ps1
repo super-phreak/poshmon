@@ -12,7 +12,10 @@ param(
     $NoDisplay,
 
     [parameter(Mandatory=$false)][Switch]
-    $NoClear
+    $NoClear,
+
+    [parameter(Mandatory=$false,ParameterSetName="Random")][Switch]
+    $Random
 )
 
 function Decode-Sprite{
@@ -296,6 +299,8 @@ if($PSBoundParameters.ContainsKey('PokedexIndex')) {
         Write-Error "There is no Pok$($poke_e)mon with name of $Name"
         exit 1
     }
+} elseif($PSBoundParameters.ContainsKey('Random')) {
+    $target_mon = $pokedex | Get-Random
 }
 
 $Script:canvas_buffer = New-Object 'System.Management.Automation.Host.BufferCell[,]' ($CANVAS_HEIGHT, $CANVAS_WIDTH)
