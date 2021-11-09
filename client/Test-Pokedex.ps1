@@ -355,7 +355,7 @@ for ($i=0;$i -lt $dex_entry_line.Length; $i++) {
 }
 
 Write-Text '_' -x 18 -y 16 -tile
-$arrow = $true
+$arrow = $false
 Write-Screen -NoDisplay:$NoDisplay
 
 $count = 0
