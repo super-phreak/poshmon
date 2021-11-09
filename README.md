@@ -16,5 +16,5 @@ You cannot combine the switches. There is also a `-Flip` switch to mirror the Sp
 - [x] Powershell rudimentary graphics library is also functional
 - [x] Display the Pokédex entry in native font from the ROM
 - [x] Get keypress working
-- [ ] Add Pokedex scroll animation
+- [x] Add Pokedex scroll animation
 - [ ] Get game running
