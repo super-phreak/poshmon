@@ -9,7 +9,10 @@ param(
     [String]$Name,
 
     [parameter(Mandatory=$false)][Switch]
-    $NoDisplay
+    $NoDisplay,
+
+    [parameter(Mandatory=$false)][Switch]
+    $NoClear
 )
 
 function Decode-Sprite{
@@ -32,11 +35,19 @@ function Decode-Sprite{
 }
 
 function Write-Screen{
+    param(
+        [parameter(Mandatory=$false)][Switch]
+        $NoDisplay
+    )
     for ($row=0;$row -lt ($CANVAS_HEIGHT);$row++) {
         for ($col=0;$col -lt ($CANVAS_WIDTH);$col++) {
             $canvas_buffer[$row,$col] = $PIXELS[($v_buff[((($row * 2)    ) * $CANVAS_WIDTH) + $col] * 4) + 
                                                  $v_buff[((($row * 2) + 1) * $CANVAS_WIDTH) + $col]]
         }
+    }
+    $coords = [System.Management.Automation.Host.Coordinates]::new(0,0)
+    if (!$NoDisplay) {
+        $Host.UI.RawUI.SetBufferContents($coords,$canvas_buffer)
     }
 }
 
@@ -159,15 +170,30 @@ function Write-Text{
         [parameter(Mandatory=$true)]
         [int]$Y,
         [parameter(Mandatory=$false)][Switch]
-        $Tile
+        $Tile,
+        [parameter(Mandatory=$false)][Switch]
+        $Line
     )
+    
+    if ($Line) {
+        $print_text = $text.padright(18,' ')
+    } else {
+        $print_text = $text
+    }
 
-    for ($i=0;$i -lt $Text.Length;$i++){
-        Add-VBuff -Sprite $alphabet["$($Text[$i])"] -x ($X+$i) -y $Y -TILE:$TILE
+    for ($i=0;$i -lt $print_text.Length;$i++){
+        Add-VBuff -Sprite $alphabet["$($print_text[$i])"] -x ($X+$i) -y $Y -TILE:$TILE
     }
 
 }
 
+function Get-FileTime {
+    param(
+        [parameter(Mandatory=$true)]
+        [int]$Milli
+    )
+    return $Milli * 10000
+}
 
 #PoshMon Tests#
 $Script:Logfile = "debug.log"
@@ -320,25 +346,58 @@ $dex_entry_page = $target_mon.pokedex_entry.text.split("^")
 $dex_entry_line = $dex_entry_page[0].split("<")
 
 for ($i=0;$i -lt $dex_entry_line.Length; $i++) {
-    Write-Text $dex_entry_line[$i] -x 1 -y (11+($i*2)) -Tile
+    Write-Text $dex_entry_line[$i] -x 1 -y (11+($i*2)) -Tile -Line
 }
 
 Write-Text '_' -x 18 -y 16 -tile
+$arrow = $true
+Write-Screen -NoDisplay:$NoDisplay
 
-Write-Screen
+$count = 0
+$targettime = ((Get-Date).ToFileTime()+(Get-FileTime -Milli 1000))
 
-
-
- 
-
-#Write-Host $v_buff[0..2000]
-# Write-Host ($font | Where-Object {$_.char -ceq $target_mon.pokedex_entry.text[50]})
-# Write-Host $alphabet['a']
-# Write-Host $target_mon.name $target_mon.index
-# Write-Host $target_mon.pokedex_entry.text
-$coords = [System.Management.Automation.Host.Coordinates]::new(0,0)
-if (!$NoDisplay) {
-    $Host.UI.RawUI.SetBufferContents($coords,$canvas_buffer)
+while ($count -lt ($dex_entry_page.Length-1)) {
+    $deltatime = (Get-Date).ToFileTime()
+    if ($deltatime -ge $targettime) {
+        if (!$dex_end) {
+            if ($arrow) {
+                Write-Text '_' -x 18 -y 16 -tile
+                $arrow = !$arrow
+            } else {
+                Write-Text ' ' -x 18 -y 16 -tile
+                $arrow = !$arrow
+            }
+        }
+        $targettime = ((Get-Date).ToFileTime()+(Get-FileTime -Milli 1000))
+        Write-Screen -NoDisplay:$NoDisplay
+    }
+    if ($Host.UI.RawUI.KeyAvailable) {
+        $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
+        if ($key.keydown -eq "True") {
+            $count+=1
+            $dex_end = ($dex_entry_page[$count].indexof('}') -ge 0)
+            $dex_entry_line_tmp = $dex_entry_page[$count].replace('}', '.')
+            $dex_entry_line = $dex_entry_line_tmp.split('<')
+            for ($i=0;$i -lt $dex_entry_line.Length; $i++) {
+                Write-Text -Text $dex_entry_line[$i] -x 1 -y (11+($i*2)) -Tile -Line
+            }
+            Write-Text ' ' -x 18 -y 16 -tile
+            Write-Screen -NoDisplay:$NoDisplay
+        }
+    }
 }
-$Host.UI.RawUI.CursorPosition = $debug_cursor_line
+
+if (!$NoClear) {
+    #$check = $false
+    while(!$check) {
+        if ($Host.UI.RawUI.KeyAvailable) {
+            $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
+            if ($key.keydown -eq "True") {
+                Clear-Host
+                $check = $true
+            }
+        }
+    }
+}
+
 
