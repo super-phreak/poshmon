@@ -154,13 +154,8 @@ Add-Template
 $dex_offset = (&{If($target_mon.front_sprite.width -eq 5) {1} Else {0}})
 Add-VBuff -Sprite $target_mon.front_sprite -X (1+$dex_offset) -Y (7-$target_mon.front_sprite.width+1) -FLIP -TILE
 
-for ($i=0;$i -lt $target_mon.name.Length;$i++){
-    Add-VBuff -Sprite $alphabet["$($target_mon.Name[$i])"] -x (9+$i) -y 2 -TILE
-}
-
-for ($i=0;$i -lt $target_mon.pokedex_entry.species.Length;$i++){
-    Add-VBuff -Sprite $alphabet["$($target_mon.pokedex_entry.species[$i])"] -x (9+$i) -y 4 -TILE
-}
+Write-Text $target_mon.name -X 9 -Y 2 -Tile
+Write-Text $target_mon.pokedex_entry.species -X 9 -Y 4 -Tile
 
 $pokedex_num = "$($target_mon.pokedex)".PadLeft(3,'0')
 $pokemon_height_feet = "$($target_mon.pokedex_entry.height.feet)".PadLeft(3,' ')
