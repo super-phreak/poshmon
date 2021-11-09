@@ -1,6 +1,6 @@
 param(
-    [parameter(Mandatory=$True)][Hashtable]
-    $Alphabet
+    [parameter(Mandatory=$False)][Switch]
+    $DEBUG_MODE
 )
 
 function Write-Screen{
@@ -79,6 +79,18 @@ function Write-Text{
 
 }
 
+function Write-ScreenDebug {
+    param(
+        [parameter(Mandatory=$true)]
+        $Text,
+        [parameter(Mandatory=$false)][Switch]
+        $Line
+    )
+
+    $Host.UI.RawUI.CursorPosition = $debug_cursor_line
+    Write-Host $text
+}
+
 function Set-Alphabet {
     param(
         [parameter(Mandatory=$True)]
@@ -133,7 +145,7 @@ $script:v_buff = New-Object 'int[]' ($CANVAS_WIDTH * $CANVAS_HEIGHT * 2)
 
 $script:gb_size = New-Object System.Management.Automation.Host.Size($CANVAS_WIDTH,$CANVAS_HEIGHT)
 $script:internal_alphabet = @()
-$debug_cursor_line = New-Object System.Management.Automation.Host.Coordinates 0, 71
+$script:debug_cursor_line = New-Object System.Management.Automation.Host.Coordinates 160, 0
 
 $script:PIXELS = @(
     #data packet 0x0 [00,00] [wh,wh]
@@ -174,6 +186,11 @@ $Script:canvas_buffer = New-Object 'System.Management.Automation.Host.BufferCell
 
 Clear-Host
 $Host.UI.RawUI.BackgroundColor = $($colors[[System.ConsoleColor]::Black])
+if ($Host.UI.RawUI.WindowSize.Width -gt $gb_size.Width -or $Host.UI.RawUI.WindowSize.Height -gt $gb_size.Height) {
+    $Host.UI.RawUI.WindowSize = $gb_size
+    $Host.UI.RawUI.BufferSize = $gb_size
+}
+
 $Host.UI.RawUI.BufferSize = $gb_size
 $Host.UI.RawUI.WindowSize = $gb_size
 
@@ -183,3 +200,4 @@ Export-ModuleMember -Function Get-FileTime
 Export-ModuleMember -Function Write-Text
 Export-ModuleMember -Function Add-VBuff
 Export-ModuleMember -Function Set-Alphabet
+Export-ModuleMember -Function Write-ScreenDebug
