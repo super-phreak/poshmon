@@ -25,6 +25,11 @@ param(
 
 )
 
+function Exit-Poshmon {
+    remove-module PoshmonGraphicsModule
+    remove-module PoshdexModule
+}
+
 #PoshMon Tests#
 Import-module .\PoshmonGraphicsModule.psm1
 Import-module .\PoshdexModule
@@ -59,27 +64,32 @@ Set-SpriteAtlas $sprite_atlas
 if($PSBoundParameters.ContainsKey('PokedexIndex')) {
     $target_mon = $pokedex | Where-Object {$_.pokedex -eq $PokedexIndex}
     $pokedex = $pokedex | Sort-Object -Property {$_.pokedex}
-    if ($target_mon -eq $null) {
+    if ($null -eq $target_mon) {
         Write-Error "There is no Pok$($poke_e)mon with Pok$($poke_e)dex of $PokedexIndex"
+        Exit-Poshmon
         exit 1
     }
 } elseif($PSBoundParameters.ContainsKey('InternalIndex')) {
     $target_mon = $pokedex | Where-Object {$_.index -eq $InternalIndex}
     $pokedex = $pokedex | Sort-Object -Property {$_.index}
-    if ($target_mon -eq $null) {
+    if ($null -eq $target_mon) {
         Write-Error "There is no Pok$($poke_e)mon with index of $InternalIndex"
+        Exit-Poshmon
         exit 1
     }
 } elseif($PSBoundParameters.ContainsKey('Name')) {
     $target_mon = $pokedex | Where-Object {$_.name -eq $Name}
-    if ($target_mon -eq $null) {
+    if ($null -eq $target_mon) {
         Write-Error "There is no Pok$($poke_e)mon with name of $Name"
+        Exit-Poshmon
         exit 1
     }
 } elseif($PSBoundParameters.ContainsKey('Random')) {
     $ScrollRandom = $True
     $target_mon = $pokedex | Get-Random
-} elseif($PSBoundParameters.ContainsKey('Scroll')) {
+} 
+
+if($PSBoundParameters.ContainsKey('Scroll')) {
     $Scroll_Check = $True
 }
 
@@ -132,16 +142,7 @@ if ($Scroll -lt 0) {
 # 
 
 if (!$NoClear) {
-    while(!$clear_check) {
-        # if ($Host.UI.RawUI.KeyAvailable) {
-        #     $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
-        #     if ($key.keydown -eq "True") {
-                Clear-Host
-                $clear_check = $true
-            # }
-        # }
-    }
+    Clear-Host
 }
 
-remove-module PoshmonGraphicsModule
-remove-module PoshdexModule
+Exit-Poshmon
