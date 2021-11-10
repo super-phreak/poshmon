@@ -11,6 +11,9 @@ If you want to run the Powershell command to test the Pokédex you must search b
 * `-InternalIndex`
 * `-Random`
 
+You can add `-Scroll` and `-ScrollLength` to Auto-scroll through the Pokedex. E.X. `Show-Pokedex -Random -Scroll 5` will show 6 (The orginal Pokémon + 5 moves).
+You can do infinite scrolling by passing `-Scroll -1`.
+
 ## Current Objectives
 - [x] Python scripts to scrape Gameboy ROM binaries and gather the Pokémon
 - [x] Fonts is also there
