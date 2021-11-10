@@ -146,6 +146,12 @@ function Show-DexEntry {
                 Write-Text ' ' -x 18 -y 16 -tile
                 Write-Screen -NoDisplay:$NoDisplay
             }
+            if ($Host.UI.RawUI.KeyAvailable) {
+                $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
+                if ($key.keydown -eq "True") {
+                    return $true
+                }
+            }
         } elseif ($Host.UI.RawUI.KeyAvailable) {
             $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
             if ($key.keydown -eq "True") {

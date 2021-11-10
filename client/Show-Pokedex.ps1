@@ -95,7 +95,7 @@ if ($Scroll -lt 0) {
             for ($clearint=0;$clearint -lt 7; $clearint++) {
                 Write-Text "       " -x 1 -y (1+$clearint) -Tile
             }
-            Show-DexEntry $target_mon -NoDisplay:$NoDisplay -Scroll -ScrollTime:$ScrollTime
+            $check = Show-DexEntry $target_mon -NoDisplay:$NoDisplay -Scroll -ScrollTime:$ScrollTime
             if(!$ScrollRandom) {
                 $target_mon = $pokedex[(($pokedex.indexof($target_mon) + 1) % $pokedex.Length)]
             } else {
@@ -116,7 +116,7 @@ if ($Scroll -lt 0) {
             for ($clearint=0;$clearint -lt 7; $clearint++) {
                 Write-Text "       " -x 1 -y (1+$clearint) -Tile
             }
-            Show-DexEntry $target_mon -NoDisplay:$NoDisplay -Scroll -ScrollTime:$ScrollTime
+            $check = Show-DexEntry $target_mon -NoDisplay:$NoDisplay -Scroll -ScrollTime:$ScrollTime
             if(!$ScrollRandom) {
                 $target_mon = $pokedex[(($pokedex.indexof($target_mon) + 1) % $pokedex.Length)]
             } else {
