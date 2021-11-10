@@ -135,7 +135,6 @@ function Show-DexEntry {
             Write-Screen -NoDisplay:$NoDisplay
         }
         if ($Scroll) {
-            Write-Host "WRONG"
             if ($deltatime -ge $target_scrolltime) {
                 $count+=1
                 $dex_end = ($dex_entry_page[$count].indexof('}') -ge 0)
