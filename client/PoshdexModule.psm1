@@ -1,4 +1,4 @@
-function Add-Template {
+function Add-PokedexTemplate {
     Write-Text -Text "HT" -x 9 -y 6 -TILE
     Add-VBuff -Sprite $internal_sprite_atlas.pokedex_tiles.sprite_sheet[0] -x 14 -y 6 -TILE
     Add-VBuff -Sprite $internal_sprite_atlas.pokedex_tiles.sprite_sheet[1] -x 17 -y 6 -TILE
@@ -9,10 +9,10 @@ function Add-Template {
     Add-VBuff -Sprite $internal_sprite_atlas.hpbar_status.sprite_sheet[18] -x 2 -y 8 -TILE
     Write-Text -Text '<DOT>' -x 3 -y 8 -TILE -Control
     Write-Text -Text '<DOT>' -x 15 -y 8 -TILE -Control
-    Add-Border
+    Add-PokedexBorder
 }
 
-function Add-Border {
+function Add-PokedexBorder {
     $topLeftCorner = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[3]
     $topRightCorner =$internal_sprite_atlas.pokedex_tiles.sprite_sheet[5]
     $botLeftCorner = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[12]
@@ -85,7 +85,7 @@ function Show-DexEntry {
     )
 
 
-    Add-Template
+    Add-PokedexTemplate
 
     $dex_offset = (&{If($Pokemon.front_sprite.width -eq 5) {1} Else {0}})
     Add-VBuff -Sprite $Pokemon.front_sprite -X (1+$dex_offset) -Y (7-$Pokemon.front_sprite.width+1) -FLIP -TILE
