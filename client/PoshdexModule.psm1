@@ -171,6 +171,12 @@ function Show-DexEntry {
         $target_scrolltime = ((Get-Date).ToFileTime()+(Get-FileTime -Milli (1000 * $ScrollTime)))
         while ($deltatime -lt $target_scrolltime) {
             $deltatime = (Get-Date).ToFileTime()
+            if ($Host.UI.RawUI.KeyAvailable) {
+                $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
+                if ($key.keydown -eq "True") {
+                    return $true
+                }
+            }
         }
     } else {
         $screen_check = $false
