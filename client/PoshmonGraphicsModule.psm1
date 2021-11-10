@@ -66,15 +66,23 @@ function Write-Text{
         [parameter(Mandatory=$false)][Switch]
         $Tile,
         [parameter(Mandatory=$false)][Switch]
-        $Line
+        $Line,
+        [parameter(Mandatory=$false)]
+        $LineLength = 18,
+        [parameter(Mandatory=$false)][Switch]
+        $Control
     )
-    if ($Line) {
-        $print_text = $text.padright(18,' ')
+    if (!$Control) {
+        if ($Line) {
+            $print_text = $text.padright($LineLength,' ')
+        } else {
+            $print_text = $text
+        }
+        for ($i=0;$i -lt $print_text.Length;$i++){
+            Add-VBuff -Sprite $internal_alphabet["$($print_text[$i])"] -x ($X+$i) -y $Y -TILE:$TILE
+        }
     } else {
-        $print_text = $text
-    }
-    for ($i=0;$i -lt $print_text.Length;$i++){
-        Add-VBuff -Sprite $internal_alphabet["$($print_text[$i])"] -x ($X+$i) -y $Y -TILE:$TILE
+        Add-VBuff -Sprite $internal_alphabet["$($Text)"] -x $X -y $Y -TILE:$TILE
     }
 
 }
@@ -136,7 +144,6 @@ $script:colors = [enum]::GetValues([System.ConsoleColor])
 $script:bufferCellType = [enum]::GetValues([System.Management.Automation.Host.BufferCellType])
 
 $script:half_pixel = [char][int]"0x2584"
-$script:poke_e = [char][int]"0x00e9"
 
 $script:CANVAS_WIDTH = 160
 $script:CANVAS_HEIGHT = 72
