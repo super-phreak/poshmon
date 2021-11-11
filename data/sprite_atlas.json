@@ -248,5 +248,55 @@
         "data": "AAAAAAAAAAAAAAAAAAAAAA=="
       }
     ]
+  },
+  "battle_hud": {
+    "name": "BATTLE_HUD",
+    "sprite_sheet": [
+      {
+        "width": 1,
+        "height": 1,
+        "data": "A8ADwAPAw8DDwAPAA8ADwA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAPAM8ADwDPAA/wAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAADwD/D////wAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "A8ADwAPAA8ADwAPAA8ADwA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "A8ADwAPAA/8A/wAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAAAAADDDAAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AAAAAAAA/////wAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "A8ADwAPA/8D/AAAAAAAAAA=="
+      },
+      {
+        "width": 1,
+        "height": 1,
+        "data": "AADwAP8A//D//wAAAAAAAA=="
+      }
+    ]
   }
 }

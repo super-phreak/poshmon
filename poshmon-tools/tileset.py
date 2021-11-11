@@ -17,8 +17,11 @@ class Tileset:
         }
 
     @classmethod
-    def from_addr(cls,addr,name,tiles):
+    def from_addr(cls,addr,name,tiles,two_bpp=True):
         sprite_sheet = []
         for i in range(tiles):
-            sprite_sheet.append(Sprite.decode2BPP(addr+(i*pokedata.TWO_BPP_TILE_SIZE),1,1))
+            if two_bpp:
+                sprite_sheet.append(Sprite.decode2BPP(addr+(i*pokedata.TWO_BPP_TILE_SIZE),1,1))
+            else:
+                sprite_sheet.append(Sprite.decode1BPP(addr+(i*pokedata.ONE_BPP_TILE_SIZE),1,1))
         return cls(addr,name,sprite_sheet)

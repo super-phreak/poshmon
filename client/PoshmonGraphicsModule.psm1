@@ -79,10 +79,10 @@ function Write-Text{
             $print_text = $text
         }
         for ($i=0;$i -lt $print_text.Length;$i++){
-            Add-VBuff -Sprite $internal_alphabet["$($print_text[$i])"] -x ($X+$i) -y $Y -TILE:$TILE
+            Add-VBuff -Sprite $internal_alphabet["$($print_text[$i])"] -x ($X+$i) -y $Y -TILE
         }
     } else {
-        Add-VBuff -Sprite $internal_alphabet["$($Text)"] -x $X -y $Y -TILE:$TILE
+        Add-VBuff -Sprite $internal_alphabet["$($Text)"] -x $X -y $Y -TILE
     }
 
 }

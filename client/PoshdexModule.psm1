@@ -88,7 +88,7 @@ function Show-DexEntry {
     Add-PokedexTemplate
 
     $dex_offset = (&{If($Pokemon.front_sprite.width -eq 5) {1} Else {0}})
-    Add-VBuff -Sprite $Pokemon.front_sprite -X (1+$dex_offset) -Y (7-$Pokemon.front_sprite.width+1) -FLIP -TILE
+    Add-VBuff -Sprite $Pokemon.front_sprite -X (1+$dex_offset) -Y (8-$Pokemon.front_sprite.height) -FLIP -TILE
 
     Write-Text "$($Pokemon.name)".PadRight(10,' ') -X 9 -Y 2 -Tile
     Write-Text "$($Pokemon.pokedex_entry.species)".PadRight(10,' ') -X 9 -Y 4 -Tile
