@@ -135,6 +135,31 @@ function Convert-Sprite{
     }
 }
 
+function Resize-Sprite {
+    param(
+        [parameter(Mandatory=$true)]
+        $Sprite,
+        
+        [Parameter(Mandatory=$true)]
+        [int]
+        $Scale
+    )
+    $sprite_scaled = New-Object 'int[]'  ($Sprite.height*$Sprite.width*$TILE_SIZE_RAW*$Scale*$Scale)
+    #$sprite_scaled = ,3 * (($Sprite.height+1)*($Sprite.width+1)*$TILE_SIZE_RAW*$Scale*$Scale)
+    for ($pixel=0;$pixel -lt $Sprite.data.Length;$pixel++) {
+        for ($scale_factor_row=0;$scale_factor_row -lt $Scale;$scale_factor_row++) {
+            for ($scale_factor_col=0;$scale_factor_col -lt $Scale;$scale_factor_col++) {
+                $sprite_scaled[(($pixel%($Sprite.width*$TILE_SIDE_RAW))*$Scale)+$scale_factor_col+(((([Math]::Floor($pixel/($Sprite.width*$TILE_SIDE_RAW)))*$Scale)+$scale_factor_row)*($Sprite.width*$TILE_SIDE_RAW*$Scale))] = $sprite.data[$pixel]
+            }
+        }
+    }
+    return @{
+        data = $sprite_scaled
+        height = (($Sprite.height)*$Scale)
+        width = (($Sprite.width)*$Scale)
+    }
+}
+
 
 $script:TILE_SIZE_RAW = 64
 $script:TILE_SIDE_RAW = 8
@@ -208,3 +233,4 @@ Export-ModuleMember -Function Write-Text
 Export-ModuleMember -Function Add-VBuff
 Export-ModuleMember -Function Set-Alphabet
 Export-ModuleMember -Function Write-ScreenDebug
+Export-ModuleMember -Function Resize-Sprite

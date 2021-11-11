@@ -1,11 +1,11 @@
 param(
-    [parameter(Mandatory=$false,ParameterSetName="PokedexIndex")]
+    [parameter(Mandatory=$true,ParameterSetName="PokedexIndex")]
     [Int]$PokedexIndex,
 
-    [parameter(Mandatory=$false,ParameterSetName="InternalIndex")]
+    [parameter(Mandatory=$true,ParameterSetName="InternalIndex")]
     [Int]$InternalIndex,
 
-    [parameter(Mandatory=$false,ParameterSetName="Name")]
+    [parameter(Mandatory=$true,ParameterSetName="Name")]
     [String]$Name,
 
     [parameter(Mandatory=$false)][Switch]
@@ -14,7 +14,7 @@ param(
     [parameter(Mandatory=$false)][Switch]
     $NoClear,
 
-    [parameter(Mandatory=$false,ParameterSetName="Random")][Switch]
+    [parameter(Mandatory=$true,ParameterSetName="Random")][Switch]
     $Random,
 
     [parameter(Mandatory=$false)][int]
