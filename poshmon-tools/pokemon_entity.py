@@ -115,8 +115,15 @@ class Pokemon:
         evo_move_bytes = data.get_var_data(addr+len(evo_mon_bytes),8,'0x00')
 
         if len(evo_mon_bytes) > 1:
-            evo_mon['evo_num'] = evo_mon_bytes[0]
-            evo_mon['evo_level'] = evo_mon_bytes[1]
+            evo_mon['evo_method'] = evo_mon_bytes[0]
+            
+            if evo_mon['evo_method'] == 1:
+                evo_mon['evo_level'] = evo_mon_bytes[1]
+            elif evo_mon['evo_method'] == 2:
+                evo_mon['evo_item'] = evo_mon_bytes[1]
+            elif evo_mon['evo_method'] == 3:
+                evo_mon['evo_trade'] = evo_mon_bytes[1]
+
             evo_mon['evo_mon_index'] = evo_mon_bytes[2]
 
         for i in range(0,len(evo_move_bytes)-1,2):

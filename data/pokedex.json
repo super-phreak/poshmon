@@ -239,7 +239,7 @@
       "43": 24
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 16,
       "evo_mon_index": 167
     }
@@ -331,8 +331,8 @@
       "48": 113
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 10,
+      "evo_method": 2,
+      "evo_item": 10,
       "evo_mon_index": 1
     }
   },
@@ -403,7 +403,7 @@
       "36": 97
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 20,
       "evo_mon_index": 35
     }
@@ -478,7 +478,7 @@
       "43": 153
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 30,
       "evo_mon_index": 141
     }
@@ -729,7 +729,7 @@
       "54": 76
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 32,
       "evo_mon_index": 154
     }
@@ -958,8 +958,8 @@
       "48": 79
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 47,
+      "evo_method": 2,
+      "evo_item": 47,
       "evo_mon_index": 1
     }
   },
@@ -1031,7 +1031,7 @@
       "55": 151
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 38,
       "evo_mon_index": 136
     }
@@ -1183,7 +1183,7 @@
       "43": 24
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 16,
       "evo_mon_index": 168
     }
@@ -1350,7 +1350,7 @@
       "46": 99
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 28,
       "evo_mon_index": 145
     }
@@ -1429,7 +1429,7 @@
       "55": 36
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 42,
       "evo_mon_index": 1
     }
@@ -1731,8 +1731,8 @@
       "50": 58
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 34,
+      "evo_method": 2,
+      "evo_item": 34,
       "evo_mon_index": 1
     }
   },
@@ -1811,7 +1811,7 @@
       "48": 56
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 30,
       "evo_mon_index": 155
     }
@@ -1881,7 +1881,7 @@
       "35": 138
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 25,
       "evo_mon_index": 147
     }
@@ -2035,8 +2035,8 @@
       "47": 56
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 34,
+      "evo_method": 2,
+      "evo_item": 34,
       "evo_mon_index": 1
     }
   },
@@ -2333,8 +2333,8 @@
       "50": 53
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 32,
+      "evo_method": 2,
+      "evo_item": 32,
       "evo_mon_index": 1
     }
   },
@@ -2548,7 +2548,7 @@
       "44": 119
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 18,
       "evo_mon_index": 150
     }
@@ -2637,7 +2637,7 @@
       "48": 94
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 37,
       "evo_mon_index": 8
     }
@@ -2721,8 +2721,8 @@
       "42": 115
     },
     "evo_info": {
-      "evo_num": 3,
-      "evo_level": 1,
+      "evo_method": 3,
+      "evo_trade": 1,
       "evo_mon_index": 149
     }
   },
@@ -2803,8 +2803,8 @@
       "43": 153
     },
     "evo_info": {
-      "evo_num": 3,
-      "evo_level": 1,
+      "evo_method": 3,
+      "evo_trade": 1,
       "evo_mon_index": 49
     }
   },
@@ -2975,8 +2975,8 @@
       "52": 66
     },
     "evo_info": {
-      "evo_num": 3,
-      "evo_level": 1,
+      "evo_method": 3,
+      "evo_trade": 1,
       "evo_mon_index": 126
     }
   },
@@ -3429,7 +3429,7 @@
       "52": 56
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 33,
       "evo_mon_index": 128
     }
@@ -3513,7 +3513,7 @@
       "37": 96
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 26,
       "evo_mon_index": 129
     }
@@ -3895,7 +3895,7 @@
       "48": 153
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 35,
       "evo_mon_index": 143
     }
@@ -3977,7 +3977,7 @@
       "39": 37
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 28,
       "evo_mon_index": 117
     }
@@ -4054,7 +4054,7 @@
       "50": 58
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 34,
       "evo_mon_index": 120
     }
@@ -4126,7 +4126,7 @@
       "40": 89
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 26,
       "evo_mon_index": 118
     }
@@ -4346,7 +4346,7 @@
       "43": 94
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 31,
       "evo_mon_index": 119
     }
@@ -4502,7 +4502,7 @@
       "44": 97
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 31,
       "evo_mon_index": 116
     }
@@ -4579,7 +4579,7 @@
       "45": 56
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 25,
       "evo_mon_index": 110
     }
@@ -4995,7 +4995,7 @@
       "44": 163
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 28,
       "evo_mon_index": 144
     }
@@ -5071,7 +5071,7 @@
       "40": 106
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 28,
       "evo_mon_index": 138
     }
@@ -5144,8 +5144,8 @@
       "42": 83
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 32,
+      "evo_method": 2,
+      "evo_item": 32,
       "evo_mon_index": 1
     }
   },
@@ -5288,8 +5288,8 @@
       "43": 87
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 33,
+      "evo_method": 2,
+      "evo_item": 33,
       "evo_mon_index": 1
     }
   },
@@ -5440,7 +5440,7 @@
       "50": 63
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 30,
       "evo_mon_index": 89
     }
@@ -5522,7 +5522,7 @@
       "55": 63
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 55,
       "evo_mon_index": 66
     }
@@ -5595,7 +5595,7 @@
       "49": 56
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 40,
       "evo_mon_index": 91
     }
@@ -5745,7 +5745,7 @@
       "45": 56
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 32,
       "evo_mon_index": 93
     }
@@ -5895,7 +5895,7 @@
       "38": 154
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 22,
       "evo_mon_index": 97
     }
@@ -6044,7 +6044,7 @@
       "53": 56
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 40,
       "evo_mon_index": 99
     }
@@ -6210,8 +6210,8 @@
       "39": 38
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 10,
+      "evo_method": 2,
+      "evo_item": 10,
       "evo_mon_index": 1
     }
   },
@@ -6361,8 +6361,8 @@
       "45": 36
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 32,
+      "evo_method": 2,
+      "evo_item": 32,
       "evo_mon_index": 1
     }
   },
@@ -6665,7 +6665,7 @@
       "46": 66
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 28,
       "evo_mon_index": 41
     }
@@ -6736,7 +6736,7 @@
       "36": 114
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 22,
       "evo_mon_index": 130
     }
@@ -6811,7 +6811,7 @@
       "38": 51
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 22,
       "evo_mon_index": 45
     }
@@ -6886,7 +6886,7 @@
       "41": 74
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 24,
       "evo_mon_index": 46
     }
@@ -6972,8 +6972,8 @@
       "49": 56
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 34,
+      "evo_method": 2,
+      "evo_item": 34,
       "evo_mon_index": 1
     }
   },
@@ -7102,7 +7102,7 @@
     },
     "evo_moves": {},
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 7,
       "evo_mon_index": 113
     }
@@ -7153,7 +7153,7 @@
     },
     "evo_moves": {},
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 10,
       "evo_mon_index": 114
     }
@@ -7643,7 +7643,7 @@
     },
     "evo_moves": {},
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 7,
       "evo_mon_index": 124
     }
@@ -7694,7 +7694,7 @@
     },
     "evo_moves": {},
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 10,
       "evo_mon_index": 125
     }
@@ -8308,7 +8308,7 @@
       "15": 33
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 20,
       "evo_mon_index": 22
     }
@@ -8966,8 +8966,8 @@
       "38": 138
     },
     "evo_info": {
-      "evo_num": 3,
-      "evo_level": 1,
+      "evo_method": 3,
+      "evo_trade": 1,
       "evo_mon_index": 14
     }
   },
@@ -9042,7 +9042,7 @@
     },
     "evo_moves": {},
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 16,
       "evo_mon_index": 38
     }
@@ -9197,7 +9197,7 @@
       "49": 119
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 36,
       "evo_mon_index": 151
     }
@@ -9417,7 +9417,7 @@
       "48": 76
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 16,
       "evo_mon_index": 9
     }
@@ -9642,7 +9642,7 @@
       "54": 97
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 33,
       "evo_mon_index": 158
     }
@@ -9789,7 +9789,7 @@
       "48": 97
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 40,
       "evo_mon_index": 164
     }
@@ -9935,7 +9935,7 @@
       "34": 162
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 20,
       "evo_mon_index": 166
     }
@@ -10086,8 +10086,8 @@
       "50": 24
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 10,
+      "evo_method": 2,
+      "evo_item": 10,
       "evo_mon_index": 1
     }
   },
@@ -10164,8 +10164,8 @@
       "50": 24
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 10,
+      "evo_method": 2,
+      "evo_item": 10,
       "evo_mon_index": 1
     }
   },
@@ -10246,7 +10246,7 @@
       "36": 153
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 25,
       "evo_mon_index": 39
     }
@@ -10468,7 +10468,7 @@
       "47": 103
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 30,
       "evo_mon_index": 54
     }
@@ -10551,7 +10551,7 @@
       "46": 83
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 16,
       "evo_mon_index": 178
     }
@@ -10634,7 +10634,7 @@
       "42": 56
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 16,
       "evo_mon_index": 179
     }
@@ -10717,7 +10717,7 @@
       "56": 83
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 36,
       "evo_mon_index": 180
     }
@@ -10800,7 +10800,7 @@
       "47": 56
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 36,
       "evo_mon_index": 28
     }
@@ -10955,7 +10955,7 @@
       "46": 76
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 21,
       "evo_mon_index": 186
     }
@@ -11028,8 +11028,8 @@
       "52": 76
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 47,
+      "evo_method": 2,
+      "evo_item": 47,
       "evo_mon_index": 1
     }
   },
@@ -11170,7 +11170,7 @@
       "42": 21
     },
     "evo_info": {
-      "evo_num": 1,
+      "evo_method": 1,
       "evo_level": 21,
       "evo_mon_index": 189
     }
@@ -11244,8 +11244,8 @@
       "49": 21
     },
     "evo_info": {
-      "evo_num": 2,
-      "evo_level": 47,
+      "evo_method": 2,
+      "evo_item": 47,
       "evo_mon_index": 1
     }
   },
