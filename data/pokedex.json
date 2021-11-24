@@ -84,7 +84,7 @@
       "55": 43,
       "64": 36
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 2,
@@ -167,7 +167,7 @@
       "41": 43,
       "46": 146
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 3,
@@ -238,11 +238,13 @@
       "36": 32,
       "43": 24
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 16,
-      "evo_mon_index": 167
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 16,
+        "evo_mon_index": 167
+      }
+    ]
   },
   {
     "index": 4,
@@ -330,11 +332,14 @@
       "39": 111,
       "48": 113
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 10,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 10,
+        "evo_level": 1,
+        "evo_mon_index": 142
+      }
+    ]
   },
   {
     "index": 5,
@@ -402,11 +407,13 @@
       "29": 65,
       "36": 97
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 20,
-      "evo_mon_index": 35
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 20,
+        "evo_mon_index": 35
+      }
+    ]
   },
   {
     "index": 6,
@@ -477,11 +484,13 @@
       "36": 129,
       "43": 153
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 30,
-      "evo_mon_index": 141
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 30,
+        "evo_mon_index": 141
+      }
+    ]
   },
   {
     "index": 7,
@@ -565,7 +574,7 @@
       "14": 40,
       "23": 37
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 8,
@@ -657,7 +666,7 @@
       "44": 133,
       "55": 94
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 9,
@@ -728,11 +737,13 @@
       "46": 79,
       "54": 76
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 32,
-      "evo_mon_index": 154
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 32,
+        "evo_mon_index": 154
+      }
+    ]
   },
   {
     "index": 10,
@@ -802,7 +813,7 @@
     "evo_moves": {
       "28": 23
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 11,
@@ -886,7 +897,7 @@
       "31": 21,
       "39": 103
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 12,
@@ -957,11 +968,14 @@
       "42": 76,
       "48": 79
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 47,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 47,
+        "evo_level": 1,
+        "evo_mon_index": 10
+      }
+    ]
   },
   {
     "index": 13,
@@ -1030,11 +1044,13 @@
       "48": 103,
       "55": 151
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 38,
-      "evo_mon_index": 136
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 38,
+        "evo_mon_index": 136
+      }
+    ]
   },
   {
     "index": 14,
@@ -1112,7 +1128,7 @@
       "29": 95,
       "38": 138
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 15,
@@ -1182,11 +1198,13 @@
       "36": 154,
       "43": 24
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 16,
-      "evo_mon_index": 168
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 16,
+        "evo_mon_index": 168
+      }
+    ]
   },
   {
     "index": 16,
@@ -1270,7 +1288,7 @@
       "14": 40,
       "23": 34
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 17,
@@ -1349,11 +1367,13 @@
       "43": 155,
       "46": 99
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 28,
-      "evo_mon_index": 145
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 28,
+        "evo_mon_index": 145
+      }
+    ]
   },
   {
     "index": 18,
@@ -1428,11 +1448,13 @@
       "50": 43,
       "55": 36
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 42,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 42,
+        "evo_mon_index": 1
+      }
+    ]
   },
   {
     "index": 19,
@@ -1513,7 +1535,7 @@
       "38": 58,
       "46": 56
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 20,
@@ -1579,7 +1601,7 @@
       "text": "A POK\u00e9MON that<has been admired<since the past^for its beauty.<It runs agilely<as if on wings}"
     },
     "evo_moves": {},
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 22,
@@ -1656,7 +1678,7 @@
       "41": 56,
       "52": 63
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 23,
@@ -1730,11 +1752,14 @@
       "39": 43,
       "50": 58
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 34,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 34,
+        "evo_level": 1,
+        "evo_mon_index": 139
+      }
+    ]
   },
   {
     "index": 24,
@@ -1810,11 +1835,13 @@
       "40": 103,
       "48": 56
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 30,
-      "evo_mon_index": 155
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 30,
+        "evo_mon_index": 155
+      }
+    ]
   },
   {
     "index": 25,
@@ -1880,11 +1907,13 @@
       "27": 95,
       "35": 138
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 25,
-      "evo_mon_index": 147
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 25,
+        "evo_mon_index": 147
+      }
+    ]
   },
   {
     "index": 26,
@@ -1953,7 +1982,7 @@
       "35": 14,
       "42": 97
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 27,
@@ -2034,11 +2063,14 @@
       "42": 113,
       "47": 56
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 34,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 34,
+        "evo_level": 1,
+        "evo_mon_index": 152
+      }
+    ]
   },
   {
     "index": 28,
@@ -2120,7 +2152,7 @@
       "42": 130,
       "52": 56
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 29,
@@ -2191,7 +2223,7 @@
       "49": 163,
       "54": 14
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 30,
@@ -2262,7 +2294,7 @@
       "45": 21,
       "49": 74
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 33,
@@ -2332,11 +2364,14 @@
       "39": 97,
       "50": 53
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 32,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 32,
+        "evo_level": 1,
+        "evo_mon_index": 20
+      }
+    ]
   },
   {
     "index": 34,
@@ -2408,7 +2443,7 @@
       "33": 21,
       "43": 106
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 35,
@@ -2477,7 +2512,7 @@
       "34": 65,
       "43": 97
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 36,
@@ -2547,11 +2582,13 @@
       "36": 97,
       "44": 119
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 18,
-      "evo_mon_index": 150
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 18,
+        "evo_mon_index": 150
+      }
+    ]
   },
   {
     "index": 37,
@@ -2636,11 +2673,13 @@
       "40": 133,
       "48": 94
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 37,
-      "evo_mon_index": 8
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 37,
+        "evo_mon_index": 8
+      }
+    ]
   },
   {
     "index": 38,
@@ -2720,11 +2759,13 @@
       "38": 94,
       "42": 115
     },
-    "evo_info": {
-      "evo_method": 3,
-      "evo_trade": 1,
-      "evo_mon_index": 149
-    }
+    "evo_info": [
+      {
+        "evo_method": 3,
+        "evo_level": 1,
+        "evo_mon_index": 149
+      }
+    ]
   },
   {
     "index": 39,
@@ -2802,11 +2843,13 @@
       "36": 89,
       "43": 153
     },
-    "evo_info": {
-      "evo_method": 3,
-      "evo_trade": 1,
-      "evo_mon_index": 49
-    }
+    "evo_info": [
+      {
+        "evo_method": 3,
+        "evo_level": 1,
+        "evo_mon_index": 49
+      }
+    ]
   },
   {
     "index": 40,
@@ -2897,7 +2940,7 @@
       "48": 113,
       "54": 38
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 41,
@@ -2974,11 +3017,13 @@
       "44": 69,
       "52": 66
     },
-    "evo_info": {
-      "evo_method": 3,
-      "evo_trade": 1,
-      "evo_mon_index": 126
-    }
+    "evo_info": [
+      {
+        "evo_method": 3,
+        "evo_level": 1,
+        "evo_mon_index": 126
+      }
+    ]
   },
   {
     "index": 42,
@@ -3059,7 +3104,7 @@
       "39": 96,
       "47": 164
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 43,
@@ -3132,7 +3177,7 @@
       "48": 136,
       "53": 25
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 44,
@@ -3205,7 +3250,7 @@
       "48": 5,
       "53": 68
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 45,
@@ -3277,7 +3322,7 @@
       "36": 103,
       "47": 51
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 46,
@@ -3349,7 +3394,7 @@
       "39": 163,
       "48": 74
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 47,
@@ -3428,11 +3473,13 @@
       "43": 154,
       "52": 56
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 33,
-      "evo_mon_index": 128
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 33,
+        "evo_mon_index": 128
+      }
+    ]
   },
   {
     "index": 48,
@@ -3512,11 +3559,13 @@
       "32": 94,
       "37": 96
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 26,
-      "evo_mon_index": 129
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 26,
+        "evo_mon_index": 129
+      }
+    ]
   },
   {
     "index": 49,
@@ -3596,7 +3645,7 @@
       "36": 89,
       "43": 153
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 51,
@@ -3674,7 +3723,7 @@
       "52": 123,
       "55": 53
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 53,
@@ -3756,7 +3805,7 @@
       "49": 113,
       "54": 87
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 54,
@@ -3828,7 +3877,7 @@
       "46": 129,
       "54": 103
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 55,
@@ -3894,11 +3943,13 @@
       "45": 114,
       "48": 153
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 35,
-      "evo_mon_index": 143
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 35,
+        "evo_mon_index": 143
+      }
+    ]
   },
   {
     "index": 57,
@@ -3976,11 +4027,13 @@
       "33": 69,
       "39": 37
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 28,
-      "evo_mon_index": 117
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 28,
+        "evo_mon_index": 117
+      }
+    ]
   },
   {
     "index": 58,
@@ -4053,11 +4106,13 @@
       "45": 36,
       "50": 58
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 34,
-      "evo_mon_index": 120
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 34,
+        "evo_mon_index": 120
+      }
+    ]
   },
   {
     "index": 59,
@@ -4125,11 +4180,13 @@
       "31": 163,
       "40": 89
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 26,
-      "evo_mon_index": 118
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 26,
+        "evo_mon_index": 118
+      }
+    ]
   },
   {
     "index": 60,
@@ -4204,7 +4261,7 @@
       "44": 99,
       "51": 36
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 64,
@@ -4276,7 +4333,7 @@
       "31": 97,
       "39": 163
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 65,
@@ -4345,11 +4402,13 @@
       "38": 79,
       "43": 94
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 31,
-      "evo_mon_index": 119
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 31,
+        "evo_mon_index": 119
+      }
+    ]
   },
   {
     "index": 66,
@@ -4430,7 +4489,7 @@
       "45": 82,
       "60": 63
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 70,
@@ -4501,11 +4560,13 @@
       "40": 161,
       "44": 97
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 31,
-      "evo_mon_index": 116
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 31,
+        "evo_mon_index": 116
+      }
+    ]
   },
   {
     "index": 71,
@@ -4578,11 +4639,13 @@
       "38": 133,
       "45": 56
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 25,
-      "evo_mon_index": 110
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 25,
+        "evo_mon_index": 110
+      }
+    ]
   },
   {
     "index": 72,
@@ -4663,7 +4726,7 @@
       "47": 37,
       "58": 59
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 73,
@@ -4732,7 +4795,7 @@
       "55": 97,
       "60": 143
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 74,
@@ -4804,7 +4867,7 @@
       "55": 97,
       "60": 54
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 75,
@@ -4876,7 +4939,7 @@
       "55": 97,
       "60": 113
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 76,
@@ -4923,7 +4986,7 @@
       "text": "Capable of copying<an enemy\u1e61 genetic<code to instantly^transform itself<into a duplicate<of the enemy}"
     },
     "evo_moves": {},
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 77,
@@ -4994,11 +5057,13 @@
       "33": 154,
       "44": 163
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 28,
-      "evo_mon_index": 144
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 28,
+        "evo_mon_index": 144
+      }
+    ]
   },
   {
     "index": 78,
@@ -5070,11 +5135,13 @@
       "35": 152,
       "40": 106
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 28,
-      "evo_mon_index": 138
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 28,
+        "evo_mon_index": 138
+      }
+    ]
   },
   {
     "index": 82,
@@ -5143,11 +5210,14 @@
       "35": 53,
       "42": 83
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 32,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 32,
+        "evo_level": 1,
+        "evo_mon_index": 83
+      }
+    ]
   },
   {
     "index": 83,
@@ -5211,7 +5281,7 @@
       "text": "Very smart and<very vengeful.<Grabbing one of^its many tails<could result in a<1000-year curse}"
     },
     "evo_moves": {},
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 84,
@@ -5287,11 +5357,14 @@
       "33": 97,
       "43": 87
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 33,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 33,
+        "evo_level": 1,
+        "evo_mon_index": 85
+      }
+    ]
   },
   {
     "index": 85,
@@ -5362,7 +5435,7 @@
       "text": "Its long tail<serves as a<ground to protect^itself from its<own high voltage<power}"
     },
     "evo_moves": {},
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 88,
@@ -5439,11 +5512,13 @@
       "40": 82,
       "50": 63
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 30,
-      "evo_mon_index": 89
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 30,
+        "evo_mon_index": 89
+      }
+    ]
   },
   {
     "index": 89,
@@ -5521,11 +5596,13 @@
       "45": 82,
       "55": 63
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 55,
-      "evo_mon_index": 66
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 55,
+        "evo_mon_index": 66
+      }
+    ]
   },
   {
     "index": 90,
@@ -5594,11 +5671,13 @@
       "44": 43,
       "49": 56
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 40,
-      "evo_mon_index": 91
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 40,
+        "evo_mon_index": 91
+      }
+    ]
   },
   {
     "index": 91,
@@ -5674,7 +5753,7 @@
       "46": 43,
       "53": 56
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 92,
@@ -5744,11 +5823,13 @@
       "37": 97,
       "45": 56
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 32,
-      "evo_mon_index": 93
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 32,
+        "evo_mon_index": 93
+      }
+    ]
   },
   {
     "index": 93,
@@ -5819,7 +5900,7 @@
       "41": 97,
       "52": 56
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 96,
@@ -5894,11 +5975,13 @@
       "31": 129,
       "38": 154
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 22,
-      "evo_mon_index": 97
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 22,
+        "evo_mon_index": 97
+      }
+    ]
   },
   {
     "index": 97,
@@ -5974,7 +6057,7 @@
       "36": 129,
       "47": 154
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 98,
@@ -6043,11 +6126,13 @@
       "46": 131,
       "53": 56
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 40,
-      "evo_mon_index": 99
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 40,
+        "evo_mon_index": 99
+      }
+    ]
   },
   {
     "index": 99,
@@ -6121,7 +6206,7 @@
       "44": 131,
       "49": 56
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 100,
@@ -6209,11 +6294,14 @@
       "34": 34,
       "39": 38
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 10,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 10,
+        "evo_level": 1,
+        "evo_mon_index": 101
+      }
+    ]
   },
   {
     "index": 101,
@@ -6294,7 +6382,7 @@
       "text": "The body is soft<and rubbery. When<angered, it will^suck in air and<inflate itself to<an enormous size}"
     },
     "evo_moves": {},
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 102,
@@ -6360,11 +6448,26 @@
       "37": 44,
       "45": 36
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 32,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 32,
+        "evo_level": 1,
+        "evo_mon_index": 103
+      },
+      {
+        "evo_method": 2,
+        "evo_item_id": 33,
+        "evo_level": 1,
+        "evo_mon_index": 104
+      },
+      {
+        "evo_method": 2,
+        "evo_item_id": 34,
+        "evo_level": 1,
+        "evo_mon_index": 105
+      }
+    ]
   },
   {
     "index": 103,
@@ -6436,7 +6539,7 @@
       "48": 99,
       "54": 53
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 104,
@@ -6511,7 +6614,7 @@
       "48": 42,
       "54": 87
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 105,
@@ -6587,7 +6690,7 @@
       "48": 54,
       "54": 56
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 106,
@@ -6664,11 +6767,13 @@
       "39": 69,
       "46": 66
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 28,
-      "evo_mon_index": 41
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 28,
+        "evo_mon_index": 41
+      }
+    ]
   },
   {
     "index": 107,
@@ -6735,11 +6840,13 @@
       "28": 17,
       "36": 114
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 22,
-      "evo_mon_index": 130
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 22,
+        "evo_mon_index": 130
+      }
+    ]
   },
   {
     "index": 108,
@@ -6810,11 +6917,13 @@
       "31": 103,
       "38": 51
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 22,
-      "evo_mon_index": 45
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 22,
+        "evo_mon_index": 45
+      }
+    ]
   },
   {
     "index": 109,
@@ -6885,11 +6994,13 @@
       "34": 163,
       "41": 74
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 24,
-      "evo_mon_index": 46
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 24,
+        "evo_mon_index": 46
+      }
+    ]
   },
   {
     "index": 110,
@@ -6971,11 +7082,14 @@
       "41": 133,
       "49": 56
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 34,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 34,
+        "evo_level": 1,
+        "evo_mon_index": 111
+      }
+    ]
   },
   {
     "index": 111,
@@ -7054,7 +7168,7 @@
       "16": 95,
       "19": 55
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 112,
@@ -7101,11 +7215,13 @@
       "text": "Often found in<forests, eating<leaves.^It has a sharp<venomous stinger<on its head}"
     },
     "evo_moves": {},
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 7,
-      "evo_mon_index": 113
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 7,
+        "evo_mon_index": 113
+      }
+    ]
   },
   {
     "index": 113,
@@ -7152,11 +7268,13 @@
       "text": "Almost incapable<of moving, this<POK\u00e9MON can only^harden its shell<to protect itself<from predators}"
     },
     "evo_moves": {},
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 10,
-      "evo_mon_index": 114
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 10,
+        "evo_mon_index": 114
+      }
+    ]
   },
   {
     "index": 114,
@@ -7227,7 +7345,7 @@
       "30": 42,
       "35": 97
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 116,
@@ -7299,7 +7417,7 @@
       "45": 161,
       "51": 97
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 117,
@@ -7378,7 +7496,7 @@
       "37": 69,
       "46": 37
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 118,
@@ -7447,7 +7565,7 @@
       "35": 163,
       "47": 89
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 119,
@@ -7521,7 +7639,7 @@
       "43": 79,
       "50": 94
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 120,
@@ -7595,7 +7713,7 @@
       "50": 36,
       "56": 58
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 123,
@@ -7642,11 +7760,13 @@
       "text": "Its short feet<are tipped with<suction pads that^enable it to<tirelessly climb<slopes and walls}"
     },
     "evo_moves": {},
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 7,
-      "evo_mon_index": 124
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 7,
+        "evo_mon_index": 124
+      }
+    ]
   },
   {
     "index": 124,
@@ -7693,11 +7813,13 @@
       "text": "This POK\u00e9MON is<vulnerable to<attack while its^shell is soft,<exposing its weak<and tender body}"
     },
     "evo_moves": {},
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 10,
-      "evo_mon_index": 125
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 10,
+        "evo_mon_index": 125
+      }
+    ]
   },
   {
     "index": 125,
@@ -7772,7 +7894,7 @@
       "26": 18,
       "32": 60
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 126,
@@ -7850,7 +7972,7 @@
       "44": 69,
       "52": 66
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 128,
@@ -7930,7 +8052,7 @@
       "48": 154,
       "59": 56
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 129,
@@ -8011,7 +8133,7 @@
       "37": 94,
       "43": 96
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 130,
@@ -8079,7 +8201,7 @@
       "32": 17,
       "43": 114
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 131,
@@ -8169,7 +8291,7 @@
       "75": 54,
       "81": 133
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 132,
@@ -8258,7 +8380,7 @@
       "48": 38,
       "56": 63
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 133,
@@ -8307,11 +8429,13 @@
     "evo_moves": {
       "15": 33
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 20,
-      "evo_mon_index": 22
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 20,
+        "evo_mon_index": 22
+      }
+    ]
   },
   {
     "index": 136,
@@ -8381,7 +8505,7 @@
       "53": 103,
       "60": 151
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 138,
@@ -8454,7 +8578,7 @@
       "42": 152,
       "49": 106
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 139,
@@ -8525,7 +8649,7 @@
     "evo_moves": {
       "50": 131
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 141,
@@ -8598,7 +8722,7 @@
       "40": 129,
       "50": 153
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 142,
@@ -8680,7 +8804,7 @@
       "text": "A timid fairy<POK\u00e9MON that is<rarely seen. It^will run and hide<the moment it<senses people}"
     },
     "evo_moves": {},
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 143,
@@ -8747,7 +8871,7 @@
       "49": 114,
       "53": 153
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 144,
@@ -8819,7 +8943,7 @@
       "37": 154,
       "51": 163
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 145,
@@ -8899,7 +9023,7 @@
       "48": 155,
       "55": 99
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 147,
@@ -8965,11 +9089,13 @@
       "29": 95,
       "38": 138
     },
-    "evo_info": {
-      "evo_method": 3,
-      "evo_trade": 1,
-      "evo_mon_index": 14
-    }
+    "evo_info": [
+      {
+        "evo_method": 3,
+        "evo_level": 1,
+        "evo_mon_index": 14
+      }
+    ]
   },
   {
     "index": 148,
@@ -9041,11 +9167,13 @@
       "text": "Using its ability<to read minds, it<will identify^impending danger<and TELEPORT to<safety}"
     },
     "evo_moves": {},
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 16,
-      "evo_mon_index": 38
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 16,
+        "evo_mon_index": 38
+      }
+    ]
   },
   {
     "index": 149,
@@ -9126,7 +9254,7 @@
       "38": 94,
       "42": 115
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 150,
@@ -9196,11 +9324,13 @@
       "40": 97,
       "49": 119
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 36,
-      "evo_mon_index": 151
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 36,
+        "evo_mon_index": 151
+      }
+    ]
   },
   {
     "index": 151,
@@ -9271,7 +9401,7 @@
       "44": 97,
       "54": 119
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 152,
@@ -9345,7 +9475,7 @@
       "text": "Its central core<glows with the<seven colors of^the rainbow. Some<people value the<core as a gem}"
     },
     "evo_moves": {},
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 153,
@@ -9416,11 +9546,13 @@
       "41": 79,
       "48": 76
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 16,
-      "evo_mon_index": 9
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 16,
+        "evo_mon_index": 9
+      }
+    ]
   },
   {
     "index": 154,
@@ -9492,7 +9624,7 @@
       "55": 79,
       "65": 76
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 155,
@@ -9569,7 +9701,7 @@
       "43": 103,
       "50": 56
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 157,
@@ -9641,11 +9773,13 @@
       "45": 32,
       "54": 97
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 33,
-      "evo_mon_index": 158
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 33,
+        "evo_mon_index": 158
+      }
+    ]
   },
   {
     "index": 158,
@@ -9718,7 +9852,7 @@
       "48": 32,
       "54": 97
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 163,
@@ -9788,11 +9922,13 @@
       "43": 36,
       "48": 97
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 40,
-      "evo_mon_index": 164
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 40,
+        "evo_mon_index": 164
+      }
+    ]
   },
   {
     "index": 164,
@@ -9863,7 +9999,7 @@
       "47": 36,
       "55": 97
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 165,
@@ -9934,11 +10070,13 @@
       "23": 116,
       "34": 162
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 20,
-      "evo_mon_index": 166
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 20,
+        "evo_mon_index": 166
+      }
+    ]
   },
   {
     "index": 166,
@@ -10011,7 +10149,7 @@
       "27": 116,
       "41": 162
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 167,
@@ -10085,11 +10223,14 @@
       "41": 32,
       "50": 24
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 10,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 10,
+        "evo_level": 1,
+        "evo_mon_index": 7
+      }
+    ]
   },
   {
     "index": 168,
@@ -10163,11 +10304,14 @@
       "41": 154,
       "50": 24
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 10,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 10,
+        "evo_level": 1,
+        "evo_mon_index": 16
+      }
+    ]
   },
   {
     "index": 169,
@@ -10245,11 +10389,13 @@
       "31": 89,
       "36": 153
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 25,
-      "evo_mon_index": 39
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 25,
+        "evo_mon_index": 39
+      }
+    ]
   },
   {
     "index": 170,
@@ -10325,7 +10471,7 @@
       "35": 97,
       "42": 161
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 171,
@@ -10396,7 +10542,7 @@
       "45": 36,
       "54": 63
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 173,
@@ -10467,11 +10613,13 @@
       "41": 129,
       "47": 103
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 30,
-      "evo_mon_index": 54
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 30,
+        "evo_mon_index": 54
+      }
+    ]
   },
   {
     "index": 176,
@@ -10550,11 +10698,13 @@
       "38": 53,
       "46": 83
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 16,
-      "evo_mon_index": 178
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 16,
+        "evo_mon_index": 178
+      }
+    ]
   },
   {
     "index": 177,
@@ -10633,11 +10783,13 @@
       "35": 130,
       "42": 56
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 16,
-      "evo_mon_index": 179
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 16,
+        "evo_mon_index": 179
+      }
+    ]
   },
   {
     "index": 178,
@@ -10716,11 +10868,13 @@
       "42": 53,
       "56": 83
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 36,
-      "evo_mon_index": 180
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 36,
+        "evo_mon_index": 180
+      }
+    ]
   },
   {
     "index": 179,
@@ -10799,11 +10953,13 @@
       "39": 130,
       "47": 56
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 36,
-      "evo_mon_index": 28
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 36,
+        "evo_mon_index": 28
+      }
+    ]
   },
   {
     "index": 180,
@@ -10885,7 +11041,7 @@
       "46": 53,
       "55": 83
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 185,
@@ -10954,11 +11110,13 @@
       "33": 80,
       "46": 76
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 21,
-      "evo_mon_index": 186
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 21,
+        "evo_mon_index": 186
+      }
+    ]
   },
   {
     "index": 186,
@@ -11027,11 +11185,14 @@
       "38": 80,
       "52": 76
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 47,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 47,
+        "evo_level": 1,
+        "evo_mon_index": 187
+      }
+    ]
   },
   {
     "index": 187,
@@ -11099,7 +11260,7 @@
       "17": 78,
       "19": 79
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 188,
@@ -11169,11 +11330,13 @@
       "33": 75,
       "42": 21
     },
-    "evo_info": {
-      "evo_method": 1,
-      "evo_level": 21,
-      "evo_mon_index": 189
-    }
+    "evo_info": [
+      {
+        "evo_method": 1,
+        "evo_level": 21,
+        "evo_mon_index": 189
+      }
+    ]
   },
   {
     "index": 189,
@@ -11243,11 +11406,14 @@
       "38": 75,
       "49": 21
     },
-    "evo_info": {
-      "evo_method": 2,
-      "evo_item": 47,
-      "evo_mon_index": 1
-    }
+    "evo_info": [
+      {
+        "evo_method": 2,
+        "evo_item_id": 47,
+        "evo_level": 1,
+        "evo_mon_index": 190
+      }
+    ]
   },
   {
     "index": 190,
@@ -11315,7 +11481,7 @@
       "15": 77,
       "18": 79
     },
-    "evo_info": {}
+    "evo_info": []
   },
   {
     "index": 21,
@@ -11423,6 +11589,6 @@
       "30": 118,
       "40": 94
     },
-    "evo_info": {}
+    "evo_info": []
   }
 ]

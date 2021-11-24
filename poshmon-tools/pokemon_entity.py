@@ -109,27 +109,35 @@ class Pokemon:
     
     @classmethod
     def __get_evo_info(cls, addr) -> tuple:
-        evo_mon = dict()
+        evolutions = list()
         evo_moves = dict()
         evo_mon_bytes = data.get_var_data(addr,8,'0x00')
         evo_move_bytes = data.get_var_data(addr+len(evo_mon_bytes),8,'0x00')
 
         if len(evo_mon_bytes) > 1:
-            evo_mon['evo_method'] = evo_mon_bytes[0]
-            
-            if evo_mon['evo_method'] == 1:
-                evo_mon['evo_level'] = evo_mon_bytes[1]
-            elif evo_mon['evo_method'] == 2:
-                evo_mon['evo_item'] = evo_mon_bytes[1]
-            elif evo_mon['evo_method'] == 3:
-                evo_mon['evo_trade'] = evo_mon_bytes[1]
+            i = 0
+            while i < len(evo_mon_bytes)-1:
+                print("Start:",i)
+                print(evo_mon_bytes.raw_dump())
+                evo_mon = dict()
+                evo_mon['evo_method'] = evo_mon_bytes[i]
 
-            evo_mon['evo_mon_index'] = evo_mon_bytes[2]
+                if evo_mon['evo_method'] == 2:
+                    evo_mon['evo_item_id'] = evo_mon_bytes[i+1]
+                    i+=1
+
+                evo_mon['evo_level'] = evo_mon_bytes[i+1]
+                evo_mon['evo_mon_index'] = evo_mon_bytes[i+2]
+                print("End:",i)
+
+                evolutions.append(evo_mon)
+                i+=3
+        
 
         for i in range(0,len(evo_move_bytes)-1,2):
             evo_moves[evo_move_bytes[i]] = evo_move_bytes[i+1]
 
-        return (evo_moves,evo_mon)
+        return (evo_moves,evolutions)
 
 
     
