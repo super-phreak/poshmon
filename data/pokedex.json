@@ -75,7 +75,16 @@
       },
       "weight": 2650,
       "text": "Protected by an<armor-like hide,<it is capable of^living in molten<lava of 3,600<degrees}"
-    }
+    },
+    "evo_moves": {
+      "30": 23,
+      "35": 39,
+      "40": 31,
+      "48": 32,
+      "55": 43,
+      "64": 36
+    },
+    "evo_info": {}
   },
   {
     "index": 2,
@@ -150,7 +159,15 @@
       },
       "weight": 1760,
       "text": "The infant rarely<ventures out of<its mother\u1e61^protective pouch<until it is 3<years old}"
-    }
+    },
+    "evo_moves": {
+      "26": 44,
+      "31": 39,
+      "36": 5,
+      "41": 43,
+      "46": 146
+    },
+    "evo_info": {}
   },
   {
     "index": 3,
@@ -212,6 +229,19 @@
       },
       "weight": 200,
       "text": "Stiffens its ears<to sense danger.<The larger its^horns, the more<powerful its<secreted venom}"
+    },
+    "evo_moves": {
+      "8": 30,
+      "14": 40,
+      "21": 116,
+      "29": 31,
+      "36": 32,
+      "43": 24
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 16,
+      "evo_mon_index": 167
     }
   },
   {
@@ -291,6 +321,19 @@
       },
       "weight": 170,
       "text": "Its magical and<cute appeal has<many admirers.^It is rare and<found only in<certain areas}"
+    },
+    "evo_moves": {
+      "13": 47,
+      "18": 3,
+      "24": 107,
+      "31": 118,
+      "39": 111,
+      "48": 113
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 10,
+      "evo_mon_index": 1
     }
   },
   {
@@ -351,6 +394,18 @@
       },
       "weight": 40,
       "text": "Eats bugs in<grassy areas. It<has to flap its^short wings at<high speed to<stay airborne}"
+    },
+    "evo_moves": {
+      "9": 43,
+      "15": 31,
+      "22": 119,
+      "29": 65,
+      "36": 97
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 20,
+      "evo_mon_index": 35
     }
   },
   {
@@ -414,6 +469,18 @@
       },
       "weight": 230,
       "text": "Usually found in<power plants.<Easily mistaken^for a POK\u00e9 BALL,<they have zapped<many people}"
+    },
+    "evo_moves": {
+      "17": 49,
+      "22": 120,
+      "29": 113,
+      "36": 129,
+      "43": 153
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 30,
+      "evo_mon_index": 141
     }
   },
   {
@@ -492,7 +559,13 @@
       },
       "weight": 1370,
       "text": "It uses its<powerful tail in<battle to smash,^constrict, then<break the prey\u1e61<bones}"
-    }
+    },
+    "evo_moves": {
+      "8": 30,
+      "14": 40,
+      "23": 37
+    },
+    "evo_info": {}
   },
   {
     "index": 8,
@@ -574,7 +647,17 @@
       },
       "weight": 1730,
       "text": "The SHELLDER that<is latched onto<SLOWPOKE\u1e61 tail^is said to feed<on the host\u1e61 left<over scraps}"
-    }
+    },
+    "evo_moves": {
+      "18": 50,
+      "22": 29,
+      "27": 45,
+      "33": 55,
+      "37": 110,
+      "44": 133,
+      "55": 94
+    },
+    "evo_info": {}
   },
   {
     "index": 9,
@@ -635,6 +718,20 @@
       },
       "weight": 290,
       "text": "When the bulb on<its back grows<large, it appears^to lose the<ability to stand<on its hind legs}"
+    },
+    "evo_moves": {
+      "7": 73,
+      "13": 22,
+      "22": 77,
+      "30": 75,
+      "38": 74,
+      "46": 79,
+      "54": 76
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 32,
+      "evo_mon_index": 154
     }
   },
   {
@@ -701,7 +798,11 @@
       },
       "weight": 2650,
       "text": "Legend has it that<on rare occasions,<one of its heads^will drop off and<continue on as an<EXEGGCUTE}"
-    }
+    },
+    "evo_moves": {
+      "28": 23
+    },
+    "evo_info": {}
   },
   {
     "index": 11,
@@ -777,7 +878,15 @@
       },
       "weight": 1440,
       "text": "Its tongue can be<extended like a<chameleon\u1e61. It^leaves a tingling<sensation when it<licks enemies}"
-    }
+    },
+    "evo_moves": {
+      "7": 23,
+      "15": 50,
+      "23": 111,
+      "31": 21,
+      "39": 103
+    },
+    "evo_info": {}
   },
   {
     "index": 12,
@@ -839,6 +948,19 @@
       },
       "weight": 60,
       "text": "Often mistaken<for eggs.<When disturbed,^they quickly<gather and attack<in swarms}"
+    },
+    "evo_moves": {
+      "25": 115,
+      "28": 73,
+      "32": 78,
+      "37": 77,
+      "42": 76,
+      "48": 79
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 47,
+      "evo_mon_index": 1
     }
   },
   {
@@ -899,6 +1021,19 @@
       },
       "weight": 660,
       "text": "Appears in filthy<areas. Thrives by<sucking up^polluted sludge<that is pumped<out of factories}"
+    },
+    "evo_moves": {
+      "30": 139,
+      "33": 107,
+      "37": 124,
+      "42": 106,
+      "48": 103,
+      "55": 151
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 38,
+      "evo_mon_index": 136
     }
   },
   {
@@ -972,7 +1107,12 @@
       },
       "weight": 890,
       "text": "Under a full moon,<this POK\u00e9MON<likes to mimic^the shadows of<people and laugh<at their fright}"
-    }
+    },
+    "evo_moves": {
+      "29": 95,
+      "38": 138
+    },
+    "evo_info": {}
   },
   {
     "index": 15,
@@ -1033,6 +1173,19 @@
       },
       "weight": 150,
       "text": "Although small,<its venomous<barbs render this^POK\u00e9MON dangerous.<The female has<smaller horns}"
+    },
+    "evo_moves": {
+      "8": 10,
+      "14": 40,
+      "21": 39,
+      "29": 44,
+      "36": 154,
+      "43": 24
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 16,
+      "evo_mon_index": 168
     }
   },
   {
@@ -1111,7 +1264,13 @@
       },
       "weight": 1320,
       "text": "Its hard scales<provide strong<protection. It^uses its hefty<bulk to execute<powerful moves}"
-    }
+    },
+    "evo_moves": {
+      "8": 10,
+      "14": 40,
+      "23": 34
+    },
+    "evo_info": {}
   },
   {
     "index": 17,
@@ -1182,6 +1341,18 @@
       },
       "weight": 140,
       "text": "Because it never<removes its skull<helmet, no one^has ever seen<this POK\u00e9MON\u1e61<real face}"
+    },
+    "evo_moves": {
+      "25": 43,
+      "31": 116,
+      "38": 37,
+      "43": 155,
+      "46": 99
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 28,
+      "evo_mon_index": 145
     }
   },
   {
@@ -1248,6 +1419,19 @@
       },
       "weight": 2540,
       "text": "Its massive bones<are 1000 times<harder than human^bones. It can<easily knock a<trailer flying}"
+    },
+    "evo_moves": {
+      "30": 23,
+      "35": 39,
+      "40": 31,
+      "45": 32,
+      "50": 43,
+      "55": 36
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 42,
+      "evo_mon_index": 1
     }
   },
   {
@@ -1320,7 +1504,16 @@
       },
       "weight": 4850,
       "text": "A POK\u00e9MON that<has been over-<hunted almost to^extinction. It<can ferry people<across the water}"
-    }
+    },
+    "evo_moves": {
+      "16": 47,
+      "20": 54,
+      "25": 34,
+      "31": 109,
+      "38": 58,
+      "46": 56
+    },
+    "evo_info": {}
   },
   {
     "index": 20,
@@ -1384,7 +1577,9 @@
       },
       "weight": 3420,
       "text": "A POK\u00e9MON that<has been admired<since the past^for its beauty.<It runs agilely<as if on wings}"
-    }
+    },
+    "evo_moves": {},
+    "evo_info": {}
   },
   {
     "index": 22,
@@ -1453,7 +1648,15 @@
       },
       "weight": 5180,
       "text": "Rarely seen in<the wild. Huge<and vicious, it^is capable of<destroying entire<cities in a rage}"
-    }
+    },
+    "evo_moves": {
+      "20": 44,
+      "25": 82,
+      "32": 43,
+      "41": 56,
+      "52": 63
+    },
+    "evo_info": {}
   },
   {
     "index": 23,
@@ -1519,6 +1722,18 @@
       },
       "weight": 90,
       "text": "Its hard shell<repels any kind<of attack.^It is vulnerable<only when its<shell is open}"
+    },
+    "evo_moves": {
+      "18": 48,
+      "23": 128,
+      "30": 62,
+      "39": 43,
+      "50": 58
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 34,
+      "evo_mon_index": 1
     }
   },
   {
@@ -1584,6 +1799,21 @@
       },
       "weight": 1000,
       "text": "Drifts in shallow<seas. Anglers who<hook them by^accident are<often punished by<its stinging acid}"
+    },
+    "evo_moves": {
+      "7": 48,
+      "13": 35,
+      "18": 40,
+      "22": 55,
+      "27": 132,
+      "33": 112,
+      "40": 103,
+      "48": 56
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 30,
+      "evo_mon_index": 155
     }
   },
   {
@@ -1645,6 +1875,15 @@
       },
       "weight": 2,
       "text": "Almost invisible,<this gaseous<POK\u00e9MON cloaks^the target and<puts it to sleep<without notice}"
+    },
+    "evo_moves": {
+      "27": 95,
+      "35": 138
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 25,
+      "evo_mon_index": 147
     }
   },
   {
@@ -1705,7 +1944,16 @@
       },
       "weight": 1230,
       "text": "With ninja-like<agility and speed,<it can create the^illusion that<there is more<than one}"
-    }
+    },
+    "evo_moves": {
+      "17": 43,
+      "20": 116,
+      "24": 104,
+      "29": 163,
+      "35": 14,
+      "42": 97
+    },
+    "evo_info": {}
   },
   {
     "index": 27,
@@ -1776,6 +2024,20 @@
       },
       "weight": 760,
       "text": "An enigmatic<POK\u00e9MON that can<effortlessly^regenerate any<appendage it<loses in battle}"
+    },
+    "evo_moves": {
+      "17": 55,
+      "22": 106,
+      "27": 105,
+      "32": 129,
+      "37": 107,
+      "42": 113,
+      "47": 56
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 34,
+      "evo_mon_index": 1
     }
   },
   {
@@ -1849,7 +2111,16 @@
       },
       "weight": 1890,
       "text": "A brutal POK\u00e9MON<with pressurized<water jets on its^shell. They are<used for high<speed tackles}"
-    }
+    },
+    "evo_moves": {
+      "8": 145,
+      "15": 55,
+      "24": 44,
+      "31": 110,
+      "42": 130,
+      "52": 56
+    },
+    "evo_info": {}
   },
   {
     "index": 29,
@@ -1911,7 +2182,16 @@
       },
       "weight": 1210,
       "text": "If it fails to<crush the victim<in its pincers,^it will swing it<around and toss<it hard}"
-    }
+    },
+    "evo_moves": {
+      "25": 69,
+      "30": 12,
+      "36": 116,
+      "43": 106,
+      "49": 163,
+      "54": 14
+    },
+    "evo_info": {}
   },
   {
     "index": 30,
@@ -1973,7 +2253,16 @@
       },
       "weight": 770,
       "text": "The whole body is<swathed with wide<vines that are^similar to sea-<weed. Its vines<shake as it walks}"
-    }
+    },
+    "evo_moves": {
+      "29": 71,
+      "32": 77,
+      "36": 78,
+      "39": 79,
+      "45": 21,
+      "49": 74
+    },
+    "evo_info": {}
   },
   {
     "index": 33,
@@ -2035,6 +2324,18 @@
       },
       "weight": 420,
       "text": "Very protective<of its territory.<It will bark and^bite to repel<intruders from<its space}"
+    },
+    "evo_moves": {
+      "18": 52,
+      "23": 43,
+      "30": 36,
+      "39": 97,
+      "50": 53
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 32,
+      "evo_mon_index": 1
     }
   },
   {
@@ -2099,7 +2400,15 @@
       },
       "weight": 4630,
       "text": "As it grows, the<stone portions of<its body harden^to become similar<to a diamond, but<colored black}"
-    }
+    },
+    "evo_moves": {
+      "15": 20,
+      "19": 88,
+      "25": 99,
+      "33": 21,
+      "43": 106
+    },
+    "evo_info": {}
   },
   {
     "index": 35,
@@ -2160,7 +2469,15 @@
       },
       "weight": 840,
       "text": "With its huge and<magnificent wings,<it can keep aloft^without ever<having to land<for rest}"
-    }
+    },
+    "evo_moves": {
+      "9": 43,
+      "15": 31,
+      "25": 119,
+      "34": 65,
+      "43": 97
+    },
+    "evo_info": {}
   },
   {
     "index": 36,
@@ -2221,6 +2538,19 @@
       },
       "weight": 40,
       "text": "A common sight in<forests and woods.<It flaps its^wings at ground<level to kick up<blinding sand}"
+    },
+    "evo_moves": {
+      "5": 28,
+      "12": 98,
+      "19": 18,
+      "28": 17,
+      "36": 97,
+      "44": 119
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 18,
+      "evo_mon_index": 150
     }
   },
   {
@@ -2297,6 +2627,19 @@
       },
       "weight": 790,
       "text": "Incredibly slow<and dopey. It<takes 5 seconds^for it to feel<pain when under<attack}"
+    },
+    "evo_moves": {
+      "18": 50,
+      "22": 29,
+      "27": 45,
+      "33": 55,
+      "40": 133,
+      "48": 94
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 37,
+      "evo_mon_index": 8
     }
   },
   {
@@ -2368,6 +2711,19 @@
       },
       "weight": 1250,
       "text": "It emits special<alpha waves from<its body that^induce headaches<just by being<close by}"
+    },
+    "evo_moves": {
+      "16": 93,
+      "20": 50,
+      "27": 60,
+      "31": 105,
+      "38": 94,
+      "42": 115
+    },
+    "evo_info": {
+      "evo_num": 3,
+      "evo_level": 1,
+      "evo_mon_index": 149
     }
   },
   {
@@ -2437,6 +2793,19 @@
       },
       "weight": 2320,
       "text": "Rolls down slopes<to move. It rolls<over any obstacle^without slowing<or changing its<direction}"
+    },
+    "evo_moves": {
+      "11": 111,
+      "16": 88,
+      "21": 120,
+      "29": 106,
+      "36": 89,
+      "43": 153
+    },
+    "evo_info": {
+      "evo_num": 3,
+      "evo_level": 1,
+      "evo_mon_index": 49
     }
   },
   {
@@ -2519,7 +2888,16 @@
       },
       "weight": 760,
       "text": "A rare and elusive<POK\u00e9MON that is<said to bring^happiness to those<who manage to get<it}"
-    }
+    },
+    "evo_moves": {
+      "24": 47,
+      "30": 45,
+      "38": 107,
+      "44": 111,
+      "48": 113,
+      "54": 38
+    },
+    "evo_info": {}
   },
   {
     "index": 41,
@@ -2588,6 +2966,18 @@
       },
       "weight": 1550,
       "text": "Its muscular body<is so powerful, it<must wear a power^save belt to be<able to regulate<its motions}"
+    },
+    "evo_moves": {
+      "20": 67,
+      "25": 43,
+      "36": 116,
+      "44": 69,
+      "52": 66
+    },
+    "evo_info": {
+      "evo_num": 3,
+      "evo_level": 1,
+      "evo_mon_index": 126
     }
   },
   {
@@ -2661,7 +3051,15 @@
       },
       "weight": 1200,
       "text": "If interrupted<while it is<miming, it will^slap around the<offender with its<broad hands}"
-    }
+    },
+    "evo_moves": {
+      "15": 93,
+      "23": 113,
+      "31": 3,
+      "39": 96,
+      "47": 164
+    },
+    "evo_info": {}
   },
   {
     "index": 43,
@@ -2726,7 +3124,15 @@
       },
       "weight": 1100,
       "text": "When in a hurry,<its legs lengthen<progressively.^It runs smoothly<with extra long,<loping strides}"
-    }
+    },
+    "evo_moves": {
+      "33": 27,
+      "38": 26,
+      "43": 116,
+      "48": 136,
+      "53": 25
+    },
+    "evo_info": {}
   },
   {
     "index": 44,
@@ -2791,7 +3197,15 @@
       },
       "weight": 1110,
       "text": "While apparently<doing nothing, it<fires punches in^lightning fast<volleys that are<impossible to see}"
-    }
+    },
+    "evo_moves": {
+      "33": 7,
+      "38": 8,
+      "43": 9,
+      "48": 5,
+      "53": 68
+    },
+    "evo_info": {}
   },
   {
     "index": 45,
@@ -2855,7 +3269,15 @@
       },
       "weight": 1430,
       "text": "It is rumored that<the ferocious<warning markings^on its belly<differ from area<to area}"
-    }
+    },
+    "evo_moves": {
+      "10": 40,
+      "17": 44,
+      "27": 137,
+      "36": 103,
+      "47": 51
+    },
+    "evo_info": {}
   },
   {
     "index": 46,
@@ -2919,7 +3341,15 @@
       },
       "weight": 650,
       "text": "A host-parasite<pair in which the<parasite mushroom^has taken over the<host bug. Prefers<damp places}"
-    }
+    },
+    "evo_moves": {
+      "13": 78,
+      "20": 141,
+      "30": 147,
+      "39": 163,
+      "48": 74
+    },
+    "evo_info": {}
   },
   {
     "index": 47,
@@ -2990,6 +3420,18 @@
       },
       "weight": 430,
       "text": "While lulling its<enemies with its<vacant look, this^wily POK\u00e9MON will<use psychokinetic<powers}"
+    },
+    "evo_moves": {
+      "28": 39,
+      "31": 50,
+      "36": 93,
+      "43": 154,
+      "52": 56
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 33,
+      "evo_mon_index": 128
     }
   },
   {
@@ -3061,6 +3503,19 @@
       },
       "weight": 710,
       "text": "Puts enemies to<sleep then eats<their dreams.^Occasionally gets<sick from eating<bad dreams}"
+    },
+    "evo_moves": {
+      "12": 50,
+      "17": 93,
+      "24": 29,
+      "29": 139,
+      "32": 94,
+      "37": 96
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 26,
+      "evo_mon_index": 129
     }
   },
   {
@@ -3132,7 +3587,16 @@
       },
       "weight": 6620,
       "text": "Its boulder-like<body is extremely<hard. It can^easily withstand<dynamite blasts<without damage}"
-    }
+    },
+    "evo_moves": {
+      "11": 111,
+      "16": 88,
+      "21": 120,
+      "29": 106,
+      "36": 89,
+      "43": 153
+    },
+    "evo_info": {}
   },
   {
     "index": 51,
@@ -3201,7 +3665,16 @@
       },
       "weight": 980,
       "text": "Its body always<burns with an<orange glow that^enables it to<hide perfectly<among flames}"
-    }
+    },
+    "evo_moves": {
+      "36": 43,
+      "39": 109,
+      "43": 7,
+      "48": 108,
+      "52": 123,
+      "55": 53
+    },
+    "evo_info": {}
   },
   {
     "index": 53,
@@ -3275,7 +3748,15 @@
       },
       "weight": 660,
       "text": "Normally found<near power plants,<they can wander^away and cause<major blackouts<in cities}"
-    }
+    },
+    "evo_moves": {
+      "34": 84,
+      "37": 103,
+      "42": 9,
+      "49": 113,
+      "54": 87
+    },
+    "evo_info": {}
   },
   {
     "index": 54,
@@ -3338,7 +3819,16 @@
       },
       "weight": 1320,
       "text": "Formed by several<MAGNEMITEs linked<together. They^frequently appear<when sunspots<flare up}"
-    }
+    },
+    "evo_moves": {
+      "21": 49,
+      "25": 84,
+      "29": 48,
+      "38": 86,
+      "46": 129,
+      "54": 103
+    },
+    "evo_info": {}
   },
   {
     "index": 55,
@@ -3396,6 +3886,18 @@
       },
       "weight": 20,
       "text": "Because it stores<several kinds of<toxic gases in^its body, it is<prone to exploding<without warning}"
+    },
+    "evo_moves": {
+      "32": 124,
+      "37": 108,
+      "40": 120,
+      "45": 114,
+      "48": 153
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 35,
+      "evo_mon_index": 143
     }
   },
   {
@@ -3466,6 +3968,18 @@
       },
       "weight": 620,
       "text": "Extremely quick to<anger. It could<be docile one^moment then<thrashing away<the next instant}"
+    },
+    "evo_moves": {
+      "15": 2,
+      "21": 154,
+      "27": 116,
+      "33": 69,
+      "39": 37
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 28,
+      "evo_mon_index": 117
     }
   },
   {
@@ -3531,6 +4045,18 @@
       },
       "weight": 1980,
       "text": "The protruding<horn on its head<is very hard.^It is used for<bashing through<thick ice}"
+    },
+    "evo_moves": {
+      "30": 45,
+      "35": 62,
+      "40": 156,
+      "45": 36,
+      "50": 58
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 34,
+      "evo_mon_index": 120
     }
   },
   {
@@ -3591,6 +4117,18 @@
       },
       "weight": 20,
       "text": "Lives about one<yard underground<where it feeds on^plant roots. It<sometimes appears<above ground}"
+    },
+    "evo_moves": {
+      "15": 45,
+      "19": 91,
+      "24": 28,
+      "31": 163,
+      "40": 89
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 26,
+      "evo_mon_index": 118
     }
   },
   {
@@ -3658,7 +4196,15 @@
       },
       "weight": 1950,
       "text": "When it targets<an enemy, it<charges furiously^while whipping its<body with its<long tails}"
-    }
+    },
+    "evo_moves": {
+      "21": 23,
+      "28": 39,
+      "35": 43,
+      "44": 99,
+      "51": 36
+    },
+    "evo_info": {}
   },
   {
     "index": 64,
@@ -3722,7 +4268,15 @@
       },
       "weight": 330,
       "text": "The sprig of<green onions it<holds is its^weapon. It is<used much like a<metal sword}"
-    }
+    },
+    "evo_moves": {
+      "7": 43,
+      "15": 31,
+      "23": 14,
+      "31": 97,
+      "39": 163
+    },
+    "evo_info": {}
   },
   {
     "index": 65,
@@ -3782,6 +4336,19 @@
       },
       "weight": 660,
       "text": "Lives in the<shadows of tall<trees where it^eats insects. It<is attracted by<light at night}"
+    },
+    "evo_moves": {
+      "24": 77,
+      "27": 141,
+      "30": 78,
+      "35": 60,
+      "38": 79,
+      "43": 94
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 31,
+      "evo_mon_index": 119
     }
   },
   {
@@ -3855,7 +4422,15 @@
       },
       "weight": 4630,
       "text": "An extremely<rarely seen<marine POK\u00e9MON.^Its intelligence<is said to match<that of humans}"
-    }
+    },
+    "evo_moves": {
+      "10": 86,
+      "20": 97,
+      "35": 21,
+      "45": 82,
+      "60": 63
+    },
+    "evo_info": {}
   },
   {
     "index": 70,
@@ -3917,6 +4492,19 @@
       },
       "weight": 860,
       "text": "A bird that makes<up for its poor<flying with its^fast foot speed.<Leaves giant<footprints}"
+    },
+    "evo_moves": {
+      "20": 45,
+      "24": 31,
+      "30": 65,
+      "36": 99,
+      "40": 161,
+      "44": 97
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 31,
+      "evo_mon_index": 116
     }
   },
   {
@@ -3981,6 +4569,19 @@
       },
       "weight": 270,
       "text": "Its newly grown<legs prevent it<from running. It^appears to prefer<swimming than<trying to stand}"
+    },
+    "evo_moves": {
+      "16": 95,
+      "19": 55,
+      "25": 3,
+      "31": 34,
+      "38": 133,
+      "45": 56
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 25,
+      "evo_mon_index": 110
     }
   },
   {
@@ -4053,7 +4654,16 @@
       },
       "weight": 900,
       "text": "It seductively<wiggles its hips<as it walks. It^can cause people<to dance in<unison with it}"
-    }
+    },
+    "evo_moves": {
+      "18": 122,
+      "23": 3,
+      "31": 8,
+      "39": 34,
+      "47": 37,
+      "58": 59
+    },
+    "evo_info": {}
   },
   {
     "index": 73,
@@ -4116,7 +4726,13 @@
       },
       "weight": 1320,
       "text": "Known as the<legendary bird of<fire. Every flap^of its wings<creates a dazzling<flash of flames}"
-    }
+    },
+    "evo_moves": {
+      "51": 43,
+      "55": 97,
+      "60": 143
+    },
+    "evo_info": {}
   },
   {
     "index": 74,
@@ -4182,7 +4798,13 @@
       },
       "weight": 1220,
       "text": "A legendary bird<POK\u00e9MON that is<said to appear to^doomed people who<are lost in icy<mountains}"
-    }
+    },
+    "evo_moves": {
+      "51": 59,
+      "55": 97,
+      "60": 54
+    },
+    "evo_info": {}
   },
   {
     "index": 75,
@@ -4248,7 +4870,13 @@
       },
       "weight": 1160,
       "text": "A legendary bird<POK\u00e9MON that is<said to appear^from clouds while<dropping enormous<lightning bolts}"
-    }
+    },
+    "evo_moves": {
+      "51": 87,
+      "55": 97,
+      "60": 113
+    },
+    "evo_info": {}
   },
   {
     "index": 76,
@@ -4293,7 +4921,9 @@
       },
       "weight": 90,
       "text": "Capable of copying<an enemy\u1e61 genetic<code to instantly^transform itself<into a duplicate<of the enemy}"
-    }
+    },
+    "evo_moves": {},
+    "evo_info": {}
   },
   {
     "index": 77,
@@ -4356,6 +4986,18 @@
       },
       "weight": 90,
       "text": "Adores circular<objects. Wanders<the streets on a^nightly basis to<look for dropped<loose change}"
+    },
+    "evo_moves": {
+      "12": 44,
+      "17": 6,
+      "24": 103,
+      "33": 154,
+      "44": 163
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 28,
+      "evo_mon_index": 144
     }
   },
   {
@@ -4420,6 +5062,18 @@
       },
       "weight": 140,
       "text": "Its pincers are<not only powerful<weapons, they are^used for balance<when walking<sideways}"
+    },
+    "evo_moves": {
+      "20": 11,
+      "25": 12,
+      "30": 23,
+      "35": 152,
+      "40": 106
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 28,
+      "evo_mon_index": 138
     }
   },
   {
@@ -4481,6 +5135,18 @@
       },
       "weight": 220,
       "text": "At the time of<birth, it has<just one tail.^The tail splits<from its tip as<it grows older}"
+    },
+    "evo_moves": {
+      "16": 98,
+      "21": 46,
+      "28": 109,
+      "35": 53,
+      "42": 83
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 32,
+      "evo_mon_index": 1
     }
   },
   {
@@ -4543,7 +5209,9 @@
       },
       "weight": 440,
       "text": "Very smart and<very vengeful.<Grabbing one of^its many tails<could result in a<1000-year curse}"
-    }
+    },
+    "evo_moves": {},
+    "evo_info": {}
   },
   {
     "index": 84,
@@ -4611,6 +5279,18 @@
       },
       "weight": 130,
       "text": "When several of<these POK\u00e9MON<gather, their^electricity could<build and cause<lightning storms}"
+    },
+    "evo_moves": {
+      "9": 86,
+      "16": 98,
+      "26": 129,
+      "33": 97,
+      "43": 87
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 33,
+      "evo_mon_index": 1
     }
   },
   {
@@ -4680,7 +5360,9 @@
       },
       "weight": 660,
       "text": "Its long tail<serves as a<ground to protect^itself from its<own high voltage<power}"
-    }
+    },
+    "evo_moves": {},
+    "evo_info": {}
   },
   {
     "index": 88,
@@ -4749,6 +5431,18 @@
       },
       "weight": 70,
       "text": "Long considered a<mythical POK\u00e9MON<until recently^when a small<colony was found<living underwater}"
+    },
+    "evo_moves": {
+      "10": 86,
+      "20": 97,
+      "30": 21,
+      "40": 82,
+      "50": 63
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 30,
+      "evo_mon_index": 89
     }
   },
   {
@@ -4819,6 +5513,18 @@
       },
       "weight": 360,
       "text": "A mystical POK\u00e9MON<that exudes a<gentle aura.^Has the ability<to change climate<conditions}"
+    },
+    "evo_moves": {
+      "10": 86,
+      "20": 97,
+      "35": 21,
+      "45": 82,
+      "55": 63
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 55,
+      "evo_mon_index": 66
     }
   },
   {
@@ -4881,6 +5587,17 @@
       },
       "weight": 250,
       "text": "A POK\u00e9MON that<was resurrected<from a fossil^found in what was<once the ocean<floor eons ago}"
+    },
+    "evo_moves": {
+      "34": 71,
+      "39": 163,
+      "44": 43,
+      "49": 56
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 40,
+      "evo_mon_index": 91
     }
   },
   {
@@ -4950,7 +5667,14 @@
       },
       "weight": 890,
       "text": "Its sleek shape is<perfect for swim-<ming. It slashes^prey with its<claws and drains<the body fluids}"
-    }
+    },
+    "evo_moves": {
+      "34": 71,
+      "39": 163,
+      "46": 43,
+      "53": 56
+    },
+    "evo_info": {}
   },
   {
     "index": 92,
@@ -5012,6 +5736,18 @@
       },
       "weight": 180,
       "text": "Known to shoot<down flying bugs<with precision^blasts of ink<from the surface<of the water}"
+    },
+    "evo_moves": {
+      "19": 108,
+      "24": 43,
+      "30": 55,
+      "37": 97,
+      "45": 56
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 32,
+      "evo_mon_index": 93
     }
   },
   {
@@ -5075,7 +5811,15 @@
       },
       "weight": 550,
       "text": "Capable of swim-<ming backwards by<rapidly flapping^its wing-like<pectoral fins and<stout tail}"
-    }
+    },
+    "evo_moves": {
+      "19": 108,
+      "24": 43,
+      "30": 55,
+      "41": 97,
+      "52": 56
+    },
+    "evo_info": {}
   },
   {
     "index": 96,
@@ -5142,6 +5886,18 @@
       },
       "weight": 260,
       "text": "Burrows deep<underground in<arid locations^far from water.<It only emerges<to hunt for food}"
+    },
+    "evo_moves": {
+      "10": 28,
+      "17": 163,
+      "24": 40,
+      "31": 129,
+      "38": 154
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 22,
+      "evo_mon_index": 97
     }
   },
   {
@@ -5210,7 +5966,15 @@
       },
       "weight": 650,
       "text": "Curls up into a<spiny ball when<threatened. It^can roll while<curled up to<attack or escape}"
-    }
+    },
+    "evo_moves": {
+      "10": 28,
+      "17": 163,
+      "27": 40,
+      "36": 129,
+      "47": 154
+    },
+    "evo_info": {}
   },
   {
     "index": 98,
@@ -5272,6 +6036,17 @@
       },
       "weight": 170,
       "text": "Although long<extinct, in rare<cases, it can be^genetically<resurrected from<fossils}"
+    },
+    "evo_moves": {
+      "34": 30,
+      "39": 43,
+      "46": 131,
+      "53": 56
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 40,
+      "evo_mon_index": 99
     }
   },
   {
@@ -5339,7 +6114,14 @@
       },
       "weight": 770,
       "text": "A prehistoric<POK\u00e9MON that died<out when its^heavy shell made<it impossible to<catch prey}"
-    }
+    },
+    "evo_moves": {
+      "34": 30,
+      "39": 43,
+      "44": 131,
+      "49": 56
+    },
+    "evo_info": {}
   },
   {
     "index": 100,
@@ -5417,6 +6199,20 @@
       },
       "weight": 120,
       "text": "When its huge eyes<light up, it sings<a mysteriously^soothing melody<that lulls its<enemies to sleep}"
+    },
+    "evo_moves": {
+      "9": 1,
+      "14": 50,
+      "19": 111,
+      "24": 3,
+      "29": 156,
+      "34": 34,
+      "39": 38
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 10,
+      "evo_mon_index": 1
     }
   },
   {
@@ -5496,7 +6292,9 @@
       },
       "weight": 260,
       "text": "The body is soft<and rubbery. When<angered, it will^suck in air and<inflate itself to<an enormous size}"
-    }
+    },
+    "evo_moves": {},
+    "evo_info": {}
   },
   {
     "index": 102,
@@ -5555,6 +6353,17 @@
       },
       "weight": 140,
       "text": "Its genetic code<is irregular.<It may mutate if^it is exposed to<radiation from<element STONEs}"
+    },
+    "evo_moves": {
+      "27": 98,
+      "31": 39,
+      "37": 44,
+      "45": 36
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 32,
+      "evo_mon_index": 1
     }
   },
   {
@@ -5616,7 +6425,18 @@
       },
       "weight": 550,
       "text": "When storing<thermal energy in<its body, its^temperature could<soar to over 1600<degrees}"
-    }
+    },
+    "evo_moves": {
+      "27": 98,
+      "31": 52,
+      "37": 39,
+      "40": 44,
+      "42": 43,
+      "44": 83,
+      "48": 99,
+      "54": 53
+    },
+    "evo_info": {}
   },
   {
     "index": 104,
@@ -5680,7 +6500,18 @@
       },
       "weight": 540,
       "text": "It accumulates<negative ions in<the atmosphere to^blast out 10000-<volt lightning<bolts}"
-    }
+    },
+    "evo_moves": {
+      "27": 98,
+      "31": 84,
+      "37": 39,
+      "40": 86,
+      "42": 24,
+      "44": 97,
+      "48": 42,
+      "54": 87
+    },
+    "evo_info": {}
   },
   {
     "index": 105,
@@ -5745,7 +6576,18 @@
       },
       "weight": 640,
       "text": "Lives close to<water. Its long<tail is ridged^with a fin which<is often mistaken<for a mermaid\u1e61}"
-    }
+    },
+    "evo_moves": {
+      "27": 98,
+      "31": 55,
+      "37": 39,
+      "40": 44,
+      "42": 151,
+      "44": 114,
+      "48": 54,
+      "54": 56
+    },
+    "evo_info": {}
   },
   {
     "index": 106,
@@ -5814,6 +6656,18 @@
       },
       "weight": 430,
       "text": "Loves to build<its muscles.<It trains in all^styles of martial<arts to become<even stronger}"
+    },
+    "evo_moves": {
+      "20": 67,
+      "25": 43,
+      "32": 116,
+      "39": 69,
+      "46": 66
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 28,
+      "evo_mon_index": 41
     }
   },
   {
@@ -5873,6 +6727,18 @@
       },
       "weight": 170,
       "text": "Forms colonies in<perpetually dark<places. Uses^ultrasonic waves<to identify and<approach targets}"
+    },
+    "evo_moves": {
+      "10": 48,
+      "15": 44,
+      "21": 109,
+      "28": 17,
+      "36": 114
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 22,
+      "evo_mon_index": 130
     }
   },
   {
@@ -5936,6 +6802,18 @@
       },
       "weight": 150,
       "text": "Moves silently<and stealthily.<Eats the eggs of^birds, such as<PIDGEY and<SPEAROW, whole}"
+    },
+    "evo_moves": {
+      "10": 40,
+      "17": 44,
+      "24": 137,
+      "31": 103,
+      "38": 51
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 22,
+      "evo_mon_index": 45
     }
   },
   {
@@ -5999,6 +6877,18 @@
       },
       "weight": 120,
       "text": "Burrows to suck<tree roots. The<mushrooms on its^back grow by draw-<ing nutrients from<the bug host}"
+    },
+    "evo_moves": {
+      "13": 78,
+      "20": 141,
+      "27": 147,
+      "34": 163,
+      "41": 74
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 24,
+      "evo_mon_index": 46
     }
   },
   {
@@ -6072,6 +6962,19 @@
       },
       "weight": 440,
       "text": "Capable of living<in or out of<water. When out^of water, it<sweats to keep<its body slimy}"
+    },
+    "evo_moves": {
+      "16": 95,
+      "19": 55,
+      "26": 3,
+      "33": 34,
+      "41": 133,
+      "49": 56
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 34,
+      "evo_mon_index": 1
     }
   },
   {
@@ -6146,7 +7049,12 @@
       },
       "weight": 1190,
       "text": "An adept swimmer<at both the front<crawl and breast^stroke. Easily<overtakes the best<human swimmers}"
-    }
+    },
+    "evo_moves": {
+      "16": 95,
+      "19": 55
+    },
+    "evo_info": {}
   },
   {
     "index": 112,
@@ -6191,6 +7099,12 @@
       },
       "weight": 70,
       "text": "Often found in<forests, eating<leaves.^It has a sharp<venomous stinger<on its head}"
+    },
+    "evo_moves": {},
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 7,
+      "evo_mon_index": 113
     }
   },
   {
@@ -6236,6 +7150,12 @@
       },
       "weight": 220,
       "text": "Almost incapable<of moving, this<POK\u00e9MON can only^harden its shell<to protect itself<from predators}"
+    },
+    "evo_moves": {},
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 10,
+      "evo_mon_index": 114
     }
   },
   {
@@ -6298,7 +7218,16 @@
       },
       "weight": 650,
       "text": "Flies at high<speed and attacks<using its large^venomous stingers<on its forelegs<and tail}"
-    }
+    },
+    "evo_moves": {
+      "12": 31,
+      "16": 116,
+      "20": 41,
+      "25": 99,
+      "30": 42,
+      "35": 97
+    },
+    "evo_info": {}
   },
   {
     "index": 116,
@@ -6361,7 +7290,16 @@
       },
       "weight": 1880,
       "text": "Uses its three<brains to execute<complex plans.^While two heads<sleep, one head<stays awake}"
-    }
+    },
+    "evo_moves": {
+      "20": 45,
+      "24": 31,
+      "30": 65,
+      "39": 99,
+      "45": 161,
+      "51": 97
+    },
+    "evo_info": {}
   },
   {
     "index": 117,
@@ -6432,7 +7370,15 @@
       },
       "weight": 710,
       "text": "Always furious<and tenacious to<boot. It will not^abandon chasing<its quarry until<it is caught}"
-    }
+    },
+    "evo_moves": {
+      "15": 2,
+      "21": 154,
+      "27": 116,
+      "37": 69,
+      "46": 37
+    },
+    "evo_info": {}
   },
   {
     "index": 118,
@@ -6493,7 +7439,15 @@
       },
       "weight": 730,
       "text": "A team of DIGLETT<triplets.<It triggers huge^earthquakes by<burrowing 60 miles<underground}"
-    }
+    },
+    "evo_moves": {
+      "15": 45,
+      "19": 91,
+      "24": 28,
+      "35": 163,
+      "47": 89
+    },
+    "evo_info": {}
   },
   {
     "index": 119,
@@ -6558,7 +7512,16 @@
       },
       "weight": 280,
       "text": "The dust-like<scales covering<its wings are^color coded to<indicate the kinds<of poison it has}"
-    }
+    },
+    "evo_moves": {
+      "24": 77,
+      "27": 141,
+      "30": 78,
+      "38": 60,
+      "43": 79,
+      "50": 94
+    },
+    "evo_info": {}
   },
   {
     "index": 120,
@@ -6624,7 +7587,15 @@
       },
       "weight": 2650,
       "text": "Stores thermal<energy in its<body. Swims at a^steady 8 knots<even in intensely<cold waters}"
-    }
+    },
+    "evo_moves": {
+      "30": 45,
+      "35": 62,
+      "44": 156,
+      "50": 36,
+      "56": 58
+    },
+    "evo_info": {}
   },
   {
     "index": 123,
@@ -6669,6 +7640,12 @@
       },
       "weight": 60,
       "text": "Its short feet<are tipped with<suction pads that^enable it to<tirelessly climb<slopes and walls}"
+    },
+    "evo_moves": {},
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 7,
+      "evo_mon_index": 124
     }
   },
   {
@@ -6714,6 +7691,12 @@
       },
       "weight": 220,
       "text": "This POK\u00e9MON is<vulnerable to<attack while its^shell is soft,<exposing its weak<and tender body}"
+    },
+    "evo_moves": {},
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 10,
+      "evo_mon_index": 125
     }
   },
   {
@@ -6779,7 +7762,17 @@
       },
       "weight": 710,
       "text": "In battle, it<flaps its wings<at high speed to^release highly<toxic dust into<the air}"
-    }
+    },
+    "evo_moves": {
+      "12": 93,
+      "15": 77,
+      "16": 78,
+      "17": 79,
+      "21": 48,
+      "26": 18,
+      "32": 60
+    },
+    "evo_info": {}
   },
   {
     "index": 126,
@@ -6849,7 +7842,15 @@
       },
       "weight": 2870,
       "text": "Using its heavy<muscles, it throws<powerful punches^that can send the<victim clear over<the horizon}"
-    }
+    },
+    "evo_moves": {
+      "20": 67,
+      "25": 43,
+      "36": 116,
+      "44": 69,
+      "52": 66
+    },
+    "evo_info": {}
   },
   {
     "index": 128,
@@ -6921,7 +7922,15 @@
       },
       "weight": 1690,
       "text": "Often seen swim-<ming elegantly by<lake shores. It^is often mistaken<for the Japanese<monster, Kappa}"
-    }
+    },
+    "evo_moves": {
+      "28": 39,
+      "31": 50,
+      "39": 93,
+      "48": 154,
+      "59": 56
+    },
+    "evo_info": {}
   },
   {
     "index": 129,
@@ -6993,7 +8002,16 @@
       },
       "weight": 1670,
       "text": "When it locks eyes<with an enemy, it<will use a mix of^PSI moves such as<HYPNOSIS and<CONFUSION}"
-    }
+    },
+    "evo_moves": {
+      "12": 50,
+      "17": 93,
+      "24": 29,
+      "33": 139,
+      "37": 94,
+      "43": 96
+    },
+    "evo_info": {}
   },
   {
     "index": 130,
@@ -7053,7 +8071,15 @@
       },
       "weight": 1210,
       "text": "Once it strikes,<it will not stop<draining energy^from the victim<even if it gets<too heavy to fly}"
-    }
+    },
+    "evo_moves": {
+      "10": 48,
+      "15": 44,
+      "21": 109,
+      "32": 17,
+      "43": 114
+    },
+    "evo_info": {}
   },
   {
     "index": 131,
@@ -7135,7 +8161,15 @@
       },
       "weight": 2690,
       "text": "It was created by<a scientist after<years of horrific^gene splicing and<DNA engineering<experiments}"
-    }
+    },
+    "evo_moves": {
+      "63": 112,
+      "66": 94,
+      "70": 105,
+      "75": 54,
+      "81": 133
+    },
+    "evo_info": {}
   },
   {
     "index": 132,
@@ -7217,7 +8251,14 @@
       },
       "weight": 10140,
       "text": "Very lazy. Just<eats and sleeps.<As its rotund^bulk builds, it<becomes steadily<more slothful}"
-    }
+    },
+    "evo_moves": {
+      "35": 34,
+      "41": 106,
+      "48": 38,
+      "56": 63
+    },
+    "evo_info": {}
   },
   {
     "index": 133,
@@ -7262,6 +8303,14 @@
       },
       "weight": 220,
       "text": "In the distant<past, it was<somewhat stronger^than the horribly<weak descendants<that exist today}"
+    },
+    "evo_moves": {
+      "15": 33
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 20,
+      "evo_mon_index": 22
     }
   },
   {
@@ -7323,7 +8372,16 @@
       },
       "weight": 660,
       "text": "Thickly covered<with a filthy,<vile sludge. It^is so toxic, even<its footprints<contain poison}"
-    }
+    },
+    "evo_moves": {
+      "30": 139,
+      "33": 107,
+      "37": 124,
+      "45": 106,
+      "53": 103,
+      "60": 151
+    },
+    "evo_info": {}
   },
   {
     "index": 138,
@@ -7388,7 +8446,15 @@
       },
       "weight": 1320,
       "text": "The large pincer<has 10000 hp of<crushing power.^However, its huge<size makes it<unwieldy to use}"
-    }
+    },
+    "evo_moves": {
+      "20": 11,
+      "25": 12,
+      "34": 23,
+      "42": 152,
+      "49": 106
+    },
+    "evo_info": {}
   },
   {
     "index": 139,
@@ -7455,7 +8521,11 @@
       },
       "weight": 2920,
       "text": "When attacked, it<launches its<horns in quick^volleys. Its<innards have<never been seen}"
-    }
+    },
+    "evo_moves": {
+      "50": 131
+    },
+    "evo_info": {}
   },
   {
     "index": 141,
@@ -7520,7 +8590,15 @@
       },
       "weight": 1470,
       "text": "It stores electric<energy under very<high pressure.^It often explodes<with little or no<provocation}"
-    }
+    },
+    "evo_moves": {
+      "17": 49,
+      "22": 120,
+      "29": 113,
+      "40": 129,
+      "50": 153
+    },
+    "evo_info": {}
   },
   {
     "index": 142,
@@ -7600,7 +8678,9 @@
       },
       "weight": 880,
       "text": "A timid fairy<POK\u00e9MON that is<rarely seen. It^will run and hide<the moment it<senses people}"
-    }
+    },
+    "evo_moves": {},
+    "evo_info": {}
   },
   {
     "index": 143,
@@ -7659,7 +8739,15 @@
       },
       "weight": 210,
       "text": "Where two kinds<of poison gases<meet, 2 KOFFINGs^can fuse into a<WEEZING over many<years}"
-    }
+    },
+    "evo_moves": {
+      "32": 124,
+      "39": 108,
+      "43": 120,
+      "49": 114,
+      "53": 153
+    },
+    "evo_info": {}
   },
   {
     "index": 144,
@@ -7723,7 +8811,15 @@
       },
       "weight": 710,
       "text": "Although its fur<has many admirers,<it is tough to^raise as a pet<because of its<fickle meanness}"
-    }
+    },
+    "evo_moves": {
+      "12": 44,
+      "17": 6,
+      "24": 103,
+      "37": 154,
+      "51": 163
+    },
+    "evo_info": {}
   },
   {
     "index": 145,
@@ -7795,7 +8891,15 @@
       },
       "weight": 990,
       "text": "The bone it holds<is its key weapon.<It throws the^bone skillfully<like a boomerang<to KO targets}"
-    }
+    },
+    "evo_moves": {
+      "25": 43,
+      "33": 116,
+      "41": 37,
+      "48": 155,
+      "55": 99
+    },
+    "evo_info": {}
   },
   {
     "index": 147,
@@ -7856,6 +8960,15 @@
       },
       "weight": 2,
       "text": "Because of its<ability to slip<through block^walls, it is said<to be from an-<other dimension}"
+    },
+    "evo_moves": {
+      "29": 95,
+      "38": 138
+    },
+    "evo_info": {
+      "evo_num": 3,
+      "evo_level": 1,
+      "evo_mon_index": 14
     }
   },
   {
@@ -7926,6 +9039,12 @@
       },
       "weight": 430,
       "text": "Using its ability<to read minds, it<will identify^impending danger<and TELEPORT to<safety}"
+    },
+    "evo_moves": {},
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 16,
+      "evo_mon_index": 38
     }
   },
   {
@@ -7998,7 +9117,16 @@
       },
       "weight": 1060,
       "text": "Its brain can out-<perform a super-<computer.^Its intelligence<quotient is said<to be 5,000}"
-    }
+    },
+    "evo_moves": {
+      "16": 93,
+      "20": 50,
+      "27": 60,
+      "31": 105,
+      "38": 94,
+      "42": 115
+    },
+    "evo_info": {}
   },
   {
     "index": 150,
@@ -8059,6 +9187,19 @@
       },
       "weight": 660,
       "text": "Very protective<of its sprawling<territorial area,^this POK\u00e9MON will<fiercely peck at<any intruder}"
+    },
+    "evo_moves": {
+      "5": 28,
+      "12": 98,
+      "21": 18,
+      "31": 17,
+      "40": 97,
+      "49": 119
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 36,
+      "evo_mon_index": 151
     }
   },
   {
@@ -8121,7 +9262,16 @@
       },
       "weight": 870,
       "text": "When hunting, it<skims the surface<of water at high^speed to pick off<unwary prey such<as MAGIKARP}"
-    }
+    },
+    "evo_moves": {
+      "5": 28,
+      "12": 98,
+      "21": 18,
+      "31": 17,
+      "44": 97,
+      "54": 119
+    },
+    "evo_info": {}
   },
   {
     "index": 152,
@@ -8193,7 +9343,9 @@
       },
       "weight": 1760,
       "text": "Its central core<glows with the<seven colors of^the rainbow. Some<people value the<core as a gem}"
-    }
+    },
+    "evo_moves": {},
+    "evo_info": {}
   },
   {
     "index": 153,
@@ -8254,6 +9406,20 @@
       },
       "weight": 150,
       "text": "A strange seed was<planted on its<back at birth.^The plant sprouts<and grows with<this POK\u00e9MON}"
+    },
+    "evo_moves": {
+      "7": 73,
+      "13": 22,
+      "20": 77,
+      "27": 75,
+      "34": 74,
+      "41": 79,
+      "48": 76
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 16,
+      "evo_mon_index": 9
     }
   },
   {
@@ -8316,7 +9482,17 @@
       },
       "weight": 2210,
       "text": "The plant blooms<when it is<absorbing solar^energy. It stays<on the move to<seek sunlight}"
-    }
+    },
+    "evo_moves": {
+      "7": 73,
+      "13": 22,
+      "22": 77,
+      "30": 75,
+      "43": 74,
+      "55": 79,
+      "65": 76
+    },
+    "evo_info": {}
   },
   {
     "index": 155,
@@ -8382,7 +9558,18 @@
       },
       "weight": 1210,
       "text": "The tentacles are<normally kept<short. On hunts,^they are extended<to ensnare and<immobilize prey}"
-    }
+    },
+    "evo_moves": {
+      "7": 48,
+      "13": 35,
+      "18": 40,
+      "22": 55,
+      "27": 132,
+      "35": 112,
+      "43": 103,
+      "50": 56
+    },
+    "evo_info": {}
   },
   {
     "index": 157,
@@ -8445,6 +9632,19 @@
       },
       "weight": 330,
       "text": "Its tail fin<billows like an<elegant ballroom^dress, giving it<the nickname of<the Water Queen}"
+    },
+    "evo_moves": {
+      "19": 48,
+      "24": 30,
+      "30": 31,
+      "37": 127,
+      "45": 32,
+      "54": 97
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 33,
+      "evo_mon_index": 158
     }
   },
   {
@@ -8509,7 +9709,16 @@
       },
       "weight": 860,
       "text": "In the autumn<spawning season,<they can be seen^swimming power-<fully up rivers<and creeks}"
-    }
+    },
+    "evo_moves": {
+      "19": 48,
+      "24": 30,
+      "30": 31,
+      "39": 127,
+      "48": 32,
+      "54": 97
+    },
+    "evo_info": {}
   },
   {
     "index": 163,
@@ -8570,6 +9779,19 @@
       },
       "weight": 660,
       "text": "Its hooves are 10<times harder than<diamonds. It can^trample anything<completely flat<in little time}"
+    },
+    "evo_moves": {
+      "30": 39,
+      "32": 23,
+      "35": 45,
+      "39": 83,
+      "43": 36,
+      "48": 97
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 40,
+      "evo_mon_index": 164
     }
   },
   {
@@ -8632,7 +9854,16 @@
       },
       "weight": 2090,
       "text": "Very competitive,<this POK\u00e9MON will<chase anything^that moves fast<in the hopes of<racing it}"
-    }
+    },
+    "evo_moves": {
+      "30": 39,
+      "32": 23,
+      "35": 45,
+      "39": 83,
+      "47": 36,
+      "55": 97
+    },
+    "evo_info": {}
   },
   {
     "index": 165,
@@ -8696,6 +9927,17 @@
       },
       "weight": 80,
       "text": "Bites anything<when it attacks.<Small and very^quick, it is a<common sight in<many places}"
+    },
+    "evo_moves": {
+      "7": 98,
+      "14": 158,
+      "23": 116,
+      "34": 162
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 20,
+      "evo_mon_index": 166
     }
   },
   {
@@ -8762,7 +10004,14 @@
       },
       "weight": 410,
       "text": "It uses its whis-<kers to maintain<its balance.^It apparently<slows down if<they are cut off}"
-    }
+    },
+    "evo_moves": {
+      "7": 98,
+      "14": 158,
+      "27": 116,
+      "41": 162
+    },
+    "evo_info": {}
   },
   {
     "index": 167,
@@ -8827,6 +10076,19 @@
       },
       "weight": 430,
       "text": "An aggressive<POK\u00e9MON that is<quick to attack.^The horn on its<head secretes a<powerful venom}"
+    },
+    "evo_moves": {
+      "8": 30,
+      "14": 40,
+      "23": 116,
+      "32": 31,
+      "41": 32,
+      "50": 24
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 10,
+      "evo_mon_index": 1
     }
   },
   {
@@ -8892,6 +10154,19 @@
       },
       "weight": 440,
       "text": "The female\u1e61 horn<develops slowly.<Prefers physical^attacks such as<clawing and<biting}"
+    },
+    "evo_moves": {
+      "8": 10,
+      "14": 40,
+      "23": 39,
+      "32": 44,
+      "41": 154,
+      "50": 24
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 10,
+      "evo_mon_index": 1
     }
   },
   {
@@ -8961,6 +10236,19 @@
       },
       "weight": 440,
       "text": "Found in fields<and mountains.<Mistaking them^for boulders,<people often step<or trip on them}"
+    },
+    "evo_moves": {
+      "11": 111,
+      "16": 88,
+      "21": 120,
+      "26": 106,
+      "31": 89,
+      "36": 153
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 25,
+      "evo_mon_index": 39
     }
   },
   {
@@ -9030,7 +10318,14 @@
       },
       "weight": 800,
       "text": "A POK\u00e9MON that<consists entirely<of programming^code. Capable of<moving freely in<cyberspace}"
-    }
+    },
+    "evo_moves": {
+      "23": 60,
+      "28": 105,
+      "35": 97,
+      "42": 161
+    },
+    "evo_info": {}
   },
   {
     "index": 171,
@@ -9094,7 +10389,14 @@
       },
       "weight": 1300,
       "text": "A ferocious, pre-<historic POK\u00e9MON<that goes for the^enemy\u1e61 throat<with its serrated<saw-like fangs}"
-    }
+    },
+    "evo_moves": {
+      "33": 48,
+      "38": 44,
+      "45": 36,
+      "54": 63
+    },
+    "evo_info": {}
   },
   {
     "index": 173,
@@ -9156,6 +10458,19 @@
       },
       "weight": 130,
       "text": "Uses anti-gravity<to stay suspended.<Appears without^warning and uses<THUNDER WAVE and<similar moves}"
+    },
+    "evo_moves": {
+      "21": 49,
+      "25": 84,
+      "29": 48,
+      "35": 86,
+      "41": 129,
+      "47": 103
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 30,
+      "evo_mon_index": 54
     }
   },
   {
@@ -9226,6 +10541,19 @@
       },
       "weight": 190,
       "text": "Obviously prefers<hot places. When<it rains, steam^is said to spout<from the tip of<its tail}"
+    },
+    "evo_moves": {
+      "9": 52,
+      "15": 43,
+      "22": 99,
+      "30": 163,
+      "38": 53,
+      "46": 83
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 16,
+      "evo_mon_index": 178
     }
   },
   {
@@ -9296,6 +10624,19 @@
       },
       "weight": 200,
       "text": "After birth, its<back swells and<hardens into a^shell. Powerfully<sprays foam from<its mouth}"
+    },
+    "evo_moves": {
+      "8": 145,
+      "15": 55,
+      "22": 44,
+      "28": 110,
+      "35": 130,
+      "42": 56
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 16,
+      "evo_mon_index": 179
     }
   },
   {
@@ -9366,6 +10707,19 @@
       },
       "weight": 420,
       "text": "When it swings<its burning tail,<it elevates the^temperature to<unbearably high<levels}"
+    },
+    "evo_moves": {
+      "9": 52,
+      "15": 43,
+      "24": 99,
+      "33": 163,
+      "42": 53,
+      "56": 83
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 36,
+      "evo_mon_index": 180
     }
   },
   {
@@ -9436,6 +10790,19 @@
       },
       "weight": 500,
       "text": "Often hides in<water to stalk<unwary prey. For^swimming fast, it<moves its ears to<maintain balance}"
+    },
+    "evo_moves": {
+      "8": 145,
+      "15": 55,
+      "24": 44,
+      "31": 110,
+      "39": 130,
+      "47": 56
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 36,
+      "evo_mon_index": 28
     }
   },
   {
@@ -9509,7 +10876,16 @@
       },
       "weight": 2000,
       "text": "Spits fire that<is hot enough to<melt boulders.^Known to cause<forest fires<unintentionally}"
-    }
+    },
+    "evo_moves": {
+      "9": 52,
+      "15": 43,
+      "24": 99,
+      "36": 163,
+      "46": 53,
+      "55": 83
+    },
+    "evo_info": {}
   },
   {
     "index": 185,
@@ -9569,6 +10945,19 @@
       },
       "weight": 120,
       "text": "During the day,<it keeps its face<buried in the^ground. At night,<it wanders around<sowing its seeds}"
+    },
+    "evo_moves": {
+      "15": 77,
+      "17": 78,
+      "19": 79,
+      "24": 51,
+      "33": 80,
+      "46": 76
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 21,
+      "evo_mon_index": 186
     }
   },
   {
@@ -9629,6 +11018,19 @@
       },
       "weight": 190,
       "text": "The fluid that<oozes from its<mouth isn\u1e6b drool.^It is a nectar<that is used to<attract prey}"
+    },
+    "evo_moves": {
+      "15": 77,
+      "17": 78,
+      "19": 79,
+      "28": 51,
+      "38": 80,
+      "52": 76
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 47,
+      "evo_mon_index": 1
     }
   },
   {
@@ -9691,7 +11093,13 @@
       },
       "weight": 410,
       "text": "The larger its<petals, the more<toxic pollen it^contains. Its big<head is heavy and<hard to hold up}"
-    }
+    },
+    "evo_moves": {
+      "15": 77,
+      "17": 78,
+      "19": 79
+    },
+    "evo_info": {}
   },
   {
     "index": 188,
@@ -9751,6 +11159,20 @@
       },
       "weight": 90,
       "text": "A carnivorous<POK\u00e9MON that traps<and eats bugs.^It uses its root<feet to soak up<needed moisture}"
+    },
+    "evo_moves": {
+      "13": 35,
+      "15": 77,
+      "18": 79,
+      "21": 78,
+      "26": 51,
+      "33": 75,
+      "42": 21
+    },
+    "evo_info": {
+      "evo_num": 1,
+      "evo_level": 21,
+      "evo_mon_index": 189
     }
   },
   {
@@ -9811,6 +11233,20 @@
       },
       "weight": 140,
       "text": "It spits out<POISONPOWDER to<immobilize the^enemy and then<finishes it with<a spray of ACID}"
+    },
+    "evo_moves": {
+      "13": 35,
+      "15": 77,
+      "18": 79,
+      "23": 78,
+      "29": 51,
+      "38": 75,
+      "49": 21
+    },
+    "evo_info": {
+      "evo_num": 2,
+      "evo_level": 47,
+      "evo_mon_index": 1
     }
   },
   {
@@ -9873,7 +11309,13 @@
       },
       "weight": 340,
       "text": "Said to live in<huge colonies<deep in jungles,^although no one<has ever returned<from there}"
-    }
+    },
+    "evo_moves": {
+      "13": 35,
+      "15": 77,
+      "18": 79
+    },
+    "evo_info": {}
   },
   {
     "index": 21,
@@ -9974,6 +11416,13 @@
       },
       "weight": 90,
       "text": "So rare that it<is still said to<be a mirage by^many experts. Only<a few people have<seen it worldwide}"
-    }
+    },
+    "evo_moves": {
+      "10": 144,
+      "20": 5,
+      "30": 118,
+      "40": 94
+    },
+    "evo_info": {}
   }
 ]

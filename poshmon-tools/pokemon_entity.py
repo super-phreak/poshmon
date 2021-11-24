@@ -27,7 +27,7 @@ class Pokemon:
                  base_hp, base_attack, base_defense, base_speed,
                  base_special, type1, type2, catch_rate, base_exp_yeild,
                  front_sprite, back_sprite, attacks_lvl_1, growth_rate, 
-                 learnable_moves, dex_entry) -> None:
+                 learnable_moves, evo_moves, evo_info, dex_entry) -> None:
         self.addr = addr
         self.internal_index = internal_index
         self.pokedex_num = pokedex_num
@@ -46,6 +46,8 @@ class Pokemon:
         self.attacks_lvl_1 = attacks_lvl_1
         self.growth_rate = growth_rate
         self.learnable_moves = learnable_moves
+        self.evo_moves = evo_moves
+        self.evo_info = evo_info
         self.dex_entry = dex_entry
 
     @classmethod
@@ -65,11 +67,12 @@ class Pokemon:
         back_sprite = Sprite.parse_pkmn_sprite(Addr(bank=cls.__get_sprite_bank(internal_index),addr=data.get_static_data(addr+0x0D,pokedata.BYTE,2).collapse(rev=True)))
         attacks_lvl_1 = data.get_static_data(addr+0x0F,pokedata.BYTE,4).data
         growth_rate = data.get_static_data(addr+0x13,pokedata.BYTE,1).collapse()
-        learnable_moves = cls.get_move_list(data.get_static_data(addr+0x14,pokedata.BYTE,7).collapse(rev=True))
+        learnable_moves = cls.__get_learnable_move_list(data.get_static_data(addr+0x14,pokedata.BYTE,7).collapse(rev=True))
+        evo_info = cls.__get_evo_info(Addr(0x0E,pokedata.datamap['EVO Table'][internal_index-1]))
         dex_entry = PokedexEntry(Addr(0x10,pokedata.datamap['Pokedex Entry Loc'][internal_index-1]))
         return cls(addr, internal_index, pokedex_num, name, base_hp, base_attack, base_defense, base_speed, base_special, 
                    type1, type2, catch_rate, base_exp_yeild, front_sprite, back_sprite, attacks_lvl_1, 
-                   growth_rate, learnable_moves, dex_entry)
+                   growth_rate, learnable_moves, evo_info[0], evo_info[1], dex_entry)
 
     def __str__(self) -> str:
         return f"{self.pokedex_num:03},{self.internal_index:03},{self.base_hp:03},{self.dex_entry}"
@@ -97,12 +100,32 @@ class Pokemon:
             return 0x0D
 
     @classmethod
-    def get_move_list(cls, moves_int) -> list:
+    def __get_learnable_move_list(cls, moves_int) -> list:
         learnable_moves = []
         for i in range((7*pokedata.BYTE)-1):
             if ((moves_int >> i) & 1):
                 learnable_moves.append(move.TM_HM_LIST[i])
         return learnable_moves
+    
+    @classmethod
+    def __get_evo_info(cls, addr) -> tuple:
+        evo_mon = dict()
+        evo_moves = dict()
+        evo_mon_bytes = data.get_var_data(addr,8,'0x00')
+        evo_move_bytes = data.get_var_data(addr+len(evo_mon_bytes),8,'0x00')
+
+        if len(evo_mon_bytes) > 1:
+            evo_mon['evo_num'] = evo_mon_bytes[0]
+            evo_mon['evo_level'] = evo_mon_bytes[1]
+            evo_mon['evo_mon_index'] = evo_mon_bytes[2]
+
+        for i in range(0,len(evo_move_bytes)-1,2):
+            evo_moves[evo_move_bytes[i]] = evo_move_bytes[i+1]
+
+        return (evo_moves,evo_mon)
+
+
+    
 
     def to_json(self) -> dict:
         return {
@@ -127,7 +150,9 @@ class Pokemon:
             'attacks_lvl_1': self.attacks_lvl_1,
             'growth_rate': self.growth_rate,
             'learnable_moves': self.learnable_moves,
-            'pokedex_entry': self.dex_entry.to_json()
+            'pokedex_entry': self.dex_entry.to_json(),
+            'evo_moves': self.evo_moves,
+            'evo_info': self.evo_info
         }
 
 

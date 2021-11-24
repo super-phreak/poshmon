@@ -100,6 +100,9 @@ class GBDataPacket:
     
     def __len__(self):
         return len(self.data)
+    
+    def __getitem__(self, index) -> int:
+        return self.data[index]
 
 class Sprite:
 
@@ -515,15 +518,15 @@ MOVE_NAME_POINTER     = Addr(0x2C,0x4000)
 MOVES_DATA_POINTER    = Addr(0x0E,0x4000)
 TM_HM_LIST_POINTER    = Addr(0x04,0x7773)
 FONT_START_POINTER    = Addr(0x04,0x5a80)
+EVO_TABLE_POINTER     = Addr(0x0E,0x705C)
 
 
 datamap = {'Index to Pokedex':  [],
-           'Pokedex Entry Loc': []
+           'Pokedex Entry Loc': [],
+           'EVO Table':         []
 }
-
-pokedex_index_map = []
-pokedex_loc_map = []
 
 for i in range(0,380,2):
     datamap["Pokedex Entry Loc"].append(GBDataPacket.get_static_data(POKEDEX_ENTRY_POINTER+i,BYTE,2).collapse(rev=True))
     datamap["Index to Pokedex"].append(GBDataPacket.get_static_data(POKEDEX_ORDER_POINTER+int(i/2),BYTE,1).collapse())
+    datamap['EVO Table'].append(GBDataPacket.get_static_data(EVO_TABLE_POINTER+i,BYTE,2).collapse(rev=True))
