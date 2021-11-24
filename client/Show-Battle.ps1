@@ -9,8 +9,7 @@ param(
 function Exit-Poshmon {
     remove-module PoshmonGraphicsModule
 }
-$script:hp_bar_full = 9
-$script:hp_bar_empty = 1
+
 function Update-HPBar{
     param(
         # Parameter help description
@@ -27,12 +26,16 @@ function Update-HPBar{
         [Switch]
         $Player
     )
-
+    $hp_bar_full = 9
+    $hp_bar_empty = 1
     if($player) {
         $x = 12
         $y = 9
 
         Write-Text -Text ("$($CurrentHP)".PadLeft(3,' ') + "/" + "$($MaxHP)".PadLeft(3,' ')) -X 11 -Y 10 -Tile
+    } else {
+        $x = 4
+        $y = 2
     }
 
     for ($precentage=0;($precentage/48) -le ($CurrentHP/$MaxHp);$precentage++) {
@@ -52,6 +55,15 @@ function Update-HPBar{
     }
 }
 
+function Clear-EnemyMon {
+    $empty_sprite = @{
+        data = ,0 * (7*7*64)
+        height = 7
+        width = 7
+    }
+    Add-VBuff -Sprite $empty_sprite -X 12 -Y 0 -Tile
+}
+
 function Add-BattleTemplate {
     $bend_left = 7
     $arrow_left = 2
@@ -66,7 +78,6 @@ function Add-BattleTemplate {
     # $elipse = 5
     $hp_word1 = 15
     $hp_word2 = 0
-    $hp_bar = 9
     $hp_bar_end = 10
 
     Add-VBuff -Sprite $sprite_atlas.battle_hud.sprite_sheet[$vert_line_dot] -x 18 -y 9 -Tile
@@ -90,10 +101,78 @@ function Add-BattleTemplate {
     Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$hp_word1] -x 2 -y 2 -Tile
     Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$hp_word2] -x 3 -y 2 -Tile
 
-    for ($i=4;$i -lt 10;$i++){
-        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$hp_bar] -x $i -y 2 -Tile
-    }
     Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$hp_bar_end] -x 10 -y 2 -Tile
+
+    Add-TextBox 0 12 19 17
+}
+
+function Add-TextBox {
+    param(
+        [Parameter(Mandatory=$True)]
+        [int]
+        $LeftX,
+
+        [Parameter(Mandatory=$True)]
+        [int]
+        $UpperY,
+        [Parameter(Mandatory=$True)]
+        [int]
+        $RightX,
+
+        [Parameter(Mandatory=$True)]
+        [int]
+        $LowerY
+
+    )
+    $text_box_upper_right = 25
+    $text_box_upper_left = 23
+    $text_box_lower_right = 28
+    $text_box_lower_left = 27
+    $text_box_vertical = 26
+    $text_box_horizontal = 24
+
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_upper_left] -x $LeftX -y $UpperY -Tile
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_upper_right] -x $RightX -y $UpperY -Tile
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_lower_left] -x $LeftX -y $LowerY -Tile
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_lower_right] -x $RightX -y $LowerY -Tile
+
+    for ($i=($LeftX+1);$i -lt $RightX; $i++) {
+        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_horizontal] -x $i -y $UpperY -Tile
+        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_horizontal] -x $i -y $LowerY -Tile
+    }
+
+    for ($i=($UpperY+1);$i -lt $LowerY; $i++) {
+        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_vertical] -x $LeftX  -y $i -Tile
+        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_vertical] -x $RightX -y $i -Tile
+    }
+}
+
+function Add-BattleMenu {
+    param(
+        [Parameter(Mandatory=$True)]
+        [int]
+        $Selection
+    )
+    $selection_pos = @(
+        @{
+            x=9
+            y=14
+        },@{
+            x=15
+            y=14
+        },@{
+            x=9
+            y=16
+        },@{
+            x=15
+            y=16
+        }
+    )
+    Add-TextBox 8 12 19 17
+    Write-Text -Text " FIGHT $([char]0x1D18)$([char]0x1D0D)" -X 9 -Y 14 -Tile
+    Write-Text -Text " ITEM  RUN" -X 9 -Y 16 -Tile
+    Write-Text -Text '>' -X $selection_pos[$Selection].x -Y $selection_pos[$Selection].y -Tile
+
 }
 
 function Format-Name {
@@ -111,7 +190,47 @@ function Format-Name {
     return $name
 }
 
+function Show-Pokemon {
+    param(
+        # Parameter help description
+        [Parameter(Mandatory=$True)]
+        $Pokemon,
 
+        [Parameter(Mandatory=$True)]
+        $level,
+
+        # Parameter help description
+        [Parameter(Mandatory=$false)]
+        [Switch]
+        $Player   
+    )
+
+    if ($Player) {
+        $xs = @(10,14,17,1)
+        $ys = @(7,8,8,5)
+        $sprite = $Pokemon.back_sprite
+        $sprite_width_offset = 0
+        $sprite_height_offset = 0
+    } else {
+        $xs = @(1,4,7,12)
+        $ys = @(0,1,1,7)
+        $sprite = $Pokemon.front_sprite
+        $sprite_width_offset = (&{If($pokemon.front_sprite.width -le 6) {1} Else {0}})
+        $sprite_height_offset = $Pokemon.front_sprite.height
+        Clear-EnemyMon
+    }
+    $mon_name = Format-Name $pokemon.name
+    Write-Text -Text $mon_name -X $xs[0] -Y $ys[0] -Tile -Line -LineLength 10
+    Add-VBuff -Sprite $sprite_atlas.battle_hud.sprite_sheet[$lvl_icon] -x $xs[1] -y $ys[1] -Tile
+    Write-Text -Text $level -X ($xs[2]-$level.Length) -Y $ys[2] -Tile
+    Add-VBuff -Sprite $sprite -X ($xs[3]+$sprite_width_offset) -Y ($ys[3]-$sprite_height_offset) -Tile
+
+    # Write-Text -Text $enemy_mon_name -x 1 -y 0 -tile -Line -LineLength 10
+    # Add-VBuff -Sprite $sprite_atlas.battle_hud.sprite_sheet[$lvl_icon] -x 4 -y 1 -Tile
+    # Write-Text -Text $level -X (7-$level.Length) -Y 1 -Tile
+    # # $enemy_sprite_offset = (&{If($enemy_mon.front_sprite.width -le 6) {1} Else {0}})
+    # Add-VBuff -Sprite $enemy_mon.front_sprite -x (12+$enemy_sprite_offset) -y (7-$enemy_mon.front_sprite.height) -Tile
+}
 
 #PoshMon Tests#
 Import-module .\PoshmonGraphicsModule.psm1
@@ -143,52 +262,58 @@ for($i=0;$i -lt $sprite_atlas.battle_hud.sprite_sheet.Length;$i++) {
 foreach($mon in $pokedex) {
     $mon.front_sprite = Convert-Sprite $mon.front_sprite
     $mon.back_sprite = Convert-Sprite $mon.back_sprite
+    $mon.back_sprite = Resize-Sprite $mon.back_sprite -Scale 2
+    $mon.back_sprite.height--
+    $mon.back_sprite.data = $mon.back_sprite.data[0..($mon.back_sprite.height*$mon.back_sprite.width*64)]
 }
-
+$pokedex = $pokedex | Sort-Object -Property {$_.pokedex}
 Set-Alphabet -Alphabet $alphabet
 #Set-SpriteAtlas $sprite_atlas
 
-$player_mon = $pokedex | Where-Object {$_.name -eq "charmeleon"}
-$enemy_mon = $pokedex | Where-Object {$_.name -eq "Blastoise"}
+$player_mon = $pokedex | Where-Object {$_.name -eq "slowpoke"}
+$enemy_mon = $pokedex | Where-Object {$_.name -eq "weepinbell"}
 
 
 Add-BattleTemplate
+Add-BattleMenu 0
 
 $lvl_icon = 1
+$int_level = 50
+$level = "$((($int_level)%100))".PadRight(2,' ')
+$max_health = 50
+$selection = 0
 
-$player_mon_back_sprite = Resize-Sprite $player_mon.back_sprite -Scale 2
-$player_mon_back_sprite.height--
-$player_mon_back_sprite.data = $player_mon_back_sprite.data[0..($player_mon_back_sprite.height*$player_mon_back_sprite.width*64)]
-$player_mon_name = Format-Name $player_mon.name
+Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
+Update-HPBar -CurrentHP $max_health -MaxHP $max_health
 
-$enemy_mon_name = Format-Name $enemy_mon.name
-$max_health = 53
-
-## Need to add short name check later
-Write-Text -Text $player_mon_name -X 10 -Y 7 -Tile
-Add-VBuff -Sprite $sprite_atlas.battle_hud.sprite_sheet[$lvl_icon] -x 14 -y 8 -Tile
-Write-Text -Text "99" -X 15 -Y 8 -Tile
-Add-VBuff -Sprite $player_mon_back_sprite -X 1 -Y 5 -Tile
-
-Write-Text -Text $enemy_mon_name -x 1 -y 0 -tile
-Add-VBuff -Sprite $sprite_atlas.battle_hud.sprite_sheet[$lvl_icon] -x 4 -y 1 -Tile
-Write-Text -Text "99" -X 5 -Y 1 -Tile
-$enemy_sprite_offset = (&{If($enemy_mon.front_sprite.width -le 6) {1} Else {0}})
-Add-VBuff -Sprite $enemy_mon.front_sprite -x (12+$enemy_sprite_offset) -y (7-$enemy_mon.front_sprite.height) -Tile
-
-for ($health=$max_health; $health -ge 0; $health--) {
-    Update-HPBar -CurrentHP $health -MaxHP $max_health -Player
-    Write-Screen -NoDisplay:$NoDisplay
-    Start-Sleep -Milliseconds 125
-}
+Show-Pokemon $player_mon $level -Player
+Show-Pokemon $enemy_mon $level
 
 Write-Screen -NoDisplay:$NoDisplay
 
-for ($j = 0; $j -lt 71; $j++) {
-    Write-Host
+$quit = $false
+while (!$quit) {
+
+    if ($Host.UI.RawUI.KeyAvailable) {
+        $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
+        if ($key.keydown -eq "True") {
+            switch ($key.VirtualKeyCode) {
+                81 {$quit = $true; break}
+                38 {$selection = ($selection+2)%4; Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
+                40 {$selection = ($selection+2)%4; Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
+                37 {$selection+=(&{If($selection%2 -eq 0) {1} Else {-1}}); Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
+                39 {$selection+=(&{If($selection%2 -eq 0) {1} Else {-1}}); Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
+                32 {Write-Host $selection}
+                default {Write-Host "$($key.Character),$($key.VirtualKeyCode)"}
+            }
+        }
+    }
+
+    
 }
+Write-Screen -NoDisplay:$NoDisplay
 
-
+Clear-Host
 
 Exit-Poshmon
 
