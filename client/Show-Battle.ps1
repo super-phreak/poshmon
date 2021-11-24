@@ -147,6 +147,29 @@ function Add-TextBox {
     }
 }
 
+function Clear-TextBox {
+    param(
+        [Parameter(Mandatory=$True)]
+        [int]
+        $X,
+        [Parameter(Mandatory=$True)]
+        [int]
+        $Y,
+        [Parameter(Mandatory=$True)]
+        [int]
+        $Lines,
+        [Parameter(Mandatory=$True)]
+        [int]
+        $Length
+    )
+    $empty_sprite = @{
+        data = ,0 * ($Lines*$Length*64)
+        height = $Lines
+        width = $Length
+    }
+    Add-VBuff -Sprite $empty_sprite -X $X -Y $Y -Tile
+}
+
 function Add-BattleMenu {
     param(
         [Parameter(Mandatory=$True)]
@@ -188,6 +211,54 @@ function Format-Name {
         return " $($name)"
     }
     return $name
+}
+
+function Enter-MoveMenu {
+    param (
+        [Parameter(Mandatory=$True)]
+        $MonMoves
+    )
+    Add-TextBox 4 12 19 17
+    Add-TextBox 0 8 10 12
+    Write-Text -Text "TYPE/" -X 1 -Y 9 -Tile -Line -LineLength 9
+    $move_selection = 0
+    for($i=0;$i -lt $MonMoves.Count; $i++) {
+        Write-Text -Text " $(($moves | Where-Object {$_.index -eq $MonMoves[$i]}).Name)" -X 5 -Y (13+$i) -Tile -Line -LineLength 14
+    }
+    Write-Text -Text '>' -X 5 -Y (13+$move_selection)
+    $current_move = $moves | Where-Object {$_.index -eq $MonMoves[$move_selection]}
+
+    Write-Text -Text " $($engine_config.types[$current_move.type])" -X 1 -Y 10 -Line -LineLength 9
+    $formatted_pp = "$($current_move.pp)".PadRight(2," ")
+    Write-Text -Text "    $formatted_pp/$formatted_pp" -X 1 -Y 11 -Tile
+    Write-Screen -NoDisplay:$NoDisplay
+    
+    $made_selection = $false
+    while (!$made_selection) {
+        if ($Host.UI.RawUI.KeyAvailable) {
+            $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
+            if ($key.keydown -eq "True") {
+                switch ($key.VirtualKeyCode) {
+                    81 {return -1}
+                    08 {return  0}
+                    38 {$move_selection = ($move_selection+3)%4; Write-Screen -NoDisplay:$NoDisplay; break}
+                    40 {$move_selection = ($move_selection+1)%4; Write-Screen -NoDisplay:$NoDisplay; break}
+                }
+                for($i=0;$i -lt $MonMoves.Count; $i++) {
+                    Write-Text -Text " $(($moves | Where-Object {$_.index -eq $MonMoves[$i]}).Name)" -X 5 -Y (13+$i) -Tile -Line -LineLength 14
+                }
+                $current_move = $moves | Where-Object {$_.index -eq $MonMoves[$move_selection]}
+
+                Write-Text -Text " $($engine_config.types[$current_move.type])" -X 1 -Y 10 -Line -LineLength 9
+                $formatted_pp = "$($current_move.pp)".PadRight(2," ")
+                Write-Text -Text "    $formatted_pp/$formatted_pp" -X 1 -Y 11
+                Write-Text -Text '>' -X 5 -Y (13+$move_selection)
+                Write-Screen -NoDisplay:$NoDisplay
+            }
+        }
+    }
+    
+
 }
 
 function Show-Pokemon {
@@ -239,6 +310,8 @@ Import-module .\PoshmonGraphicsModule.psm1
 $pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
 $font_file = Get-Content '../data/font.json' | ConvertFrom-Json
 $script:sprite_atlas = Get-Content '../data/sprite_atlas.json' | ConvertFrom-Json
+$script:moves = Get-Content '../data/moves.json' | ConvertFrom-Json
+$script:engine_config = Get-Content '../data/engine.json' | ConvertFrom-Json
 
 $alphabet = New-Object -TypeName System.Collections.Hashtable
 
@@ -270,17 +343,18 @@ $pokedex = $pokedex | Sort-Object -Property {$_.pokedex}
 Set-Alphabet -Alphabet $alphabet
 #Set-SpriteAtlas $sprite_atlas
 
-$player_mon = $pokedex | Where-Object {$_.name -eq "slowpoke"}
-$enemy_mon = $pokedex | Where-Object {$_.name -eq "weepinbell"}
+$player_mon = $pokedex | Where-Object {$_.name -eq "kadabra"}
+$enemy_mon = $pokedex | Where-Object {$_.name -eq "ditto"}
+$player_moves = $player_mon.learnable_moves | Get-Random -Count 4
 
 
 Add-BattleTemplate
 Add-BattleMenu 0
 
 $lvl_icon = 1
-$int_level = 50
+$int_level = 94
 $level = "$((($int_level)%100))".PadRight(2,' ')
-$max_health = 50
+$max_health = 184
 $selection = 0
 
 Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
@@ -293,17 +367,48 @@ Write-Screen -NoDisplay:$NoDisplay
 
 $quit = $false
 while (!$quit) {
-
     if ($Host.UI.RawUI.KeyAvailable) {
         $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
         if ($key.keydown -eq "True") {
             switch ($key.VirtualKeyCode) {
                 81 {$quit = $true; break}
+                ##This strange logic is only here because bitwise ops in pwsh is slooooow...
                 38 {$selection = ($selection+2)%4; Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
                 40 {$selection = ($selection+2)%4; Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
                 37 {$selection+=(&{If($selection%2 -eq 0) {1} Else {-1}}); Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
                 39 {$selection+=(&{If($selection%2 -eq 0) {1} Else {-1}}); Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
-                32 {Write-Host $selection}
+                ##End Strange logic
+                32 {
+                    switch ($selection) {
+                        0 {
+                            $result = Enter-MoveMenu $player_moves
+                            if ($result -lt 0) {
+                                $quit = $True
+                            } elseif ($result -eq 0) {
+                                Clear-TextBox 0 8 4 12
+                                Add-BattleTemplate
+                                Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
+                                Show-Pokemon $player_mon $level -Player
+                                Clear-TextBox 1 13 4 18
+                                Add-BattleMenu $selection
+                                Write-Screen -NoDisplay:$NoDisplay;
+                            }
+
+                            break
+                        }
+                        3 {
+                            $run_text = "safely"
+                            Clear-TextBox 1 13 4 18
+                            Add-BattleTemplate
+                            Write-Text "You got away" -X 2 -Y 14 -Tile -Line -LineLength 16
+                            Write-Text $run_text -X 2 -Y 16 -Tile -Line -LineLength 16
+                            Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[19] -X (2+$run_text.Length) -Y 16 -Tile
+                            Write-Screen -NoDisplay:$NoDisplay
+                            Start-Sleep 5
+                            $quit = $true
+                        }
+                    }
+                }
                 default {Write-Host "$($key.Character),$($key.VirtualKeyCode)"}
             }
         }
