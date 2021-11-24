@@ -117,8 +117,6 @@ class Pokemon:
         if len(evo_mon_bytes) > 1:
             i = 0
             while i < len(evo_mon_bytes)-1:
-                print("Start:",i)
-                print(evo_mon_bytes.raw_dump())
                 evo_mon = dict()
                 evo_mon['evo_method'] = evo_mon_bytes[i]
 
@@ -128,7 +126,6 @@ class Pokemon:
 
                 evo_mon['evo_level'] = evo_mon_bytes[i+1]
                 evo_mon['evo_mon_index'] = evo_mon_bytes[i+2]
-                print("End:",i)
 
                 evolutions.append(evo_mon)
                 i+=3
