@@ -10,7 +10,7 @@
       "speed": 40,
       "special": 45
     },
-    "types": [
+    "types_id": [
       4,
       5
     ],
@@ -97,7 +97,7 @@
       "speed": 90,
       "special": 40
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -180,7 +180,7 @@
       "speed": 50,
       "special": 40
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -257,7 +257,7 @@
       "speed": 35,
       "special": 60
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -352,7 +352,7 @@
       "speed": 70,
       "special": 31
     },
-    "types": [
+    "types_id": [
       0,
       2
     ],
@@ -426,7 +426,7 @@
       "speed": 100,
       "special": 55
     },
-    "types": [
+    "types_id": [
       23,
       23
     ],
@@ -503,7 +503,7 @@
       "speed": 85,
       "special": 75
     },
-    "types": [
+    "types_id": [
       3,
       4
     ],
@@ -587,7 +587,7 @@
       "speed": 30,
       "special": 80
     },
-    "types": [
+    "types_id": [
       21,
       24
     ],
@@ -679,7 +679,7 @@
       "speed": 60,
       "special": 80
     },
-    "types": [
+    "types_id": [
       22,
       3
     ],
@@ -756,7 +756,7 @@
       "speed": 55,
       "special": 125
     },
-    "types": [
+    "types_id": [
       22,
       24
     ],
@@ -826,7 +826,7 @@
       "speed": 30,
       "special": 60
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -910,7 +910,7 @@
       "speed": 40,
       "special": 60
     },
-    "types": [
+    "types_id": [
       22,
       24
     ],
@@ -988,7 +988,7 @@
       "speed": 25,
       "special": 40
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -1063,7 +1063,7 @@
       "speed": 110,
       "special": 130
     },
-    "types": [
+    "types_id": [
       8,
       3
     ],
@@ -1141,7 +1141,7 @@
       "speed": 41,
       "special": 40
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -1217,7 +1217,7 @@
       "speed": 76,
       "special": 75
     },
-    "types": [
+    "types_id": [
       3,
       4
     ],
@@ -1301,7 +1301,7 @@
       "speed": 35,
       "special": 40
     },
-    "types": [
+    "types_id": [
       4,
       4
     ],
@@ -1386,7 +1386,7 @@
       "speed": 25,
       "special": 30
     },
-    "types": [
+    "types_id": [
       4,
       5
     ],
@@ -1467,7 +1467,7 @@
       "speed": 60,
       "special": 95
     },
-    "types": [
+    "types_id": [
       21,
       25
     ],
@@ -1548,7 +1548,7 @@
       "speed": 95,
       "special": 80
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -1614,7 +1614,7 @@
       "speed": 81,
       "special": 100
     },
-    "types": [
+    "types_id": [
       21,
       2
     ],
@@ -1691,7 +1691,7 @@
       "speed": 40,
       "special": 45
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -1772,7 +1772,7 @@
       "speed": 70,
       "special": 100
     },
-    "types": [
+    "types_id": [
       21,
       3
     ],
@@ -1854,7 +1854,7 @@
       "speed": 80,
       "special": 100
     },
-    "types": [
+    "types_id": [
       8,
       3
     ],
@@ -1926,7 +1926,7 @@
       "speed": 105,
       "special": 55
     },
-    "types": [
+    "types_id": [
       7,
       2
     ],
@@ -1995,7 +1995,7 @@
       "speed": 85,
       "special": 70
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -2083,7 +2083,7 @@
       "speed": 78,
       "special": 85
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -2165,7 +2165,7 @@
       "speed": 85,
       "special": 55
     },
-    "types": [
+    "types_id": [
       7,
       7
     ],
@@ -2236,7 +2236,7 @@
       "speed": 60,
       "special": 100
     },
-    "types": [
+    "types_id": [
       22,
       22
     ],
@@ -2307,7 +2307,7 @@
       "speed": 60,
       "special": 50
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -2384,7 +2384,7 @@
       "speed": 70,
       "special": 30
     },
-    "types": [
+    "types_id": [
       5,
       4
     ],
@@ -2456,7 +2456,7 @@
       "speed": 100,
       "special": 61
     },
-    "types": [
+    "types_id": [
       0,
       2
     ],
@@ -2525,7 +2525,7 @@
       "speed": 56,
       "special": 35
     },
-    "types": [
+    "types_id": [
       0,
       2
     ],
@@ -2601,7 +2601,7 @@
       "speed": 15,
       "special": 40
     },
-    "types": [
+    "types_id": [
       21,
       24
     ],
@@ -2692,7 +2692,7 @@
       "speed": 105,
       "special": 120
     },
-    "types": [
+    "types_id": [
       24,
       24
     ],
@@ -2778,7 +2778,7 @@
       "speed": 35,
       "special": 45
     },
-    "types": [
+    "types_id": [
       5,
       4
     ],
@@ -2862,7 +2862,7 @@
       "speed": 50,
       "special": 105
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -2953,7 +2953,7 @@
       "speed": 45,
       "special": 50
     },
-    "types": [
+    "types_id": [
       1,
       1
     ],
@@ -3036,7 +3036,7 @@
       "speed": 90,
       "special": 100
     },
-    "types": [
+    "types_id": [
       24,
       24
     ],
@@ -3117,7 +3117,7 @@
       "speed": 87,
       "special": 35
     },
-    "types": [
+    "types_id": [
       1,
       1
     ],
@@ -3190,7 +3190,7 @@
       "speed": 76,
       "special": 35
     },
-    "types": [
+    "types_id": [
       1,
       1
     ],
@@ -3263,7 +3263,7 @@
       "speed": 80,
       "special": 65
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -3335,7 +3335,7 @@
       "speed": 30,
       "special": 80
     },
-    "types": [
+    "types_id": [
       7,
       22
     ],
@@ -3407,7 +3407,7 @@
       "speed": 55,
       "special": 50
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -3492,7 +3492,7 @@
       "speed": 42,
       "special": 90
     },
-    "types": [
+    "types_id": [
       24,
       24
     ],
@@ -3578,7 +3578,7 @@
       "speed": 45,
       "special": 55
     },
-    "types": [
+    "types_id": [
       5,
       4
     ],
@@ -3658,7 +3658,7 @@
       "speed": 93,
       "special": 85
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -3736,7 +3736,7 @@
       "speed": 105,
       "special": 85
     },
-    "types": [
+    "types_id": [
       23,
       23
     ],
@@ -3818,7 +3818,7 @@
       "speed": 70,
       "special": 120
     },
-    "types": [
+    "types_id": [
       23,
       23
     ],
@@ -3890,7 +3890,7 @@
       "speed": 35,
       "special": 60
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -3962,7 +3962,7 @@
       "speed": 70,
       "special": 35
     },
-    "types": [
+    "types_id": [
       1,
       1
     ],
@@ -4046,7 +4046,7 @@
       "speed": 45,
       "special": 70
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -4125,7 +4125,7 @@
       "speed": 95,
       "special": 45
     },
-    "types": [
+    "types_id": [
       4,
       4
     ],
@@ -4199,7 +4199,7 @@
       "speed": 110,
       "special": 70
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -4274,7 +4274,7 @@
       "speed": 60,
       "special": 58
     },
-    "types": [
+    "types_id": [
       0,
       2
     ],
@@ -4346,7 +4346,7 @@
       "speed": 45,
       "special": 40
     },
-    "types": [
+    "types_id": [
       7,
       3
     ],
@@ -4421,7 +4421,7 @@
       "speed": 80,
       "special": 100
     },
-    "types": [
+    "types_id": [
       26,
       2
     ],
@@ -4502,7 +4502,7 @@
       "speed": 75,
       "special": 35
     },
-    "types": [
+    "types_id": [
       0,
       2
     ],
@@ -4579,7 +4579,7 @@
       "speed": 90,
       "special": 40
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -4658,7 +4658,7 @@
       "speed": 95,
       "special": 95
     },
-    "types": [
+    "types_id": [
       25,
       24
     ],
@@ -4739,7 +4739,7 @@
       "speed": 90,
       "special": 125
     },
-    "types": [
+    "types_id": [
       20,
       2
     ],
@@ -4808,7 +4808,7 @@
       "speed": 85,
       "special": 125
     },
-    "types": [
+    "types_id": [
       25,
       2
     ],
@@ -4880,7 +4880,7 @@
       "speed": 100,
       "special": 125
     },
-    "types": [
+    "types_id": [
       23,
       2
     ],
@@ -4952,7 +4952,7 @@
       "speed": 48,
       "special": 48
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -4999,7 +4999,7 @@
       "speed": 90,
       "special": 40
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -5076,7 +5076,7 @@
       "speed": 50,
       "special": 25
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -5154,7 +5154,7 @@
       "speed": 65,
       "special": 65
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -5230,7 +5230,7 @@
       "speed": 100,
       "special": 100
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -5294,7 +5294,7 @@
       "speed": 90,
       "special": 50
     },
-    "types": [
+    "types_id": [
       23,
       23
     ],
@@ -5377,7 +5377,7 @@
       "speed": 100,
       "special": 90
     },
-    "types": [
+    "types_id": [
       23,
       23
     ],
@@ -5448,7 +5448,7 @@
       "speed": 50,
       "special": 50
     },
-    "types": [
+    "types_id": [
       26,
       26
     ],
@@ -5531,7 +5531,7 @@
       "speed": 70,
       "special": 70
     },
-    "types": [
+    "types_id": [
       26,
       26
     ],
@@ -5615,7 +5615,7 @@
       "speed": 55,
       "special": 45
     },
-    "types": [
+    "types_id": [
       5,
       21
     ],
@@ -5690,7 +5690,7 @@
       "speed": 80,
       "special": 70
     },
-    "types": [
+    "types_id": [
       5,
       21
     ],
@@ -5766,7 +5766,7 @@
       "speed": 60,
       "special": 70
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -5842,7 +5842,7 @@
       "speed": 85,
       "special": 95
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -5913,7 +5913,7 @@
       "speed": 40,
       "special": 30
     },
-    "types": [
+    "types_id": [
       4,
       4
     ],
@@ -5994,7 +5994,7 @@
       "speed": 65,
       "special": 55
     },
-    "types": [
+    "types_id": [
       4,
       4
     ],
@@ -6070,7 +6070,7 @@
       "speed": 35,
       "special": 90
     },
-    "types": [
+    "types_id": [
       5,
       21
     ],
@@ -6145,7 +6145,7 @@
       "speed": 55,
       "special": 115
     },
-    "types": [
+    "types_id": [
       5,
       21
     ],
@@ -6219,7 +6219,7 @@
       "speed": 20,
       "special": 25
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -6314,7 +6314,7 @@
       "speed": 45,
       "special": 50
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -6395,7 +6395,7 @@
       "speed": 55,
       "special": 65
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -6480,7 +6480,7 @@
       "speed": 65,
       "special": 110
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -6552,7 +6552,7 @@
       "speed": 130,
       "special": 110
     },
-    "types": [
+    "types_id": [
       23,
       23
     ],
@@ -6627,7 +6627,7 @@
       "speed": 65,
       "special": 110
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -6703,7 +6703,7 @@
       "speed": 35,
       "special": 35
     },
-    "types": [
+    "types_id": [
       1,
       1
     ],
@@ -6786,7 +6786,7 @@
       "speed": 55,
       "special": 40
     },
-    "types": [
+    "types_id": [
       3,
       2
     ],
@@ -6859,7 +6859,7 @@
       "speed": 55,
       "special": 40
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -6936,7 +6936,7 @@
       "speed": 25,
       "special": 55
     },
-    "types": [
+    "types_id": [
       7,
       22
     ],
@@ -7013,7 +7013,7 @@
       "speed": 90,
       "special": 50
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -7102,7 +7102,7 @@
       "speed": 70,
       "special": 70
     },
-    "types": [
+    "types_id": [
       21,
       1
     ],
@@ -7181,7 +7181,7 @@
       "speed": 50,
       "special": 20
     },
-    "types": [
+    "types_id": [
       7,
       3
     ],
@@ -7234,7 +7234,7 @@
       "speed": 35,
       "special": 25
     },
-    "types": [
+    "types_id": [
       7,
       3
     ],
@@ -7287,7 +7287,7 @@
       "speed": 75,
       "special": 45
     },
-    "types": [
+    "types_id": [
       7,
       3
     ],
@@ -7358,7 +7358,7 @@
       "speed": 100,
       "special": 60
     },
-    "types": [
+    "types_id": [
       0,
       2
     ],
@@ -7430,7 +7430,7 @@
       "speed": 95,
       "special": 60
     },
-    "types": [
+    "types_id": [
       1,
       1
     ],
@@ -7509,7 +7509,7 @@
       "speed": 120,
       "special": 70
     },
-    "types": [
+    "types_id": [
       4,
       4
     ],
@@ -7578,7 +7578,7 @@
       "speed": 90,
       "special": 90
     },
-    "types": [
+    "types_id": [
       7,
       3
     ],
@@ -7652,7 +7652,7 @@
       "speed": 70,
       "special": 95
     },
-    "types": [
+    "types_id": [
       21,
       25
     ],
@@ -7726,7 +7726,7 @@
       "speed": 45,
       "special": 20
     },
-    "types": [
+    "types_id": [
       7,
       7
     ],
@@ -7779,7 +7779,7 @@
       "speed": 30,
       "special": 25
     },
-    "types": [
+    "types_id": [
       7,
       7
     ],
@@ -7832,7 +7832,7 @@
       "speed": 70,
       "special": 80
     },
-    "types": [
+    "types_id": [
       7,
       2
     ],
@@ -7907,7 +7907,7 @@
       "speed": 55,
       "special": 65
     },
-    "types": [
+    "types_id": [
       1,
       1
     ],
@@ -7985,7 +7985,7 @@
       "speed": 85,
       "special": 80
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -8065,7 +8065,7 @@
       "speed": 67,
       "special": 115
     },
-    "types": [
+    "types_id": [
       24,
       24
     ],
@@ -8146,7 +8146,7 @@
       "speed": 90,
       "special": 75
     },
-    "types": [
+    "types_id": [
       3,
       2
     ],
@@ -8214,7 +8214,7 @@
       "speed": 130,
       "special": 154
     },
-    "types": [
+    "types_id": [
       24,
       24
     ],
@@ -8304,7 +8304,7 @@
       "speed": 30,
       "special": 65
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -8393,7 +8393,7 @@
       "speed": 80,
       "special": 20
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -8448,7 +8448,7 @@
       "speed": 50,
       "special": 65
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -8518,7 +8518,7 @@
       "speed": 75,
       "special": 50
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -8591,7 +8591,7 @@
       "speed": 70,
       "special": 85
     },
-    "types": [
+    "types_id": [
       21,
       25
     ],
@@ -8662,7 +8662,7 @@
       "speed": 140,
       "special": 80
     },
-    "types": [
+    "types_id": [
       23,
       23
     ],
@@ -8735,7 +8735,7 @@
       "speed": 60,
       "special": 85
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -8817,7 +8817,7 @@
       "speed": 60,
       "special": 85
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -8884,7 +8884,7 @@
       "speed": 115,
       "special": 65
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -8956,7 +8956,7 @@
       "speed": 45,
       "special": 50
     },
-    "types": [
+    "types_id": [
       4,
       4
     ],
@@ -9036,7 +9036,7 @@
       "speed": 95,
       "special": 115
     },
-    "types": [
+    "types_id": [
       8,
       3
     ],
@@ -9108,7 +9108,7 @@
       "speed": 90,
       "special": 105
     },
-    "types": [
+    "types_id": [
       24,
       24
     ],
@@ -9186,7 +9186,7 @@
       "speed": 120,
       "special": 135
     },
-    "types": [
+    "types_id": [
       24,
       24
     ],
@@ -9267,7 +9267,7 @@
       "speed": 71,
       "special": 50
     },
-    "types": [
+    "types_id": [
       0,
       2
     ],
@@ -9343,7 +9343,7 @@
       "speed": 91,
       "special": 70
     },
-    "types": [
+    "types_id": [
       0,
       2
     ],
@@ -9414,7 +9414,7 @@
       "speed": 115,
       "special": 100
     },
-    "types": [
+    "types_id": [
       21,
       24
     ],
@@ -9488,7 +9488,7 @@
       "speed": 45,
       "special": 65
     },
-    "types": [
+    "types_id": [
       22,
       3
     ],
@@ -9565,7 +9565,7 @@
       "speed": 80,
       "special": 100
     },
-    "types": [
+    "types_id": [
       22,
       3
     ],
@@ -9637,7 +9637,7 @@
       "speed": 100,
       "special": 120
     },
-    "types": [
+    "types_id": [
       21,
       3
     ],
@@ -9714,7 +9714,7 @@
       "speed": 63,
       "special": 50
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -9792,7 +9792,7 @@
       "speed": 68,
       "special": 80
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -9865,7 +9865,7 @@
       "speed": 90,
       "special": 65
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -9941,7 +9941,7 @@
       "speed": 105,
       "special": 80
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -10012,7 +10012,7 @@
       "speed": 72,
       "special": 25
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -10089,7 +10089,7 @@
       "speed": 97,
       "special": 50
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -10162,7 +10162,7 @@
       "speed": 65,
       "special": 55
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -10243,7 +10243,7 @@
       "speed": 56,
       "special": 55
     },
-    "types": [
+    "types_id": [
       3,
       3
     ],
@@ -10324,7 +10324,7 @@
       "speed": 20,
       "special": 30
     },
-    "types": [
+    "types_id": [
       5,
       4
     ],
@@ -10408,7 +10408,7 @@
       "speed": 40,
       "special": 75
     },
-    "types": [
+    "types_id": [
       0,
       0
     ],
@@ -10484,7 +10484,7 @@
       "speed": 130,
       "special": 60
     },
-    "types": [
+    "types_id": [
       5,
       2
     ],
@@ -10555,7 +10555,7 @@
       "speed": 45,
       "special": 95
     },
-    "types": [
+    "types_id": [
       23,
       23
     ],
@@ -10632,7 +10632,7 @@
       "speed": 65,
       "special": 50
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -10717,7 +10717,7 @@
       "speed": 43,
       "special": 50
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -10802,7 +10802,7 @@
       "speed": 80,
       "special": 65
     },
-    "types": [
+    "types_id": [
       20,
       20
     ],
@@ -10887,7 +10887,7 @@
       "speed": 58,
       "special": 65
     },
-    "types": [
+    "types_id": [
       21,
       21
     ],
@@ -10972,7 +10972,7 @@
       "speed": 100,
       "special": 85
     },
-    "types": [
+    "types_id": [
       20,
       2
     ],
@@ -11054,7 +11054,7 @@
       "speed": 30,
       "special": 75
     },
-    "types": [
+    "types_id": [
       22,
       3
     ],
@@ -11129,7 +11129,7 @@
       "speed": 40,
       "special": 85
     },
-    "types": [
+    "types_id": [
       22,
       3
     ],
@@ -11205,7 +11205,7 @@
       "speed": 50,
       "special": 100
     },
-    "types": [
+    "types_id": [
       22,
       3
     ],
@@ -11273,7 +11273,7 @@
       "speed": 40,
       "special": 70
     },
-    "types": [
+    "types_id": [
       22,
       3
     ],
@@ -11349,7 +11349,7 @@
       "speed": 55,
       "special": 85
     },
-    "types": [
+    "types_id": [
       22,
       3
     ],
@@ -11426,7 +11426,7 @@
       "speed": 70,
       "special": 100
     },
-    "types": [
+    "types_id": [
       22,
       3
     ],
@@ -11494,7 +11494,7 @@
       "speed": 100,
       "special": 100
     },
-    "types": [
+    "types_id": [
       24,
       24
     ],

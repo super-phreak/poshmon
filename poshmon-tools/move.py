@@ -29,7 +29,7 @@ class Move:
             "name": self.name,
             "effect": self.effect,
             "power": self.power,
-            "type": self.move_type,
+            "type_id": self.move_type,
             "accuracy": self.accuracy,
             "pp": self.pp
         }

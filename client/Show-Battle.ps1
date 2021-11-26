@@ -223,12 +223,15 @@ function Enter-MoveMenu {
     Write-Text -Text "TYPE/" -X 1 -Y 9 -Tile -Line -LineLength 9
     $move_selection = 0
     for($i=0;$i -lt $MonMoves.Count; $i++) {
-        Write-Text -Text " $(($moves | Where-Object {$_.index -eq $MonMoves[$i]}).Name)" -X 5 -Y (13+$i) -Tile -Line -LineLength 14
+        Write-Text -Text " $(($moves | Where-Object {$_.id -eq $MonMoves[$i]}).Name)" -X 5 -Y (13+$i) -Tile -Line -LineLength 14
+    }
+    for($i; $i -lt 4; $i++) {
+        Write-Text -Text " -" -X 5 -Y (13+$i) -Tile -Line -LineLength 14
     }
     Write-Text -Text '>' -X 5 -Y (13+$move_selection)
-    $current_move = $moves | Where-Object {$_.index -eq $MonMoves[$move_selection]}
+    $current_move = $moves | Where-Object {$_.id -eq $MonMoves[$move_selection]}
 
-    Write-Text -Text " $($engine_config.types[$current_move.type])" -X 1 -Y 10 -Line -LineLength 9
+    Write-Text -Text " $(($engine_config.types | Where-Object {$_.id -eq $current_move.type_id}).name)" -X 1 -Y 10 -Line -LineLength 9
     $formatted_pp = "$($current_move.pp)".PadRight(2," ")
     Write-Text -Text "    $formatted_pp/$formatted_pp" -X 1 -Y 11 -Tile
     Write-Screen -NoDisplay:$NoDisplay
@@ -241,15 +244,15 @@ function Enter-MoveMenu {
                 switch ($key.VirtualKeyCode) {
                     81 {return -1}
                     08 {return  0}
-                    38 {$move_selection = ($move_selection+3)%4; Write-Screen -NoDisplay:$NoDisplay; break}
-                    40 {$move_selection = ($move_selection+1)%4; Write-Screen -NoDisplay:$NoDisplay; break}
+                    38 {$move_selection = ($move_selection+($MonMoves.Length-1))%$MonMoves.Length; Write-Screen -NoDisplay:$NoDisplay; break}
+                    40 {$move_selection = ($move_selection+1) % $MonMoves.Length; Write-Screen -NoDisplay:$NoDisplay; break}
                 }
                 for($i=0;$i -lt $MonMoves.Count; $i++) {
-                    Write-Text -Text " $(($moves | Where-Object {$_.index -eq $MonMoves[$i]}).Name)" -X 5 -Y (13+$i) -Tile -Line -LineLength 14
+                    Write-Text -Text " $(($moves | Where-Object {$_.id -eq $MonMoves[$i]}).Name)" -X 5 -Y (13+$i) -Tile -Line -LineLength 14
                 }
-                $current_move = $moves | Where-Object {$_.index -eq $MonMoves[$move_selection]}
+                $current_move = $moves | Where-Object {$_.id -eq $MonMoves[$move_selection]}
 
-                Write-Text -Text " $($engine_config.types[$current_move.type])" -X 1 -Y 10 -Line -LineLength 9
+                Write-Text -Text " $(($engine_config.types | Where-Object {$_.id -eq $current_move.type_id}).name)" -X 1 -Y 10 -Line -LineLength 9
                 $formatted_pp = "$($current_move.pp)".PadRight(2," ")
                 Write-Text -Text "    $formatted_pp/$formatted_pp" -X 1 -Y 11
                 Write-Text -Text '>' -X 5 -Y (13+$move_selection)
@@ -343,9 +346,12 @@ $pokedex = $pokedex | Sort-Object -Property {$_.pokedex}
 Set-Alphabet -Alphabet $alphabet
 #Set-SpriteAtlas $sprite_atlas
 
+$sub = $moves | Where-Object {$_.name -eq "SUBMISSION"}
+
 $player_mon = $pokedex | Where-Object {$_.name -eq "kadabra"}
 $enemy_mon = $pokedex | Where-Object {$_.name -eq "ditto"}
-$player_moves = $player_mon.learnable_moves | Get-Random -Count 4
+$player_moves = $player_mon.learnable_moves | Get-Random -Count 2
+#$player_moves+=($sub.id)
 
 
 Add-BattleTemplate

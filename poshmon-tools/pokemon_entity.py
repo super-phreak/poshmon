@@ -151,7 +151,7 @@ class Pokemon:
                 'speed': self.base_speed,
                 'special': self.base_special,
             },
-            'types': [
+            'types_id': [
                 self.type1,
                 self.type2
             ],

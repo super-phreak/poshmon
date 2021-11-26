@@ -34,7 +34,7 @@ function Exit-Poshmon {
 Import-module .\PoshmonGraphicsModule.psm1
 Import-module .\PoshdexModule
 
-$poke_e = [char][int]"0x00e9"
+$poke_e = [char]0x00e9
 $pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
 $font_file = Get-Content '../data/font.json' | ConvertFrom-Json
 $sprite_atlas = Get-Content '../data/sprite_atlas.json' | ConvertFrom-Json

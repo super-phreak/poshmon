@@ -1,31 +1,132 @@
 {
     "types": [
-        "NORMAL",
-        "FIGHTING",
-        "FLYING",
-        "POISON",
-        "GROUND",
-        "ROCK",
-        "BIRD",
-        "BUG",
-        "GHOST",
-        "???",
-        "???",
-        "???",
-        "???",
-        "???",
-        "???",
-        "???",
-        "???",
-        "???",
-        "???",
-        "???",
-        "FIRE",
-        "WATER",
-        "GRASS",
-        "ELECTRIC",
-        "PSYCHIC",
-        "ICE",
-        "DRAGON"
+        {
+            "name": "NORMAL",
+            "id": 0,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "FIGHTING",
+            "id": 1,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "FLYING",
+            "id": 2,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "POISON",
+            "id": 3,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "GROUND",
+            "id": 4,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "ROCK",
+            "id": 5,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "BIRD",
+            "id": 6,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "BUG",
+            "id": 7,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "GHOST",
+            "id": 8,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "FIRE",
+            "id": 20,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "WATER",
+            "id": 21,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "GRASS",
+            "id": 22,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "ELECTRIC",
+            "id": 23,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "PSYCHIC",
+            "id": 24,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "ICE",
+            "id": 25,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        },
+        {
+            "name": "DRAGON",
+            "id": 26,
+            "strong": [],
+            "weak": [],
+            "resist": [],
+            "immune": []
+        }
     ]
 }
