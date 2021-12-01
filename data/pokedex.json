@@ -15,7 +15,7 @@
       5
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 204,
+    "base_exp_yield": 204,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -102,7 +102,7 @@
       0
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 175,
+    "base_exp_yield": 175,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -185,7 +185,7 @@
       3
     ],
     "catch_rate": 235,
-    "base_exp_yeild": 60,
+    "base_exp_yield": 60,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -262,7 +262,7 @@
       0
     ],
     "catch_rate": 150,
-    "base_exp_yeild": 68,
+    "base_exp_yield": 68,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -357,7 +357,7 @@
       2
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 58,
+    "base_exp_yield": 58,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -431,7 +431,7 @@
       23
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 103,
+    "base_exp_yield": 103,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -508,7 +508,7 @@
       4
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 195,
+    "base_exp_yield": 195,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -592,7 +592,7 @@
       24
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 164,
+    "base_exp_yield": 164,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -684,7 +684,7 @@
       3
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 141,
+    "base_exp_yield": 141,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -761,7 +761,7 @@
       24
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 212,
+    "base_exp_yield": 212,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -831,7 +831,7 @@
       0
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 127,
+    "base_exp_yield": 127,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -915,7 +915,7 @@
       24
     ],
     "catch_rate": 90,
-    "base_exp_yeild": 98,
+    "base_exp_yield": 98,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -993,7 +993,7 @@
       3
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 90,
+    "base_exp_yield": 90,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -1068,7 +1068,7 @@
       3
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 190,
+    "base_exp_yield": 190,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -1146,7 +1146,7 @@
       3
     ],
     "catch_rate": 235,
-    "base_exp_yeild": 59,
+    "base_exp_yield": 59,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -1222,7 +1222,7 @@
       4
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 194,
+    "base_exp_yield": 194,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -1306,7 +1306,7 @@
       4
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 87,
+    "base_exp_yield": 87,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -1391,7 +1391,7 @@
       5
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 135,
+    "base_exp_yield": 135,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -1472,7 +1472,7 @@
       25
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 219,
+    "base_exp_yield": 219,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -1553,7 +1553,7 @@
       20
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 213,
+    "base_exp_yield": 213,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -1619,7 +1619,7 @@
       2
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 214,
+    "base_exp_yield": 214,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -1696,7 +1696,7 @@
       21
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 97,
+    "base_exp_yield": 97,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -1777,7 +1777,7 @@
       3
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 105,
+    "base_exp_yield": 105,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -1859,7 +1859,7 @@
       3
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 95,
+    "base_exp_yield": 95,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -1931,7 +1931,7 @@
       2
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 187,
+    "base_exp_yield": 187,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -2000,7 +2000,7 @@
       21
     ],
     "catch_rate": 225,
-    "base_exp_yeild": 106,
+    "base_exp_yield": 106,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -2088,7 +2088,7 @@
       21
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 210,
+    "base_exp_yield": 210,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -2170,7 +2170,7 @@
       7
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 200,
+    "base_exp_yield": 200,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -2241,7 +2241,7 @@
       22
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 166,
+    "base_exp_yield": 166,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -2312,7 +2312,7 @@
       20
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 91,
+    "base_exp_yield": 91,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -2389,7 +2389,7 @@
       4
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 108,
+    "base_exp_yield": 108,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -2461,7 +2461,7 @@
       2
     ],
     "catch_rate": 90,
-    "base_exp_yeild": 162,
+    "base_exp_yield": 162,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -2530,7 +2530,7 @@
       2
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 55,
+    "base_exp_yield": 55,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -2606,7 +2606,7 @@
       24
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 99,
+    "base_exp_yield": 99,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -2697,7 +2697,7 @@
       24
     ],
     "catch_rate": 100,
-    "base_exp_yeild": 145,
+    "base_exp_yield": 145,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -2783,7 +2783,7 @@
       4
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 134,
+    "base_exp_yield": 134,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -2867,7 +2867,7 @@
       0
     ],
     "catch_rate": 30,
-    "base_exp_yeild": 255,
+    "base_exp_yield": 255,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -2958,7 +2958,7 @@
       1
     ],
     "catch_rate": 90,
-    "base_exp_yeild": 146,
+    "base_exp_yield": 146,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -3041,7 +3041,7 @@
       24
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 136,
+    "base_exp_yield": 136,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -3122,7 +3122,7 @@
       1
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 139,
+    "base_exp_yield": 139,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -3195,7 +3195,7 @@
       1
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 140,
+    "base_exp_yield": 140,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -3268,7 +3268,7 @@
       3
     ],
     "catch_rate": 90,
-    "base_exp_yeild": 147,
+    "base_exp_yield": 147,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -3340,7 +3340,7 @@
       22
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 128,
+    "base_exp_yield": 128,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -3412,7 +3412,7 @@
       21
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 80,
+    "base_exp_yield": 80,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -3497,7 +3497,7 @@
       24
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 102,
+    "base_exp_yield": 102,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -3583,7 +3583,7 @@
       4
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 177,
+    "base_exp_yield": 177,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -3663,7 +3663,7 @@
       20
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 167,
+    "base_exp_yield": 167,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -3741,7 +3741,7 @@
       23
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 156,
+    "base_exp_yield": 156,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -3823,7 +3823,7 @@
       23
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 161,
+    "base_exp_yield": 161,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -3895,7 +3895,7 @@
       3
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 114,
+    "base_exp_yield": 114,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -3967,7 +3967,7 @@
       1
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 74,
+    "base_exp_yield": 74,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -4051,7 +4051,7 @@
       21
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 100,
+    "base_exp_yield": 100,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -4130,7 +4130,7 @@
       4
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 81,
+    "base_exp_yield": 81,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -4204,7 +4204,7 @@
       0
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 211,
+    "base_exp_yield": 211,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -4279,7 +4279,7 @@
       2
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 94,
+    "base_exp_yield": 94,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -4351,7 +4351,7 @@
       3
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 75,
+    "base_exp_yield": 75,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -4426,7 +4426,7 @@
       2
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 218,
+    "base_exp_yield": 218,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -4507,7 +4507,7 @@
       2
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 96,
+    "base_exp_yield": 96,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -4584,7 +4584,7 @@
       21
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 77,
+    "base_exp_yield": 77,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -4663,7 +4663,7 @@
       24
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 137,
+    "base_exp_yield": 137,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -4744,7 +4744,7 @@
       2
     ],
     "catch_rate": 3,
-    "base_exp_yeild": 217,
+    "base_exp_yield": 217,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -4813,7 +4813,7 @@
       2
     ],
     "catch_rate": 3,
-    "base_exp_yeild": 215,
+    "base_exp_yield": 215,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -4885,7 +4885,7 @@
       2
     ],
     "catch_rate": 3,
-    "base_exp_yeild": 216,
+    "base_exp_yield": 216,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -4957,7 +4957,7 @@
       0
     ],
     "catch_rate": 35,
-    "base_exp_yeild": 61,
+    "base_exp_yield": 61,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -5004,7 +5004,7 @@
       0
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 69,
+    "base_exp_yield": 69,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -5081,7 +5081,7 @@
       21
     ],
     "catch_rate": 225,
-    "base_exp_yeild": 115,
+    "base_exp_yield": 115,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -5159,7 +5159,7 @@
       20
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 63,
+    "base_exp_yield": 63,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -5235,7 +5235,7 @@
       20
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 178,
+    "base_exp_yield": 178,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -5299,7 +5299,7 @@
       23
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 82,
+    "base_exp_yield": 82,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -5382,7 +5382,7 @@
       23
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 122,
+    "base_exp_yield": 122,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -5453,7 +5453,7 @@
       26
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 67,
+    "base_exp_yield": 67,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -5536,7 +5536,7 @@
       26
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 144,
+    "base_exp_yield": 144,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -5620,7 +5620,7 @@
       21
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 119,
+    "base_exp_yield": 119,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -5695,7 +5695,7 @@
       21
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 201,
+    "base_exp_yield": 201,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -5771,7 +5771,7 @@
       21
     ],
     "catch_rate": 225,
-    "base_exp_yeild": 83,
+    "base_exp_yield": 83,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -5847,7 +5847,7 @@
       21
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 155,
+    "base_exp_yield": 155,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -5918,7 +5918,7 @@
       4
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 93,
+    "base_exp_yield": 93,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -5999,7 +5999,7 @@
       4
     ],
     "catch_rate": 90,
-    "base_exp_yeild": 163,
+    "base_exp_yield": 163,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -6075,7 +6075,7 @@
       21
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 120,
+    "base_exp_yield": 120,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -6150,7 +6150,7 @@
       21
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 199,
+    "base_exp_yield": 199,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -6224,7 +6224,7 @@
       0
     ],
     "catch_rate": 170,
-    "base_exp_yeild": 76,
+    "base_exp_yield": 76,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -6319,7 +6319,7 @@
       0
     ],
     "catch_rate": 50,
-    "base_exp_yeild": 109,
+    "base_exp_yield": 109,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -6400,7 +6400,7 @@
       0
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 92,
+    "base_exp_yield": 92,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -6485,7 +6485,7 @@
       20
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 198,
+    "base_exp_yield": 198,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -6557,7 +6557,7 @@
       23
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 197,
+    "base_exp_yield": 197,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -6632,7 +6632,7 @@
       21
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 196,
+    "base_exp_yield": 196,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -6708,7 +6708,7 @@
       1
     ],
     "catch_rate": 180,
-    "base_exp_yeild": 88,
+    "base_exp_yield": 88,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -6791,7 +6791,7 @@
       2
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 54,
+    "base_exp_yield": 54,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -6864,7 +6864,7 @@
       3
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 62,
+    "base_exp_yield": 62,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -6941,7 +6941,7 @@
       22
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 70,
+    "base_exp_yield": 70,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -7018,7 +7018,7 @@
       21
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 131,
+    "base_exp_yield": 131,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -7107,7 +7107,7 @@
       1
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 185,
+    "base_exp_yield": 185,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -7186,7 +7186,7 @@
       3
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 52,
+    "base_exp_yield": 52,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -7239,7 +7239,7 @@
       3
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 71,
+    "base_exp_yield": 71,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -7292,7 +7292,7 @@
       3
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 159,
+    "base_exp_yield": 159,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -7363,7 +7363,7 @@
       2
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 158,
+    "base_exp_yield": 158,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -7435,7 +7435,7 @@
       1
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 149,
+    "base_exp_yield": 149,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -7514,7 +7514,7 @@
       4
     ],
     "catch_rate": 50,
-    "base_exp_yeild": 153,
+    "base_exp_yield": 153,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -7583,7 +7583,7 @@
       3
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 138,
+    "base_exp_yield": 138,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -7657,7 +7657,7 @@
       25
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 176,
+    "base_exp_yield": 176,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -7731,7 +7731,7 @@
       7
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 53,
+    "base_exp_yield": 53,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -7784,7 +7784,7 @@
       7
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 72,
+    "base_exp_yield": 72,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -7837,7 +7837,7 @@
       2
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 160,
+    "base_exp_yield": 160,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -7912,7 +7912,7 @@
       1
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 193,
+    "base_exp_yield": 193,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -7990,7 +7990,7 @@
       21
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 174,
+    "base_exp_yield": 174,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8070,7 +8070,7 @@
       24
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 165,
+    "base_exp_yield": 165,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8151,7 +8151,7 @@
       2
     ],
     "catch_rate": 90,
-    "base_exp_yeild": 171,
+    "base_exp_yield": 171,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8219,7 +8219,7 @@
       24
     ],
     "catch_rate": 3,
-    "base_exp_yeild": 220,
+    "base_exp_yield": 220,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8309,7 +8309,7 @@
       0
     ],
     "catch_rate": 25,
-    "base_exp_yeild": 154,
+    "base_exp_yield": 154,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8398,7 +8398,7 @@
       21
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 20,
+    "base_exp_yield": 20,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -8453,7 +8453,7 @@
       3
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 157,
+    "base_exp_yield": 157,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8523,7 +8523,7 @@
       21
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 206,
+    "base_exp_yield": 206,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8596,7 +8596,7 @@
       25
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 203,
+    "base_exp_yield": 203,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8667,7 +8667,7 @@
       23
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 150,
+    "base_exp_yield": 150,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -8740,7 +8740,7 @@
       0
     ],
     "catch_rate": 25,
-    "base_exp_yeild": 129,
+    "base_exp_yield": 129,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -8822,7 +8822,7 @@
       3
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 173,
+    "base_exp_yield": 173,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8889,7 +8889,7 @@
       0
     ],
     "catch_rate": 90,
-    "base_exp_yeild": 148,
+    "base_exp_yield": 148,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -8961,7 +8961,7 @@
       4
     ],
     "catch_rate": 75,
-    "base_exp_yeild": 124,
+    "base_exp_yield": 124,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -9041,7 +9041,7 @@
       3
     ],
     "catch_rate": 90,
-    "base_exp_yeild": 126,
+    "base_exp_yield": 126,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -9113,7 +9113,7 @@
       24
     ],
     "catch_rate": 200,
-    "base_exp_yeild": 73,
+    "base_exp_yield": 73,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -9191,7 +9191,7 @@
       24
     ],
     "catch_rate": 50,
-    "base_exp_yeild": 186,
+    "base_exp_yield": 186,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -9272,7 +9272,7 @@
       2
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 113,
+    "base_exp_yield": 113,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -9348,7 +9348,7 @@
       2
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 172,
+    "base_exp_yield": 172,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -9419,7 +9419,7 @@
       24
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 207,
+    "base_exp_yield": 207,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -9493,7 +9493,7 @@
       3
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 64,
+    "base_exp_yield": 64,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -9570,7 +9570,7 @@
       3
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 208,
+    "base_exp_yield": 208,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -9642,7 +9642,7 @@
       3
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 205,
+    "base_exp_yield": 205,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -9719,7 +9719,7 @@
       21
     ],
     "catch_rate": 225,
-    "base_exp_yeild": 111,
+    "base_exp_yield": 111,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -9797,7 +9797,7 @@
       21
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 170,
+    "base_exp_yield": 170,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -9870,7 +9870,7 @@
       20
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 152,
+    "base_exp_yield": 152,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -9946,7 +9946,7 @@
       20
     ],
     "catch_rate": 60,
-    "base_exp_yeild": 192,
+    "base_exp_yield": 192,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -10017,7 +10017,7 @@
       0
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 57,
+    "base_exp_yield": 57,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -10094,7 +10094,7 @@
       0
     ],
     "catch_rate": 90,
-    "base_exp_yeild": 116,
+    "base_exp_yield": 116,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -10167,7 +10167,7 @@
       3
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 118,
+    "base_exp_yield": 118,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -10248,7 +10248,7 @@
       3
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 117,
+    "base_exp_yield": 117,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -10329,7 +10329,7 @@
       4
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 86,
+    "base_exp_yield": 86,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -10413,7 +10413,7 @@
       0
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 130,
+    "base_exp_yield": 130,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -10489,7 +10489,7 @@
       2
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 202,
+    "base_exp_yield": 202,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -10560,7 +10560,7 @@
       23
     ],
     "catch_rate": 190,
-    "base_exp_yeild": 89,
+    "base_exp_yield": 89,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -10637,7 +10637,7 @@
       20
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 65,
+    "base_exp_yield": 65,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -10722,7 +10722,7 @@
       21
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 66,
+    "base_exp_yield": 66,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -10807,7 +10807,7 @@
       20
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 142,
+    "base_exp_yield": 142,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -10892,7 +10892,7 @@
       21
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 143,
+    "base_exp_yield": 143,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -10977,7 +10977,7 @@
       2
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 209,
+    "base_exp_yield": 209,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -11059,7 +11059,7 @@
       3
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 78,
+    "base_exp_yield": 78,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -11134,7 +11134,7 @@
       3
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 132,
+    "base_exp_yield": 132,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -11210,7 +11210,7 @@
       3
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 184,
+    "base_exp_yield": 184,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -11278,7 +11278,7 @@
       3
     ],
     "catch_rate": 255,
-    "base_exp_yeild": 84,
+    "base_exp_yield": 84,
     "front_sprite": {
       "width": 5,
       "height": 5,
@@ -11354,7 +11354,7 @@
       3
     ],
     "catch_rate": 120,
-    "base_exp_yeild": 151,
+    "base_exp_yield": 151,
     "front_sprite": {
       "width": 6,
       "height": 6,
@@ -11431,7 +11431,7 @@
       3
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 191,
+    "base_exp_yield": 191,
     "front_sprite": {
       "width": 7,
       "height": 7,
@@ -11499,7 +11499,7 @@
       24
     ],
     "catch_rate": 45,
-    "base_exp_yeild": 64,
+    "base_exp_yield": 64,
     "front_sprite": {
       "width": 5,
       "height": 5,

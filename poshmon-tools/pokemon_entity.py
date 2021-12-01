@@ -25,7 +25,7 @@ class Pokemon:
     '''
     def __init__(self, addr, internal_index, pokedex_num, name,
                  base_hp, base_attack, base_defense, base_speed,
-                 base_special, type1, type2, catch_rate, base_exp_yeild,
+                 base_special, type1, type2, catch_rate, base_exp_yield,
                  front_sprite, back_sprite, attacks_lvl_1, growth_rate, 
                  learnable_moves, evo_moves, evo_info, dex_entry) -> None:
         self.addr = addr
@@ -40,7 +40,7 @@ class Pokemon:
         self.type1 = type1
         self.type2 = type2
         self.catch_rate = catch_rate
-        self.base_exp_yeild = base_exp_yeild
+        self.base_exp_yield = base_exp_yield
         self.front_sprite = front_sprite
         self.back_sprite = back_sprite
         self.attacks_lvl_1 = attacks_lvl_1
@@ -62,7 +62,7 @@ class Pokemon:
         type1 = data.get_static_data(addr+0x06,pokedata.BYTE,1).collapse()
         type2 = data.get_static_data(addr+0x07,pokedata.BYTE,1).collapse()
         catch_rate = data.get_static_data(addr+0x08,pokedata.BYTE,1).collapse()
-        base_exp_yeild = data.get_static_data(addr+0x09,pokedata.BYTE,1).collapse()
+        base_exp_yield = data.get_static_data(addr+0x09,pokedata.BYTE,1).collapse()
         front_sprite = Sprite.parse_pkmn_sprite(Addr(bank=cls.__get_sprite_bank(internal_index),addr=data.get_static_data(addr+0x0B,pokedata.BYTE,2).collapse(rev=True)))
         back_sprite = Sprite.parse_pkmn_sprite(Addr(bank=cls.__get_sprite_bank(internal_index),addr=data.get_static_data(addr+0x0D,pokedata.BYTE,2).collapse(rev=True)))
         attacks_lvl_1 = data.get_static_data(addr+0x0F,pokedata.BYTE,4).data
@@ -71,7 +71,7 @@ class Pokemon:
         evo_info = cls.__get_evo_info(Addr(0x0E,pokedata.datamap['EVO Table'][internal_index-1]))
         dex_entry = PokedexEntry(Addr(0x10,pokedata.datamap['Pokedex Entry Loc'][internal_index-1]))
         return cls(addr, internal_index, pokedex_num, name, base_hp, base_attack, base_defense, base_speed, base_special, 
-                   type1, type2, catch_rate, base_exp_yeild, front_sprite, back_sprite, attacks_lvl_1, 
+                   type1, type2, catch_rate, base_exp_yield, front_sprite, back_sprite, attacks_lvl_1, 
                    growth_rate, learnable_moves, evo_info[0], evo_info[1], dex_entry)
 
     def __str__(self) -> str:
@@ -156,7 +156,7 @@ class Pokemon:
                 self.type2
             ],
             'catch_rate': self.catch_rate,
-            'base_exp_yeild': self.base_exp_yeild,
+            'base_exp_yield': self.base_exp_yield,
             'front_sprite': self.front_sprite.to_json(),
             'back_sprite': self.back_sprite.to_json(),
             'attacks_lvl_1': self.attacks_lvl_1,

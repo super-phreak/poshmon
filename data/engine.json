@@ -4,129 +4,107 @@
             "name": "NORMAL",
             "id": 0,
             "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "weak": [5],
+            "no_effect": [8]
         },
         {
             "name": "FIGHTING",
             "id": 1,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [0,2,5],
+            "weak": [3,2,24,7],
+            "no_effect": [8]
         },
         {
             "name": "FLYING",
             "id": 2,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [22,1,7],
+            "weak": [23,5],
+            "no_effect": []
         },
         {
             "name": "POISON",
             "id": 3,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [7,22],
+            "weak": [3,4,5,8],
+            "no_effect": []
         },
         {
             "name": "GROUND",
             "id": 4,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [20,23,3,5],
+            "weak": [22,7],
+			"no_effect": [2]
         },
         {
             "name": "ROCK",
             "id": 5,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
-        },
-        {
-            "name": "BIRD",
-            "id": 6,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [20,25,2,7],
+            "weak": [1,4],
+			"no_effect": []
         },
         {
             "name": "BUG",
             "id": 7,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [22,3,24],
+            "weak": [20,1,2,8],
+			"no_effect": []
         },
         {
             "name": "GHOST",
             "id": 8,
-            "strong": [],
+            "strong": [8],
             "weak": [],
-            "resist": [],
-            "immune": []
+			"no_effect": [0,24]
         },
         {
             "name": "FIRE",
             "id": 20,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [22,25,7],
+            "weak": [20,21,5,26],
+			"no_effect": []
         },
         {
             "name": "WATER",
             "id": 21,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [20,4,5],
+            "weak": [21,22,26],
+			"no_effect": []
         },
         {
             "name": "GRASS",
             "id": 22,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [21,4,5],
+            "weak": [20,22,3,2,7,26],
+			"no_effect": []
         },
         {
             "name": "ELECTRIC",
             "id": 23,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [21,2],
+            "weak": [23,22,26],
+			"no_effect": [4]
         },
         {
             "name": "PSYCHIC",
             "id": 24,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [1,3],
+            "weak": [24],
+			"no_effect": []
         },
         {
             "name": "ICE",
             "id": 25,
-            "strong": [],
-            "weak": [],
-            "resist": [],
-            "immune": []
+            "strong": [22,4,2,26],
+            "weak": [21,25],
+			"no_effect": []
         },
         {
             "name": "DRAGON",
             "id": 26,
-            "strong": [],
+            "strong": [26],
             "weak": [],
-            "resist": [],
-            "immune": []
+			"no_effect": []
         }
-    ]
+    ],
+    "damage_formula": "1+1"
 }

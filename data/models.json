@@ -1,0 +1,189 @@
+{
+  "model_list": [
+    "pokemon",
+    "stats",
+    "sprite",
+    "pokedex_entry",
+    "height",
+    "evo_info"
+  ],
+  "model": {
+    "pokemon": [
+      {
+        "name": "index",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "pokedex",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "name",
+        "data_type": "string",
+        "required": true
+      },
+      {
+        "name": "base_stats",
+        "data_type": "model(stats)",
+        "required": true
+      },
+      {
+        "name": "types_id",
+        "data_type": "seq[int]",
+        "required": true
+      },
+      {
+        "name": "catch_rate",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "base_exp_yield",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "front_sprite",
+        "data_type": "model(sprite)",
+        "required": true
+      },
+      {
+        "name": "back_sprite",
+        "data_type": "model(sprite)",
+        "required": true
+      },
+      {
+        "name": "attacks_lvl_1",
+        "data_type": "seq[int]",
+        "required": true
+      },
+      {
+        "name": "growth_rate",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "learnable_moves",
+        "data_type": "seq[int]",
+        "required": true
+      },
+      {
+        "name": "pokedex_entry",
+        "data_type": "model(pokedex_entry)",
+        "required": true
+      },
+      {
+        "name": "evo_moves",
+        "data_type": "hash[int]",
+        "required": true
+      },
+      {
+        "name": "evo_info",
+        "data_type": "seq[model(evo_info)]",
+        "required": true
+      }
+    ],
+    "stats": [
+      {
+        "name": "hp",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "attack",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "defense",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "speed",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "special",
+        "data_type": "int",
+        "required": true
+      }
+    ],
+    "sprite": [
+      {
+        "name": "width",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "height",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "data",
+        "data_type": "string",
+        "required": true
+      }
+    ],
+    "pokedex_entry": [
+      {
+        "name": "species",
+        "data_type": "string",
+        "required": true
+      },
+      {
+        "name": "height",
+        "data_type": "model(height)",
+        "required": true
+      },
+      {
+        "name": "weight",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "text",
+        "data_type": "string",
+        "required": true
+      }
+    ],
+    "height": [
+      {
+        "name": "feet",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "inches",
+        "data_type": "int",
+        "required": true
+      }
+    ],
+    "evo_info": [
+      {
+        "name": "evo_method",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "evo_item_id",
+        "data_type": "int",
+        "required": false
+      },
+      {
+        "name": "evo_level",
+        "data_type": "int",
+        "required": true
+      },
+      {
+        "name": "evo_mon_index",
+        "data_type": "int",
+        "required": true
+      }
+    ]
+  }
+}
