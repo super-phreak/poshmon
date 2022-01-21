@@ -106,70 +106,6 @@ function Add-BattleTemplate {
     Add-TextBox 0 12 19 17
 }
 
-function Add-TextBox {
-    param(
-        [Parameter(Mandatory=$True)]
-        [int]
-        $LeftX,
-
-        [Parameter(Mandatory=$True)]
-        [int]
-        $UpperY,
-        [Parameter(Mandatory=$True)]
-        [int]
-        $RightX,
-
-        [Parameter(Mandatory=$True)]
-        [int]
-        $LowerY
-
-    )
-    $text_box_upper_right = 25
-    $text_box_upper_left = 23
-    $text_box_lower_right = 28
-    $text_box_lower_left = 27
-    $text_box_vertical = 26
-    $text_box_horizontal = 24
-
-    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_upper_left] -x $LeftX -y $UpperY -Tile
-    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_upper_right] -x $RightX -y $UpperY -Tile
-    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_lower_left] -x $LeftX -y $LowerY -Tile
-    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_lower_right] -x $RightX -y $LowerY -Tile
-
-    for ($i=($LeftX+1);$i -lt $RightX; $i++) {
-        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_horizontal] -x $i -y $UpperY -Tile
-        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_horizontal] -x $i -y $LowerY -Tile
-    }
-
-    for ($i=($UpperY+1);$i -lt $LowerY; $i++) {
-        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_vertical] -x $LeftX  -y $i -Tile
-        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_vertical] -x $RightX -y $i -Tile
-    }
-}
-
-function Clear-TextBox {
-    param(
-        [Parameter(Mandatory=$True)]
-        [int]
-        $X,
-        [Parameter(Mandatory=$True)]
-        [int]
-        $Y,
-        [Parameter(Mandatory=$True)]
-        [int]
-        $Lines,
-        [Parameter(Mandatory=$True)]
-        [int]
-        $Length
-    )
-    $empty_sprite = @{
-        data = ,0 * ($Lines*$Length*64)
-        height = $Lines
-        width = $Length
-    }
-    Add-VBuff -Sprite $empty_sprite -X $X -Y $Y -Tile
-}
-
 function Add-BattleMenu {
     param(
         [Parameter(Mandatory=$True)]
@@ -311,29 +247,9 @@ Import-module .\PoshmonGraphicsModule.psm1
 
 #$poke_e = [char][int]"0x00e9"
 $pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
-$font_file = Get-Content '../data/font.json' | ConvertFrom-Json
-$script:sprite_atlas = Get-Content '../data/sprite_atlas.json' | ConvertFrom-Json
+
 $script:moves = Get-Content '../data/moves.json' | ConvertFrom-Json
 $script:engine_config = Get-Content '../data/engine.json' | ConvertFrom-Json
-
-$alphabet = New-Object -TypeName System.Collections.Hashtable
-
-foreach($letter in $font_file) {
-    $alphabet.add($letter.char, (Convert-Sprite($letter.sprite)))
-}
-
-for($i=0;$i -lt $sprite_atlas.pokedex_tiles.sprite_sheet.Length;$i++) {
-    $sprite_atlas.pokedex_tiles.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.pokedex_tiles.sprite_sheet[$i])
-}
-
-for($i=0;$i -lt $sprite_atlas.hpbar_status.sprite_sheet.Length;$i++) {
-    $sprite_atlas.hpbar_status.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.hpbar_status.sprite_sheet[$i])
-}
-
-for($i=0;$i -lt $sprite_atlas.battle_hud.sprite_sheet.Length;$i++) {
-    $sprite_atlas.battle_hud.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.battle_hud.sprite_sheet[$i])
-}
-
 
 foreach($mon in $pokedex) {
     $mon.front_sprite = Convert-Sprite $mon.front_sprite
@@ -343,10 +259,8 @@ foreach($mon in $pokedex) {
     $mon.back_sprite.data = $mon.back_sprite.data[0..($mon.back_sprite.height*$mon.back_sprite.width*64)]
 }
 $pokedex = $pokedex | Sort-Object -Property {$_.pokedex}
-Set-Alphabet -Alphabet $alphabet
-#Set-SpriteAtlas $sprite_atlas
 
-$sub = $moves | Where-Object {$_.name -eq "SUBMISSION"}
+# $sub = $moves | Where-Object {$_.name -eq "SUBMISSION"}
 
 $player_mon = $pokedex | Where-Object {$_.name -eq "kadabra"}
 $enemy_mon = $pokedex | Where-Object {$_.name -eq "ditto"}

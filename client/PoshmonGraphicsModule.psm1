@@ -54,6 +54,70 @@ function Add-VBuff{
     }
 }
 
+function Add-TextBox {
+    param(
+        [Parameter(Mandatory=$True)]
+        [int]
+        $LeftX,
+
+        [Parameter(Mandatory=$True)]
+        [int]
+        $UpperY,
+        [Parameter(Mandatory=$True)]
+        [int]
+        $RightX,
+
+        [Parameter(Mandatory=$True)]
+        [int]
+        $LowerY
+
+    )
+    $text_box_upper_right = 25
+    $text_box_upper_left = 23
+    $text_box_lower_right = 28
+    $text_box_lower_left = 27
+    $text_box_vertical = 26
+    $text_box_horizontal = 24
+
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_upper_left] -x $LeftX -y $UpperY -Tile
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_upper_right] -x $RightX -y $UpperY -Tile
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_lower_left] -x $LeftX -y $LowerY -Tile
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_lower_right] -x $RightX -y $LowerY -Tile
+
+    for ($i=($LeftX+1);$i -lt $RightX; $i++) {
+        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_horizontal] -x $i -y $UpperY -Tile
+        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_horizontal] -x $i -y $LowerY -Tile
+    }
+
+    for ($i=($UpperY+1);$i -lt $LowerY; $i++) {
+        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_vertical] -x $LeftX  -y $i -Tile
+        Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[$text_box_vertical] -x $RightX -y $i -Tile
+    }
+}
+
+function Clear-TextBox {
+    param(
+        [Parameter(Mandatory=$True)]
+        [int]
+        $X,
+        [Parameter(Mandatory=$True)]
+        [int]
+        $Y,
+        [Parameter(Mandatory=$True)]
+        [int]
+        $Lines,
+        [Parameter(Mandatory=$True)]
+        [int]
+        $Length
+    )
+    $empty_sprite = @{
+        data = ,0 * ($Lines*$Length*64)
+        height = $Lines
+        width = $Length
+    }
+    Add-VBuff -Sprite $empty_sprite -X $X -Y $Y -Tile
+}
+
 
 function Write-Text{
     param(
@@ -79,10 +143,10 @@ function Write-Text{
             $print_text = $text
         }
         for ($i=0;$i -lt $print_text.Length;$i++){
-            Add-VBuff -Sprite $internal_alphabet["$($print_text[$i])"] -x ($X+$i) -y $Y -TILE
+            Add-VBuff -Sprite $alphabet["$($print_text[$i])"] -x ($X+$i) -y $Y -TILE
         }
     } else {
-        Add-VBuff -Sprite $internal_alphabet["$($Text)"] -x $X -y $Y -TILE
+        Add-VBuff -Sprite $alphabet["$($Text)"] -x $X -y $Y -TILE
     }
 
 }
@@ -97,14 +161,6 @@ function Write-ScreenDebug {
 
     $Host.UI.RawUI.CursorPosition = $debug_cursor_line
     Write-Host $text
-}
-
-function Set-Alphabet {
-    param(
-        [parameter(Mandatory=$True)]
-        $Alphabet
-    )
-    $script:internal_alphabet = $alphabet
 }
 
 function Get-FileTime {
@@ -226,11 +282,34 @@ if ($Host.UI.RawUI.WindowSize.Width -gt $gb_size.Width -or $Host.UI.RawUI.Window
 $Host.UI.RawUI.BufferSize = $gb_size
 $Host.UI.RawUI.WindowSize = $gb_size
 
+$sprite_atlas = Get-Content '../data/sprite_atlas.json' | ConvertFrom-Json
+
+for($i=0;$i -lt $sprite_atlas.pokedex_tiles.sprite_sheet.Length;$i++) {
+    $sprite_atlas.pokedex_tiles.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.pokedex_tiles.sprite_sheet[$i])
+}
+
+for($i=0;$i -lt $sprite_atlas.hpbar_status.sprite_sheet.Length;$i++) {
+    $sprite_atlas.hpbar_status.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.hpbar_status.sprite_sheet[$i])
+}
+
+for($i=0;$i -lt $sprite_atlas.battle_hud.sprite_sheet.Length;$i++) {
+    $sprite_atlas.battle_hud.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.battle_hud.sprite_sheet[$i])
+}
+
+$script:alphabet = New-Object -TypeName System.Collections.Hashtable
+$font_file = Get-Content '../data/font.json' | ConvertFrom-Json
+foreach($letter in $font_file) {
+    $alphabet.add($letter.char, (Convert-Sprite($letter.sprite)))
+}
+
+Export-ModuleMember -Variable sprite_atlas, alphabet
+
 Export-ModuleMember -Function Write-Screen
 Export-ModuleMember -Function Convert-Sprite
 Export-ModuleMember -Function Get-FileTime
 Export-ModuleMember -Function Write-Text
 Export-ModuleMember -Function Add-VBuff
-Export-ModuleMember -Function Set-Alphabet
 Export-ModuleMember -Function Write-ScreenDebug
 Export-ModuleMember -Function Resize-Sprite
+Export-ModuleMember -Function Add-TextBox
+Export-ModuleMember -Function Clear-TextBox
