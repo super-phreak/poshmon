@@ -5,106 +5,120 @@
             "id": 0,
             "strong": [],
             "weak": [5],
-            "no_effect": [8]
+            "no_effect": [8],
+            "category": "physical"
         },
         {
             "name": "FIGHTING",
             "id": 1,
             "strong": [0,2,5],
             "weak": [3,2,24,7],
-            "no_effect": [8]
+            "no_effect": [8],
+            "category": "physical"
         },
         {
             "name": "FLYING",
             "id": 2,
             "strong": [22,1,7],
             "weak": [23,5],
-            "no_effect": []
+            "no_effect": [],
+            "category": "physical"
         },
         {
             "name": "POISON",
             "id": 3,
             "strong": [7,22],
             "weak": [3,4,5,8],
-            "no_effect": []
+            "no_effect": [],
+            "category": "physical"
         },
         {
             "name": "GROUND",
             "id": 4,
             "strong": [20,23,3,5],
             "weak": [22,7],
-			"no_effect": [2]
+			"no_effect": [2],
+            "category": "physical"
         },
         {
             "name": "ROCK",
             "id": 5,
             "strong": [20,25,2,7],
             "weak": [1,4],
-			"no_effect": []
+			"no_effect": [],
+            "category": "physical"
         },
         {
             "name": "BUG",
             "id": 7,
             "strong": [22,3,24],
             "weak": [20,1,2,8],
-			"no_effect": []
+			"no_effect": [],
+            "category": "physical"
         },
         {
             "name": "GHOST",
             "id": 8,
             "strong": [8],
             "weak": [],
-			"no_effect": [0,24]
+			"no_effect": [0,24],
+            "category": "physical"
         },
         {
             "name": "FIRE",
             "id": 20,
             "strong": [22,25,7],
             "weak": [20,21,5,26],
-			"no_effect": []
+			"no_effect": [],
+            "category": "special"
         },
         {
             "name": "WATER",
             "id": 21,
             "strong": [20,4,5],
             "weak": [21,22,26],
-			"no_effect": []
+			"no_effect": [],
+            "category": "special"
         },
         {
             "name": "GRASS",
             "id": 22,
             "strong": [21,4,5],
             "weak": [20,22,3,2,7,26],
-			"no_effect": []
+			"no_effect": [],
+            "category": "special"
         },
         {
             "name": "ELECTRIC",
             "id": 23,
             "strong": [21,2],
             "weak": [23,22,26],
-			"no_effect": [4]
+			"no_effect": [4],
+            "category": "special"
         },
         {
             "name": "PSYCHIC",
             "id": 24,
             "strong": [1,3],
             "weak": [24],
-			"no_effect": []
+			"no_effect": [],
+            "category": "special"
         },
         {
             "name": "ICE",
             "id": 25,
             "strong": [22,4,2,26],
             "weak": [21,25],
-			"no_effect": []
+			"no_effect": [],
+            "category": "special"
         },
         {
             "name": "DRAGON",
             "id": 26,
             "strong": [26],
             "weak": [],
-			"no_effect": []
+			"no_effect": [],
+            "category": "special"
         }
-    ],
-    "damage_formula": "1+1"
+    ]
 }
