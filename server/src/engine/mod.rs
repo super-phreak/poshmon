@@ -1,5 +1,7 @@
 use std::cmp;
 use rand::Rng;
+use self::structs::MoveType;
+use self::structs::PersistantStatus;
 use self::structs::PokeType;
 use self::structs::Pokemon;
 use self::structs::Move;
@@ -64,4 +66,44 @@ pub fn attack(attacker: &Pokemon, defender: &Pokemon, pokemove: &Move) -> (i32,i
     let level = if crit {attacker.level * 2} else {attacker.level};
     println!("level: {}, stab: {}, effective: {}, random: {}", level, stab, effective, random);
     return (dmg_calculator(level, pokemove.power, attacker.attack, defender.defense, stab, effective, random),effective,crit)
+}
+
+pub fn build_pokemon<'a>(pokemon_json: &'a serde_json::Value, nickname: &'a str, level: i32, types: &'a Vec<PokeType<'a>>, ivs: i32) -> Option<Pokemon<'a>> { 
+    let pokemon = Pokemon { 
+        index: pokemon_json["index"].as_i64().map(|x| x as i32)?,
+        pokedex: pokemon_json["pokedex"].as_i64().map(|x| x as i32)?,
+        name: pokemon_json["name"].as_str()?, 
+        nickname: &nickname,
+        level,
+        hp: pokemon_json["base_stats"]["hp"].as_i64().map(|x| x as i32)?, 
+        attack: pokemon_json["base_stats"]["attack"].as_i64().map(|x| x as i32)?, 
+        defense: pokemon_json["base_stats"]["defense"].as_i64().map(|x| x as i32)?, 
+        speed: pokemon_json["base_stats"]["speed"].as_i64().map(|x| x as i32)?, 
+        special: pokemon_json["base_stats"]["special"].as_i64().map(|x| x as i32)?, 
+
+        hp_ev: 0,
+        attack_ev: 0,
+        defense_ev: 0,
+        speed_ev: 0,
+        special_ev: 0,
+
+        type1: types.into_iter().find(|type1| type1.index == pokemon_json["types_id"][0].as_i64().map(|x| x as i32).unwrap())?, 
+        type2: if pokemon_json["types_id"][1] != pokemon_json["types_id"][0] {types.into_iter().find(|type2| type2.index == pokemon_json["types_id"][1].as_i64().map(|x| x as i32).unwrap())} else {None},
+        ivs,
+        current_hp: 0, 
+        status: PersistantStatus::Healthy,
+    };
+    return Some(pokemon);
+}
+
+pub fn build_type<'a>(poketype_json: &'a serde_json::Value) -> Option<PokeType<'a>>{
+    let poketype = PokeType {
+        index: poketype_json["id"].as_i64().map(|x| x as i32)?,
+        name: poketype_json["name"].as_str()?,
+        category: if poketype_json["category"].as_str()?.eq("physical") {MoveType::Physical} else if poketype_json["category"].as_str()?.eq("special") {MoveType::Special} else {return None},
+        strong: poketype_json["strong"].as_array()?.iter().map(|x| x.as_i64().unwrap() as i32).collect(),
+        weak: poketype_json["weak"].as_array()?.iter().map(|x| x.as_i64().unwrap() as i32).collect(),
+        no_effect: poketype_json["no_effect"].as_array()?.iter().map(|x| x.as_i64().unwrap() as i32).collect(),
+    };
+    return Some(poketype);
 }
