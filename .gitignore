@@ -23,3 +23,6 @@ server/debug
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+
+#VS Code local files
+.vscode
