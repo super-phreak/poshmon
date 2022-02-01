@@ -6,6 +6,9 @@ poshmon-tools/pyvenv.cfg
 poshmon-tools/share
 poshmon-tools/lib64
 
+#Local env test
+client-tests/
+
 # Python Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -58,7 +58,6 @@ foreach($mon in $pokedex) {
     $mon.back_sprite = Convert-Sprite $mon.back_sprite
 }
 
-Set-Alphabet -Alphabet $alphabet
 Set-SpriteAtlas $sprite_atlas
 
 if($PSBoundParameters.ContainsKey('PokedexIndex')) {
