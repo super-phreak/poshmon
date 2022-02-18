@@ -1,9 +1,19 @@
 param(
+    # Parameter help description
+    [Parameter(Mandatory=$false)]
+    [Switch]
+    $DebugRun,
     [parameter(Mandatory=$false)][Switch]
     $NoDisplay,
 
     [parameter(Mandatory=$false)][Switch]
-    $NoClear
+    $NoClear,
+
+    [parameter(Mandatory=$true)][int]
+    $PlayerMonIndex,
+
+    [parameter(Mandatory=$true)][int]
+    $EnemyMonIndex
 )
 
 function Exit-Poshmon {
@@ -231,7 +241,7 @@ function Show-Pokemon {
     }
     $mon_name = Format-Name $pokemon.name
     Write-Text -Text $mon_name -X $xs[0] -Y $ys[0] -Tile -Line -LineLength 10
-    Add-VBuff -Sprite $sprite_atlas.battle_hud.sprite_sheet[$lvl_icon] -x $xs[1] -y $ys[1] -Tile
+    Add-VBuff -Sprite $sprite_atlas.battle_hud.sprite_sheet[1] -x $xs[1] -y $ys[1] -Tile
     Write-Text -Text $level -X ($xs[2]-$level.Length) -Y $ys[2] -Tile
     Add-VBuff -Sprite $sprite -X ($xs[3]+$sprite_width_offset) -Y ($ys[3]-$sprite_height_offset) -Tile
 
@@ -246,97 +256,93 @@ function Show-Pokemon {
 Import-module .\PoshmonGraphicsModule.psm1
 
 #$poke_e = [char][int]"0x00e9"
-$pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
 
-$script:moves = Get-Content '../data/moves.json' | ConvertFrom-Json
+
+$script:moves = Get-Content '../data/movedex.json' | ConvertFrom-Json
 $script:engine_config = Get-Content '../data/engine.json' | ConvertFrom-Json
-
-foreach($mon in $pokedex) {
-    $mon.front_sprite = Convert-Sprite $mon.front_sprite
-    $mon.back_sprite = Convert-Sprite $mon.back_sprite
-    $mon.back_sprite = Resize-Sprite $mon.back_sprite -Scale 2
-    $mon.back_sprite.height--
-    $mon.back_sprite.data = $mon.back_sprite.data[0..($mon.back_sprite.height*$mon.back_sprite.width*64)]
-}
-$pokedex = $pokedex | Sort-Object -Property {$_.pokedex}
 
 # $sub = $moves | Where-Object {$_.name -eq "SUBMISSION"}
 
-$player_mon = $pokedex | Where-Object {$_.name -eq "kadabra"}
-$enemy_mon = $pokedex | Where-Object {$_.name -eq "ditto"}
-$player_moves = $player_mon.learnable_moves | Get-Random -Count 2
-#$player_moves+=($sub.id)
+function Start-Battle {
+    $player_mon = $pokedex | Where-Object {$_.index -eq $PlayerMonIndex}
+    $enemy_mon = $pokedex | Where-Object {$_.index -eq $EnemyMonIndex}
+    $player_moves = $player_mon.learnable_moves | Get-Random -Count 2
+    #$player_moves+=($sub.id)
 
 
-Add-BattleTemplate
-Add-BattleMenu 0
+    Add-BattleTemplate
+    Add-BattleMenu 0
 
-$lvl_icon = 1
-$int_level = 94
-$level = "$((($int_level)%100))".PadRight(2,' ')
-$max_health = 184
-$selection = 0
+    $int_level = 100
+    $level = "$(($int_level))".PadRight(2,' ')
+    $max_health = 184
+    $selection = 0
 
-Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
-Update-HPBar -CurrentHP $max_health -MaxHP $max_health
+    Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
+    Update-HPBar -CurrentHP $max_health -MaxHP $max_health
 
-Show-Pokemon $player_mon $level -Player
-Show-Pokemon $enemy_mon $level
+    Show-Pokemon $player_mon $level -Player
+    Show-Pokemon $enemy_mon $level
 
-Write-Screen -NoDisplay:$NoDisplay
+    Write-Screen -NoDisplay:$NoDisplay
 
-$quit = $false
-while (!$quit) {
-    if ($Host.UI.RawUI.KeyAvailable) {
-        $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
-        if ($key.keydown -eq "True") {
-            switch ($key.VirtualKeyCode) {
-                81 {$quit = $true; break}
-                ##This strange logic is only here because bitwise ops in pwsh is slooooow...
-                38 {$selection = ($selection+2)%4; Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
-                40 {$selection = ($selection+2)%4; Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
-                37 {$selection+=(&{If($selection%2 -eq 0) {1} Else {-1}}); Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
-                39 {$selection+=(&{If($selection%2 -eq 0) {1} Else {-1}}); Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
-                ##End Strange logic
-                32 {
-                    switch ($selection) {
-                        0 {
-                            $result = Enter-MoveMenu $player_moves
-                            if ($result -lt 0) {
-                                $quit = $True
-                            } elseif ($result -eq 0) {
-                                Clear-TextBox 0 8 4 12
-                                Add-BattleTemplate
-                                Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
-                                Show-Pokemon $player_mon $level -Player
-                                Clear-TextBox 1 13 4 18
-                                Add-BattleMenu $selection
-                                Write-Screen -NoDisplay:$NoDisplay;
+    $quit = $false
+    while (!$quit) {
+        if ($Host.UI.RawUI.KeyAvailable) {
+            $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
+            if ($key.keydown -eq "True") {
+                switch ($key.VirtualKeyCode) {
+                    81 {$quit = $true; break}
+                    ##This strange logic is only here because bitwise ops in pwsh is slooooow...
+                    38 {$selection = ($selection+2)%4; Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
+                    40 {$selection = ($selection+2)%4; Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
+                    37 {$selection+=(&{If($selection%2 -eq 0) {1} Else {-1}}); Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
+                    39 {$selection+=(&{If($selection%2 -eq 0) {1} Else {-1}}); Add-BattleMenu $selection; Write-Screen -NoDisplay:$NoDisplay; break}
+                    ##End Strange logic
+                    32 {
+                        switch ($selection) {
+                            0 {
+                                $result = Enter-MoveMenu $player_moves
+                                if ($result -lt 0) {
+                                    $quit = $True
+                                } elseif ($result -eq 0) {
+                                    Clear-TextBox 0 8 4 12
+                                    Add-BattleTemplate
+                                    Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
+                                    Show-Pokemon $player_mon $level -Player
+                                    Clear-TextBox 1 13 4 18
+                                    Add-BattleMenu $selection
+                                    Write-Screen -NoDisplay:$NoDisplay;
+                                }
+
+                                break
                             }
-
-                            break
-                        }
-                        3 {
-                            $run_text = "safely"
-                            Clear-TextBox 1 13 4 18
-                            Add-BattleTemplate
-                            Write-Text "You got away" -X 2 -Y 14 -Tile -Line -LineLength 16
-                            Write-Text $run_text -X 2 -Y 16 -Tile -Line -LineLength 16
-                            Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[19] -X (2+$run_text.Length) -Y 16 -Tile
-                            Write-Screen -NoDisplay:$NoDisplay
-                            Start-Sleep 5
-                            $quit = $true
+                            3 {
+                                $run_text = "safely"
+                                Clear-TextBox 1 13 4 18
+                                Add-BattleTemplate
+                                Write-Text "You got away" -X 2 -Y 14 -Tile -Line -LineLength 16
+                                Write-Text $run_text -X 2 -Y 16 -Tile -Line -LineLength 16
+                                Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[19] -X (2+$run_text.Length) -Y 16 -Tile
+                                Write-Screen -NoDisplay:$NoDisplay
+                                Start-Sleep 5
+                                $quit = $true
+                            }
                         }
                     }
+                    default {Write-Host "$($key.Character),$($key.VirtualKeyCode)"}
                 }
-                default {Write-Host "$($key.Character),$($key.VirtualKeyCode)"}
             }
         }
-    }
 
-    
+        
+    }
+    Write-Screen -NoDisplay:$NoDisplay
 }
-Write-Screen -NoDisplay:$NoDisplay
+
+if ($DebugRun) {
+    Start-Battle
+}
 
 Clear-Host
 

@@ -302,7 +302,16 @@ foreach($letter in $font_file) {
     $alphabet.add($letter.char, (Convert-Sprite($letter.sprite)))
 }
 
-Export-ModuleMember -Variable sprite_atlas, alphabet
+$script:pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
+foreach($mon in $pokedex) {
+    $mon.front_sprite = Convert-Sprite $mon.front_sprite
+    $mon.back_sprite = Convert-Sprite $mon.back_sprite
+    $mon.back_sprite = Resize-Sprite $mon.back_sprite -Scale 2
+    $mon.back_sprite.height--
+    $mon.back_sprite.data = $mon.back_sprite.data[0..($mon.back_sprite.height*$mon.back_sprite.width*64)]
+}
+
+Export-ModuleMember -Variable sprite_atlas, alphabet, pokedex
 
 Export-ModuleMember -Function Write-Screen
 Export-ModuleMember -Function Convert-Sprite
