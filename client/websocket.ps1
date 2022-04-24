@@ -68,7 +68,7 @@ $recv_job = {
     }
  }
 
-Write-Output "Starting recv runspace ewq"
+Write-Output "Starting recv runspace" 
 $recv_runspace = [PowerShell]::Create()
 $recv_runspace.AddScript($recv_job).
     AddParameter("ws", $ws).

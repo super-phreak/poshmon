@@ -190,6 +190,7 @@ function Enter-MoveMenu {
                 switch ($key.VirtualKeyCode) {
                     81 {return -1}
                     08 {return  0}
+                    32 {return  1}
                     38 {$move_selection = ($move_selection+($MonMoves.Length-1))%$MonMoves.Length; Write-Screen -NoDisplay:$NoDisplay; break}
                     40 {$move_selection = ($move_selection+1) % $MonMoves.Length; Write-Screen -NoDisplay:$NoDisplay; break}
                 }
@@ -313,6 +314,17 @@ function Start-Battle {
                                     Clear-TextBox 1 13 4 18
                                     Add-BattleMenu $selection
                                     Write-Screen -NoDisplay:$NoDisplay;
+                                } elseif ($result -gt 0) {
+                                    $box_text = "other player"
+                                    Clear-TextBox 0 8 4 12
+                                    Add-BattleTemplate
+                                    Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
+                                    Show-Pokemon $player_mon $level -Player
+                                    Clear-TextBox 1 13 4 18
+                                    Write-Text "Waiting on the" -X 2 -Y 14 -Tile -Line -LineLength 16
+                                    Write-Text $box_text -X 2 -Y 16 -Tile -Line -LineLength 16
+                                    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[19] -X (2+$box_text.Length) -Y 16 -Tile
+                                    Write-Screen -NoDisplay:$NoDisplay;                                    
                                 }
 
                                 break
@@ -347,6 +359,3 @@ if ($DebugRun) {
 Clear-Host
 
 Exit-Poshmon
-
-
-
