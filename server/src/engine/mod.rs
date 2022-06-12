@@ -1,7 +1,7 @@
 use std::cmp;
 use rand::Rng;
 use self::structs::MoveType;
-use self::structs::PersistantStatus;
+use self::structs::Status;
 use self::structs::PokeType;
 use self::structs::Pokemon;
 use self::structs::Move;
@@ -91,7 +91,7 @@ pub fn build_pokemon<'a>(pokemon_json: &'a serde_json::Value, nickname: &'a str,
         type2: if pokemon_json["types_id"][1] != pokemon_json["types_id"][0] {types.into_iter().find(|type2| type2.index == pokemon_json["types_id"][1].as_i64().map(|x| x as i32).unwrap())} else {None},
         ivs,
         current_hp: 0, 
-        status: PersistantStatus::Healthy,
+        status: Status::Healthy,
     };
     return Some(pokemon);
 }
@@ -107,3 +107,5 @@ pub fn build_type<'a>(poketype_json: &'a serde_json::Value) -> Option<PokeType<'
     };
     return Some(poketype);
 }
+
+

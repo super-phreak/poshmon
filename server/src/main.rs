@@ -1,3 +1,7 @@
+mod engine;
+mod comm;
+
+use comm::Peer;
 use std::fs::File;
 use engine::structs::{Pokemon, PokeType};
 use rand::Rng;
@@ -13,6 +17,7 @@ use std::{
     sync::{Arc, Mutex},
 };
 
+use uuid::Uuid;
 use serde::{Serialize, Deserialize};
 
 use futures_channel::mpsc::{unbounded, UnboundedSender};
@@ -20,9 +25,9 @@ use futures_util::{future, pin_mut, stream::TryStreamExt, StreamExt};
 use tungstenite::protocol::Message;
 
 type Tx = UnboundedSender<Message>;
-type PeerMap = Arc<Mutex<HashMap<SocketAddr, Tx>>>;
+type PeerMap = Arc<Mutex<HashMap<Peer, Tx>>>;
 
-mod engine;
+
 
 fn _print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())
@@ -37,8 +42,9 @@ struct ServerConfig {
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(tag = "cmd", rename_all = "snake_case")]
 enum Commands {
-    Login {client_id: String},
-    SubmitTeam {client_id: String}
+    Login {},
+    SubmitTeam {client_id: String},
+    Chat {client_id: String, recipient: String, chat_msg: String}
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -72,6 +78,11 @@ fn create_server_config() -> Result<ServerConfig, Box<dyn Error>> {
     return Ok(config);
 }
 
+fn new_peer(addr: SocketAddr) -> Peer {
+    let peer: Peer = Peer { addr, client_id: Uuid::new_v4() };
+    return peer;
+}
+
 async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: SocketAddr) {
     println!("Incoming TCP connection from: {}", addr);
 
@@ -80,21 +91,23 @@ async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: Socke
         .expect("Error during the websocket handshake occurred");
     println!("WebSocket connection established: {}", addr);
 
-    // Insert the write part of this peer to the peer map.
     let (tx, rx) = unbounded();
-    peer_map.lock().unwrap().insert(addr, tx);
+    // Insert the write part of this peer to the peer map.
+    let peer = new_peer(addr);
+    peer_map.lock().unwrap().insert(peer, tx);
 
     let (outgoing, incoming) = ws_stream.split();
 
-    let broadcast_incoming = incoming.try_for_each(|msg| {
+    let incoming_msg = incoming.try_for_each(|msg| {
         println!("Received a message from {}: {}", addr, msg.to_text().unwrap());
         let cmd: Result<Commands, _> = serde_json::from_str(msg.to_text().unwrap());
         let msg_out: Message;
         let player_msg: Message;
         if let Ok(data) = cmd  {
             let (temp_out, temp_msg) = match data {
-                Commands::Login {client_id} => (Message::from(format!("Player {} joined", client_id)), Response::Login{client_id, auth: true}.to_message()),
+                Commands::Login {} => (Message::from(format!("Player {} joined", &peer.client_id)), Response::Login{client_id: peer.client_id.to_string(), auth: true}.to_message()),
                 Commands::SubmitTeam {client_id} => (Message::from(format!("Player {} submitted team", client_id)), Message::from(format!("You submitted team"))),
+                Commands::Chat { client_id, recipient, chat_msg } => (Message::from(format!("")),Message::from(format!("")))
                 //_ => (Message::from(format!("Player Invalid CMD")), Message::from(format!("You sent invalid cmd"))),
             };
             msg_out = temp_out;
@@ -110,14 +123,17 @@ async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: Socke
 
         let peers = peer_map.lock().unwrap();
         
-        if let Some(to_self) = peers.iter().find(|(self_addr, _)| self_addr == &&addr).map(|(_, ws_sink)| ws_sink) {
+        if let Some(to_self) = peers.iter().find(|(self_addr, _)| self_addr.addr == addr).map(|(_, ws_sink)| ws_sink) {
             to_self.unbounded_send(player_msg).unwrap();
         }
         // We want to broadcast the message to everyone except ourselves.
-        let broadcast_recipients =
-            peers.iter().filter(|(peer_addr, _)| peer_addr != &&addr).map(|(_, ws_sink)| ws_sink);
+        // let broadcast_recipients =
+        //     peers.iter().filter(|(peer_addr, _)| peer_addr != &&addr).map(|(_, ws_sink)| ws_sink);
 
-        for recp in broadcast_recipients {
+        let recipients =
+            peers.iter().filter(|(peer, _)| peer.addr != addr).map(|(_, ws_sink)| ws_sink);
+
+        for recp in recipients {
             recp.unbounded_send(msg_out.clone()).unwrap();
         }
 
@@ -126,11 +142,11 @@ async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: Socke
 
     let receive_from_others = rx.map(Ok).forward(outgoing);
 
-    pin_mut!(broadcast_incoming, receive_from_others);
-    future::select(broadcast_incoming, receive_from_others).await;
+    pin_mut!(incoming_msg, receive_from_others);
+    future::select(incoming_msg, receive_from_others).await;
 
     println!("{} disconnected", &addr);
-    peer_map.lock().unwrap().remove(&addr);
+    peer_map.lock().unwrap().remove(&peer);
 }
 
 #[tokio::main]

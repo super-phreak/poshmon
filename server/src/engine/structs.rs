@@ -36,7 +36,7 @@ pub struct Pokemon<'a> {
 
     //Persistant Battle Tracking Things
     pub current_hp: i32,
-    pub status: PersistantStatus,
+    pub status: Status,
 }
 
 #[derive(Debug)]
@@ -59,12 +59,14 @@ pub enum MoveType {
 }
 #[derive(Debug)]
 #[derive(PartialEq)]
-pub enum PersistantStatus {
+pub enum Status {
     Healthy,
     Paralyzed,
     Poisoned,
     Burned,
     Sleep,
     Freeze,
-
+    Confused,
+    Seeded,
+    Bound,
 }

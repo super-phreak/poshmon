@@ -6,8 +6,6 @@ References:
     - https://www.leeholmes.com/blog/2018/09/05/producer-consumer-parallelism-in-powershell/
 #>
 
-$client_id = [System.GUID]::NewGuid()
-
 $recv_queue = New-Object 'System.Collections.Concurrent.ConcurrentQueue[String]'
 $send_queue = New-Object 'System.Collections.Concurrent.ConcurrentQueue[String]'
 
@@ -15,8 +13,11 @@ $ws = New-Object Net.WebSockets.ClientWebSocket
 $cts = New-Object Threading.CancellationTokenSource
 $ct = New-Object Threading.CancellationToken($false)
 
+Write-Host "enter address:port"
+$connString = Read-Host
+
 Write-Output "Connecting..."
-$connectTask = $ws.ConnectAsync("ws://172.26.124.213:8080", $cts.Token)
+$connectTask = $ws.ConnectAsync("ws://${connString}", $cts.Token)
 do { Sleep(1) }
 until ($connectTask.IsCompleted)
 Write-Output "Connected!"
@@ -84,7 +85,6 @@ $send_runspace.AddScript($send_job).
 
 try {
     $hash = @{
-        client_id = $client_id
         cmd = "login"
     }
 
@@ -95,7 +95,8 @@ try {
     do {
         $msg = $null
         while ($recv_queue.TryDequeue([ref] $msg)) {
-            Write-Output "Processed message: $msg"
+            Write-Output "Processed message: $msg, client_id = $(($msg | ConvertFrom-Json).client_id)"
+
         }
         if ($Host.UI.RawUI.KeyAvailable) {
             $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyDown")
