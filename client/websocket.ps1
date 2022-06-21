@@ -88,14 +88,18 @@ try {
         cmd = "login"
     }
 
-    $test_payload = New-Object PSObject -Property $hash
-    $json = ConvertTo-Json $test_payload
+    $login_payload = New-Object PSObject -Property $hash
+    $json = ConvertTo-Json $login_payload
     $send_queue.Enqueue($json)
     
     do {
         $msg = $null
         while ($recv_queue.TryDequeue([ref] $msg)) {
-            Write-Output "Processed message: $msg, client_id = $(($msg | ConvertFrom-Json).client_id)"
+            Write-Output "Processed message: $msg"
+            $msg = $msg | ConvertFrom-Json
+            if ($msg.cmd -eq "login") {
+                $client_id = $msg.client_id
+            }
 
         }
         if ($Host.UI.RawUI.KeyAvailable) {
