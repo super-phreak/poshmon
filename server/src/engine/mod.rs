@@ -80,11 +80,11 @@ pub fn attack(attacker: &BasePokemon, defender: &BasePokemon, pokemove: &Move) -
 
 fn get_iv (method: StatEnum, iv: u16) -> i32 {
     match method {
-        StatEnum::Attack => return (iv & 0xF000) as i32,
-        StatEnum::Defense => return (iv & 0x0F00) as i32,
-        StatEnum::Speed => return (iv & 0x00F0) as i32,
+        StatEnum::Attack => return ((iv & 0xF000) >> 12)  as i32,
+        StatEnum::Defense => return ((iv & 0x0F00) >> 8) as i32,
+        StatEnum::Speed => return ((iv & 0x00F0) >> 4) as i32,
         StatEnum::Special => return (iv & 0x000F) as i32,
-        StatEnum::Hp => return (iv & 0x1111) as i32,
+        StatEnum::Hp => return (((iv & 0x1000) >> 9) + ((iv & 0x0100) >> 6) + ((iv & 0x0010) >> 3) + ((iv & 0x0001))) as i32,
     }
 }
 
@@ -106,8 +106,8 @@ pub fn create_pokemon(id: u8, data: Data) -> Result<Pokemon, Box<dyn Error>> {
             hp: hp_calculator(base_pokemon.base_hp, get_iv(StatEnum::Hp, ivs), ivs as i32, level),
             attack: stat_calculator(base_pokemon.base_attack, get_iv(StatEnum::Attack, ivs), ivs as i32, level),
             defense: stat_calculator(base_pokemon.base_defense, get_iv(StatEnum::Defense, ivs), ivs as i32, level),
-            speed: stat_calculator(base_pokemon.base_attack, get_iv(StatEnum::Speed, ivs), ivs as i32, level),
-            special: stat_calculator(base_pokemon.base_attack, get_iv(StatEnum::Special, ivs), ivs as i32, level),
+            speed: stat_calculator(base_pokemon.base_speed, get_iv(StatEnum::Speed, ivs), ivs as i32, level),
+            special: stat_calculator(base_pokemon.base_special, get_iv(StatEnum::Special, ivs), ivs as i32, level),
             iv: ivs,
             hp_ev: ivs as i32,
             attack_ev: ivs as i32,
