@@ -1,3 +1,4 @@
+use std::fmt;
 use std::{
     //    env,
     //    io::Error as IoError,
@@ -8,7 +9,10 @@ use std::{
 use futures_channel::mpsc::{UnboundedSender};
 use uuid::Uuid;
 use serde::{Serialize, Deserialize};
+use serde::de::{self, Deserializer, Visitor, SeqAccess, MapAccess};
 use tungstenite::protocol::Message;
+
+use crate::engine::structs::Pokemon;
 
 use super::PeerMap;
 
@@ -49,19 +53,35 @@ pub struct ServerConfig {
     pub peers: PeerMap,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(tag = "cmd", rename_all = "snake_case")]
-pub enum Commands {
-    Login {},
-    SubmitTeam {client_id: String},
-    Chat {client_id: String, recipient: String, chat_msg: String}
+#[derive(Debug, Serialize, Deserialize)]
+pub struct PokemonModel {
+    pub id: u8,
+    pub nickname: String,
+    pub hp: i32,
+    pub attack: i32,
+    pub defense: i32,
+    pub speed: i32,
+    pub special: i32,
+    pub guid: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(tag = "cmd", rename_all = "snake_case")]
+pub enum Commands {
+    Login {},
+    SubmitTeam {
+        session_id: String, 
+        client_id: String, 
+        name: String, 
+        team: Vec<i64>},
+    Chat {client_id: String, recipient: String, chat_msg: String}
+}
+
+#[derive(Serialize, Debug)]
+#[serde(tag = "cmd", rename_all = "snake_case")]
 pub enum Response {
-    Login {client_id: String, auth: bool},
-    SubmitTeam {client_id: String}
+    Login{client_id: String, session_id: String, auth: bool},
+    SubmitTeam {session_id: String, client_id: String, name: String, team: Vec<PokemonModel>, valid: bool}
 }
 
 pub trait Communication {

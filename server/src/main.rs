@@ -3,9 +3,9 @@ mod comm;
 
 use comm::create_server_config;
 use std::fs::File;
-use engine::structs::{Pokemon, PokeType};
+use engine::structs::{BasePokemon, PokeType};
 use rand::Rng;
-use rand::prelude::SliceRandom;
+use rand::prelude::{SliceRandom, IteratorRandom};
 //use tokio::{io as tokio_io, task};
 use tokio::net::{TcpListener, TcpStream};
 use std::error::Error;
@@ -26,10 +26,9 @@ use tungstenite::protocol::Message;
 
 use comm::handle_connection;
 
+use crate::engine::init_engine;
+
 type Tx = UnboundedSender<Message>;
-
-
-
 
 fn _print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())
@@ -39,30 +38,25 @@ fn _print_type_of<T>(_: &T) {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>>{
-    let mut pokedex: Vec<Pokemon> = Vec::new();
-    let mut typedex: Vec<PokeType> = Vec::new();
+    //let pokedex = Pokedex::new(Mutex::new(HashMap::new()));
+    //let mut typedex = 
     let mut rng = rand::thread_rng();
     let engine_conf = File::open("../data/engine.json").expect("Unable to read file");
     let pokedex_file = File::open("../data/pokedex.json").expect("unable to open pokedex");
     let engine_json: serde_json::Value = serde_json::from_reader(engine_conf).expect("JSON was not well-formatted");
     let pokedex_json: serde_json::Value = serde_json::from_reader(pokedex_file).expect("JSON was not well-formatted");
-    let level: i32 = 100;
 
-    for poketypes in engine_json["types"].as_array().unwrap() {
-        if let Some(new_type) = engine::build_type(poketypes) {
-            typedex.push(new_type);
-        }
-    }
+    let mut data: HashMap<&str, serde_json::Value> = HashMap::new();
+    data.insert("conf", engine_json);
+    data.insert("pokemon", pokedex_json);
 
-    for pokemon_json in pokedex_json.as_array().unwrap() {
-        if let Some(new_mon) = engine::build_pokemon(pokemon_json,pokemon_json["name"].as_str().unwrap(),level,&typedex,rng.gen_range(0..u16::MAX) as i32) {
-            pokedex.push(new_mon);
-        }
-    }
+    let engine = init_engine(data);
+    if let Ok(pokedex) = engine.pokedex.try_lock() {
     //println!("Types: {:#?}", &typedex_vec.into_iter().find(|x| x.index == 23));
-    assert_eq!(pokedex.len(), 151, "Pokedex length should be {} but {} was found", 151, pokedex.len());
+        assert_eq!(pokedex.len(), 151, "Pokedex length should be {} but {} was found", 151, pokedex.len());
 
-    println!("{:#?}", pokedex.choose(&mut rng).unwrap());
+        println!("{:#?}", pokedex.get(&(rng.gen_range(1..pokedex.len()) as u8)).unwrap());
+    }
     let server_configs = create_server_config(Some(8080))?;
     println!("{:#?}", server_configs);
 
@@ -76,7 +70,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
 
     // Let's spawn the handling of each connection in a separate task.
     while let Ok((stream, addr)) = listener.accept().await {
-        tokio::spawn(handle_connection(state.clone(), stream, addr));
+        tokio::spawn(handle_connection(state.clone(), stream, addr, engine.clone()));
     }
 
     Ok(())

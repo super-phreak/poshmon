@@ -29,3 +29,4 @@ server/debug
 
 #VS Code local files
 .vscode
+.DS_Store

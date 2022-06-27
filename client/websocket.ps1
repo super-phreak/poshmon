@@ -99,14 +99,20 @@ try {
             $msg = $msg | ConvertFrom-Json
             if ($msg.cmd -eq "login") {
                 $client_id = $msg.client_id
+                $session_id = $msg.session_id
             }
 
         }
         if ($Host.UI.RawUI.KeyAvailable) {
             $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-            $test_payload = New-Object PSObject -Property $hash
-            $json = ConvertTo-Json $test_payload
-            $send_queue.Enqueue($json)
+            $team = @{
+                cmd = "submit_team"
+                session_id = $session_id
+                client_id = $client_id
+                name = "Josh"
+                team = 1,2,3,150,151,85
+            } | ConvertTo-Json
+            $send_queue.Enqueue($team)
         }
     } until ($ws.State -ne [Net.WebSockets.WebSocketState]::Open -or ($key.VirtualKeyCode -eq 81))
 }
