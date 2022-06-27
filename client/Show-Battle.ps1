@@ -268,7 +268,7 @@ $script:engine_config = Get-Content '../data/engine.json' | ConvertFrom-Json
 
 function Start-Battle {
     Start-Connection -ConnectionString "192.168.1.195" -Port "8080"
-
+    Send-Login -Username "Josh"
 
     $player_mon = $pokedex | Where-Object {$_.index -eq 5}
     $enemy_mon = $pokedex | Where-Object {$_.index -eq 5}
