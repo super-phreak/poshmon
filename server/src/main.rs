@@ -3,32 +3,17 @@ mod comm;
 
 use comm::create_server_config;
 use std::fs::File;
-use engine::structs::{BasePokemon, PokeType};
 use rand::Rng;
-use rand::prelude::{SliceRandom, IteratorRandom};
 //use tokio::{io as tokio_io, task};
-use tokio::net::{TcpListener, TcpStream};
+use tokio::net::{TcpListener};
 use std::error::Error;
 use std::{
     collections::HashMap,
-//    env,
-//    io::Error as IoError,
-    net::SocketAddr,
-    sync::{Arc, Mutex},
 };
-
-use uuid::Uuid;
-use serde::{Serialize, Deserialize};
-
-use futures_channel::mpsc::{unbounded, UnboundedSender};
-use futures_util::{future, pin_mut, stream::TryStreamExt, StreamExt};
-use tungstenite::protocol::Message;
 
 use comm::handle_connection;
 
 use crate::engine::init_engine;
-
-type Tx = UnboundedSender<Message>;
 
 fn _print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>())

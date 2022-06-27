@@ -86,14 +86,15 @@ pub enum MoveType {
 #[derive(PartialEq)]
 pub enum Status {
     Healthy,
-    Paralyzed,
-    Poisoned,
-    Burned,
-    Sleep,
-    Freeze,
-    Confused,
-    Seeded,
-    Bound,
+    //TO DO IMPLEMENT THESE
+    // Paralyzed,
+    // Poisoned,
+    // Burned,
+    // Sleep,
+    // Freeze,
+    // Confused,
+    // Seeded,
+    // Bound,
 }
  
 pub enum StatEnum {

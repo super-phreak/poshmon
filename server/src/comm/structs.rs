@@ -1,4 +1,3 @@
-use std::fmt;
 use std::{
     //    env,
     //    io::Error as IoError,
@@ -9,10 +8,7 @@ use std::{
 use futures_channel::mpsc::{UnboundedSender};
 use uuid::Uuid;
 use serde::{Serialize, Deserialize};
-use serde::de::{self, Deserializer, Visitor, SeqAccess, MapAccess};
 use tungstenite::protocol::Message;
-
-use crate::engine::structs::Pokemon;
 
 use super::PeerMap;
 
@@ -74,7 +70,7 @@ pub enum Commands {
         client_id: String, 
         name: String, 
         team: Vec<i64>},
-    Chat {client_id: String, recipient: String, chat_msg: String}
+    //Chat {client_id: String, recipient: String, chat_msg: String}
 }
 
 #[derive(Serialize, Debug)]

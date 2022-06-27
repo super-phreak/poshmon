@@ -1,6 +1,6 @@
 pub mod structs;
 
-use crate::engine::{structs::{BasePokemon, Pokemon}, data::Data, create_pokemon};
+use crate::engine::{structs::Pokemon, data::Data, create_pokemon};
 
 use self::structs::{
     Peer,
@@ -10,19 +10,16 @@ use self::structs::{
 };
 
 use std::{
-        env,
-        io::Error as IoError,
         net::SocketAddr,
         error::Error,
         sync::{Arc, Mutex},
-        collections::{HashMap, HashSet},
+        collections::HashMap,
     };
 
-use serde_json::Value;
-use tokio::net::{TcpListener, TcpStream};
+
+use tokio::net::{TcpStream};
     
 use uuid::Uuid;
-use serde::{Serialize, Deserialize};
 use tungstenite::protocol::Message;
 use futures_channel::mpsc::{unbounded, UnboundedSender};
 use futures_util::{future, pin_mut, stream::TryStreamExt, StreamExt};
@@ -87,7 +84,7 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
             msg_out = match cmd_in {
                 Commands::Login {} => Response::Login{client_id: "jfqsdcja".to_string(), session_id: session.to_string(), auth: true}.to_message(),
                 Commands::SubmitTeam {session_id, client_id, name, team } => Response::SubmitTeam {session_id, client_id, name, team: get_team_from_ids(team, data.clone()).ok().unwrap(), valid: true }.to_message(),
-                Commands::Chat { client_id, recipient, chat_msg } => Message::from(format!(""))
+                //Commands::Chat { client_id, recipient, chat_msg } => Response::
                 //_ => (Message::from(format!("Player Invalid CMD")), Message::from(format!("You sent invalid cmd"))),
             };
         } else if msg.is_empty() {
