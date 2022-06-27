@@ -7,17 +7,18 @@ param(
     $NoDisplay,
 
     [parameter(Mandatory=$false)][Switch]
-    $NoClear,
+    $NoClear
 
-    [parameter(Mandatory=$true)][int]
-    $PlayerMonIndex,
+    # [parameter(Mandatory=$true)][int]
+    # $PlayerMonIndex,
 
-    [parameter(Mandatory=$true)][int]
-    $EnemyMonIndex
+    # [parameter(Mandatory=$true)][int]
+    # $EnemyMonIndex
 )
 
 function Exit-Poshmon {
     remove-module PoshmonGraphicsModule
+    Remove-Module WebCommunicationsModule
 }
 
 function Update-HPBar{
@@ -255,6 +256,7 @@ function Show-Pokemon {
 
 #PoshMon Tests#
 Import-module .\PoshmonGraphicsModule.psm1
+Import-Module .\WebCommunicationsModule.psm1
 
 #$poke_e = [char][int]"0x00e9"
 
@@ -265,8 +267,11 @@ $script:engine_config = Get-Content '../data/engine.json' | ConvertFrom-Json
 # $sub = $moves | Where-Object {$_.name -eq "SUBMISSION"}
 
 function Start-Battle {
-    $player_mon = $pokedex | Where-Object {$_.index -eq $PlayerMonIndex}
-    $enemy_mon = $pokedex | Where-Object {$_.index -eq $EnemyMonIndex}
+    Start-Connection -ConnectionString "192.168.1.195" -Port "8080"
+
+
+    $player_mon = $pokedex | Where-Object {$_.index -eq 5}
+    $enemy_mon = $pokedex | Where-Object {$_.index -eq 5}
     $player_moves = $player_mon.learnable_moves | Get-Random -Count 2
     #$player_moves+=($sub.id)
 
@@ -357,5 +362,6 @@ if ($DebugRun) {
 }
 
 Clear-Host
+Stop-Connection
 
 Exit-Poshmon

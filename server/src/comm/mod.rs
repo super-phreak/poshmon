@@ -91,7 +91,7 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
             msg_out = Message::from(format!("{{\"action\": \"Ping\"}}"));
         } else {
 
-            msg_out = Message::from(format!("ERR"));
+            msg_out = Message::from(format!("{{\"action\": \"ERR\"}}"));
         };
 
         let peers = peer_map.lock().unwrap();
