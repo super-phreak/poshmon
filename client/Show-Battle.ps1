@@ -16,9 +16,12 @@ param(
     # $EnemyMonIndex
 )
 
+$global:battle_state = [hashtable]::Synchronized(@{})
+
 function Exit-Poshmon {
     remove-module PoshmonGraphicsModule
     Remove-Module WebCommunicationsModule
+    Unregister-Event "NewServerMessage"
 }
 
 function Update-HPBar{
@@ -256,20 +259,11 @@ function Show-Pokemon {
 
 #PoshMon Tests#
 Import-module .\PoshmonGraphicsModule.psm1
-Import-Module .\WebCommunicationsModule.psm1
-
-#$poke_e = [char][int]"0x00e9"
-
 
 $script:moves = Get-Content '../data/movedex.json' | ConvertFrom-Json
 $script:engine_config = Get-Content '../data/engine.json' | ConvertFrom-Json
 
-# $sub = $moves | Where-Object {$_.name -eq "SUBMISSION"}
-
 function Start-Battle {
-    Start-Connection -ConnectionString "192.168.1.195" -Port "8080"
-    Send-Login -Username "Josh"
-
     $player_mon = $pokedex | Where-Object {$_.index -eq 5}
     $enemy_mon = $pokedex | Where-Object {$_.index -eq 5}
     $player_moves = $player_mon.learnable_moves | Get-Random -Count 2
@@ -362,6 +356,5 @@ if ($DebugRun) {
 }
 
 Clear-Host
-Stop-Connection
 
 Exit-Poshmon

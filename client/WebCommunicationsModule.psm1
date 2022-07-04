@@ -1,12 +1,12 @@
 $script:recv_queue = New-Object 'System.Collections.Concurrent.ConcurrentQueue[String]'
 $script:send_queue = New-Object 'System.Collections.Concurrent.ConcurrentQueue[String]'
 
-# $script:serverData = [hashtable]::Synchronized(@{})
+$script:serverData = [hashtable]::Synchronized(@{})
 # $serverData.ws = $ws
 # $serverData.cts = $cts
 # $serverData.ct = $ct
 
-# $serverData.host = $Host
+$serverData.host = $Host
 
 function Start-Connection {
     param(
@@ -25,7 +25,7 @@ function Start-Connection {
     until ($connectTask.IsCompleted)
 
     $recv_job = {
-        param($ws, $client_id, $recv_queue)
+        param($ws, $client_id, $recv_queue, $serverData)
         $buffer = [Net.WebSockets.WebSocket]::CreateClientBuffer(1024,1024)
         $ct = [Threading.CancellationToken]::new($false)
         $taskResult = $null
@@ -45,6 +45,8 @@ function Start-Connection {
 
             if (-not [string]::IsNullOrEmpty($jsonResult)) {
                 $recv_queue.Enqueue($jsonResult)
+                $serverData.host.runspace.events.generateevent("NewServerMessage", "Server", $null, $jsonResult)
+                #$serverData.host.ui.writeline($jsonResult)
             }
         }
     }
@@ -70,7 +72,8 @@ function Start-Connection {
     $recv_runspace.AddScript($recv_job).
         AddParameter("ws", $ws).
         AddParameter("client_id", $client_id).
-        AddParameter("recv_queue", $recv_queue).BeginInvoke() | Out-Null
+        AddParameter("recv_queue", $recv_queue).
+        AddParameter("serverData", $serverData).BeginInvoke() | Out-Null
     
     $script:send_runspace = [PowerShell]::Create()
     $send_runspace.AddScript($send_job).
@@ -97,23 +100,24 @@ function Stop-Connection {
     $send_runspace.Dispose()
 }
 
-function Send-Login {
+function Send-MessageJson {
     param(
         # Parameter help description
         [Parameter(Mandatory=$true)]
-        [String]
-        $Username
+        $msg
     )
-    $cmd = @{
-        cmd = "login"
-    } | ConvertTo-Json
+    $send_queue.Enqueue($msg)
+}
 
-    Write-Host "Queue ${send_queue} ${cmd}"
-    $send_queue.Enqueue($cmd)
+function Get-ServerMessage {
+    $msg = $null
+    $recv_queue.TryDequeue([ref] $msg)
+    Write-Output "Processed message: $msg"
 }
 
 
 
 Export-ModuleMember -Function Start-Connection
 Export-ModuleMember -Function Stop-Connection
-Export-ModuleMember -Function Send-Login
+Export-ModuleMember -Function Send-MessageJson
+Export-ModuleMember -Function Get-ServerMessage
