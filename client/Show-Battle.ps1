@@ -7,22 +7,14 @@ param(
     $NoDisplay,
 
     [parameter(Mandatory=$false)][Switch]
-    $NoClear
+    $NoClear,
 
-    # [parameter(Mandatory=$true)][int]
-    # $PlayerMonIndex,
+    [parameter(Mandatory=$true)]
+    $PlayerMon,
 
-    # [parameter(Mandatory=$true)][int]
-    # $EnemyMonIndex
+    [parameter(Mandatory=$true)][int]
+    $EnemyMonIndex
 )
-
-$global:battle_state = [hashtable]::Synchronized(@{})
-
-function Exit-Poshmon {
-    remove-module PoshmonGraphicsModule
-    Remove-Module WebCommunicationsModule
-    Unregister-Event "NewServerMessage"
-}
 
 function Update-HPBar{
     param(
@@ -264,18 +256,18 @@ $script:moves = Get-Content '../data/movedex.json' | ConvertFrom-Json
 $script:engine_config = Get-Content '../data/engine.json' | ConvertFrom-Json
 
 function Start-Battle {
-    $player_mon = $pokedex | Where-Object {$_.index -eq 5}
-    $enemy_mon = $pokedex | Where-Object {$_.index -eq 5}
-    $player_moves = $player_mon.learnable_moves | Get-Random -Count 2
+    $player_mon = $pokedex | Where-Object {$_.Pokedex -eq $PlayerMon.Id}
+    $enemy_mon = $pokedex | Where-Object {$_.Pokedex -eq $EnemyMonIndex}
+    $player_moves = $player_mon.learnable_moves | Get-Random -Count 4
     #$player_moves+=($sub.id)
 
 
     Add-BattleTemplate
     Add-BattleMenu 0
 
-    $int_level = 100
+    $int_level = $PlayerMon.level
     $level = "$(($int_level))".PadRight(2,' ')
-    $max_health = 184
+    $max_health = $PlayerMon.Hp
     $selection = 0
 
     Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
@@ -314,7 +306,7 @@ function Start-Battle {
                                     Add-BattleMenu $selection
                                     Write-Screen -NoDisplay:$NoDisplay;
                                 } elseif ($result -gt 0) {
-                                    $box_text = "other player"
+                                    $box_text = "other trainer"
                                     Clear-TextBox 0 8 4 12
                                     Add-BattleTemplate
                                     Update-HPBar -CurrentHP $max_health -MaxHP $max_health -Player
@@ -354,7 +346,3 @@ function Start-Battle {
 if ($DebugRun) {
     Start-Battle
 }
-
-Clear-Host
-
-Exit-Poshmon

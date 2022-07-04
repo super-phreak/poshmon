@@ -53,6 +53,7 @@ pub struct ServerConfig {
 pub struct PokemonModel {
     pub id: u8,
     pub nickname: String,
+    pub level: i32,
     pub hp: i32,
     pub attack: i32,
     pub defense: i32,

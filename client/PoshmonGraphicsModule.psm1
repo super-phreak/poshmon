@@ -118,6 +118,29 @@ function Clear-TextBox {
     Add-VBuff -Sprite $empty_sprite -X $X -Y $Y -Tile
 }
 
+function Clear-Screen {
+    param(
+        [Parameter(Mandatory=$False)]
+        [int]
+        $X = 0,
+        [Parameter(Mandatory=$False)]
+        [int]
+        $Y = 0,
+        [Parameter(Mandatory=$False)]
+        [int]
+        $Height = 14,
+        [Parameter(Mandatory=$False)]
+        [int]
+        $Width = 19
+    )
+    $empty_sprite = @{
+        data = ,0 * ($Lines*$Length*64)
+        height = $Height
+        width = $Width
+    }
+    Add-VBuff -Sprite $empty_sprite -X $X -Y $Y -Tile
+}
+
 
 function Write-Text{
     param(
@@ -322,3 +345,4 @@ Export-ModuleMember -Function Write-ScreenDebug
 Export-ModuleMember -Function Resize-Sprite
 Export-ModuleMember -Function Add-TextBox
 Export-ModuleMember -Function Clear-TextBox
+Export-ModuleMember -Function Clear-Screen

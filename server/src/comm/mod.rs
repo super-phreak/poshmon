@@ -36,6 +36,7 @@ fn create_pokemon_model(pokemon: Pokemon) -> Result<PokemonModel, Box<dyn Error>
     Ok(PokemonModel{
         id: pokemon.base.pokedex,
         nickname: pokemon.nickname,
+        level: pokemon.level,
         hp: pokemon.hp,
         attack: pokemon.attack,
         defense: pokemon.defense,

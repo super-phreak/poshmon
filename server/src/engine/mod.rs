@@ -103,7 +103,7 @@ pub fn create_pokemon(id: u8, data: Data) -> Result<Pokemon, Box<dyn Error>> {
             base: base_pokemon.clone(),
             trainer_id: 1337,
             nickname: "TestMon".to_string(),
-            lvl: 100,
+            level: 100,
             xp: 0,
             hp: hp_calculator(base_pokemon.base_hp, get_iv(StatEnum::Hp, ivs), ivs as i32, level),
             attack: stat_calculator(base_pokemon.base_attack, get_iv(StatEnum::Attack, ivs), ivs as i32, level),

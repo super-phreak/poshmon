@@ -39,7 +39,7 @@ pub struct Pokemon {
 
     pub nickname: String,
 
-    pub lvl: i32,
+    pub level: i32,
     pub xp: u32,
     pub hp: i32,
     pub attack: i32,
