@@ -35,30 +35,6 @@ Import-module .\PoshmonGraphicsModule.psm1
 Import-module .\PoshdexModule
 
 $poke_e = [char]0x00e9
-$pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
-$font_file = Get-Content '../data/font.json' | ConvertFrom-Json
-$sprite_atlas = Get-Content '../data/sprite_atlas.json' | ConvertFrom-Json
-
-$alphabet = New-Object -TypeName System.Collections.Hashtable
-
-foreach($letter in $font_file) {
-    $alphabet.add($letter.char, (Convert-Sprite($letter.sprite)))
-}
-
-for($i=0;$i -lt $sprite_atlas.pokedex_tiles.sprite_sheet.Length;$i++) {
-    $sprite_atlas.pokedex_tiles.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.pokedex_tiles.sprite_sheet[$i])
-}
-
-for($i=0;$i -lt $sprite_atlas.hpbar_status.sprite_sheet.Length;$i++) {
-    $sprite_atlas.hpbar_status.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.hpbar_status.sprite_sheet[$i])
-}
-
-foreach($mon in $pokedex) {
-    $mon.front_sprite = Convert-Sprite $mon.front_sprite
-    $mon.back_sprite = Convert-Sprite $mon.back_sprite
-}
-
-Set-SpriteAtlas $sprite_atlas
 
 if($PSBoundParameters.ContainsKey('PokedexIndex')) {
     $target_mon = $pokedex | Where-Object {$_.pokedex -eq $PokedexIndex}

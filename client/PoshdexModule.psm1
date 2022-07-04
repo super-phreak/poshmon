@@ -1,34 +1,34 @@
 function Add-PokedexTemplate {
     Write-Text -Text "HT" -x 9 -y 6 -TILE
-    Add-VBuff -Sprite $internal_sprite_atlas.pokedex_tiles.sprite_sheet[0] -x 14 -y 6 -TILE
-    Add-VBuff -Sprite $internal_sprite_atlas.pokedex_tiles.sprite_sheet[1] -x 17 -y 6 -TILE
+    Add-VBuff -Sprite $sprite_atlas.pokedex_tiles.sprite_sheet[0] -x 14 -y 6 -TILE
+    Add-VBuff -Sprite $sprite_atlas.pokedex_tiles.sprite_sheet[1] -x 17 -y 6 -TILE
     
     Write-Text -Text "WT" -x 9 -y 8 -TILE
     Write-Text -Text "lb" -x 17 -y 8 -TILE
 
-    Add-VBuff -Sprite $internal_sprite_atlas.hpbar_status.sprite_sheet[18] -x 2 -y 8 -TILE
+    Add-VBuff -Sprite $sprite_atlas.hpbar_status.sprite_sheet[18] -x 2 -y 8 -TILE
     Write-Text -Text '<DOT>' -x 3 -y 8 -TILE -Control
     Write-Text -Text '<DOT>' -x 15 -y 8 -TILE -Control
     Add-PokedexBorder
 }
 
 function Add-PokedexBorder {
-    $topLeftCorner = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[3]
-    $topRightCorner =$internal_sprite_atlas.pokedex_tiles.sprite_sheet[5]
-    $botLeftCorner = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[12]
-    $botRightCorner = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[14]
+    $topLeftCorner = $sprite_atlas.pokedex_tiles.sprite_sheet[3]
+    $topRightCorner =$sprite_atlas.pokedex_tiles.sprite_sheet[5]
+    $botLeftCorner = $sprite_atlas.pokedex_tiles.sprite_sheet[12]
+    $botRightCorner = $sprite_atlas.pokedex_tiles.sprite_sheet[14]
 
-    $topBar = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[4]
-    $botBar = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[15]
+    $topBar = $sprite_atlas.pokedex_tiles.sprite_sheet[4]
+    $botBar = $sprite_atlas.pokedex_tiles.sprite_sheet[15]
 
-    $rightBar = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[7]
-    $leftBar = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[6]
+    $rightBar = $sprite_atlas.pokedex_tiles.sprite_sheet[7]
+    $leftBar = $sprite_atlas.pokedex_tiles.sprite_sheet[6]
 
-    $rightBarDash = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[10]
-    $leftBarDash = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[8]
+    $rightBarDash = $sprite_atlas.pokedex_tiles.sprite_sheet[10]
+    $leftBarDash = $sprite_atlas.pokedex_tiles.sprite_sheet[8]
 
-    $box = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[9]
-    $dash = $internal_sprite_atlas.pokedex_tiles.sprite_sheet[11]
+    $box = $sprite_atlas.pokedex_tiles.sprite_sheet[9]
+    $dash = $sprite_atlas.pokedex_tiles.sprite_sheet[11]
 
     #Add in the four corners first
     Add-VBuff -Sprite $topLeftCorner -x 0 -y 0
@@ -117,7 +117,7 @@ function Show-DexEntry {
     Write-Screen -NoDisplay:$NoDisplay
 
     $count = 0
-    $targettime = ((Get-Date).ToFileTime()+(Get-FileTime -Milli 1000))
+    $targettime = ((Get-Date).ToFileTime()+(Get-FileTime -Milli 500))
     $target_scrolltime = ((Get-Date).ToFileTime()+(Get-FileTime -Milli (1000 * $ScrollTime)))
     while ($count -lt ($dex_entry_page.Length-1)) {
         $deltatime = (Get-Date).ToFileTime()
@@ -131,7 +131,7 @@ function Show-DexEntry {
                     $arrow = !$arrow
                 }
             }
-            $targettime = ((Get-Date).ToFileTime()+(Get-FileTime -Milli 1000))
+            $targettime = ((Get-Date).ToFileTime()+(Get-FileTime -Milli 500))
             Write-Screen -NoDisplay:$NoDisplay
         }
         if ($Scroll) {
@@ -191,20 +191,7 @@ function Show-DexEntry {
     }
 }
 
-
-function Set-SpriteAtlas {
-    param(
-        [parameter(Mandatory=$True)]
-        $SpriteAtlas
-    )
-    $script:internal_sprite_atlas = $SpriteAtlas
-}
-
-$script:internal_sprite_atlas = @()
-
-
 Export-ModuleMember -Function Show-DexEntry
-Export-ModuleMember -Function Set-SpriteAtlas
 
 #Temp for testing to be removed later
 # Export-ModuleMember -Function Add-Template
