@@ -28,20 +28,22 @@ async fn main() -> Result<(), Box<dyn Error>>{
     let mut rng = rand::thread_rng();
     let engine_conf = File::open("../data/engine.json").expect("Unable to read file");
     let pokedex_file = File::open("../data/pokedex.json").expect("unable to open pokedex");
+    let movedex_file = File::open("../data/movedex.json").expect("unable to open movedex");
     let engine_json: serde_json::Value = serde_json::from_reader(engine_conf).expect("JSON was not well-formatted");
     let pokedex_json: serde_json::Value = serde_json::from_reader(pokedex_file).expect("JSON was not well-formatted");
+    let movedex_json: serde_json::Value = serde_json::from_reader(movedex_file).expect("JSON was not well-formatted");
 
     let mut data: HashMap<&str, serde_json::Value> = HashMap::new();
     data.insert("conf", engine_json);
     data.insert("pokemon", pokedex_json);
+    data.insert("moves", movedex_json);
 
     let engine = init_engine(data);
-    if let Ok(pokedex) = engine.pokedex.try_lock() {
     //println!("Types: {:#?}", &typedex_vec.into_iter().find(|x| x.index == 23));
-        assert_eq!(pokedex.len(), 151, "Pokedex length should be {} but {} was found", 151, pokedex.len());
+    assert_eq!(engine.pokedex.len(), 151, "Pokedex length should be {} but {} was found", 151, engine.pokedex.len());
 
-        println!("{:#?}", pokedex.get(&(rng.gen_range(1..pokedex.len()) as u8)).unwrap());
-    }
+    println!("{:#?}", engine.pokedex.get(&(rng.gen_range(1..=engine.pokedex.len()) as u8)).unwrap());
+    
     let server_configs = create_server_config(Some(8080))?;
     println!("{:#?}", server_configs);
 

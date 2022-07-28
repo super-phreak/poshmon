@@ -258,7 +258,7 @@ $script:engine_config = Get-Content '../data/engine.json' | ConvertFrom-Json
 function Start-Battle {
     $player_mon = $pokedex | Where-Object {$_.Pokedex -eq $PlayerMon.Id}
     $enemy_mon = $pokedex | Where-Object {$_.Pokedex -eq $EnemyMonIndex}
-    $player_moves = $player_mon.learnable_moves | Get-Random -Count 4
+    $player_moves = $PlayerMon.moves | Where-Object {$_ -ne $null}
     #$player_moves+=($sub.id)
 
 

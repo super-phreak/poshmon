@@ -1,6 +1,6 @@
 pub mod structs;
 
-use crate::engine::{structs::Pokemon, data::Data, create_pokemon};
+use crate::engine::{structs::{Pokemon, Move}, data::Data, create_pokemon};
 
 use self::structs::{
     Peer,
@@ -38,11 +38,13 @@ fn create_pokemon_model(pokemon: Pokemon) -> Result<PokemonModel, Box<dyn Error>
         nickname: pokemon.nickname,
         level: pokemon.level,
         hp: pokemon.hp,
+        current_hp: pokemon.hp,
         attack: pokemon.attack,
         defense: pokemon.defense,
         speed: pokemon.speed,
         special: pokemon.special,
         guid: pokemon.guid.to_string(),
+        moves: vec![pokemon.move1.map_or(None, |mv| Some(mv.id)),pokemon.move2.map_or(None, |mv| Some(mv.id)),pokemon.move3.map_or(None, |mv| Some(mv.id)),pokemon.move4.map_or(None, |mv| Some(mv.id))],
     })
 }
 
@@ -85,6 +87,7 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
             msg_out = match cmd_in {
                 Commands::Login {} => Response::Login{client_id: "jfqsdcja".to_string(), session_id: session.to_string(), auth: true}.to_message(),
                 Commands::SubmitTeam {session_id, client_id, name, team } => Response::SubmitTeam {session_id, client_id, name, team: get_team_from_ids(team, data.clone()).ok().unwrap(), valid: true }.to_message(),
+                Commands::SendMove { session_id, client_id: _, pokemon_guid: _, move_id: _ } => Response::Awk { session_id, cmd_response: "SendMove".to_string() }.to_message(),
                 //Commands::Chat { client_id, recipient, chat_msg } => Response::
                 //_ => (Message::from(format!("Player Invalid CMD")), Message::from(format!("You sent invalid cmd"))),
             };

@@ -46,7 +46,7 @@ function Start-Connection {
             if (-not [string]::IsNullOrEmpty($jsonResult)) {
                 $recv_queue.Enqueue($jsonResult)
                 $serverData.host.runspace.events.generateevent("NewServerMessage", "Server", $null, $jsonResult)
-                #$serverData.host.ui.writeline($jsonResult)
+                $serverData.host.ui.writeline($jsonResult)
             }
         }
     }
