@@ -1,9 +1,11 @@
-use std::{fmt, error::Error, cell::Cell, sync::Arc};
+use std::{fmt, error::Error, sync::{Arc, RwLock}, sync::Mutex};
 
 use rand::Rng;
+use serde::Serialize;
 use uuid::Uuid;
 
 use super::data::Movedex;
+pub type PokeTeam = Arc<Vec<Arc<RwLock<Pokemon>>>>;
 
 #[derive(Debug, Clone)]
 pub struct Move {
@@ -90,7 +92,7 @@ pub enum MoveType {
     Special
 }
 
-#[derive(Debug,Clone,Copy)]
+#[derive(Debug,Clone,Copy,Serialize)]
 pub enum MoveStatus {
     Error,
     Hit,
@@ -130,22 +132,22 @@ pub enum StatEnum {
 
 #[derive(Debug)]
 pub struct GameState {
-    pub player1_team: Vec<Pokemon>,
-    pub player2_team: Vec<Pokemon>,
+    pub player1_team: PokeTeam,
+    pub player2_team: PokeTeam,
 
-    pub active1: usize,
-    pub active2: usize,
+    pub active1: Arc<RwLock<Pokemon>>,
+    pub active2: Arc<RwLock<Pokemon>>,
 
-    pub last_fight: Cell<FightResult>,
+    pub last_fight: Mutex<Option<FightResult>>,
 
-    pub player1_ready: Cell<bool>,
-    pub player2_ready: Cell<bool>,
+    pub player1_ready: Mutex<bool>,
+    pub player2_ready: Mutex<bool>,
 }
 
 impl GameState {
     pub fn fight(&mut self, player1_move: &Move, player2_move: &Move) {
-        let mon1: &mut Pokemon = &mut self.player1_team[self.active1];
-        let mon2: &mut Pokemon = &mut self.player2_team[self.active2];
+        let mon1 = self.active1.write().unwrap();
+        let mut mon2 = self.active2.write().unwrap();
 
         let player1_movestatus;
         let player2_movestatus;
@@ -153,13 +155,13 @@ impl GameState {
         let mut rng = rand::thread_rng();
 
         if mon1.speed > mon2.speed {
-            let result1 = Self::attack(mon1, mon2, player1_move);
+            let result1 = Self::attack(&mon1, &mon2, player1_move);
             if result1.0 >= mon2.current_hp {
                 mon2.current_hp = 0;
                 mon2.status = Status::Fainted;
                 player2_movestatus = MoveStatus::Fainted;
             } else {
-                let result2 = Self::attack(mon2, mon1, player2_move);
+                let result2 = Self::attack(&mon2, &mon1, player2_move);
                 player2_movestatus = result2.1;
             }
             player1_movestatus = result1.1;
@@ -174,7 +176,7 @@ impl GameState {
             player1_movestatus = MoveStatus::Missed;
             player2_movestatus = MoveStatus::Missed;
         }
-        self.last_fight.replace(FightResult{ player1_movestatus, player2_movestatus });
+        *self.last_fight.get_mut().unwrap() = Some(FightResult{ player1_movestatus, player2_movestatus });
     }
 
     fn dmg_calculator(level: i32, power: i32, attack: i32, defense: i32, stab: i32, effective: i32, random: i32) -> i32 {
@@ -239,7 +241,7 @@ impl GameState {
         return (Self::dmg_calculator(level, pokemove.power, attacker.attack, defender.defense, stab, effective, random),status)
     }
 }
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize)]
 pub struct FightResult {
     pub player1_movestatus: MoveStatus,
     pub player2_movestatus: MoveStatus,

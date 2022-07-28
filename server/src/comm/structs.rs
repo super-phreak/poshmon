@@ -10,6 +10,8 @@ use uuid::Uuid;
 use serde::{Serialize, Deserialize};
 use tungstenite::protocol::Message;
 
+use crate::engine::structs::MoveStatus;
+
 use super::PeerMap;
 
 pub type Tx = UnboundedSender<Message>;
@@ -50,7 +52,7 @@ pub struct ServerConfig {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct PokemonModel {
+pub struct PlayerPokemonModel {
     pub id: u8,
     pub nickname: String,
     pub level: i32,
@@ -64,10 +66,23 @@ pub struct PokemonModel {
     pub moves: Vec<Option<u8>>,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ReducedPokemonModel {
+    pub id: u8,
+    pub nickname: String,
+    pub level: i32,
+    pub current_hp: i32,
+    pub guid: String,
+}
+
+
+
 #[derive(Debug, Serialize)]
 pub struct GameStateModel {
-    player1_team: Vec<PokemonModel>,
-    player2_team: Vec<PokemonModel>,
+    pub(crate) player_mon: PlayerPokemonModel,
+    pub(crate) enemy_mon: PlayerPokemonModel,
+
+    pub(crate) fight_message: MoveStatus,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -93,9 +108,9 @@ pub enum Commands {
 #[serde(tag = "cmd", rename_all = "snake_case")]
 pub enum Response {
     Login{client_id: String, session_id: String, auth: bool},
-    SubmitTeam {session_id: String, client_id: String, name: String, team: Vec<PokemonModel>, valid: bool},
+    SubmitTeam {session_id: String, client_id: String, name: String, team: Vec<PlayerPokemonModel>, valid: bool},
     Awk {session_id: String, cmd_response: String},
-    //BattleResult {client_id: String, session_id: String, game_state: GameStateModel}
+    BattleResult {client_id: String, session_id: String, game_state: GameStateModel}
 }
 
 pub trait Communication {

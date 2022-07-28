@@ -1,4 +1,4 @@
-use std::{collections::HashMap, sync::{Arc, Mutex}, error::Error};
+use std::{collections::HashMap, sync::{Arc, Mutex, RwLock}, error::Error};
 
 use super::structs::{BasePokemon, PokeType, MoveType, DataFieldNotFoundError, GameState, Move};
 
@@ -6,7 +6,7 @@ pub(super) type Pokedex = Arc<HashMap<u8,Arc<BasePokemon>>>;
 pub(super) type Movedex = Arc<HashMap<u8,Arc<Move>>>;
 pub(super) type Typedex = Arc<HashMap<u8,Arc<PokeType>>>;
 //Special Snowflake
-pub(super) type Games = Arc<Mutex<HashMap<String, GameState>>>;
+pub(super) type Games = Arc<Mutex<HashMap<String, Arc<RwLock<GameState>>>>>;
 
 #[derive(Clone)]
 pub struct Data{
