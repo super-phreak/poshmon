@@ -10,8 +10,6 @@ use uuid::Uuid;
 use serde::{Serialize, Deserialize};
 use tungstenite::protocol::Message;
 
-use crate::engine::structs::Move;
-
 use super::PeerMap;
 
 pub type Tx = UnboundedSender<Message>;

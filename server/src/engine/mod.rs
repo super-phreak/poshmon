@@ -1,9 +1,7 @@
 use std::cmp;
 use std::collections::HashMap;
 use std::error::Error;
-use std::rc::Rc;
 use std::sync::{Mutex, Arc};
-use rand::Rng;
 // use rand::Rng;
 use uuid::Uuid;
 use self::structs:: {
@@ -13,7 +11,7 @@ use self::structs:: {
     Pokemon, 
     StatEnum, 
     PokemonNotFoundError, 
-    DataLockError, GameState, FightResult, MoveStatus, BasePokemon,
+    BasePokemon,
 };
 
 use self::data::{Data, Pokedex, Typedex, build_type, build_pokemon, Games, Movedex, build_moves};
@@ -64,10 +62,10 @@ pub fn create_pokemon(id: u8, data: Data) -> Result<Pokemon, Box<dyn Error>> {
             defense_ev: ivs as i32,
             speed_ev: ivs as i32,
             special_ev: ivs as i32,
-            move1: Some(data.movedex.get(&5).ok_or_else(|| PokemonNotFoundError)?.clone()),
-            move2: None,
-            move3: None,
-            move4: None,
+            move1: base_pokemon.default_moves.get(0).map_or_else(|| None, |v| Some(v.clone())),
+            move2: base_pokemon.default_moves.get(1).map_or_else(|| None, |v| Some(v.clone())),
+            move3: base_pokemon.default_moves.get(2).map_or_else(|| None, |v| Some(v.clone())),
+            move4: base_pokemon.default_moves.get(3).map_or_else(|| None, |v| Some(v.clone())),
             status: Status::Healthy,
             current_hp: hp_calculator(base_pokemon.base_hp, get_iv(StatEnum::Hp, ivs), ivs as i32, level),
             guid: Uuid::new_v4(),
@@ -76,7 +74,7 @@ pub fn create_pokemon(id: u8, data: Data) -> Result<Pokemon, Box<dyn Error>> {
 }
 
 pub fn init_engine(data: HashMap<&str, serde_json::Value>) -> Data {
-    let mut pokedex: HashMap<u8, BasePokemon> = HashMap::new();
+    let mut pokedex: HashMap<u8, Arc<BasePokemon>> = HashMap::new();
     let mut movedex: HashMap<u8, Arc<Move>> = HashMap::new();
     let mut typedex: HashMap<u8, Arc<PokeType>> = HashMap::new();
     let games = Games::new(Mutex::new(HashMap::new()));
@@ -101,15 +99,17 @@ pub fn init_engine(data: HashMap<&str, serde_json::Value>) -> Data {
         }
     }
 
+    let movedex = Movedex::new(movedex);
+
     if let Some(pokemon) = data.get("pokemon") {
         for pokemon_json in pokemon.as_array().unwrap().to_owned() {
-            if let Some(new_mon) = build_pokemon(pokemon_json, typedex.clone()) {
-                pokedex.insert(new_mon.pokedex, new_mon);
+            match build_pokemon(pokemon_json, typedex.clone(), movedex.clone()) {
+                Ok(new_mon) => _ = pokedex.insert(new_mon.pokedex, Arc::new(new_mon)),
+                Err(e) => println!("{} was the error", e),
             }
         }
     }
 
-    let movedex = Movedex::new(movedex);
     let pokedex = Pokedex::new(pokedex);
 
     return Data { pokedex, movedex, typedex, games };

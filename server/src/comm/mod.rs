@@ -1,6 +1,6 @@
 pub mod structs;
 
-use crate::engine::{structs::{Pokemon, Move}, data::Data, create_pokemon};
+use crate::engine::{structs::{Pokemon}, data::Data, create_pokemon};
 
 use self::structs::{
     Peer,

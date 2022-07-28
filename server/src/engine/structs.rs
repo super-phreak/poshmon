@@ -3,6 +3,8 @@ use std::{fmt, error::Error, cell::Cell, sync::Arc};
 use rand::Rng;
 use uuid::Uuid;
 
+use super::data::Movedex;
+
 #[derive(Debug, Clone)]
 pub struct Move {
     pub id: u8,
@@ -29,11 +31,15 @@ pub struct BasePokemon {
 
     pub type1: Arc<PokeType>,
     pub type2: Option<Arc<PokeType>>,
+
+    pub learned_moves: Movedex,
+    pub default_moves: Arc<Vec<Arc<Move>>>,
+    pub taught_moves: Arc<Vec<Arc<Move>>>,
 }
 
 #[derive(Debug)]
 pub struct Pokemon {
-    pub base: BasePokemon,
+    pub base: Arc<BasePokemon>,
 
     pub trainer_id: u16,
     pub guid: Uuid,
@@ -56,9 +62,9 @@ pub struct Pokemon {
     pub special_ev: i32,
 
     pub move1: Option<Arc<Move>>,
-    pub move2: Option<Move>,
-    pub move3: Option<Move>,
-    pub move4: Option<Move>,
+    pub move2: Option<Arc<Move>>,
+    pub move3: Option<Arc<Move>>,
+    pub move4: Option<Arc<Move>>,
 
     pub status: Status,
     pub current_hp: i32,
