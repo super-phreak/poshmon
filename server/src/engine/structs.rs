@@ -73,6 +73,15 @@ pub struct Pokemon {
 
 }
 
+impl Pokemon {
+    fn set_hp(&mut self, hp: &i32) {
+        self.current_hp = *hp;
+    }
+    fn reduce_hp(&mut self, hp: &i32) {
+        self.current_hp -= *hp;
+    }
+}
+
 #[derive(Debug)]
 #[derive(PartialEq, Clone)]
 pub struct PokeType {
@@ -157,10 +166,11 @@ impl GameState {
         if mon1.speed > mon2.speed {
             let result1 = Self::attack(&mon1, &mon2, player1_move);
             if result1.0 >= mon2.current_hp {
-                mon2.current_hp = 0;
+                mon2.set_hp(&0);
                 mon2.status = Status::Fainted;
                 player2_movestatus = MoveStatus::Fainted;
             } else {
+                mon2.current_hp -= result1.0;
                 let result2 = Self::attack(&mon2, &mon1, player2_move);
                 player2_movestatus = result2.1;
             }
@@ -211,8 +221,8 @@ impl GameState {
     fn is_crit(attacker: &Pokemon) -> bool {
         let mut rng = rand::thread_rng();
         let rng = rng.gen_range(0..=255);
-        println!("{} <= {} ({} / 2)", rng, attacker.speed / 2, attacker.speed);
-        return rng <= attacker.speed / 2;
+        println!("{} <= {} ({} / 2)", rng, attacker.base.base_speed / 2, attacker.base.base_speed);
+        return rng <= attacker.base.base_speed / 2;
     }
     
     fn attack(attacker: &Pokemon, defender: &Pokemon, pokemove: &Move) -> (i32,MoveStatus) {
@@ -230,12 +240,12 @@ impl GameState {
         let status = match (effective, crit, hit_roll) {
             (0,_, _) => MoveStatus::NoEffect,
             (_,_,x) if x > pokemove.accuracy => MoveStatus::Missed,
-            (x,true, _) if x < 1 => MoveStatus::NotVeryEffectiveCriticalHit,
-            (x,false, _) if x < 1 => MoveStatus::NotVeryEffective,
-            (x,true, _) if x > 1 => MoveStatus::SuperEffectiveCriticalHit,
-            (x,false, _) if x > 1 => MoveStatus::SuperEffective,
-            (1,true, _) => MoveStatus::CriticalHit,
-            (1,false, _) => MoveStatus::Hit,
+            (x,true, _) if x < 100 => MoveStatus::NotVeryEffectiveCriticalHit,
+            (x,false, _) if x < 100 => MoveStatus::NotVeryEffective,
+            (x,true, _) if x > 100 => MoveStatus::SuperEffectiveCriticalHit,
+            (x,false, _) if x > 100 => MoveStatus::SuperEffective,
+            (100,true, _) => MoveStatus::CriticalHit,
+            (100,false, _) => MoveStatus::Hit,
             (_,_,_) => MoveStatus::Error,
         };
         return (Self::dmg_calculator(level, pokemove.power, attacker.attack, defender.defense, stab, effective, random),status)

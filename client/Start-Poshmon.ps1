@@ -110,6 +110,26 @@ function Send-Team {
     
 }
 
+function Send-Move {
+    param (
+        # Parameter help description
+        [Parameter(Mandatory=$true)]
+        [int]
+        $MoveId
+    )
+
+    $msg = @{
+        cmd = "send_move"
+        session_id = $game_state.session_id
+        client_id = $game_state.client_id
+        pokemon_guid = $game_state.team[0].guid
+        move_id = $MoveId
+    } | ConvertTo-Json
+
+    Send-MessageJson $msg
+    
+}
+
 function Start-Game {
     Write-Host "Logging in"
     Get-EventSubscriber
@@ -148,6 +168,7 @@ if ($ConnectionString) {
 
 Join-Server -PlayerName "Josh"
 Send-Team -Mon1 6 -Mon2 25
+Send-Move -MoveId 1
 ./Show-Battle.ps1 -DebugRun -PlayerMon $game_state.team[0] -EnemyMonIndex ($game_state.team[1].id) -NoDisplay:$NoDisplay
 
 while (!$quit) {

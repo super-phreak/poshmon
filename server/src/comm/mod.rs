@@ -39,7 +39,7 @@ fn create_pokemon_model(mon: &RwLock<Pokemon>) -> Result<PlayerPokemonModel, Box
             nickname: pokemon.nickname.clone(),
             level: pokemon.level,
             hp: pokemon.hp,
-            current_hp: pokemon.hp,
+            current_hp: pokemon.current_hp,
             attack: pokemon.attack,
             defense: pokemon.defense,
             speed: pokemon.speed,
