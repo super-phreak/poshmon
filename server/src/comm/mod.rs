@@ -86,7 +86,7 @@ fn get_gamestate(session_id: & String, move_id: i32, data: Data) -> Result<GameS
 }
 
 fn build_game(player1_team: PokeTeam, player2_team: PokeTeam) -> Result<GameState, Box<dyn Error>> {
-    return Ok(GameState { player1_team: player1_team.clone(), player2_team: player2_team.clone(), active1: player1_team.get(0).ok_or_else(|| DataFieldNotFoundError)?.clone(), active2: player2_team.get(1).ok_or_else(|| DataFieldNotFoundError)?.clone(), last_fight: Mutex::new(None), player1_ready: Mutex::new(true), player2_ready: Mutex::new(true) });
+    return Ok(GameState { player1_team: player1_team.clone(), player2_team: player2_team.clone(), active1: player1_team.get(0).ok_or_else(|| DataFieldNotFoundError)?.clone(), active2: player2_team.get(1).ok_or_else(|| DataFieldNotFoundError)?.clone(), last_fight: Mutex::new(None), player1_ready: RwLock::new(true), player2_ready: RwLock::new(true) });
 }
 
 pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: SocketAddr, data: Data) {
@@ -117,6 +117,7 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
         if let Ok(cmd_in) = cmd  {
             msg_out = match cmd_in {
                 Commands::Login {} => Response::Login{client_id: "jfqsdcja".to_string(), session_id: session.to_string(), auth: true}.to_message(),
+                Commands::CreateGame {  } => Response::Awk { session_id: "dfad".to_string(), cmd_response: "dafd".to_string() }.to_message(),
                 Commands::SubmitTeam {session_id, client_id, name, team } => {
                     let team2: Vec<i64> = vec![25,25];
                     if let Ok(game) = build_game(get_team_from_ids(team, data.clone()).ok().unwrap(), get_team_from_ids(team2, data.clone()).ok().unwrap()) {

@@ -149,8 +149,8 @@ pub struct GameState {
 
     pub last_fight: Mutex<Option<FightResult>>,
 
-    pub player1_ready: Mutex<bool>,
-    pub player2_ready: Mutex<bool>,
+    pub player1_ready: RwLock<bool>,
+    pub player2_ready: RwLock<bool>,
 }
 
 impl GameState {

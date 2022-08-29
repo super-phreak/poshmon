@@ -89,6 +89,9 @@ pub struct GameStateModel {
 #[serde(tag = "cmd", rename_all = "snake_case")]
 pub enum Commands {
     Login {},
+    CreateGame {
+        
+    },
     SubmitTeam {
         session_id: String, 
         client_id: String, 
