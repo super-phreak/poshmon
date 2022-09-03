@@ -239,7 +239,6 @@ function Resize-Sprite {
     }
 }
 
-
 $script:TILE_SIZE_RAW = 64
 $script:TILE_SIDE_RAW = 8
 $script:TILE_HIEGHT_POSH = 4
@@ -305,33 +304,45 @@ if ($Host.UI.RawUI.WindowSize.Width -gt $gb_size.Width -or $Host.UI.RawUI.Window
 $Host.UI.RawUI.BufferSize = $gb_size
 $Host.UI.RawUI.WindowSize = $gb_size
 
+Write-Progress -Activity "Unpacking sprites..." -ID 0
+
 $sprite_atlas = Get-Content '../data/sprite_atlas.json' | ConvertFrom-Json
-
-for($i=0;$i -lt $sprite_atlas.pokedex_tiles.sprite_sheet.Length;$i++) {
-    $sprite_atlas.pokedex_tiles.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.pokedex_tiles.sprite_sheet[$i])
-}
-
-for($i=0;$i -lt $sprite_atlas.hpbar_status.sprite_sheet.Length;$i++) {
-    $sprite_atlas.hpbar_status.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.hpbar_status.sprite_sheet[$i])
-}
-
-for($i=0;$i -lt $sprite_atlas.battle_hud.sprite_sheet.Length;$i++) {
-    $sprite_atlas.battle_hud.sprite_sheet[$i] = Convert-Sprite($sprite_atlas.battle_hud.sprite_sheet[$i])
-}
-
 $script:alphabet = New-Object -TypeName System.Collections.Hashtable
 $font_file = Get-Content '../data/font.json' | ConvertFrom-Json
-foreach($letter in $font_file) {
-    $alphabet.add($letter.char, (Convert-Sprite($letter.sprite)))
+$script:pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
+
+
+for($pokedex_tiles=0;$pokedex_tiles -lt $sprite_atlas.pokedex_tiles.sprite_sheet.Length;$pokedex_tiles++) {
+    $sprite_atlas.pokedex_tiles.sprite_sheet[$pokedex_tiles] = Convert-Sprite($sprite_atlas.pokedex_tiles.sprite_sheet[$pokedex_tiles])
+    Write-Progress -Activity "Unpacking Pokedex Tiles..." -ID 1 -ParentId 0 -PercentComplete (100*$pokedex_tiles/$sprite_atlas.pokedex_tiles.sprite_sheet.Length)
+    Write-Progress -Activity "Unpacking sprites..." -ID 0 -PercentComplete (100*($pokedex_tiles+$hpbar_status+$battle_hud+$letter+$mon)/($sprite_atlas.pokedex_tiles.sprite_sheet.Length+$sprite_atlas.hpbar_status.sprite_sheet.Length+$sprite_atlas.battle_hud.sprite_sheet.Length+$font_file.Length+$pokedex.Length))
 }
 
-$script:pokedex = Get-Content '../data/pokedex.json' | ConvertFrom-Json
-foreach($mon in $pokedex) {
-    $mon.front_sprite = Convert-Sprite $mon.front_sprite
-    $mon.back_sprite = Convert-Sprite $mon.back_sprite
-    $mon.back_sprite = Resize-Sprite $mon.back_sprite -Scale 2
-    $mon.back_sprite.height--
-    $mon.back_sprite.data = $mon.back_sprite.data[0..($mon.back_sprite.height*$mon.back_sprite.width*64)]
+for($hpbar_status=0;$hpbar_status -lt $sprite_atlas.hpbar_status.sprite_sheet.Length;$hpbar_status++) {
+    $sprite_atlas.hpbar_status.sprite_sheet[$hpbar_status] = Convert-Sprite($sprite_atlas.hpbar_status.sprite_sheet[$hpbar_status])
+    Write-Progress -Activity "Unpacking HP Bar Tiles..." -ID 1 -ParentId 0 -PercentComplete (100*$hpbar_status/$sprite_atlas.hpbar_status.sprite_sheet.Length)
+    Write-Progress -Activity "Unpacking sprites..." -ID 0 -PercentComplete (100*($pokedex_tiles+$hpbar_status+$battle_hud+$letter+$mon)/($sprite_atlas.pokedex_tiles.sprite_sheet.Length+$sprite_atlas.hpbar_status.sprite_sheet.Length+$sprite_atlas.battle_hud.sprite_sheet.Length+$font_file.Length+$pokedex.Length))
+}
+
+for($battle_hud=0;$battle_hud -lt $sprite_atlas.battle_hud.sprite_sheet.Length;$battle_hud++) {
+    $sprite_atlas.battle_hud.sprite_sheet[$battle_hud] = Convert-Sprite($sprite_atlas.battle_hud.sprite_sheet[$battle_hud])
+    Write-Progress -Activity "Unpacking Battle hud Tiles..." -ID 1 -ParentId 0 -PercentComplete (100*$battle_hud/$sprite_atlas.battle_hud.sprite_sheet.Length)
+    Write-Progress -Activity "Unpacking sprites..." -ID 0 -PercentComplete (100*($pokedex_tiles+$hpbar_status+$battle_hud+$letter+$mon)/($sprite_atlas.pokedex_tiles.sprite_sheet.Length+$sprite_atlas.hpbar_status.sprite_sheet.Length+$sprite_atlas.battle_hud.sprite_sheet.Length+$font_file.Length+$pokedex.Length))
+}
+
+for($letter=0;$letter -lt $font_file.Length;$letter++) {
+    $alphabet.add(($font_file[$letter]).char, (Convert-Sprite($font_file[$letter].sprite)))
+    Write-Progress -Activity "Unpacking Font..." -ID 1 -ParentId 0 -PercentComplete (100*$letter/$font_file.Length)
+    Write-Progress -Activity "Unpacking sprites..." -ID 0 -PercentComplete (100*($pokedex_tiles+$hpbar_status+$battle_hud+$letter+$mon)/($sprite_atlas.pokedex_tiles.sprite_sheet.Length+$sprite_atlas.hpbar_status.sprite_sheet.Length+$sprite_atlas.battle_hud.sprite_sheet.Length+$font_file.Length+$pokedex.Length))
+}
+
+for($mon=0;$mon -lt $pokedex.Length;$mon++) {
+    $pokedex[$mon].front_sprite = Convert-Sprite $pokedex[$mon].front_sprite
+    $pokedex[$mon].back_sprite = Convert-Sprite $pokedex[$mon].back_sprite
+    $pokedex[$mon].back_sprite = Resize-Sprite $pokedex[$mon].back_sprite -Scale 2
+    $pokedex[$mon].back_sprite.height--
+    Write-Progress -Activity "Unpacking Pokemon..." -ID 1 -ParentId 0 -PercentComplete (100*$mon/$pokedex.Length)
+    Write-Progress -Activity "Unpacking sprites..." -ID 0 -PercentComplete (100*($pokedex_tiles+$hpbar_status+$battle_hud+$letter+$mon)/($sprite_atlas.pokedex_tiles.sprite_sheet.Length+$sprite_atlas.hpbar_status.sprite_sheet.Length+$sprite_atlas.battle_hud.sprite_sheet.Length+$font_file.Length+$pokedex.Length))
 }
 
 Export-ModuleMember -Variable sprite_atlas, alphabet, pokedex
