@@ -128,10 +128,10 @@ function Clear-Screen {
         $Y = 0,
         [Parameter(Mandatory=$False)]
         [int]
-        $Height = 14,
+        $Height = 18,
         [Parameter(Mandatory=$False)]
         [int]
-        $Width = 19
+        $Width = 20
     )
     $empty_sprite = @{
         data = ,0 * ($Lines*$Length*64)
