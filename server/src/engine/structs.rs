@@ -77,9 +77,13 @@ impl Pokemon {
     fn set_hp(&mut self, hp: &i32) {
         self.current_hp = *hp;
     }
-    fn reduce_hp(&mut self, hp: &i32) {
-        self.current_hp -= *hp;
-    }
+}
+
+#[derive(Debug)]
+pub struct Trainer {
+    pub name: String,
+    pub id: u16,
+    pub team: PokeTeam,
 }
 
 #[derive(Debug)]
@@ -141,8 +145,9 @@ pub enum StatEnum {
 
 #[derive(Debug)]
 pub struct GameState {
-    pub player1_team: PokeTeam,
-    pub player2_team: PokeTeam,
+    pub game_code: String, 
+    pub player1: Trainer,
+    pub player2: Option<RwLock<Trainer>>,
 
     pub active1: Arc<RwLock<Pokemon>>,
     pub active2: Arc<RwLock<Pokemon>>,

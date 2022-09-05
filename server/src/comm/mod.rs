@@ -86,7 +86,8 @@ fn get_gamestate(session_id: & String, move_id: i32, data: Data) -> Result<GameS
 }
 
 fn build_game(player1_team: PokeTeam, player2_team: PokeTeam) -> Result<GameState, Box<dyn Error>> {
-    return Ok(GameState { player1_team: player1_team.clone(), player2_team: player2_team.clone(), active1: player1_team.get(0).ok_or_else(|| DataFieldNotFoundError)?.clone(), active2: player2_team.get(1).ok_or_else(|| DataFieldNotFoundError)?.clone(), last_fight: Mutex::new(None), player1_ready: RwLock::new(true), player2_ready: RwLock::new(true) });
+    todo!();
+    //return Ok(GameState {game_code: "Testy Testy".to_string(), player1_team: player1_team.clone(), player2_team: player2_team.clone(), active1: player1_team.get(0).ok_or_else(|| DataFieldNotFoundError)?.clone(), active2: player2_team.get(1).ok_or_else(|| DataFieldNotFoundError)?.clone(), last_fight: Mutex::new(None), player1_ready: RwLock::new(true), player2_ready: RwLock::new(true) });
 }
 
 pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: SocketAddr, data: Data) {
@@ -123,7 +124,7 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
                     if let Ok(game) = build_game(get_team_from_ids(team, data.clone()).ok().unwrap(), get_team_from_ids(team2, data.clone()).ok().unwrap()) {
                         let game = Arc::new(RwLock::new(game));
                         data.games.lock().unwrap().insert(session_id.clone(), game.clone());
-                        Response::SubmitTeam { session_id: session_id, client_id: client_id, name: "Josh".to_string(), team: build_pokemodel(game.clone().read().unwrap().player1_team.clone(), true), valid: true }.to_message()
+                        Response::SubmitTeam { session_id: session_id, client_id: client_id, name: "Josh".to_string(), team: build_pokemodel(game.clone().read().unwrap().player1.team.clone(), true), valid: true }.to_message()
                     } else {
                         Response::Awk { session_id: session_id, cmd_response: "Failure to submit team".to_string() }.to_message()
                     }

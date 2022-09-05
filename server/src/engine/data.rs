@@ -5,6 +5,7 @@ use super::structs::{BasePokemon, PokeType, MoveType, DataFieldNotFoundError, Ga
 pub(super) type Pokedex = Arc<HashMap<u8,Arc<BasePokemon>>>;
 pub(super) type Movedex = Arc<HashMap<u8,Arc<Move>>>;
 pub(super) type Typedex = Arc<HashMap<u8,Arc<PokeType>>>;
+pub(super) type WordList = Arc<RwLock<Vec<String>>>;
 //Special Snowflake
 pub(super) type Games = Arc<Mutex<HashMap<String, Arc<RwLock<GameState>>>>>;
 
@@ -14,6 +15,7 @@ pub struct Data{
     pub movedex: Movedex,
     pub typedex: Typedex,
     pub games: Games,
+    pub wordlist: WordList,
 }
 
 pub(super) fn build_pokemon(pokemon_json: serde_json::Value, typedex: Typedex, movedex: Movedex) -> Result<BasePokemon, Box<dyn Error>> {

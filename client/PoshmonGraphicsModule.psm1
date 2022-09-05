@@ -344,6 +344,10 @@ for($mon=0;$mon -lt $pokedex.Length;$mon++) {
     Write-Progress -Activity "Unpacking Pokemon..." -ID 1 -ParentId 0 -PercentComplete (100*$mon/$pokedex.Length)
     Write-Progress -Activity "Unpacking sprites..." -ID 0 -PercentComplete (100*($pokedex_tiles+$hpbar_status+$battle_hud+$letter+$mon)/($sprite_atlas.pokedex_tiles.sprite_sheet.Length+$sprite_atlas.hpbar_status.sprite_sheet.Length+$sprite_atlas.battle_hud.sprite_sheet.Length+$font_file.Length+$pokedex.Length))
 }
+Write-Progress -Activity "Unpacking Pokemon..." -ID 1 -Completed
+Write-Progress -Activity "Unpacking sprites..." -ID 0 -Completed
+
+[Console]::CursorVisible = $false
 
 Export-ModuleMember -Variable sprite_atlas, alphabet, pokedex
 

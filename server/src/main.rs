@@ -29,6 +29,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     let engine_conf = File::open("../data/engine.json").expect("Unable to read file");
     let pokedex_file = File::open("../data/pokedex.json").expect("unable to open pokedex");
     let movedex_file = File::open("../data/movedex.json").expect("unable to open movedex");
+    let words_file = File::open("../data/gamenames.txt").expect("unable to open wordlist");
     let engine_json: serde_json::Value = serde_json::from_reader(engine_conf).expect("JSON was not well-formatted");
     let pokedex_json: serde_json::Value = serde_json::from_reader(pokedex_file).expect("JSON was not well-formatted");
     let movedex_json: serde_json::Value = serde_json::from_reader(movedex_file).expect("JSON was not well-formatted");
@@ -38,7 +39,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     data.insert("pokemon", pokedex_json);
     data.insert("moves", movedex_json);
 
-    let engine = init_engine(data);
+    let engine = init_engine(data, words_file);
     //println!("Types: {:#?}", &typedex_vec.into_iter().find(|x| x.index == 23));
     assert_eq!(engine.pokedex.len(), 151, "Pokedex length should be {} but {} was found", 151, engine.pokedex.len());
 

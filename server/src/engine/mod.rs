@@ -1,7 +1,9 @@
 use std::cmp;
 use std::collections::HashMap;
 use std::error::Error;
-use std::sync::{Mutex, Arc};
+use std::fs::File;
+use std::io::{BufReader, BufRead};
+use std::sync::{Mutex, Arc, RwLock};
 // use rand::Rng;
 use uuid::Uuid;
 use self::structs:: {
@@ -14,7 +16,7 @@ use self::structs:: {
     BasePokemon,
 };
 
-use self::data::{Data, Pokedex, Typedex, build_type, build_pokemon, Games, Movedex, build_moves};
+use self::data::{Data, Pokedex, Typedex, build_type, build_pokemon, Games, Movedex, build_moves, WordList};
 
 pub mod structs;
 pub mod data;
@@ -73,11 +75,12 @@ pub fn create_pokemon(id: u8, data: Data) -> Result<Pokemon, Box<dyn Error>> {
     })
 }
 
-pub fn init_engine(data: HashMap<&str, serde_json::Value>) -> Data {
+pub fn init_engine(data: HashMap<&str, serde_json::Value>, words_file: File) -> Data {
     let mut pokedex: HashMap<u8, Arc<BasePokemon>> = HashMap::new();
     let mut movedex: HashMap<u8, Arc<Move>> = HashMap::new();
     let mut typedex: HashMap<u8, Arc<PokeType>> = HashMap::new();
     let games = Games::new(Mutex::new(HashMap::new()));
+    let mut wordlist: Vec<String> = Vec::new();
 
     if let Some(config) = data.get("conf") {
         for poketypes in config["types"].as_array().unwrap().to_owned() {
@@ -87,6 +90,16 @@ pub fn init_engine(data: HashMap<&str, serde_json::Value>) -> Data {
             };
         }
     }
+
+    let reader = BufReader::new(words_file);
+    for word in reader.lines() {
+        match word {
+            Ok(word) => _ = wordlist.push(word),
+            Err(e) => println!("{} was the error", e),
+        }
+    }
+
+    let wordlist = WordList::new(RwLock::new(wordlist));
 
     let typedex = Typedex::new(typedex);
 
@@ -112,7 +125,8 @@ pub fn init_engine(data: HashMap<&str, serde_json::Value>) -> Data {
 
     let pokedex = Pokedex::new(pokedex);
 
-    return Data { pokedex, movedex, typedex, games };
+
+    return Data { pokedex, movedex, typedex, games, wordlist };
 }
 
 
