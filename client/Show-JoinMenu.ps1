@@ -13,7 +13,7 @@ param(
     $SpoofGames
 )
 
-function Add-MenuBorder {
+function Show-JoinMenu {
     Param(
         [Parameter(Mandatory=$true)]
         [AllowEmptyCollection()]
@@ -50,7 +50,6 @@ function Add-MenuBorder {
         Add-VBuff -Sprite $sprite_atlas.pokedex_tiles.sprite_sheet[15] -X $i -Y 12 -Tile
     }
     Add-VBuff $sprite_atlas.pokedex_tiles.sprite_sheet[17] -X 0 -Y ((11*8)+2)
-    #Add-VBuff $sprite_atlas.hpbar_status.sprite_sheet[26] -X 0 -Y ((13*8)+4)
 
     for ($i=0;$i -lt 5;$i++) {
         Write-Text "$($GameList[$i+$TopList].Name.Substring(0,5)) $($GameList[$i+$TopList].Name.Substring(5,5)) $($GameList[$i].currentUsers)/$($GameList[$i].TotalUsers)" -X 3 -Y (2+$i*2)
@@ -167,6 +166,6 @@ if ($DebugRun) {
         })
     }
 
-    Add-MenuBorder -GameList $gameList -GameTotal 50
+    Show-JoinMenu -GameList $gameList -GameTotal 50 | Out-Null
     Clear-Screen
 }
