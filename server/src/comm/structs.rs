@@ -5,7 +5,7 @@ use std::{
         hash::Hash,
     };
     
-use futures_channel::mpsc::{UnboundedSender};
+use futures_channel::mpsc::UnboundedSender;
 use uuid::Uuid;
 use serde::{Serialize, Deserialize};
 use tungstenite::protocol::Message;
@@ -88,7 +88,10 @@ pub struct GameStateModel {
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(tag = "cmd", rename_all = "snake_case")]
 pub enum Commands {
-    Login {},
+    Login {
+        username: String,
+        password: String,
+    },
     CreateGame {
         
     },
@@ -110,24 +113,29 @@ pub enum Commands {
 #[derive(Serialize, Debug)]
 #[serde(tag = "cmd", rename_all = "snake_case")]
 pub enum Response {
-    Login{client_id: String, session_id: String, auth: bool},
+    Login{client_id: String, auth: bool},
     SubmitTeam {session_id: String, client_id: String, name: String, team: Vec<PlayerPokemonModel>, valid: bool},
     Awk {session_id: String, cmd_response: String},
-    BattleResult {client_id: String, session_id: String, game_state: GameStateModel}
+    BattleResult {gamestate: GameStateModel, client_id: String, session_id: String}
 }
 
 pub trait Communication {
-    fn to_json(&self) -> String where
-        Self: Serialize {
+    fn to_json_str(&self) -> String 
+    where
+        Self: Serialize,
+    {
         match serde_json::to_string(&self) {
             Ok(resp) => return resp,
             Err(_) => return String::from("{\"err\": 500}")
         }
     }
-    fn to_message(&self) -> Message where 
-        Self: Serialize {
-            return Message::from(self.to_json());
+    fn to_message(&self) -> Message 
+    where
+    Self: Serialize,
+    {
+            return Message::from(self.to_json_str());
     }
 }
 
 impl Communication for Response {}
+impl Communication for Commands {}

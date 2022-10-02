@@ -39,7 +39,7 @@ function Show-JoinMenu {
         })
     }
 
-    Add-VBuff $sprite_atlas.pokedex_tiles.sprite_sheet[17] 0 0
+    Add-VBuff $sprite_atlas.pokedex_tiles.sprite_sheet[17] -X 0 -Y 0 -Tile
     for ($i=1;$i -lt 12;$i++) {
         Add-VBuff -Sprite $sprite_atlas.pokedex_tiles.sprite_sheet[16 + ($i%2)] -X 0 -Y $i -Tile
     }

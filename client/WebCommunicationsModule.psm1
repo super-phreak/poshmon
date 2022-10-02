@@ -46,6 +46,9 @@ function Start-Connection {
             if (-not [string]::IsNullOrEmpty($jsonResult)) {
                 $recv_queue.Enqueue($jsonResult)
                 $serverData.host.runspace.events.generateevent("NewServerMessage", "Server", $null, $jsonResult)
+                ######### View Messages Debugger #############
+                $debugMsg = $jsonResult | ConvertFrom-Json | Get-Member
+                $serverData.host.ui.writeline($debugMsg)
                 $serverData.host.ui.writeline($jsonResult)
             }
         }
@@ -112,7 +115,7 @@ function Send-MessageJson {
 function Get-ServerMessage {
     $msg = $null
     $recv_queue.TryDequeue([ref] $msg)
-    Write-Output "Processed message: $msg"
+    #Write-Output "Processed message: $msg"
 }
 
 

@@ -21,7 +21,7 @@ $script:game_state = [hashtable]::Synchronized(@{})
 function Exit-Poshmon {
     Stop-Connection
     Get-EventSubscriber | Unregister-Event
-    remove-module PoshmonGraphicsModule
+    #remove-module PoshmonGraphicsModule
     Remove-Module WebCommunicationsModule
 }
 
@@ -33,8 +33,8 @@ function global:Read-Message {
     
     switch ($data.cmd) {
         'login' { Update-Player $data }
-        'submit_team' {Update-Team $data}
-        Default { Write-Host "UNKNOWN CMD"}
+        'submit_team' { Update-Team $data }
+        Default { Write-Host "UNKNOWN CMD" }
     }
 }
 
@@ -64,8 +64,10 @@ function Join-Server {
     Start-Connection -ConnectionString $game_state.ConnectionString -Port $game_state.Port
     $msg = @{
         cmd = "login"
+        username = "ductape"
+        password = "password"
     } | ConvertTo-Json
-    Send-MessageJson $msg
+    Send-MessageJson $msg | Out-Null
     $login_text = "Logging in"
     Write-Text -Text $login_text -X 3 -Y 7 -Tile
     Write-Screen -NoDisplay:$NoDisplay
@@ -161,15 +163,15 @@ if ($ConnectionString) {
     #         }
     #     }
     # }
-    $ConnectionString = "192.168.001.195:8080"
+    $ConnectionString = "172.29.244.9:8080"
     $game_state.ConnectionString = $ConnectionString.Split(':')[0]
     $game_state.Port = $ConnectionString.Split(':')[1]
 }
 
 Join-Server -PlayerName "Josh"
-Send-Team -Mon1 6 -Mon2 25
-Send-Move -MoveId 1
-./Show-Battle.ps1 -DebugRun -PlayerMon $game_state.team[0] -EnemyMonIndex ($game_state.team[1].id) -NoDisplay:$NoDisplay
+# Send-Team -Mon1 6 -Mon2 25
+# Send-Move -MoveId 1
+# ./Show-Battle.ps1 -DebugRun -PlayerMon $game_state.team[0] -EnemyMonIndex ($game_state.team[1].id) -NoDisplay:$NoDisplay
 
 while (!$quit) {
     if ($Host.UI.RawUI.KeyAvailable) {
@@ -182,6 +184,8 @@ while (!$quit) {
     }
 }
 
-Clear-Host
+if (!$NoClear) {
+    Clear-Host
+}
 
 Exit-Poshmon
