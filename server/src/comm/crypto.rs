@@ -5,7 +5,7 @@ use hmac::{Hmac, Mac};
 
 use super::{auth::SessionToken, structs::{Communication, Response}};
 
-const CURRENT_ALGO: &str = "HS256";
+const CURRENT_ALGO: &'static str = "HS256";
 const PACKET_TYPE: &str = "PMT";
 const VERSION: &str = "0.0.1";
 
@@ -30,6 +30,7 @@ impl OutPacket {
 // }
 
 impl Communication for OutPacket {}
+impl Communication for Header {}
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Header {
@@ -46,9 +47,9 @@ impl serde::ser::Serialize for OutPacket {
         S: Serializer,
     {
         //Construct the header string.
-        let header_string = format!("{{\"alg\": \"{}\",\n \"typ\": \"{}\",\n\"ver\": \"{}\",\n \"session_id\": \"{}\"}}",CURRENT_ALGO,PACKET_TYPE,VERSION,&self.session_token.session_id.to_string());
-        let header_b64 = encode(&header_string);
-        let header: Header = serde_json::from_str(&header_string).unwrap();
+        //let header_string = format!("{{\"alg\": \"{}\",\n \"typ\": \"{}\",\n\"ver\": \"{}\",\n \"session_id\": \"{}\"}}",CURRENT_ALGO,PACKET_TYPE,VERSION,&self.session_token.session_id.to_string());
+        let header: Header = Header {alg: CURRENT_ALGO.to_string(), typ: PACKET_TYPE.to_string(), ver: VERSION.to_string(), session_id: self.session_token.session_id.to_string().clone() };
+        let header_b64 = encode(&header.to_json_str());
 
         //For serialize the Packet should always be a response as it is an outgoing message.
         let body_b64 = encode(&self.data.to_json_str());
@@ -56,6 +57,7 @@ impl serde::ser::Serialize for OutPacket {
 
         //Sign the message as two b64 strings concatenated by a period.
         let mut mac = HmacSha256::new(&self.session_token.session_key);
+        println!("{}", &msg);
         mac.update(msg.as_bytes());
         let signature = mac.finalize();
 

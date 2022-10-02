@@ -123,7 +123,9 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
         if let Ok(cmd_in) = cmd  {
             msg_out = match cmd_in {
                 Commands::Login {username, password} => {
-                    OutPacket::new(login(username, password).ok().unwrap(), Response::Login{client_id: "jfqsdcja".to_string(), auth: true})
+                    let session_token = login(username, password).ok().unwrap();
+                    let key = session_token.session_key;
+                    OutPacket::new(session_token, Response::Login{client_id: "jfqsdcja".to_string(), auth: true, pkey: base64::encode(key) })
                 },
                 Commands::CreateGame {  } => OutPacket::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Response::Awk { session_id: "dfad".to_string(), cmd_response: "dafd".to_string() }),
                 Commands::SubmitTeam {session_id, client_id, name, team } => {

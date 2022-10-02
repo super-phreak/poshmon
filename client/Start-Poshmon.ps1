@@ -25,25 +25,91 @@ function Exit-Poshmon {
     Remove-Module WebCommunicationsModule
 }
 
+function Test-Signature {
+    param(
+        [Parameter(Mandatory=$True)]
+        $Header,
+        [Parameter(Mandatory=$True)]
+        $Body,
+        [Parameter(Mandatory=$True)]
+        $Signature
+    )
+    $HeaderJson = $Header | ConvertTo-Json -Compress
+    $header64 = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($HeaderJson))
+
+    $BodyJson = $Body | ConvertTo-Json -Compress
+    $body64 = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($BodyJson))
+
+    $packetString = "$header64.$body64"
+    $testSignature = $script:game_state.hmacsha.ComputeHash([Text.Encoding]::UTF8.GetBytes($packetString))
+    $testSignature64 = [System.Convert]::ToBase64String($testSignature)
+
+    return $($testSignature64 -eq $Signature)
+}
+
 function global:Read-Message {
     param(
         $msg
     )
     $data = $msg | ConvertFrom-Json
-    
-    switch ($data.cmd) {
+    Write-Host $data.signature | Get-Member
+    switch ($data.body.cmd) {
         'login' { Update-Player $data }
         'submit_team' { Update-Team $data }
         Default { Write-Host "UNKNOWN CMD" }
     }
 }
 
+function Submit-ForSignature {
+    param(
+        [Parameter(Mandatory=$True)]
+        $Header,
+        [Parameter(Mandatory=$True)]
+        $Body
+    )
+
+    $HeaderJson = $Header | ConvertTo-Json -Compress
+    $header64 = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($HeaderJson))
+
+    $BodyJson = $Body | ConvertTo-Json -Compress
+    $body64 = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($BodyJson))
+
+    $packetString = "$header64.$body64"
+    $Signature = $script:game_state.hmacsha.ComputeHash([Text.Encoding]::UTF8.GetBytes($packetString))
+    $signature64 = [System.Convert]::ToBase64String($Signature)
+
+    return $signature64
+}
+
+function Send-Message {
+    param(
+        $msg
+    )
+    $header = @{
+        alg = "HS256"
+        typ = "PWT"
+        ver = "0.0.1"
+        session_id = $script:game_state.session_id
+    }
+
+    $body = $msg
+
+    $signature = Submit-ForSignature -Header $header -Body $body
+    Write-Host $signature
+}
+
 function Update-Player {
     param(
         $data
     )
-    $script:game_state.session_id = $data.session_id
-    $script:game_state.client_id = $data.client_id
+    $script:game_state.session_id = $data.header.session_id
+    $script:game_state.client_id = $data.body.client_id
+
+    $script:game_state.hmacsha = New-Object System.Security.Cryptography.HMACSHA256
+    $script:game_state.hmacsha.key = [System.Convert]::FromBase64String(($data.body.pkey))
+
+    $test = Test-Signature -Header $data.header -Body $data.body -Signature $data.signature
+    Write-Host $test
 }
 
 function Update-Team {

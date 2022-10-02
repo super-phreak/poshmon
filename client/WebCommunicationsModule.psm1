@@ -47,9 +47,11 @@ function Start-Connection {
                 $recv_queue.Enqueue($jsonResult)
                 $serverData.host.runspace.events.generateevent("NewServerMessage", "Server", $null, $jsonResult)
                 ######### View Messages Debugger #############
-                $debugMsg = $jsonResult | ConvertFrom-Json | Get-Member
-                $serverData.host.ui.writeline($debugMsg)
-                $serverData.host.ui.writeline($jsonResult)
+                # $debugMsg = $jsonResult | ConvertFrom-Json | Get-Member
+                # # $testMsg = $debugMsg.header | ConvertTo-Json -Compress
+                # # $b64String = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($testMsg))
+                # # $serverData.host.ui.writeline($b64String)
+                # $serverData.host.ui.writeline($debugMsg)
             }
         }
     }

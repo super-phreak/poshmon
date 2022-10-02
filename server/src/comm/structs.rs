@@ -113,7 +113,7 @@ pub enum Commands {
 #[derive(Serialize, Debug)]
 #[serde(tag = "cmd", rename_all = "snake_case")]
 pub enum Response {
-    Login{client_id: String, auth: bool},
+    Login{client_id: String, auth: bool, pkey: String},
     SubmitTeam {session_id: String, client_id: String, name: String, team: Vec<PlayerPokemonModel>, valid: bool},
     Awk {session_id: String, cmd_response: String},
     BattleResult {gamestate: GameStateModel, client_id: String, session_id: String}
