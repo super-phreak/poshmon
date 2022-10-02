@@ -124,14 +124,17 @@ function Join-Server {
         # Parameter help description
         [Parameter(Mandatory=$true)]
         [string]
-        $PlayerName
+        $playerName,
+        [Parameter(Mandatory=$true)]
+        [String]
+        $pass
     )
     $game_state.PlayerName = $PlayerName
     Start-Connection -ConnectionString $game_state.ConnectionString -Port $game_state.Port
     $msg = @{
         cmd = "login"
-        username = "ductape"
-        password = "password"
+        username = $playerName
+        password = $pass
     } | ConvertTo-Json
     Send-MessageJson $msg | Out-Null
     $login_text = "Logging in"
@@ -234,7 +237,7 @@ if ($ConnectionString) {
     $game_state.Port = $ConnectionString.Split(':')[1]
 }
 
-Join-Server -PlayerName "Josh"
+Join-Server -PlayerName "Josh" -Pass "password"
 # Send-Team -Mon1 6 -Mon2 25
 # Send-Move -MoveId 1
 # ./Show-Battle.ps1 -DebugRun -PlayerMon $game_state.team[0] -EnemyMonIndex ($game_state.team[1].id) -NoDisplay:$NoDisplay
