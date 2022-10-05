@@ -1,9 +1,11 @@
+use std::{error::Error, fmt};
+
 use base64::encode;
 use serde::{ser::{Serializer, SerializeMap}, Serialize, Deserialize};
 use sha2::Sha256;
 use hmac::{Hmac, Mac};
 
-use super::{auth::SessionToken, structs::{Communication, Response}};
+use super::{auth::SessionToken, structs::{Communication, Response, Commands}};
 
 const CURRENT_ALGO: &'static str = "HS256";
 const PACKET_TYPE: &str = "PMT";
@@ -22,12 +24,12 @@ impl OutPacket {
     }
 }
 
-// #[derive(Deserialize, Debug)]
-// pub struct InPacket {
-//     header: Header,
-//     body: Commands,
-//     signature: String,
-// }
+#[derive(Deserialize, Debug)]
+pub struct InPacket {
+    header: Header,
+    body: Commands,
+    signature: String,
+}
 
 impl Communication for OutPacket {}
 impl Communication for Header {}
@@ -73,3 +75,34 @@ impl serde::ser::Serialize for OutPacket {
     }
 }
 
+impl InPacket {
+    fn verify(&self, token: SessionToken) -> Result<(), InvalidPacketError> {
+        let header_b64 = encode(&self.header.to_json_str());
+        let body_b64 = encode(&self.body.to_json_str());
+
+        let msg = format!("{}.{}",header_b64,body_b64);
+        let mut mac = HmacSha256::new(&token.session_key);
+        println!("{}", &msg);
+        mac.update(msg.as_bytes());
+        let signature = mac.finalize();
+
+        let bytes: Vec<u8> = signature.into_bytes().to_vec();
+        let b64bytes = encode(bytes);
+
+        if &self.signature == &b64bytes {
+            return Ok(());
+        }
+        
+        return Err(InvalidPacketError)
+    }
+}
+
+#[derive(Debug)]
+pub struct InvalidPacketError;
+impl fmt::Display for InvalidPacketError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Packet was invalid")
+    }
+}
+
+impl Error for InvalidPacketError {}
