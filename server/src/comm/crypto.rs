@@ -1,11 +1,11 @@
 use std::{error::Error, fmt};
 
 use base64::encode;
-use serde::{ser::{Serializer, SerializeMap}, Serialize, Deserialize};
-use sha2::Sha256;
+use serde::{ser::{Serializer, SerializeMap, SerializeStruct}, Serialize, Deserialize};
+use sha2::{Sha256, Sha512};
 use hmac::{Hmac, Mac};
 
-use super::{auth::SessionToken, structs::{Communication, Response, Commands}};
+use super::{structs::{Communication, Response, Commands}, keys::SessionToken};
 
 const CURRENT_ALGO: &'static str = "HS256";
 const PACKET_TYPE: &str = "PMT";
@@ -60,7 +60,7 @@ impl serde::ser::Serialize for OutPacket {
         //Sign the message as two b64 strings concatenated by a period.
         let mut mac = HmacSha256::new(&self.session_token.session_key);
         println!("{}", &msg);
-        mac.update(msg.as_bytes());
+        Mac::update(&mut mac, msg.as_bytes());
         let signature = mac.finalize();
 
         //Encode the signature into b64

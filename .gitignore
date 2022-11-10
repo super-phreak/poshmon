@@ -31,3 +31,6 @@ server/debug
 .vscode
 .DS_Store
 *.code-workspace
+
+#Local Database
+*.db

@@ -1,6 +1,8 @@
 pub mod structs;
 pub mod auth;
 pub mod crypto;
+pub mod queries;
+mod keys;
 
 use crate::{engine::{structs::{Pokemon, GameState, PokeTeam, DataFieldNotFoundError}, data::Data, create_pokemon}, comm::{auth::login, crypto::OutPacket}};
 

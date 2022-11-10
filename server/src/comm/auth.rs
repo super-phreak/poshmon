@@ -1,48 +1,62 @@
 use std::error::Error;
+use std::io::Read;
 use crypto_common::{Key, KeyInit};
 use hmac::HmacCore;
 use serde::ser::{Serialize, Serializer, SerializeStruct};
 use sha2::Sha256;
 use uuid::Uuid;
 use crypto_common::rand_core::{OsRng};
+use argon2::{self, Config};
 
-use super::crypto::HmacSha256;
+use crate::comm::keys::Salt;
 
-#[derive(Debug)]
-pub struct SessionToken {
-    pub session_id: Uuid,
-    pub username: String,
-    pub session_key: Key<HmacSha256>, 
-}
+use super::crypto::{HmacSha256};
+use super::keys::SessionToken;
+use super::queries::{self};
 
-impl SessionToken {
-
-    fn new(username: String) -> SessionToken {
-        let rng = OsRng::default();
-        let session_key: Key<HmacCore<Sha256>> =  HmacSha256::generate_key(rng);
-        SessionToken {
-            session_id: Uuid::new_v4(),
-            username,
-            session_key,
-        }
+pub fn login_test(username: String, password: String, hash: &String) -> Result<SessionToken, Box<dyn Error>> {
+    match argon2::verify_encoded(&hash.to_owned(), password.as_bytes()) {
+        Ok(_) => Ok(SessionToken::new(username)),
+        Err(e) => Err(Box::new(e)),
     }
 }
 
-
-impl Serialize for SessionToken {
-    
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        let mut s = serializer.serialize_struct("SessionToken", 2)?;
-        s.serialize_field("session_id", &self.session_id.to_string())?;
-        s.serialize_field("username", &self.username)?;
-        s.end()
+pub fn login(username: String, password: String,) -> Result<SessionToken, Box<dyn Error>> {
+    match argon2::verify_encoded("", password.as_bytes()) {
+        Ok(_) => Ok(SessionToken::new(username)),
+        Err(e) => Err(Box::new(e)),
     }
 }
 
-pub fn login(username: String, password: String) -> Result<SessionToken, Box<dyn Error>> {
-    _ = password;
-    Ok(SessionToken::new(username))
+pub fn signup(username: String, password: String) -> Result<String, Box<dyn Error>> {
+    let rng = OsRng::default();
+    let session_key: Key<HmacSha256> =  HmacSha256::generate_key(rng);
+    println!("Key Size: {:#?}", session_key.len());
+    let password = password.as_bytes();
+    let salt = Salt::generate_key(rng);
+    let config = build_config();
+    println!("SALT: {:#?}", &salt.len());
+    let hash = argon2::hash_encoded(password, &salt, &config)?;
+    Ok(hash)
+}
+
+fn build_config<'a>() -> argon2::Config<'a> {
+    Config {
+        variant: argon2::Variant::Argon2id,
+        version: argon2::Version::Version13,
+        mem_cost: 65536,
+        time_cost: 10,
+        lanes: 4,
+        thread_mode: argon2::ThreadMode::Parallel,
+        secret: &[],
+        ad: &[],
+        hash_length: 32
+    }
+}
+
+pub fn init_db() -> Result<(), Box<dyn Error>> {
+    let connection = sqlite::open("../data/poshmon.db").unwrap();
+
+    connection.execute(queries::CREATE_USER_TABLE_SQL)?;
+    Ok(())
 }

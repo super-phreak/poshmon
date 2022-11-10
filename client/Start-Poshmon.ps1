@@ -237,7 +237,7 @@ if ($ConnectionString) {
     $game_state.Port = $ConnectionString.Split(':')[1]
 }
 
-Join-Server -PlayerName "Josh" -Pass "password"
+Join-Server -PlayerName "ductape" -Pass "password"
 # Send-Team -Mon1 6 -Mon2 25
 # Send-Move -MoveId 1
 # ./Show-Battle.ps1 -DebugRun -PlayerMon $game_state.team[0] -EnemyMonIndex ($game_state.team[1].id) -NoDisplay:$NoDisplay

@@ -2,6 +2,8 @@ mod engine;
 mod comm;
 
 use comm::create_server_config;
+use std::time::{Duration, Instant};
+use sqlite::Connection;
 use std::fs::File;
 use rand::Rng;
 //use tokio::{io as tokio_io, task};
@@ -13,6 +15,7 @@ use std::{
 
 use comm::handle_connection;
 
+use crate::comm::auth::login_test;
 use crate::engine::init_engine;
 
 fn _print_type_of<T>(_: &T) {
@@ -34,6 +37,15 @@ async fn main() -> Result<(), Box<dyn Error>>{
     let pokedex_json: serde_json::Value = serde_json::from_reader(pokedex_file).expect("JSON was not well-formatted");
     let movedex_json: serde_json::Value = serde_json::from_reader(movedex_file).expect("JSON was not well-formatted");
 
+    comm::auth::init_db()?;
+    let now = Instant::now();
+    let hash = comm::auth::signup("username".to_owned(), "password".to_owned())?;
+    println!("Login: {}, time: {}", &hash, now.elapsed().as_millis());
+    println!("pending...");
+    let now = Instant::now();
+    println!("Verify: {:#?}, time: {}", login_test("username".to_owned(), "password".to_owned(), &hash)?, now.elapsed().as_millis());
+
+
     let mut data: HashMap<&str, serde_json::Value> = HashMap::new();
     data.insert("conf", engine_json);
     data.insert("pokemon", pokedex_json);
@@ -43,7 +55,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     //println!("Types: {:#?}", &typedex_vec.into_iter().find(|x| x.index == 23));
     assert_eq!(engine.pokedex.len(), 151, "Pokedex length should be {} but {} was found", 151, engine.pokedex.len());
 
-    println!("{:#?}", engine.pokedex.get(&(rng.gen_range(1..=engine.pokedex.len()) as u8)).unwrap());
+    //println!("{:#?}", engine.pokedex.get(&(rng.gen_range(1..=engine.pokedex.len()) as u8)).unwrap());
     
     let server_configs = create_server_config(Some(8080))?;
     println!("{:#?}", server_configs);
