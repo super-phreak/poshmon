@@ -1,4 +1,6 @@
 use crypto_common::{KeySizeUser, Key, rand_core::OsRng, KeyInit};
+use core::fmt::Debug;
+use std::fmt::Display;
 use digest::{
     consts::{U16, U28, U32, U48, U64, U128},
     core_api::{CoreWrapper, CtVariableCoreWrapper, BlockSizeUser},
@@ -36,7 +38,6 @@ impl KeyInit for Salt {
     }
 }
 
-#[derive(Debug)]
 pub struct SessionToken {
     pub session_id: Uuid,
     pub username: String,
@@ -56,7 +57,6 @@ impl SessionToken {
     }
 }
 
-
 impl Serialize for SessionToken {
     
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
@@ -67,5 +67,17 @@ impl Serialize for SessionToken {
         s.serialize_field("session_id", &self.session_id.to_string())?;
         s.serialize_field("username", &self.username)?;
         s.end()
+    }
+}
+
+impl Debug for SessionToken {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("SessionToken").field("session_id", &self.session_id.to_string()).field("username", &self.username).field("session_key", &hex::encode(&self.session_key)).finish()
+    }
+}
+
+impl Display for SessionToken {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "session id: {}, username: {}", &self.session_id.to_string(), &self.username)
     }
 }

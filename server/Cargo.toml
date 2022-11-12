@@ -25,6 +25,7 @@ base64 = "0.13.0"
 rust-argon2 = "1.0"
 sqlite = "0.27.0"
 digest = "0.10.5"
+hex = "0.4.3"
 
 
 [dependencies.uuid]
