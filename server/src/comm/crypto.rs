@@ -1,8 +1,8 @@
 use std::{error::Error, fmt};
 
 use base64::encode;
-use serde::{ser::{Serializer, SerializeMap, SerializeStruct}, Serialize, Deserialize};
-use sha2::{Sha256, Sha512};
+use serde::{ser::{Serializer, SerializeMap}, Serialize, Deserialize};
+use sha2::Sha256;
 use hmac::{Hmac, Mac};
 
 use super::{structs::{Communication, Response, Commands}, keys::SessionToken};

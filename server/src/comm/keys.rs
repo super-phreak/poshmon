@@ -1,13 +1,8 @@
 use crypto_common::{KeySizeUser, Key, rand_core::OsRng, KeyInit};
 use core::fmt::Debug;
 use std::fmt::Display;
-use digest::{
-    consts::{U16, U28, U32, U48, U64, U128},
-    core_api::{CoreWrapper, CtVariableCoreWrapper, BlockSizeUser},
-};
-use hmac::HmacCore;
+use digest::consts::U16;
 use serde::ser::{Serialize, Serializer, SerializeStruct};
-use sha2::Sha256;
 use uuid::Uuid;
 
 use super::crypto::HmacSha256;
@@ -19,7 +14,7 @@ impl KeySizeUser for Salt {
 }
 
 impl KeyInit for Salt {
-    fn new(key: &Key<Self>) -> Self {
+    fn new(_key: &Key<Self>) -> Self {
         todo!()
     }
 

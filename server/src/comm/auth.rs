@@ -1,10 +1,5 @@
 use std::error::Error;
-use std::io::Read;
 use crypto_common::{Key, KeyInit};
-use hmac::HmacCore;
-use serde::ser::{Serialize, Serializer, SerializeStruct};
-use sha2::Sha256;
-use uuid::Uuid;
 use crypto_common::rand_core::{OsRng};
 use argon2::{self, Config};
 

@@ -2,10 +2,9 @@ mod engine;
 mod comm;
 
 use comm::create_server_config;
-use std::time::{Duration, Instant};
-use sqlite::Connection;
+use std::time::Instant;
 use std::fs::File;
-use rand::Rng;
+// use rand::Rng;
 //use tokio::{io as tokio_io, task};
 use tokio::net::{TcpListener};
 use std::error::Error;
@@ -28,7 +27,7 @@ fn _print_type_of<T>(_: &T) {
 async fn main() -> Result<(), Box<dyn Error>>{
     //let pokedex = Pokedex::new(Mutex::new(HashMap::new()));
     //let mut typedex = 
-    let mut rng = rand::thread_rng();
+    // let mut rng = rand::thread_rng();
     let engine_conf = File::open("../data/engine.json").expect("Unable to read file");
     let pokedex_file = File::open("../data/pokedex.json").expect("unable to open pokedex");
     let movedex_file = File::open("../data/movedex.json").expect("unable to open movedex");
@@ -43,7 +42,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     println!("Login: {}, time: {}", &hash, now.elapsed().as_millis());
     println!("pending...");
     let now = Instant::now();
-    println!("Verify: {:#?}, time: {}", login_test("username".to_owned(), "password".to_owned(), &hash)?, now.elapsed().as_millis());
+    println!("Verify: {}, time: {}", login_test("username".to_owned(), "password".to_owned(), &hash)?, now.elapsed().as_millis());
 
 
     let mut data: HashMap<&str, serde_json::Value> = HashMap::new();
