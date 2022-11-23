@@ -770,6 +770,7 @@ dependencies = [
  "hex",
  "hmac",
  "local_ipaddress",
+ "log",
  "rand",
  "rust-argon2",
  "serde",
