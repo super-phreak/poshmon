@@ -125,7 +125,7 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
         if let Ok(cmd_in) = cmd  {
             msg_out = match cmd_in {
                 Commands::Login {username, password} => {
-                    let session_token = login(username, password).ok().unwrap();
+                    let session_token = login(username, password).unwrap();
                     let key = session_token.session_key;
                     OutPacket::new(session_token, Response::Login{client_id: "jfqsdcja".to_string(), auth: true, pkey: base64::encode(key) })
                 },

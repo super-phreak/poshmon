@@ -232,7 +232,7 @@ if ($ConnectionString) {
     #         }
     #     }
     # }
-    $ConnectionString = "172.29.244.9:8080"
+    $ConnectionString = "172.30.142.149:8080"
     $game_state.ConnectionString = $ConnectionString.Split(':')[0]
     $game_state.Port = $ConnectionString.Split(':')[1]
 }

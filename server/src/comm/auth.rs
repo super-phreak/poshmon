@@ -2,6 +2,7 @@ use std::error::Error;
 use crypto_common::{Key, KeyInit};
 use crypto_common::rand_core::{OsRng};
 use argon2::{self, Config};
+use sqlite::State;
 
 use crate::comm::keys::Salt;
 
@@ -17,8 +18,15 @@ pub fn login_test(username: String, password: String, hash: &String) -> Result<S
 }
 
 pub fn login(username: String, password: String,) -> Result<SessionToken, Box<dyn Error>> {
-    match argon2::verify_encoded("", password.as_bytes()) {
-        Ok(_) => Ok(SessionToken::new(username)),
+    let connection = sqlite::Connection::open_with_full_mutex("../data/poshmon.sqlite")?;
+    let mut statement = connection.prepare(queries::LOOKUP_USER_SQL)?;
+    statement.bind((":username",username.as_str()))?;
+    match statement.next() {
+        Ok(_) => 
+            match argon2::verify_encoded(statement.read::<String, _>("hash")?.as_str(), password.as_bytes()) {
+                Ok(_) => Ok(SessionToken::new(username)),
+                Err(e) => Err(Box::new(e)),
+            },
         Err(e) => Err(Box::new(e)),
     }
 }
@@ -50,8 +58,7 @@ fn build_config<'a>() -> argon2::Config<'a> {
 }
 
 pub fn init_db() -> Result<(), Box<dyn Error>> {
-    let connection = sqlite::open("../data/poshmon.db").unwrap();
-
+    let connection = sqlite::Connection::open_with_full_mutex("../data/poshmon.sqlite").unwrap();
     connection.execute(queries::CREATE_USER_TABLE_SQL)?;
     Ok(())
 }

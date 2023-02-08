@@ -38,7 +38,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
 
     comm::auth::init_db()?;
     let now = Instant::now();
-    let hash = comm::auth::signup("username".to_owned(), "password".to_owned())?;
+    let hash = comm::auth::signup("ductape".to_owned(), "password".to_owned())?;
     println!("Login: {}, time: {}", &hash, now.elapsed().as_millis());
     println!("pending...");
     let now = Instant::now();

@@ -42,6 +42,7 @@ pub struct SessionToken {
 impl SessionToken {
 
     pub fn new(username: String) -> SessionToken {
+        println!("New Session generated: {}", username);
         let rng = OsRng::default();
         let session_key: Key<HmacSha256> =  HmacSha256::generate_key(rng);
         SessionToken {

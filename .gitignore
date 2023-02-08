@@ -34,3 +34,4 @@ server/debug
 
 #Local Database
 *.db
+*.sqlite
