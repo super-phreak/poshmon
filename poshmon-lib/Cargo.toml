@@ -15,6 +15,7 @@ hmac = "0.12.1"
 crypto-common = { version = "0.1.6", features = ["rand_core"] }
 base64 = "0.13.0"
 rand = "0.8.4"
+tokio-tungstenite = { version = "*", features = ["connect", "native-tls"] }
 
 [dependencies.uuid]
 version = "1.1.2"
@@ -25,5 +26,5 @@ features = [
 ]
 
 [dependencies.tungstenite]
-version = "0.18.0"
+version = "*"
 default-features = false

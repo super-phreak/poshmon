@@ -1,20 +1,16 @@
 use std::{error::Error, fmt};
 
 use base64::encode;
-use serde::{ser::{Serializer, SerializeMap}, Serialize, Deserialize};
-use sha2::Sha256;
-use hmac::{Hmac, Mac};
-use tungstenite::Message;
+use serde::{Serialize, Deserialize};
+use hmac::Mac;
+use tokio_tungstenite::tungstenite;
+use tungstenite::protocol::Message;
 
-use crate::{key::SessionToken, datagram::Datagram};
-
-//use super::{structs::{Communication, Response, Commands}, keys::SessionToken};
+use crate::{key::{SessionToken, HmacSha256}, datagram::Datagram};
 
 const CURRENT_ALGO: &'static str = "HS256";
 const PACKET_TYPE: &'static str = "PMT";
 const VERSION: &'static str = "0.0.1";
-
-pub type HmacSha256 = Hmac<Sha256>;
 
 pub trait Communication {
     fn to_json_str(&self) -> String; 
@@ -39,7 +35,7 @@ impl Packet {
 
         //Sign the message as two b64 strings concatenated by a period.
         let mut mac = HmacSha256::new(&session_token.session_key);
-        Mac::update(&mut mac, msg.as_bytes());
+        mac.update(msg.as_bytes());
         let signature = mac.finalize();
         
         //Encode the signature into b64
@@ -102,21 +98,6 @@ impl Communication for Datagram {
         todo!()
     }
 }
-
-// impl serde::ser::Serialize for Packet {
-    
-//     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-//     where
-//         S: Serializer,
-//     {
-//         let mut s = serializer.serialize_map(None)?;
-//         s.serialize_entry("header", &self.header)?;
-//         s.serialize_entry("data", &self.data)?;
-//         s.serialize_entry("signature", &self.signature)?;
-//         s.end()
-//     }
-// }
-
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Header {

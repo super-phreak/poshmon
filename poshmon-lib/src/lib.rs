@@ -1,6 +1,6 @@
-mod packet;
-mod key;
-mod datagram;
+pub mod packet;
+pub mod datagram;
+pub mod key;
 
 pub fn add(left: usize, right: usize) -> usize {
     left + right

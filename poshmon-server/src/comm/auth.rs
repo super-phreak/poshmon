@@ -3,10 +3,7 @@ use crypto_common::{Key, KeyInit};
 use crypto_common::rand_core::{OsRng};
 use argon2::{self, Config};
 
-use crate::comm::keys::Salt;
-
-use super::crypto::{HmacSha256};
-use super::keys::SessionToken;
+use poshmon_lib::key::{SessionToken, Salt, HmacSha256};
 use super::queries::{self};
 
 const USER_DB: &'static str = "../data/poshmon.sqlite";

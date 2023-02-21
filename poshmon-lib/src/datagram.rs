@@ -1,6 +1,6 @@
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub enum Datagram {
     CreateGame {
         
@@ -21,7 +21,7 @@ pub enum Datagram {
         session_id: String, 
         client_id: String, 
         name: String, 
-        team: Vec<i64>, 
+        //team: Vec<i64>, 
     },
     Awk {
         session_id: String, 
