@@ -3,7 +3,9 @@ pub mod auth;
 pub mod queries;
 
 extern crate poshmon_lib;
-use poshmon_lib::{packet::{Packet, Communication}, datagram::Datagram};
+use poshmon_lib::{
+    networking::{Packet, Communication, Datagram}
+};
 
 use crate::{engine::{structs::{Pokemon, GameState, PokeTeam, DataFieldNotFoundError}, data::Data, create_pokemon}, comm::{auth::login}};
 

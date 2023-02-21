@@ -6,7 +6,7 @@ use hmac::Mac;
 use tokio_tungstenite::tungstenite;
 use tungstenite::protocol::Message;
 
-use crate::{key::{SessionToken, HmacSha256}, datagram::Datagram};
+use crate::{networking::key::{SessionToken, HmacSha256}, networking::Datagram};
 
 const CURRENT_ALGO: &'static str = "HS256";
 const PACKET_TYPE: &'static str = "PMT";
