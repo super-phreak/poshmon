@@ -119,23 +119,37 @@ pub enum Response {
     BattleResult {gamestate: GameStateModel, client_id: String, session_id: String}
 }
 
+pub trait Payload {
+
+}
+
 pub trait Communication {
-    fn to_json_str(&self) -> String 
-    where
-        Self: Serialize,
-    {
+    fn to_json_str(&self) -> String; 
+    fn to_message(&self) -> Message; 
+}
+
+impl Communication for Response {
+    fn to_json_str(&self) -> String {        
         match serde_json::to_string(&self) {
-            Ok(resp) => return resp,
-            Err(_) => return String::from("{\"err\": 500}")
-        }
+                Ok(resp) => return resp,
+                Err(_) => return String::from("{\"err\": 500}")
+            }
     }
-    fn to_message(&self) -> Message 
-    where
-    Self: Serialize,
-    {
-            return Message::from(self.to_json_str());
+
+    fn to_message(&self) -> Message {
+        return Message::from(self.to_json_str());
     }
 }
 
-impl Communication for Response {}
-impl Communication for Commands {}
+impl Communication for Commands {
+    fn to_json_str(&self) -> String {        
+        match serde_json::to_string(&self) {
+                Ok(resp) => return resp,
+                Err(_) => return String::from("{\"err\": 500}")
+            }
+    }
+
+    fn to_message(&self) -> Message {
+        return Message::from(self.to_json_str());
+    }
+}

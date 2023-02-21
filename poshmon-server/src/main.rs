@@ -12,6 +12,8 @@ use std::{
     collections::HashMap,
 };
 
+use dotenv::dotenv;
+
 use comm::handle_connection;
 
 use crate::comm::auth::login_test;
@@ -25,10 +27,18 @@ fn _print_type_of<T>(_: &T) {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>>{
+    match dotenv() {
+        Ok(_) => {
+            println!("Environment found, running with keys in file.")
+        },
+        Err(_) => println!("No environment found, running defaults."),
+    }
+
     //let pokedex = Pokedex::new(Mutex::new(HashMap::new()));
     //let mut typedex = 
     // let mut rng = rand::thread_rng();
-    let engine_conf = File::open("../data/engine.json").expect("Unable to read file");
+    let data_root = std::env::var("DATA_ROOT").expect("Data folder must be set.");
+    let engine_conf = File::open(format!("{}{}",data_root,"engine.json")).expect("Unable to read file");
     let pokedex_file = File::open("../data/pokedex.json").expect("unable to open pokedex");
     let movedex_file = File::open("../data/movedex.json").expect("unable to open movedex");
     let words_file = File::open("../data/gamenames.txt").expect("unable to open wordlist");

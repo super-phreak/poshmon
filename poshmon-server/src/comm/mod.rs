@@ -4,7 +4,7 @@ pub mod crypto;
 pub mod queries;
 mod keys;
 
-use crate::{engine::{structs::{Pokemon, GameState, PokeTeam, DataFieldNotFoundError}, data::Data, create_pokemon}, comm::{auth::login, crypto::OutPacket}};
+use crate::{engine::{structs::{Pokemon, GameState, PokeTeam, DataFieldNotFoundError}, data::Data, create_pokemon}, comm::{auth::login, crypto::{OutPacket, Packet}}};
 
 use self::structs::{
     Peer,
@@ -127,29 +127,29 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
                 Commands::Login {username, password} => {
                     let session_token = login(username, password).unwrap();
                     let key = session_token.session_key;
-                    OutPacket::new(session_token, Response::Login{client_id: "jfqsdcja".to_string(), auth: true, pkey: base64::encode(key) })
+                    Packet::new(session_token, Box::new(Response::Login{client_id: "jfqsdcja".to_string(), auth: true, pkey: base64::encode(key) }))
                 },
-                Commands::CreateGame {  } => OutPacket::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Response::Awk { session_id: "dfad".to_string(), cmd_response: "dafd".to_string() }),
+                Commands::CreateGame {  } => Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Box::new(Response::Awk { session_id: "dfad".to_string(), cmd_response: "dafd".to_string() })),
                 Commands::SubmitTeam {session_id, client_id, name, team } => {
                     let team2: Vec<i64> = vec![25,25];
                     _ = name;
                     if let Ok(game) = build_game(get_team_from_ids(team, data.clone()).ok().unwrap(), get_team_from_ids(team2, data.clone()).ok().unwrap()) {
                         let game = Arc::new(RwLock::new(game));
                         data.games.lock().unwrap().insert(session_id.clone(), game.clone());
-                        OutPacket::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Response::SubmitTeam { session_id: session_id, client_id: client_id, name: "Josh".to_string(), team: build_pokemodel(game.clone().read().unwrap().player1.team.clone(), true), valid: true })
+                        Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Box::new(Response::SubmitTeam { session_id: session_id, client_id: client_id, name: "Josh".to_string(), team: build_pokemodel(game.clone().read().unwrap().player1.team.clone(), true), valid: true }))
                     } else {
-                        OutPacket::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Response::Awk { session_id: session_id, cmd_response: "Failure to submit team".to_string() })
+                        Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Box::new(Response::Awk { session_id: session_id, cmd_response: "Failure to submit team".to_string() }))
                     }
                 },
-                Commands::SendMove { session_id, client_id, pokemon_guid: _, move_id } => OutPacket::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Response::BattleResult { gamestate: get_gamestate(&"1234".to_string(),move_id,data.clone()).ok().unwrap(), session_id, client_id }),
+                Commands::SendMove { session_id, client_id, pokemon_guid: _, move_id } => Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(), Box::new(Response::BattleResult { gamestate: get_gamestate(&"1234".to_string(),move_id,data.clone()).ok().unwrap(), session_id, client_id })),
                 //Commands::Chat { client_id, recipient, chat_msg } => Response::
                 //_ => (Message::from(format!("Player Invalid CMD")), Message::from(format!("You sent invalid cmd"))),
             };
         } else if msg.is_empty() {
-            msg_out = OutPacket::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Response::Awk { session_id: "ping".to_string(), cmd_response: "ping".to_string() })
+            msg_out = Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(), Box::new(Response::Awk { session_id: "ping".to_string(), cmd_response: "ping".to_string() }))
         //     msg_out = Message::from(format!("{{\"action\": \"Ping\"}}"));
         } else {
-            msg_out = OutPacket::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Response::Awk { session_id: "err".to_string(), cmd_response: "err".to_string() })
+            msg_out = Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(), Box::new(Response::Awk { session_id: "err".to_string(), cmd_response: "err".to_string() }))
         //     msg_out = Message::from(format!("{{\"action\": \"ERR\"}}"));
         };
 

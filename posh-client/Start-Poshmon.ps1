@@ -9,7 +9,7 @@ param(
     [parameter(Mandatory=$false)][Switch]
     $NoClear,
 
-    [parameter(Mandatory=$false)][string]
+    [parameter(Mandatory=$true)][string]
     $ConnectionString
 )
 

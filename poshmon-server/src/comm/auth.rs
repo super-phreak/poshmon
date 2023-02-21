@@ -21,6 +21,7 @@ pub fn login_test(username: String, password: String, hash: &String) -> Result<S
 pub fn login(username: String, password: String,) -> Result<SessionToken, Box<dyn Error>> {
     let connection = sqlite::Connection::open_with_full_mutex(USER_DB)?;
     let mut statement = connection.prepare(queries::LOOKUP_USER_SQL)?;
+    println!("UN: {}, PW: {}", username, password);
     statement.bind((":username",username.as_str()))?;
     match statement.next() {
         Ok(_) => 
