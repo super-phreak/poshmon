@@ -39,12 +39,12 @@ async fn main() -> Result<(), Box<dyn Error>>{
     // let mut rng = rand::thread_rng();
     let data_root = std::env::var("DATA_ROOT").expect("Data folder must be set.");
     let engine_conf = File::open(format!("{}{}",data_root,"engine.json")).expect("Unable to read file");
-    let pokedex_file = File::open("../data/pokedex.json").expect("unable to open pokedex");
-    let movedex_file = File::open("../data/movedex.json").expect("unable to open movedex");
-    let words_file = File::open("../data/gamenames.txt").expect("unable to open wordlist");
-    let engine_json: serde_json::Value = serde_json::from_reader(engine_conf).expect("JSON was not well-formatted");
-    let pokedex_json: serde_json::Value = serde_json::from_reader(pokedex_file).expect("JSON was not well-formatted");
-    let movedex_json: serde_json::Value = serde_json::from_reader(movedex_file).expect("JSON was not well-formatted");
+    let pokedex_file = File::open(format!("{}{}",data_root,"pokedex.json")).expect("unable to open pokedex");
+    let movedex_file = File::open(format!("{}{}",data_root,"movedex.json")).expect("unable to open movedex");
+    let words_file = File::open(format!("{}{}",data_root,"gamenames.txt")).expect("unable to open wordlist");
+    let engine_json: serde_json::Value = serde_json::from_reader(engine_conf).expect("Engine JSON was not well-formatted");
+    let pokedex_json: serde_json::Value = serde_json::from_reader(pokedex_file).expect("Pokedex JSON was not well-formatted");
+    let movedex_json: serde_json::Value = serde_json::from_reader(movedex_file).expect("Move JSON was not well-formatted");
 
     comm::auth::init_db()?;
     let now = Instant::now();
