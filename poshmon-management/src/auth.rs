@@ -1,12 +1,11 @@
-use std::error::Error;
-use std::time::{Duration, Instant, SystemTime};
+
+use std::time::SystemTime;
 use crypto_common::{Key, KeyInit};
 use crypto_common::rand_core::{OsRng};
 use argon2::{self, Config};
 
-use actix_web::web::{Json, Path, Data, self};
+use actix_web::web::{Json, Data, self};
 use actix_web::{HttpResponse, post, get};
-use diesel::{QueryDsl, RunQueryDsl};
 use serde::{Deserialize, Serialize};
 
 use crate::dbc::{DbcPool, get_user, create_user};
@@ -46,13 +45,6 @@ pub struct Pong {
 impl Pong {
     pub fn new(msg: String) -> Self {
         Pong { msg, time: SystemTime::now()}
-    }
-}
-
-pub fn login_test(username: String, password: String, hash: &String) -> Result<SessionToken, Box<dyn Error>> {
-    match argon2::verify_encoded(&hash.to_owned(), password.as_bytes()) {
-        Ok(_) => Ok(SessionToken::new(username)),
-        Err(e) => Err(Box::new(e)),
     }
 }
 

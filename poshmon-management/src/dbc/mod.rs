@@ -1,15 +1,12 @@
-use diesel::{PgConnection, Connection};
+use diesel::PgConnection;
 use diesel::result::Error;
 use diesel::r2d2::ConnectionManager;
-use diesel::query_dsl::methods::{FilterDsl, LimitDsl, OrderDsl};
-use diesel::{ExpressionMethods, Insertable, Queryable, RunQueryDsl};
+use diesel::query_dsl::methods::FilterDsl;
+use diesel::{ExpressionMethods, RunQueryDsl};
 
 use r2d2::{Pool, PooledConnection};
 
-use dotenv::dotenv;
 use uuid::Uuid;
-
-use std::env;
 
 use self::models::User;
 
@@ -18,14 +15,6 @@ pub mod schema;
 
 pub type DbcPool = Pool<ConnectionManager<PgConnection>>;
 pub type DbcConnection = PooledConnection<ConnectionManager<PgConnection>>;
-
-pub fn establish_connection() -> PgConnection {
-    dotenv().ok();
-
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    PgConnection::establish(&database_url)
-        .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
-}
 
 pub fn get_user(_username: String, connection: &mut DbcConnection) -> Result<User, Error> {
     use self::schema::users::dsl::*;
