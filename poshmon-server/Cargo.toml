@@ -22,7 +22,6 @@ hmac = "0.12.1"
 crypto-common = { version = "0.1.6", features = ["rand_core"] }
 base64 = "0.13.0"
 rust-argon2 = "1.0"
-sqlite = "0.30.3"
 digest = "0.10.5"
 hex = "0.4.3"
 log = "0.4.17"

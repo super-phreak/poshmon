@@ -1,13 +1,11 @@
 pub mod structs;
-pub mod auth;
-pub mod queries;
 
 extern crate poshmon_lib;
 use poshmon_lib::{
-    networking::{Packet, Communication, Datagram}
+    networking::{Packet, Communication, Datagram, SessionToken}
 };
 
-use crate::{engine::{structs::{Pokemon, GameState, PokeTeam, DataFieldNotFoundError}, data::Data, create_pokemon}, comm::{auth::login}};
+use crate::{engine::{structs::{Pokemon, GameState, PokeTeam, DataFieldNotFoundError}, data::Data, create_pokemon}};
 
 use self::structs::{
     Peer,
@@ -123,21 +121,22 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
         }
         let cmd: Result<Datagram, _> = serde_json::from_str(msg.to_text().unwrap());
         let msg_out;
+        let token = SessionToken::new("testuser".to_owned());
         if let Ok(cmd_in) = cmd  {
             msg_out = match cmd_in {
-                Datagram::CreateGame {  } => Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(), Datagram::Awk { session_id: "dfad".to_string(), cmd_response: "dafd".to_string() }),
+                Datagram::CreateGame {  } => Packet::new(token, Datagram::Awk { session_id: "dfad".to_string(), cmd_response: "dafd".to_string() }),
                 Datagram::SubmitTeam {session_id, client_id, name, team } => {
                     let team2: Vec<i64> = vec![25,25];
                     _ = name;
                     if let Ok(game) = build_game(get_team_from_ids(team, data.clone()).ok().unwrap(), get_team_from_ids(team2, data.clone()).ok().unwrap()) {
                         let game = Arc::new(RwLock::new(game));
                         data.games.lock().unwrap().insert(session_id.clone(), game.clone());
-                        Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Datagram::GetTeam { session_id: session_id, client_id: client_id, name: "Josh".to_string(), })//team: build_pokemodel(game.clone().read().unwrap().player1.team.clone(), true) })
+                        Packet::new(token,Datagram::GetTeam { session_id: session_id, client_id: client_id, name: "Josh".to_string(), })//team: build_pokemodel(game.clone().read().unwrap().player1.team.clone(), true) })
                     } else {
-                        Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(),Datagram::Awk { session_id: session_id, cmd_response: "Failure to submit team".to_string() })
+                        Packet::new(token,Datagram::Awk { session_id: session_id, cmd_response: "Failure to submit team".to_string() })
                     }
                 },
-                Datagram::SendMove { session_id, client_id, pokemon_guid: _, move_id } => Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(), Datagram::BattleResult { /*gamestate: get_gamestate(&"1234".to_string(),move_id,data.clone()).ok().unwrap(),*/ session_id, client_id }),
+                Datagram::SendMove { session_id, client_id, pokemon_guid: _, move_id } => Packet::new(token, Datagram::BattleResult { /*gamestate: get_gamestate(&"1234".to_string(),move_id,data.clone()).ok().unwrap(),*/ session_id, client_id }),
                 Datagram::GetTeam { session_id, client_id, name } => todo!(),
                 Datagram::Awk { session_id, cmd_response } => todo!(),
                 Datagram::BattleResult { client_id, session_id } => todo!(),
@@ -145,10 +144,10 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
                 //_ => (Message::from(format!("Player Invalid CMD")), Message::from(format!("You sent invalid cmd"))),
             };
         } else if msg.is_empty() {
-            msg_out = Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(), Datagram::Awk { session_id: "ping".to_string(), cmd_response: "ping".to_string() })
+            msg_out = Packet::new(token, Datagram::Awk { session_id: "ping".to_string(), cmd_response: "ping".to_string() })
         //     msg_out = Message::from(format!("{{\"action\": \"Ping\"}}"));
         } else {
-            msg_out = Packet::new(login("ductape".to_string(), "password".to_string()).ok().unwrap(), Datagram::Awk { session_id: "err".to_string(), cmd_response: "err".to_string() })
+            msg_out = Packet::new(token, Datagram::Awk { session_id: "err".to_string(), cmd_response: "err".to_string() })
         //     msg_out = Message::from(format!("{{\"action\": \"ERR\"}}"));
         };
 

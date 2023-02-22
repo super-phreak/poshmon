@@ -1,0 +1,31 @@
+[package]
+name = "poshmon-management"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-rt = "2.8.0"
+actix-web = "4"
+dotenv = "0.15.0"
+env_logger = "0.10.0"
+serde = "1.0.152"
+serde_json = "1.0.93"
+crypto-common = { version = "0.1.6", features = ["rand_core"] }
+base64 = "0.13.0"
+rust-argon2 = "1.0"
+diesel = { version = "2.0.3", features = ["postgres", "uuid", "r2d2"] }
+r2d2 = "0.8.10"
+r2d2-diesel = "1.0.0"
+
+[dependencies.uuid]
+version = "1.1.2"
+features = [
+    "v4",                # Lets you generate random UUIDs
+    "fast-rng",          # Use a faster (but still sufficiently random) RNG
+    "macro-diagnostics", # Enable better diagnostics for compile-time UUIDs
+]
+
+[dependencies.poshmon-lib]
+path = "../poshmon-lib"

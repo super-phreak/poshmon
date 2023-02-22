@@ -16,7 +16,6 @@ use dotenv::dotenv;
 
 use comm::handle_connection;
 
-use crate::comm::auth::login_test;
 use crate::engine::init_engine;
 
 fn _print_type_of<T>(_: &T) {
@@ -46,13 +45,13 @@ async fn main() -> Result<(), Box<dyn Error>>{
     let pokedex_json: serde_json::Value = serde_json::from_reader(pokedex_file).expect("Pokedex JSON was not well-formatted");
     let movedex_json: serde_json::Value = serde_json::from_reader(movedex_file).expect("Move JSON was not well-formatted");
 
-    comm::auth::init_db()?;
-    let now = Instant::now();
-    let hash = comm::auth::signup("ductape".to_owned(), "password".to_owned())?;
-    println!("Login: {}, time: {}", &hash, now.elapsed().as_millis());
-    println!("pending...");
-    let now = Instant::now();
-    println!("Verify: {}, time: {}", login_test("username".to_owned(), "password".to_owned(), &hash)?, now.elapsed().as_millis());
+    //comm::auth::init_db()?;
+    // let now = Instant::now();
+    //let hash = comm::auth::signup("ductape".to_owned(), "password".to_owned())?;
+    // println!("Login: {}, time: {}", &hash, now.elapsed().as_millis());
+    // println!("pending...");
+    // let now = Instant::now();
+    //println!("Verify: {}, time: {}", login_test("username".to_owned(), "password".to_owned(), &hash)?, now.elapsed().as_millis());
 
 
     let mut data: HashMap<&str, serde_json::Value> = HashMap::new();
