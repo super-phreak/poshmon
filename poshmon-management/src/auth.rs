@@ -133,7 +133,10 @@ pub async fn signup(req: Json<Request>, pool: Data<DbcPool>) -> HttpResponse {
                         .unwrap()
                 }
             },
-            Err(_) => todo!(),
+            Err(_) => HttpResponse::Unauthorized()
+                        .content_type(APPLICATION_JSON)
+                        .await
+                        .unwrap()
         }
     } else {
         HttpResponse::InternalServerError()

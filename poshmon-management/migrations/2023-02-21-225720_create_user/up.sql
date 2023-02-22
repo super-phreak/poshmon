@@ -1,7 +1,6 @@
 -- Your SQL goes here
 CREATE TABLE users (
-  id UUID NOT NULL,
-  username TEXT NOT NULL,
-  hash TEXT NOT NULL,
-  PRIMARY KEY (id, username)
+  id UUID PRIMARY KEY,
+  username TEXT NOT NULL UNIQUE,
+  hash TEXT NOT NULL
 )
