@@ -59,15 +59,48 @@ pub async fn ping() -> HttpResponse {
 
 #[post("/login")]
 pub async fn login(req: Json<Request>, pool: Data<DbcPool>) -> HttpResponse {
+    //Pulling the password out so the borrow checker doesn't steal it when we hand the request over to the 
+    //database to pull the user.
+    let password = req.password.clone();
+
     let mut conn = pool.get().expect(CONNECTION_POOL_ERROR);
+    let user_res = web::block(move || get_user(&req.username.clone(), &mut conn)).await;
 
-    println!("Sent user: {}", req.username);
-
-    let user = web::block(move || get_user(req.username.clone(), &mut conn)).await;
-
-    HttpResponse::Ok()
-    .content_type(APPLICATION_JSON)
-    .json(SessionCookie::new(user.unwrap().unwrap().username))
+    //Need to find a way to bullet-proof the unwraps in the ones where JSON isn't sent back.
+    match user_res {
+        Ok(user) => {
+            match user {
+                Ok(user) => {
+                    if let Ok(res) = argon2::verify_encoded(&user.hash, password.as_bytes()) {
+                        if res {
+                            HttpResponse::Ok()
+                                .content_type(APPLICATION_JSON)
+                                .json(SessionCookie::new(user.username))
+                        } else {
+                            HttpResponse::Unauthorized()
+                                .content_type(APPLICATION_JSON)
+                                .await
+                                .unwrap()
+                        }
+                    } else {
+                        HttpResponse::InternalServerError()
+                            .content_type(APPLICATION_JSON)
+                            .await
+                            .unwrap()
+                    }
+                    
+                },
+                Err(_) => HttpResponse::NotFound()
+                            .content_type(APPLICATION_JSON)
+                            .await
+                            .unwrap(),
+            }
+        },
+        Err(_) => HttpResponse::InternalServerError()
+                    .content_type(APPLICATION_JSON)
+                    .await
+                    .unwrap(), 
+    }
 }
 
 #[post("/signup")]

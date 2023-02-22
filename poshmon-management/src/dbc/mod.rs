@@ -16,7 +16,7 @@ pub mod schema;
 pub type DbcPool = Pool<ConnectionManager<PgConnection>>;
 pub type DbcConnection = PooledConnection<ConnectionManager<PgConnection>>;
 
-pub fn get_user(_username: String, connection: &mut DbcConnection) -> Result<User, Error> {
+pub fn get_user(_username: &String, connection: &mut DbcConnection) -> Result<User, Error> {
     use self::schema::users::dsl::*;
 
     let res = users.filter(username.eq(_username)).load::<User>(connection);
