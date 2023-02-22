@@ -32,6 +32,7 @@ async fn main() -> io::Result<()> {
             // register HTTP requests handlers
             .service(auth::login)
             .service(auth::signup)
+            .service(auth::ping)
     })
     .bind("0.0.0.0:8443")?
     .run()

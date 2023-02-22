@@ -1,10 +1,11 @@
 use std::error::Error;
+use std::time::{Duration, Instant, SystemTime};
 use crypto_common::{Key, KeyInit};
 use crypto_common::rand_core::{OsRng};
 use argon2::{self, Config};
 
 use actix_web::web::{Json, Path, Data, self};
-use actix_web::{HttpResponse, post};
+use actix_web::{HttpResponse, post, get};
 use diesel::{QueryDsl, RunQueryDsl};
 use serde::{Deserialize, Serialize};
 
@@ -36,11 +37,32 @@ pub struct Request {
     password: String,
 }
 
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Pong {
+    msg: String,
+    time: SystemTime,
+}
+
+impl Pong {
+    pub fn new(msg: String) -> Self {
+        Pong { msg, time: SystemTime::now()}
+    }
+}
+
 pub fn login_test(username: String, password: String, hash: &String) -> Result<SessionToken, Box<dyn Error>> {
     match argon2::verify_encoded(&hash.to_owned(), password.as_bytes()) {
         Ok(_) => Ok(SessionToken::new(username)),
         Err(e) => Err(Box::new(e)),
     }
+}
+
+#[get("/ping")]
+pub async fn ping() -> HttpResponse {
+    let pong = Pong::new("pong".to_owned());
+
+    HttpResponse::Ok()
+    .content_type(APPLICATION_JSON)
+    .json(pong)
 }
 
 #[post("/login")]
