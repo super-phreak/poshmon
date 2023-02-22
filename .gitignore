@@ -41,5 +41,7 @@ Cargo.lock
 *.sqlite
 
 # Added by cargo
-
 /target
+
+#temp ignore until ready for release
+helm/
