@@ -1,5 +1,6 @@
 
 use std::time::SystemTime;
+use actix_web::http::header::ContentType;
 use crypto_common::{Key, KeyInit};
 use crypto_common::rand_core::{OsRng};
 use argon2::{self, Config};
@@ -12,7 +13,7 @@ use crate::dbc::{DbcPool, get_user, create_user};
 
 use poshmon_lib::networking::{SessionToken, Salt, HmacSha256};
 
-use crate::httpconst::{APPLICATION_JSON, CONNECTION_POOL_ERROR};
+use crate::httpconst::CONNECTION_POOL_ERROR;
 
 #[derive(Debug, Deserialize, Serialize)]
 struct SessionCookie {
@@ -53,58 +54,53 @@ pub async fn ping() -> HttpResponse {
     let pong = Pong::new("pong".to_owned());
 
     HttpResponse::Ok()
-    .content_type(APPLICATION_JSON)
+    .content_type(ContentType::json())
     .json(pong)
 }
 
 #[post("/login")]
-pub async fn login(req: Json<Request>, pool: Data<DbcPool>) -> HttpResponse {
+pub async fn login(req: Json<Request>, pool: Data<DbcPool>) -> Result<HttpResponse, actix_web::Error> {
     //Pulling the password out so the borrow checker doesn't steal it when we hand the request over to the 
     //database to pull the user.
-    let password = req.password.clone();
+    let password: String = req.password.clone();
 
     let mut conn = pool.get().expect(CONNECTION_POOL_ERROR);
     let user_res = web::block(move || get_user(&req.username.clone(), &mut conn)).await;
 
-    //Need to find a way to bullet-proof the unwraps in the ones where JSON isn't sent back.
     match user_res {
         Ok(user) => {
             match user {
                 Ok(user) => {
                     if let Ok(res) = argon2::verify_encoded(&user.hash, password.as_bytes()) {
                         if res {
-                            HttpResponse::Ok()
-                                .content_type(APPLICATION_JSON)
-                                .json(SessionCookie::new(user.username))
+                            Ok(HttpResponse::Ok()
+                                .content_type(ContentType::json())
+                                .json(SessionCookie::new(user.username)))
                         } else {
                             HttpResponse::Unauthorized()
-                                .content_type(APPLICATION_JSON)
+                                .content_type(ContentType::json())
                                 .await
-                                .unwrap()
                         }
                     } else {
                         HttpResponse::InternalServerError()
-                            .content_type(APPLICATION_JSON)
+                            .content_type(ContentType::json())
                             .await
-                            .unwrap()
                     }
                     
                 },
                 Err(_) => HttpResponse::NotFound()
-                            .content_type(APPLICATION_JSON)
-                            .await
-                            .unwrap(),
+                            .content_type(ContentType::json())
+                            .await,
             }
         },
         Err(_) => HttpResponse::InternalServerError()
-                    .content_type(APPLICATION_JSON)
-                    .await
-                    .unwrap(), 
+                    .content_type(ContentType::json())
+                    .await, 
     }
 }
 
 #[post("/signup")]
-pub async fn signup(req: Json<Request>, pool: Data<DbcPool>) -> HttpResponse {
+pub async fn signup(req: Json<Request>, pool: Data<DbcPool>) -> Result<HttpResponse, actix_web::Error> {
     let mut connection = pool.get().expect(CONNECTION_POOL_ERROR);
     println!("Signup for user: {}", req.username);
 
@@ -123,26 +119,23 @@ pub async fn signup(req: Json<Request>, pool: Data<DbcPool>) -> HttpResponse {
         match web::block(move || create_user(&req.username, hash, &mut connection)).await {
             Ok(result) => {
                 if result == 1 {
-                    HttpResponse::Ok()
-                        .content_type(APPLICATION_JSON)
-                        .json(SessionCookie::new(uname.clone()))
+                    Ok(HttpResponse::Ok()
+                        .content_type(ContentType::json())
+                        .json(SessionCookie::new(uname.clone())))
                 } else {
                     HttpResponse::Unauthorized()
-                        .content_type(APPLICATION_JSON)
+                        .content_type(ContentType::json())
                         .await
-                        .unwrap()
                 }
             },
             Err(_) => HttpResponse::Unauthorized()
-                        .content_type(APPLICATION_JSON)
+                        .content_type(ContentType::json())
                         .await
-                        .unwrap()
         }
     } else {
         HttpResponse::InternalServerError()
-                        .content_type(APPLICATION_JSON)
+                        .content_type(ContentType::json())
                         .await
-                        .unwrap()
     }
 }
 
