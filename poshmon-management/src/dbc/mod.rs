@@ -40,5 +40,5 @@ pub fn create_user(username: &String, hash: String, connection: &mut DbcConnecti
     diesel::insert_into(users::table)
         .values(&new_user)
         .execute(connection)
-        .expect("Error saving new post")
+        .unwrap_or(0)
 }
