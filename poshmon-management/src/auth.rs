@@ -64,7 +64,14 @@ pub async fn login(req: Json<Request>, pool: Data<DbcPool>, redis: Data<Pool<red
     //database to pull the user.
     let password: String = req.password.clone();
 
-    let mut conn = pool.get().expect(CONNECTION_POOL_ERROR);
+    let conn_result = pool.get();
+    let mut conn = match conn_result {
+        Ok(c) => c,
+        Err(_) => return HttpResponse::InternalServerError()
+                            .content_type(ContentType::json())
+                            .await
+    };
+
     let user_res = web::block(move || get_user(&req.username.clone(), &mut conn)).await;
 
     match user_res {
