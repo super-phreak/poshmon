@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y openssl libpq-dev && rm -rf /var/lib/ap
 COPY --from=builder /usr/local/cargo/bin/poshmon-management /usr/local/bin/poshmon-management
 COPY data /data
 ENV DATA_ROOT="data/"
+ENV REDIS_URL="redis://poshmon-redis"
 ENV POSTGRES_PASSWORD="1&W3RR08IScc*OPrSelx"
 ENV DATABASE_URL="postgres://postgres:${POSTGRES_PASSWORD}@poshmon-postgres/local_dev"
-EXPOSE 8443
+ENV PORT=8443
+EXPOSE ${PORT}
 CMD ["poshmon-management"]
