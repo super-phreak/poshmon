@@ -18,15 +18,24 @@ async fn main() -> io::Result<()> {
     dotenv().ok();
 
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    let manager = ConnectionManager::<PgConnection>::new(database_url);
-    let pool = r2d2::Pool::builder()
-        .build(manager)
+    let db_manager = ConnectionManager::<PgConnection>::new(database_url);
+    let db_pool = r2d2::Pool::builder()
+        .build(db_manager)
         .expect("Failed to create pool");
+
+    let redis_url = env::var("REDIS_URL").expect("REDIS_URL must be set");
+    let redis_client = redis::Client::open(redis_url).expect("Redis Connection is required");
+    let redis_pool = r2d2::Pool::builder()
+        .build(redis_client)
+        .expect("Failed to create pool");
+
+    let port = env::var("PORT").expect("Port must be set");
 
     HttpServer::new(move || {
         App::new()
             // Set up DB pool to be used with web::Data<Pool> extractor
-            .app_data(Data::new(pool.clone()))
+            .app_data(Data::new(db_pool.clone()))
+            .app_data(Data::new(redis_pool.clone()))
             // enable logger - always register actix-web Logger middleware last
             .wrap(middleware::Logger::default())
             // register HTTP requests handlers
@@ -34,7 +43,7 @@ async fn main() -> io::Result<()> {
             .service(auth::signup)
             .service(auth::ping)
     })
-    .bind("0.0.0.0:8443")?
+    .bind(format!("0.0.0.0:{}",port))?
     .run()
     .await
 }

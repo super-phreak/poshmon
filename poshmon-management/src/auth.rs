@@ -7,9 +7,10 @@ use argon2::{self, Config};
 
 use actix_web::web::{Json, Data, self};
 use actix_web::{HttpResponse, post, get};
+use r2d2::Pool;
 use serde::{Deserialize, Serialize};
 
-use crate::dbc::{DbcPool, get_user, create_user};
+use crate::dbc::{DbcPool, get_user, create_user, insert_session};
 
 use poshmon_lib::networking::{SessionToken, Salt, HmacSha256};
 
@@ -22,8 +23,7 @@ struct SessionCookie {
 }
 
 impl SessionCookie {
-    pub fn new(username: String) -> Self {
-        let token = SessionToken::new(username);
+    pub fn new(token: SessionToken) -> Self {
         SessionCookie {
             pkey: base64::encode(token.session_key),
             session_id: token.session_id.to_string(),
@@ -59,7 +59,7 @@ pub async fn ping() -> HttpResponse {
 }
 
 #[post("/login")]
-pub async fn login(req: Json<Request>, pool: Data<DbcPool>) -> Result<HttpResponse, actix_web::Error> {
+pub async fn login(req: Json<Request>, pool: Data<DbcPool>, redis: Data<Pool<redis::Client>>) -> Result<HttpResponse, actix_web::Error> {
     //Pulling the password out so the borrow checker doesn't steal it when we hand the request over to the 
     //database to pull the user.
     let password: String = req.password.clone();
@@ -73,9 +73,28 @@ pub async fn login(req: Json<Request>, pool: Data<DbcPool>) -> Result<HttpRespon
                 Ok(user) => {
                     if let Ok(res) = argon2::verify_encoded(&user.hash, password.as_bytes()) {
                         if res {
-                            Ok(HttpResponse::Ok()
-                                .content_type(ContentType::json())
-                                .json(SessionCookie::new(user.username)))
+                            let mut redis = redis.get().expect(CONNECTION_POOL_ERROR);
+                            let session_res = web::block(move || insert_session(user.username, &mut redis)).await;
+
+                            match session_res {
+                                Ok(session_info) => {
+                                    match session_info {
+                                        Ok(session_token) => {
+                                            Ok(HttpResponse::Ok()
+                                                .content_type(ContentType::json())
+                                                .json(SessionCookie::new(session_token))
+                                            )
+                                        }
+                                        Err(_) => HttpResponse::InternalServerError()
+                                                    .content_type(ContentType::json())
+                                                    .await, 
+                                    }
+                                }
+                                Err(_) => HttpResponse::InternalServerError()
+                                            .content_type(ContentType::json())
+                                            .await, 
+                            }
+                            
                         } else {
                             HttpResponse::Unauthorized()
                                 .content_type(ContentType::json())
@@ -104,8 +123,6 @@ pub async fn signup(req: Json<Request>, pool: Data<DbcPool>) -> Result<HttpRespo
     let mut connection = pool.get().expect(CONNECTION_POOL_ERROR);
     println!("Signup for user: {}", req.username);
 
-    let uname = req.username.clone();
-
     let rng = OsRng::default();
     let session_key: Key<HmacSha256> =  HmacSha256::generate_key(rng);
     println!("Key Size: {:#?}", session_key.len());
@@ -119,9 +136,9 @@ pub async fn signup(req: Json<Request>, pool: Data<DbcPool>) -> Result<HttpRespo
         match web::block(move || create_user(&req.username, hash, &mut connection)).await {
             Ok(result) => {
                 if result == 1 {
-                    Ok(HttpResponse::Ok()
+                    HttpResponse::Ok()
                         .content_type(ContentType::json())
-                        .json(SessionCookie::new(uname.clone())))
+                        .await
                 } else {
                     HttpResponse::Unauthorized()
                         .content_type(ContentType::json())

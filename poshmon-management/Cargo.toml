@@ -27,7 +27,11 @@ features = [
 [dependencies.redis]
 version = "0.22.3"
 features = [
-    "r2d2"
+    "r2d2",
+    "tokio-comp",
+    "tokio-native-tls-comp",
+    "aio",
+    "connection-manager"
 ]
 
 [dependencies.uuid]
