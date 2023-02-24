@@ -1,9 +1,9 @@
+use chrono::Utc;
+
 use diesel::PgConnection;
 use diesel::r2d2::ConnectionManager;
 use diesel::query_dsl::methods::FilterDsl;
 use diesel::{ExpressionMethods, RunQueryDsl};
-
-use redis::Commands;
 
 use r2d2::{Pool, PooledConnection};
 
@@ -35,17 +35,27 @@ pub fn get_user(_username: &String, connection: &mut DbcConnection) -> Result<Us
     }
 }
 
-pub fn insert_session(username: String, client: &mut PooledConnection<redis::Client>) -> Result<SessionToken, redis::RedisError> {
-    let session = SessionToken::new(username);
-    
-    let res: Result<(), redis::RedisError> = client
+pub fn insert_session(user: User, client: &mut PooledConnection<redis::Client>) -> Result<SessionToken, redis::RedisError> {
+    let session = SessionToken::new(user.username.clone());
+
+
+    let res: Result<(), redis::RedisError> = redis::pipe()
+        .atomic()
+        .sadd(
+            "active_users",
+            user.id.to_string()
+        )
+        .sadd(
+            user.id.to_string(),
+            session.session_id.to_string()
+        )
         .hset_multiple(
             session.session_id.to_string(),
             &[
-                ("username", session.username.clone()),
                 ("pkey", base64::encode(session.session_key)),
-            ],
-        );
+                ("created_time", Utc::now().to_rfc3339())
+                ]
+        ).query(client);    
 
     match res {
         Ok(_) => Ok(session),

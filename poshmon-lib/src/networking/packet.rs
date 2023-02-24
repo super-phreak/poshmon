@@ -17,7 +17,7 @@ pub trait Communication {
     fn to_message(&self) -> Message; 
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct Packet {
     header: Header,
     data: Datagram,

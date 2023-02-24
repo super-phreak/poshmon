@@ -17,6 +17,7 @@ base64 = "0.13.0"
 rust-argon2 = "1.0"
 r2d2 = "0.8.10"
 r2d2-diesel = "1.0.0"
+chrono = "0.4.23"
 
 [dependencies.diesel]
 version = "2.0.3"

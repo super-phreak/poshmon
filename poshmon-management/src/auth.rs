@@ -1,6 +1,6 @@
 
-use std::time::SystemTime;
 use actix_web::http::header::ContentType;
+use chrono::Utc;
 use crypto_common::{Key, KeyInit};
 use crypto_common::rand_core::{OsRng};
 use argon2::{self, Config};
@@ -40,12 +40,12 @@ pub struct Request {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Pong {
     msg: String,
-    time: SystemTime,
+    time: String,
 }
 
 impl Pong {
     pub fn new(msg: String) -> Self {
-        Pong { msg, time: SystemTime::now()}
+        Pong { msg, time: Utc::now().to_rfc3339()}
     }
 }
 
@@ -81,7 +81,7 @@ pub async fn login(req: Json<Request>, pool: Data<DbcPool>, redis: Data<Pool<red
                     if let Ok(res) = argon2::verify_encoded(&user.hash, password.as_bytes()) {
                         if res {
                             let mut redis = redis.get().expect(CONNECTION_POOL_ERROR);
-                            let session_res = web::block(move || insert_session(user.username, &mut redis)).await;
+                            let session_res = web::block(move || insert_session(user, &mut redis)).await;
 
                             match session_res {
                                 Ok(session_info) => {

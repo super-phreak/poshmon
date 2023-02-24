@@ -1,5 +1,5 @@
 pub mod networking;
-
+pub mod engine;
 
 #[cfg(test)]
 mod tests {
