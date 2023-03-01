@@ -45,3 +45,7 @@ Cargo.lock
 
 #temp ignore until ready for release
 helm/
+
+#Ignore Scratchpad notes
+
+scratchpad*
