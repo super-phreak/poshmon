@@ -4,12 +4,11 @@ use std::{
 };
 
 use rand::Rng;
-use serde::{self, Serialize, ser::SerializeStruct};
 use uuid::Uuid;
 
 use crate::engine::gen1::MoveType;
 
-use super::{PokeType, pokemove::PokeMove};
+use super::{PokeType, pokemove::PokeMove, Sprite};
 
 pub type Movedex = HashMap<u8,Arc<PokeMove>>;
 
@@ -41,20 +40,13 @@ pub enum StatEnum {
 }
 
 #[derive(Debug, Clone)]
-pub struct Sprite {
-    id: Uuid,
-    width: i32,
-    height: i32,
-    data: String,
-}
-
-#[derive(Debug, Clone)]
 pub struct BasePokemon {
     pub index: u8,
     pub pokedex: u8,
     pub name: String,
     pub catch_rate: u8,
-    pub sprite_id: Uuid,
+    pub front_sprite: Sprite,
+    pub back_sprite: Sprite,
 
     pub base_hp: i32,
     pub base_attack: i32,
