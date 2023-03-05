@@ -8,9 +8,9 @@ use uuid::Uuid;
 
 use crate::engine::gen1::MoveType;
 
-use super::{PokeType, pokemove::PokeMove, Sprite};
+use super::{PokeType, pokemove::PokeMove, graphics::Sprite, game::BattleMessage};
 
-pub type Movedex = HashMap<u8,Arc<PokeMove>>;
+pub type Movedex = Arc<HashMap<u8,Arc<PokeMove>>>;
 
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum PermStatus {
@@ -19,24 +19,45 @@ pub enum PermStatus {
     Paralyzed,
     Poisoned,
     Burned,
-    Sleep,
-    Freeze,
+    Sleep {turn: i32},
+    Frozen,
 }
 
 #[derive(Debug, PartialEq, Clone, Copy)]
-pub enum TempStatus {
+pub enum VolatileStatus {
     None,
-    Confused,
+    Confused {turn: i32},
+    BadlyPoisoned {turn: i32},
     Seeded,
-    Bound,
+    Bound {turn: i32},
+    Flinch,
+}
+
+pub enum BattleStatus {
+    Charging,
+    GettingPumped,
+    Mimic,
+    Recharging,
+    Subsitute,
+    SemiInvulnerable,
+    Transformed,
+
 }
  
-pub enum StatEnum {
+pub enum Stat {
     Hp,
     Attack,
     Defense,
     Speed,
     Special,
+}
+
+#[derive(Debug)]
+pub enum EvolutionInfo {
+    None,
+    LevelUp { level: u8, index: u8 },
+    Item { item_id: u8, index: u8},
+    Trade { index: u8 },
 }
 
 #[derive(Debug, Clone)]
@@ -51,17 +72,22 @@ pub struct BasePokemon {
     pub base_hp: i32,
     pub base_attack: i32,
     pub base_defense: i32,
-    pub base_special: i32,
     pub base_speed: i32,
+    pub base_special: i32,
 
     pub type1: Arc<PokeType>,
     pub type2: Option<Arc<PokeType>>,
 
     pub learned_moves: Movedex,
-    pub default_moves: Vec<Arc<PokeMove>>,
-    pub taught_moves: Vec<Arc<PokeMove>>,
+    pub default_moves: Arc<Vec<Arc<PokeMove>>>,
+    pub taught_moves: Arc<Vec<Arc<PokeMove>>>,
 
     pub pokedex_entry: String,
+    pub species: String,
+    pub height: u16,
+    pub weight: u16,
+
+    pub evolution_info: Arc<Vec<EvolutionInfo>>,
 }
 
 #[derive(Debug)]
@@ -93,7 +119,7 @@ pub struct Pokemon {
     pub move3: Option<Arc<PokeMove>>,
     pub move4: Option<Arc<PokeMove>>,
 
-    pub status: (PermStatus, TempStatus),
+    pub status: (PermStatus, VolatileStatus),
     pub current_hp: i32,
 
 }
@@ -129,13 +155,7 @@ pub enum StatXP {
     All(i32,i32,i32,i32,i32)
 }
 
-pub enum BattleMessage {
-    Missed,
-    NotVeryEffective,
-    SuperEffective,
-    NoEffect,
-    CriticalHit,
-}
+
 
 /*
 _SuperEffectiveText::
@@ -183,11 +203,11 @@ impl Pokemon {
             name: nickname.clone(),
             level,
             xp: 0,
-            hp: Self::hp_calculator(base.base_hp, Self::get_iv(StatEnum::Hp, ivs), stat_xp[0], level),
-            attack: Self::stat_calculator(base.base_attack, Self::get_iv(StatEnum::Attack, ivs), stat_xp[1], level),
-            defense: Self::stat_calculator(base.base_defense, Self::get_iv(StatEnum::Defense, ivs), stat_xp[2], level),
-            speed: Self::stat_calculator(base.base_speed, Self::get_iv(StatEnum::Speed, ivs), stat_xp[3], level),
-            special: Self::stat_calculator(base.base_special, Self::get_iv(StatEnum::Special, ivs), stat_xp[4], level),
+            hp: Self::hp_calculator(base.base_hp, Self::get_iv(Stat::Hp, ivs), stat_xp[0], level),
+            attack: Self::stat_calculator(base.base_attack, Self::get_iv(Stat::Attack, ivs), stat_xp[1], level),
+            defense: Self::stat_calculator(base.base_defense, Self::get_iv(Stat::Defense, ivs), stat_xp[2], level),
+            speed: Self::stat_calculator(base.base_speed, Self::get_iv(Stat::Speed, ivs), stat_xp[3], level),
+            special: Self::stat_calculator(base.base_special, Self::get_iv(Stat::Special, ivs), stat_xp[4], level),
             iv: ivs,
             hp_ev: stat_xp[0],
             attack_ev: stat_xp[1],
@@ -198,19 +218,29 @@ impl Pokemon {
             move2: base.default_moves.get(1).map_or_else(|| None, |v| Some(v.clone())),
             move3: base.default_moves.get(2).map_or_else(|| None, |v| Some(v.clone())),
             move4: base.default_moves.get(3).map_or_else(|| None, |v| Some(v.clone())),
-            status: (PermStatus::Healthy, TempStatus::None),
-            current_hp: Self::hp_calculator(base.base_hp, Self::get_iv(StatEnum::Hp, ivs), ivs as i32, level),
+            status: (PermStatus::Healthy, VolatileStatus::None),
+            current_hp: Self::hp_calculator(base.base_hp, Self::get_iv(Stat::Hp, ivs), stat_xp[0], level),
             guid: Uuid::new_v4(),
         }
     }
 
-    fn get_iv (method: StatEnum, iv: u16) -> i32 {
-        match method {
-            StatEnum::Attack => return ((iv & 0xF000) >> 12)  as i32,
-            StatEnum::Defense => return ((iv & 0x0F00) >> 8) as i32,
-            StatEnum::Speed => return ((iv & 0x00F0) >> 4) as i32,
-            StatEnum::Special => return (iv & 0x000F) as i32,
-            StatEnum::Hp => return (((iv & 0x1000) >> 9) + ((iv & 0x0100) >> 6) + ((iv & 0x0010) >> 3) + ((iv & 0x0001))) as i32,
+    pub fn get_stat(&self, stat: Stat) -> i32 {
+        match stat {
+            Stat::Hp => self.hp,
+            Stat::Attack => self.attack,
+            Stat::Defense => self.defense,
+            Stat::Speed => self.speed,
+            Stat::Special => self.special,
+        }
+    }
+
+    fn get_iv (mask: Stat, iv: u16) -> i32 {
+        match mask {
+            Stat::Attack => return ((iv & 0xF000) >> 12)  as i32,
+            Stat::Defense => return ((iv & 0x0F00) >> 8) as i32,
+            Stat::Speed => return ((iv & 0x00F0) >> 4) as i32,
+            Stat::Special => return (iv & 0x000F) as i32,
+            Stat::Hp => return (((iv & 0x1000) >> 9) + ((iv & 0x0100) >> 6) + ((iv & 0x0010) >> 3) + ((iv & 0x0001))) as i32,
         }
     }
 
@@ -224,7 +254,7 @@ impl Pokemon {
         return Self::stat_calculator(base, iv, statxp, level) + level + 5;
     }
 
-    pub fn set_hp(&mut self, hp: Health) {
+    pub fn set_hp(&mut self, hp: Health) -> PermStatus {
         self.current_hp = match hp {
             Health::Full => self.hp,
             Health::Percent(per) => (self.hp*per)/100,
@@ -235,11 +265,12 @@ impl Pokemon {
             Health::Zero => 0,
         };
         if self.current_hp == 0 {
-            self.status = (PermStatus::Fainted, TempStatus::None)
+            self.status = (PermStatus::Fainted, VolatileStatus::None)
         }
+        return self.status.0;
     }
 
-    pub fn get_status(&self) -> (PermStatus, TempStatus) {
+    pub fn get_status(&self) -> (PermStatus, VolatileStatus) {
         self.status
     }
 
@@ -297,7 +328,7 @@ impl Pokemon {
         dmg * random / 255
     }
 
-    pub fn attack(&mut self, defender: &mut Pokemon, pokemove: &PokeMove) -> Vec<BattleMessage> {
+    pub fn attack(&mut self, defender: &Pokemon, pokemove: &PokeMove) -> (Vec<BattleMessage>, i32) {
         let mut rng = rand::thread_rng();
 
         let stab: bool = self.basemon.type1 == pokemove.move_type || self.basemon.type2.as_ref() == Some(&pokemove.move_type);
@@ -321,24 +352,22 @@ impl Pokemon {
         let mut messages: Vec<BattleMessage> = Vec::new();
         match did_hit {
             true => {
-                defender.set_hp(Health::Subtract(dmg));
+                match crit {
+                    true => messages.push(BattleMessage::CriticalHit),
+                    false => (),
+                };
 
                 match effective {
                     Effective::NoEffect => messages.push(BattleMessage::NoEffect),
                     Effective::DoubleResist | Effective::Resist => messages.push(BattleMessage::NotVeryEffective),
                     Effective::Normal => (),
                     Effective::Super | Effective::DoubleSuper => messages.push(BattleMessage::SuperEffective),
-                }
-
-                match crit {
-                    true => messages.push(BattleMessage::CriticalHit),
-                    false => (),
                 };
             },
             false => messages.push(BattleMessage::Missed),
         };
 
-        return messages;
+        return (messages, dmg);
     }
 
     pub fn debug_pkmn_structure(&self, trainer_id: i32) -> String {
@@ -415,9 +444,10 @@ impl Display for Pokemon {
             Some(pokemove) => (pokemove.name.clone(), pokemove.power.to_string()),
             None => ("None".to_owned(),"-".to_owned()),
         };
-        write!(f, "Name: {},\n  level:\t{},\n  hp:\t\t{},\n  attack:\t{}\n  defense:\t{}\n  special:\t{}\n  speed:\t{}\nMoves:\n  {}:\t{}\n  {}:\t{}\n  {}:\t{}\n  {}:\t{}", 
+        write!(f, "Name: {},\n  level:\t{},\n  hp:\t\t{}/{},\n  attack:\t{}\n  defense:\t{}\n  special:\t{}\n  speed:\t{}\nMoves:\n  {}:\t{}\n  {}:\t{}\n  {}:\t{}\n  {}:\t{}", 
                 self.basemon.name,
                 self.level,
+                self.current_hp,
                 self.hp,
                 self.attack,
                 self.defense,

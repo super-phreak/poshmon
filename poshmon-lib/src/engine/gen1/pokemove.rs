@@ -10,5 +10,6 @@ pub struct PokeMove {
     pub power: i32,
     pub move_type: Arc<PokeType>,
     pub accuracy: i32,
-    pub pp: i32
+    pub pp: i32,
+    pub priority: i32,
 }

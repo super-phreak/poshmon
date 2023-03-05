@@ -3,7 +3,7 @@ from pokedata import GBText as text, GBDataPacket as data
 import pokedata
 
 class Move:
-    def __init__(self, addr, id, name, effect, power, move_type, accuracy, pp) -> None:
+    def __init__(self, addr, id, name, effect, power, move_type, accuracy, pp, priority) -> None:
         self.addr = addr
         self.id = id
         self.name = name
@@ -12,6 +12,7 @@ class Move:
         self.move_type = move_type
         self.accuracy = accuracy
         self.pp = pp
+        self.priority = priority
 
     @classmethod
     def from_addr(cls, addr):
@@ -21,7 +22,13 @@ class Move:
         move_type = data.get_static_data(addr+3, pokedata.BYTE, 1).collapse()
         accuracy = data.get_static_data(addr+4, pokedata.BYTE, 1).collapse()
         pp = data.get_static_data(addr+5, pokedata.BYTE, 1).collapse()
-        return cls(addr,id,MOVE_NAMES[id],effect,power,move_type,accuracy,pp)
+        if id == 98:
+            priority = 1
+        elif id == 68:
+            priority = -1
+        else:
+            priority = 0
+        return cls(addr,id,MOVE_NAMES[id],effect,power,move_type,accuracy,pp, priority)
 
     def to_json(self) -> dict:
         return {
@@ -31,7 +38,8 @@ class Move:
             "power": self.power,
             "type_id": self.move_type,
             "accuracy": self.accuracy,
-            "pp": self.pp
+            "pp": self.pp,
+            "priority": self.priority
         }
 
         

@@ -22,14 +22,20 @@ CREATE TABLE gen1_movedex (
   guid UUID PRIMARY KEY,
   id SMALLINT NOT NULL UNIQUE,
   name TEXT NOT NULL,
-  effect SMALLINT REFERENCES gen1_effectdex(id)
+  effect SMALLINT REFERENCES gen1_effectdex(id),
+  power SMALLINT NOT NULL,
+  type SMALLINT REFERENCES gen1_typedex(id),
+  accuracy SMALLINT NOT NULL,
+  pp SMALLINT NOT NULL,
+  priority SMALLINT NOT NULL
 );
 
 CREATE TABLE gen1_graphics (
   id UUID PRIMARY KEY,
   width SMALLINT NOT NULL,
   height SMALLINT NOT NULL,
-  data TEXT NOT NULL
+  data TEXT NOT NULL,
+  name TEXT NOT NULL
 );
 
 CREATE TABLE gen1_pokedex (
@@ -58,6 +64,6 @@ CREATE TABLE gen1_poke_move (
   pokemon_id UUID REFERENCES gen1_pokedex(guid),
   move_id SMALLINT REFERENCES gen1_movedex(id),
   level SMAllINT NOT NULL,
-  tm_teachable BOOLEAN NOT NULL,
+  hmtm_teachable BOOLEAN NOT NULL,
   PRIMARY KEY(pokemon_id, move_id)
 );

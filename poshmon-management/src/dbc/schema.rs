@@ -4,6 +4,7 @@ diesel::table! {
     gen1_effectdex (guid) {
         guid -> Uuid,
         id -> Int2,
+        name -> Text,
     }
 }
 
@@ -13,6 +14,7 @@ diesel::table! {
         width -> Int2,
         height -> Int2,
         data -> Text,
+        name -> Text,
     }
 }
 
@@ -22,6 +24,12 @@ diesel::table! {
         id -> Int2,
         name -> Text,
         effect -> Nullable<Int2>,
+        power -> Int2,
+        #[sql_name = "type"]
+        type_ -> Nullable<Int2>,
+        accuracy -> Int2,
+        pp -> Int2,
+        priority -> Int2,
     }
 }
 
@@ -30,7 +38,7 @@ diesel::table! {
         pokemon_id -> Uuid,
         move_id -> Int2,
         level -> Int2,
-        tm_teachable -> Bool,
+        hmtm_teachable -> Bool,
     }
 }
 
@@ -82,6 +90,7 @@ diesel::table! {
     }
 }
 
+diesel::joinable!(gen1_movedex -> gen1_typedex (type_));
 diesel::joinable!(gen1_poke_move -> gen1_pokedex (pokemon_id));
 
 diesel::allow_tables_to_appear_in_same_query!(

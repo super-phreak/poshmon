@@ -28,10 +28,10 @@ pub enum Datagram {
         session_id: String, 
         cmd_response: String
     },
-    BattleResult {
-        //gamestate: GameStateModel, 
-        client_id: String, 
-        session_id: String
-    }
+    // BattleResult {
+    //     //gamestate: GameStateModel, 
+    //     client_id: String, 
+    //     session_id: String
+    // }
     //Chat {client_id: String, recipient: String, chat_msg: String}
 }

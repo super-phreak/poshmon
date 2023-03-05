@@ -6,6 +6,13 @@ use base64::DecodeError;
 
 const TILE_SIDE_RAW: i32 = 8;
 const TILE_SIZE_RAW: i32 = TILE_SIDE_RAW * TILE_SIDE_RAW;
+//const CANVAS_WIDTH: i32 = TILE_SIDE_RAW * 10;
+
+// struct Canvas {
+//     width: i32,
+//     heigth: i32,
+//     tile_side_px: i32
+// }
 
 const PIXELS: [&str; 16] = [
     //White 202, 220, 159
@@ -74,23 +81,21 @@ impl Sprite {
     }
 
     fn render_sprite(&self, flip: bool) -> Result<Vec<u8>, Box<dyn Error>>{
-        let (flip_sign, flip_offest) = match flip {
-            true => (-1, self.width*TILE_SIDE_RAW),
-            false => (1,0),
-        };
+        // let (flip_sign, flip_offest) = match flip {
+        //     true => (-1, self.width*TILE_SIDE_RAW),
+        //     false => (1,0),
+        // };
         let decompressed_sprite: Vec<u8> = self.decompress_sprite()?;
         let mut v_buff: Vec<u8> = vec![0;(self.height*self.width*TILE_SIZE_RAW) as usize];
-        let CANVAS_WIDTH = self.width.clone()*TILE_SIDE_RAW;
+        
         for index in 0..self.height*TILE_SIZE_RAW {
             let bound = self.width*TILE_SIDE_RAW;
             if let Some(bits) = decompressed_sprite.get((index*bound) as usize..(index*bound+bound) as usize) {
                 let mut bits = bits.to_vec();
                 if flip {bits.reverse();}
                 for width in 0..bound {
-                    v_buff.insert(((index*CANVAS_WIDTH)+width) as usize,bits[width as usize]);
-                    //v_buff.insert((((index/(self.width*TILE_SIDE_RAW))*CANVAS_WIDTH)+(((index%(self.width*TILE_SIDE_RAW))*flip_sign)+flip_offest)) as usize,bits[width as usize]);
+                    v_buff.insert(((index*bound)+width) as usize,bits[width as usize]);
                 }
-                
             }
             
         }
@@ -136,22 +141,6 @@ fn draw_canvas(decompressed_sprite: Vec<u8>, height: i32, width: i32) -> String 
 }
 
 pub fn print_pallet() {
-    println!("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}", 
-        PIXELS[0],
-        PIXELS[1],
-        PIXELS[2],
-        PIXELS[3],
-        PIXELS[4],
-        PIXELS[5],
-        PIXELS[6],
-        PIXELS[7],
-        PIXELS[8],
-        PIXELS[9],
-        PIXELS[10],
-        PIXELS[11],
-        PIXELS[12],
-        PIXELS[13],
-        PIXELS[14],
-        PIXELS[15],
-    )
+    let buf: String = PIXELS.into_iter().collect();
+    println!("Pallet: {}", buf)
 }
