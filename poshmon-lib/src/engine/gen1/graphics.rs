@@ -160,8 +160,8 @@ fn draw_canvas(frame_buffer: Vec<u8>, height: i32, width: i32, viewport: Viewpor
     let canvas_width = cmp::min(viewport.width, (width*TILE_SIDE_RAW) as usize);
     let canvas_height = cmp::min(viewport.height, (height*TILE_SIDE_RAW/2) as usize);
     let mut buffer = "".to_string();
-    for row in 0..canvas_height {
-        for col in 0..canvas_width {
+    for row in viewport.offset_y..canvas_height {
+        for col in viewport.offset_x..canvas_width {
             buffer.push_str(PIXELS[
                 ((frame_buffer.get(((((row * 2)    ) * (width * TILE_SIDE_RAW) as usize) + col) as usize).unwrap() << 2) +
                   frame_buffer.get(((((row * 2) + 1) * (width * TILE_SIDE_RAW) as usize) + col) as usize).unwrap()) as usize
