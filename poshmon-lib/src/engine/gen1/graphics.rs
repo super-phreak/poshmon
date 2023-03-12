@@ -1,4 +1,4 @@
-use std::{fmt::Display, error::Error};
+use std::{fmt::Display, error::Error, cmp};
 
 use serde::Deserialize;
 use uuid::Uuid;
@@ -106,10 +106,28 @@ impl Sprite {
         let sprite = self.render_sprite(false);
 
         match sprite {
-            Ok(sprite) => println!("{}", draw_canvas(sprite, self.height, self.width)),
+            Ok(sprite) => println!("{}", draw_canvas(sprite, self.width, self.height, Viewport::new((self.width*8) as usize, (self.height*4) as usize, 0, 0))),
             Err(_) => println!("There was a decoding error in the sprite. Please check the data"),
         }
     }
+
+    pub fn draw_sprite(&self, flip: bool, viewport: Option<Viewport>) -> String {
+        let viewport = match viewport {
+            Some(v) => v,
+            None => Viewport::new((self.width*8) as usize, (self.height*4) as usize, 0, 0)
+        };
+
+        match self.render_sprite(flip) {
+            Ok(sprite) => draw_canvas(sprite, self.height, self.width, viewport),
+            Err(_) => "There was an error decoding the sprite.".to_owned()
+        }
+    }
+
+    pub fn get_bounds(&self) -> (i32, i32) {
+        (self.width, self.height)
+    }
+
+
 
 }
 
@@ -118,20 +136,35 @@ impl Display for Sprite {
         let sprite = self.render_sprite(true);
 
         let sprite: String = match sprite {
-            Ok(sprite) => draw_canvas(sprite, self.height, self.width),
+            Ok(sprite) => draw_canvas(sprite, self.height, self.width, Viewport::new((self.width*8) as usize, (self.height*4) as usize, 0,0)),
             Err(_) => "There was a decoding error in the sprite. Please check the data".to_owned(),
         };
         write!(f, "{}:{}\n\t{}x{} tiles (flipped)\n{}", self.name, self.id.to_string(),self.height,self.width,sprite)
     }
 }
 
-fn draw_canvas(decompressed_sprite: Vec<u8>, height: i32, width: i32) -> String {
+pub struct Viewport {
+    width: usize,
+    height: usize,
+    offset_x: usize,
+    offset_y: usize,
+}
+
+impl Viewport {
+    pub fn new(width: usize, height: usize, offset_x: usize, offset_y: usize) -> Self {
+        Viewport { width, height, offset_x, offset_y }
+    }
+}
+
+fn draw_canvas(frame_buffer: Vec<u8>, height: i32, width: i32, viewport: Viewport) -> String {
+    let canvas_width = cmp::min(viewport.width, (width*TILE_SIDE_RAW) as usize);
+    let canvas_height = cmp::min(viewport.height, (height*TILE_SIDE_RAW/2) as usize);
     let mut buffer = "".to_string();
-    for row in 0..height*TILE_SIDE_RAW/2 {
-        for col in 0..width*TILE_SIDE_RAW {
+    for row in 0..canvas_height {
+        for col in 0..canvas_width {
             buffer.push_str(PIXELS[
-                ((decompressed_sprite.get(((((row * 2)    ) * width * TILE_SIDE_RAW) + col) as usize).unwrap() << 2) +
-                  decompressed_sprite.get(((((row * 2) + 1) * width * TILE_SIDE_RAW) + col) as usize).unwrap()) as usize
+                ((frame_buffer.get(((((row * 2)    ) * (width * TILE_SIDE_RAW) as usize) + col) as usize).unwrap() << 2) +
+                  frame_buffer.get(((((row * 2) + 1) * (width * TILE_SIDE_RAW) as usize) + col) as usize).unwrap()) as usize
             ]);
         }
         buffer.push_str("\n");

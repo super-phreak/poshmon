@@ -1,6 +1,6 @@
 use std::{sync::Arc, collections::HashMap};
 
-use poshmon_lib::engine::gen1::{graphics, EvolutionInfo};
+use poshmon_lib::engine::gen1::{graphics, EvolutionInfo, PermStatus, VolatileStatus};
 
 fn main() {
     use poshmon_lib::engine::gen1::{BasePokemon, Pokemon, PokeType, MoveType, PokeMove, StatXP, graphics::Sprite};
@@ -80,7 +80,7 @@ fn main() {
     let kangaskhan_front_sprite = Sprite::new(7,7,"AAAAC/AAAAAAAAAAAAAAAAAxbAAAAAAAAAAAAAAAAMF7AAAAAAAAAAAAAAADm//+AAAAAAAAAAAAAAP0BVX8AAAAAAAAAAAAD8ABVVfAAAAAAAAAAAA9AAVVVbwP/8AAAAAAANVAVVVVv+QAMAAAAAALVVVVVVW5AADAAAAAADlVVVVVVsAADgAAAAAA1VVVVVVbwAAwAAAAAANVVVVv/q9AAcAAAAAACVVVVvlT+lALAAAAAAANVVVvVAOqVXwAAAAAAA5VVbLgDVuV8AAAAAAAM+qq4+ANVv+8AAAAAAAwP9v7wLVWqrfAAAAAADAVVb/r1ZWqpsAAAAAADXlVVVVVlaqrAAAAAAAOVVVVVVbVqqwAAAAAAAP/5VVVW1arrAAAAAAAAAHDv/6uVqrv8AAAAAAAAMP/gPlqqrysAAAAAAAAz//w16qv8GwAAAAAA/x7/qzWq/1prAAAAAAPA7fqrd6sA6rDwAAAAAwAt6qrXrAD/rHAAAAAA/h3qql6fV8DpcAAAwAMA+mqrenD8AenwAAJgDAA3Wv16cDBV6n8AA3AMB+fVVelcP++qq/AIcAl+l7V//Vf9qqarzA1wA/9ba9ar/V1WpWtTIXAMA/1dWv9TX1Vlb1M1DAwfHXa/QMDV1VVuW8UHArMd39D8P9XlVa+rF1sAA13AA88bW//6u6xXawADedAB/1teVW/6/1X8AAD5f9AFb/lBVu/w9WwAALl9fVf99AVV8BxdbAAAO8eX7G90BVcAW11gAAA6xulwXXQFVwFbrbAAADLG//Ft0VVXAWu2sAAAwtbQNrXVVVXFqdrAAADGv1AP1Nf6lX+q6sAAAMa1QABQjAV1Vf/rAAADGnUAAAFwVW1Va+4AAAM9bwAAF/FVbVVq+AAAA8FqwVX+sVVtVargAAADxaqv/1qtVbVWqvAAADw+qquFqquq6b/6+AAAwBf6q/qqq/+rAB+8AAMAVV6r///8D6wAVf4AAwVVV6//AAAA8AFVXwAA/////8AAAAA/////AAAAAAAAAAAAAAAAAAAAA==".to_owned(), "kangaskhan_front_sprite".to_owned());
     let kangaskhan_back_sprite = Sprite::new(4,4,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPwP/wD8AAAPG/BV/wPAADAbAVawBbAAMW1VWsAWsAANdVWqwVrAAAPf+qrFXwAAAPCvq3XwAAAAwFr9X9wAAAIBVVVVzwAAA8TFVVV/AAADMxlVVV7AAAwHKVVVW8AAMBnmxVVqwADBblsBV+sAAMauVwFYvAAAOvpcFtvwAAA/qVxa38AAADalV6ufAAAAMGVW+58AAADFZVauWwAAAxV1VqpawAADFtWaqWqwAADrVqu9arwAA7uqruWqrAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==".to_owned(), "kangaskhan_back_sprite".to_owned());
 
-    println!("{}", rhydon_front_sprite);
+    println!("{}", kangaskhan_front_sprite);
     rhydon_front_sprite.print_sprite_to_term();
     graphics::print_pallet();
 
@@ -124,7 +124,8 @@ fn main() {
         evolution_info: Arc::new(vec!(EvolutionInfo::None)),
     });
 
-    let mut rhydon = Pokemon::new(base_rhydon.clone(), None, None, None, StatXP::Zero);
+    let mut rhydon = Pokemon::new(base_rhydon.clone(), None, Some(10), Some("BREAKPOINT".to_owned()), StatXP::Max);
+    rhydon.set_status(Some(PermStatus::Paralyzed), Some(VolatileStatus::BadlyPoisoned { turn: 10 }));
 
     let base_kangaskhan = Arc::new(BasePokemon {
         index: 2,
@@ -173,4 +174,6 @@ fn main() {
     } else {
         println!("Unable to get term size :(")
     }
+
+    println!("{}", rhydon.print_battle_stats(true));
 }

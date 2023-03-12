@@ -8,7 +8,7 @@ use uuid::Uuid;
 
 use crate::engine::gen1::MoveType;
 
-use super::{PokeType, pokemove::PokeMove, graphics::Sprite, game::BattleMessage};
+use super::{PokeType, pokemove::PokeMove, graphics::{Sprite, Viewport}, game::BattleMessage};
 
 pub type Movedex = Arc<HashMap<u8,Arc<PokeMove>>>;
 
@@ -90,7 +90,7 @@ pub struct BasePokemon {
     pub evolution_info: Arc<Vec<EvolutionInfo>>,
 }
 
-#[derive(Debug)]
+//#[derive(Debug)]
 pub struct Pokemon {
     basemon: Arc<BasePokemon>,
 
@@ -114,10 +114,10 @@ pub struct Pokemon {
     pub speed_ev: i32,
     pub special_ev: i32,
 
-    pub move1: Option<Arc<PokeMove>>,
-    pub move2: Option<Arc<PokeMove>>,
-    pub move3: Option<Arc<PokeMove>>,
-    pub move4: Option<Arc<PokeMove>>,
+    pub move1: Option<InstantiatedMove>,
+    pub move2: Option<InstantiatedMove>,
+    pub move3: Option<InstantiatedMove>,
+    pub move4: Option<InstantiatedMove>,
 
     pub status: (PermStatus, VolatileStatus),
     pub current_hp: i32,
@@ -155,6 +155,16 @@ pub enum StatXP {
     All(i32,i32,i32,i32,i32)
 }
 
+pub struct InstantiatedMove {
+    pub data: Arc<PokeMove>,
+    pub current_pp: i32,
+}
+
+impl InstantiatedMove {
+    pub fn new(data: Arc<PokeMove>, current_pp: i32) -> Self {
+        InstantiatedMove { data, current_pp }
+    }
+}
 
 
 /*
@@ -214,10 +224,10 @@ impl Pokemon {
             defense_ev: stat_xp[2],
             speed_ev: stat_xp[3],
             special_ev: stat_xp[4],
-            move1: base.default_moves.get(0).map_or_else(|| None, |v| Some(v.clone())),
-            move2: base.default_moves.get(1).map_or_else(|| None, |v| Some(v.clone())),
-            move3: base.default_moves.get(2).map_or_else(|| None, |v| Some(v.clone())),
-            move4: base.default_moves.get(3).map_or_else(|| None, |v| Some(v.clone())),
+            move1: base.default_moves.get(0).map_or_else(|| None, |v| Some(InstantiatedMove::new(v.clone(), v.pp))),
+            move2: base.default_moves.get(1).map_or_else(|| None, |v| Some(InstantiatedMove::new(v.clone(), v.pp))),
+            move3: base.default_moves.get(2).map_or_else(|| None, |v| Some(InstantiatedMove::new(v.clone(), v.pp))),
+            move4: base.default_moves.get(3).map_or_else(|| None, |v| Some(InstantiatedMove::new(v.clone(), v.pp))),
             status: (PermStatus::Healthy, VolatileStatus::None),
             current_hp: Self::hp_calculator(base.base_hp, Self::get_iv(Stat::Hp, ivs), stat_xp[0], level),
             guid: Uuid::new_v4(),
@@ -370,25 +380,37 @@ impl Pokemon {
         return (messages, dmg);
     }
 
+    pub fn set_status(&mut self, perm: Option<PermStatus>, volatile: Option<VolatileStatus>) {
+        match perm {
+            Some(stat) => self.status.0 = stat,
+            None => ()
+        };
+
+        match volatile {
+            Some(stat) => self.status.1 = stat,
+            None => ()
+        }
+    }
+
     pub fn debug_pkmn_structure(&self, trainer_id: i32) -> String {
         let type2_index = match &self.basemon.type2 {
             Some(type2) => type2.index,
             None => self.basemon.type1.index,
         };
         let (move1_index, move1_pp) = match &self.move1 {
-            Some(move1) => (move1.id, move1.pp),
+            Some(move1) => (move1.data.id, move1.current_pp),
             None => (0,0),
         };
         let (move2_index, move2_pp) = match &self.move2 {
-            Some(mov) => (mov.id, mov.pp),
+            Some(mov) => (mov.data.id, mov.current_pp),
             None => (0,0),
         };
         let (move3_index, move3_pp) = match &self.move3 {
-            Some(mov) => (mov.id, mov.pp),
+            Some(mov) => (mov.data.id, mov.current_pp),
             None => (0,0),
         };        
         let (move4_index, move4_pp) = match &self.move4 {
-            Some(mov) => (mov.id, mov.pp),
+            Some(mov) => (mov.data.id, mov.current_pp),
             None => (0,0),
         };
         
@@ -424,43 +446,134 @@ impl Pokemon {
             self.special
         )
     }
+
+    pub fn print_battle_stats(&self, player: bool) -> String {
+        let sprite = match player {
+            true => &self.basemon.back_sprite,
+            false => &self.basemon.front_sprite,
+        };
+        
+
+        let (canvas_width, canvas_height): (usize, usize) = match term_size::dimensions() {
+            Some(size) => match player {
+                true => (size.0, (sprite.get_bounds().1*4-1) as usize),
+                false => (size.0, (sprite.get_bounds().1*4) as usize),
+            }
+            None => (45,45),
+        };
+        let viewport = Viewport::new(canvas_width-45, canvas_height, 0, 0);
+        let sprite = sprite.draw_sprite(false, Some(viewport));
+        let sprite: Vec<&str> = sprite.lines().collect();
+        let mut stats: Vec<String> = Vec::new();
+        let mut output: String = "".to_owned();
+
+        if self.name == self.basemon.name {
+            stats.push(format!("{}", self.name));
+        } else {
+            stats.push(format!("{:<10} ({})", self.name, self.basemon.name));
+        }
+        stats.push(format!("{:^45}", self.guid.to_string()));
+        stats.push(format!("  {:<15}{:>3}", "Level:", self.level));
+        stats.push(format!("  {:<15}", "---Status---"));
+        stats.push(format!("    {:<13}{:?}", "Perm:", self.status.0));
+        stats.push(format!("    {:<13}{:?}", "Volatile:", self.status.1));
+        stats.push("  ---Stats---".to_string());
+        stats.push(format!("    {:<9}{:>3}/{:>3} (0x{:04X})", "HP:", self.current_hp, self.hp, self.hp_ev));
+        stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Attack:", self.attack, self.attack_ev));
+        stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Defence:", self.defense, self.defense_ev));
+        stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Speed:", self.speed, self.speed_ev));
+        stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Special:", self.special, self.special_ev));
+        stats.push(format!("    {:<13}0x{:04X}", "IVs:", self.iv, ));
+        stats.push("  ---Moves---".to_string());
+
+        //Move info
+        let mut move_data: Vec<(String, String, i32, i32, String)> = Vec::new();
+        move_data.push(
+            match &self.move1 {
+                Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
+                None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
+            }
+        );
+        move_data.push(
+            match &self.move2 {
+                Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
+                None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
+            }
+        );
+        move_data.push(
+            match &self.move3 {
+                Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
+                None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
+            }
+        );
+        move_data.push(
+            match &self.move4 {
+                Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
+                None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
+            }
+        );
+        for moves in move_data {
+            stats.push(format!("    {:<13}{:>2}/{:>2}", moves.0, moves.3, moves.2));
+            stats.push(format!("      Type: {:<8} PWR: {}", moves.4, moves.1));
+        }
+        
+        
+        
+        let print_len = cmp::max(stats.len(), sprite.len() as usize);
+        output.push_str(format!("{:^45}{}", stats[0], sprite[0]).as_str());
+        for i in 1..print_len as usize {
+            let sprite_line = match sprite.get(i) {
+                Some(line) => line,
+                None => "",
+            };
+
+            let stat_line = match stats.get(i) {
+                Some(line) => line,
+                None => "",
+            };
+            
+            output.push_str(format!("\n{:<45}{}", stat_line, sprite_line).as_str());
+        }
+        output
+    }
 }
 
 impl Display for Pokemon {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let (move1_name, move1_power): (String, String) = match &self.move1 {
-            Some(pokemove) => (pokemove.name.clone(), pokemove.power.to_string()),
-            None => ("None".to_owned(),"-".to_owned()),
-        };
-        let (move2_name, move2_power): (String, String) = match &self.move2 {
-            Some(pokemove) => (pokemove.name.clone(), pokemove.power.to_string()),
-            None => ("None".to_owned(),"-".to_owned()),
-        };
-        let (move3_name, move3_power): (String, String) = match &self.move3 {
-            Some(pokemove) => (pokemove.name.clone(), pokemove.power.to_string()),
-            None => ("None".to_owned(),"-".to_owned()),
-        };
-        let (move4_name, move4_power): (String, String) = match &self.move4 {
-            Some(pokemove) => (pokemove.name.clone(), pokemove.power.to_string()),
-            None => ("None".to_owned(),"-".to_owned()),
-        };
-        write!(f, "Name: {},\n  level:\t{},\n  hp:\t\t{}/{},\n  attack:\t{}\n  defense:\t{}\n  special:\t{}\n  speed:\t{}\nMoves:\n  {}:\t{}\n  {}:\t{}\n  {}:\t{}\n  {}:\t{}", 
-                self.basemon.name,
-                self.level,
-                self.current_hp,
-                self.hp,
-                self.attack,
-                self.defense,
-                self.special,
-                self.speed,
-                move1_name,
-                move1_power,
-                move2_name,
-                move2_power,
-                move3_name,
-                move3_power,
-                move4_name,
-                move4_power,
-        )
+        // let (move1_name, move1_power): (String, String) = match &self.move1 {
+        //     Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string()),
+        //     None => ("None".to_owned(),"-".to_owned()),
+        // };
+        // let (move2_name, move2_power): (String, String) = match &self.move2 {
+        //     Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string()),
+        //     None => ("None".to_owned(),"-".to_owned()),
+        // };
+        // let (move3_name, move3_power): (String, String) = match &self.move3 {
+        //     Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string()),
+        //     None => ("None".to_owned(),"-".to_owned()),
+        // };
+        // let (move4_name, move4_power): (String, String) = match &self.move4 {
+        //     Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string()),
+        //     None => ("None".to_owned(),"-".to_owned()),
+        // };
+        // write!(f, "Name: {},\n  level:\t{},\n  hp:\t\t{}/{},\n  attack:\t{}\n  defense:\t{}\n  special:\t{}\n  speed:\t{}\nMoves:\n  {}:\t{}\n  {}:\t{}\n  {}:\t{}\n  {}:\t{}", 
+        //         self.basemon.name,
+        //         self.level,
+        //         self.current_hp,
+        //         self.hp,
+        //         self.attack,
+        //         self.defense,
+        //         self.special,
+        //         self.speed,
+        //         move1_name,
+        //         move1_power,
+        //         move2_name,
+        //         move2_power,
+        //         move3_name,
+        //         move3_power,
+        //         move4_name,
+        //         move4_power,
+        // )
+        write!(f, "{}", self.print_battle_stats(false))
     }
 }

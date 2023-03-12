@@ -13,4 +13,6 @@ pub use poketype::PokeType;
 pub use poketype::MoveType;
 pub use pokemove::PokeMove;
 pub use pokemon::BattleStatus;
+pub use pokemon::PermStatus;
+pub use pokemon::VolatileStatus;
 pub use game::GameState;

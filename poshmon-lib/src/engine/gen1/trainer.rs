@@ -2,7 +2,6 @@ use std::{sync::{Arc, RwLock, RwLockWriteGuard}};
 
 use super::{Pokemon, graphics::Sprite};
 
-#[derive(Debug)]
 pub struct Trainer {
     pub name: String,
     pub id: u16,
