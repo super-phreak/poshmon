@@ -10,8 +10,6 @@ use uuid::Uuid;
 use serde::{Serialize, Deserialize};
 use tungstenite::protocol::Message;
 
-use crate::engine::structs::MoveStatus;
-
 use super::PeerMap;
 
 pub type Tx = UnboundedSender<Message>;
@@ -81,8 +79,6 @@ pub struct ReducedPokemonModel {
 pub struct GameStateModel {
     pub(crate) player_mon: PlayerPokemonModel,
     pub(crate) enemy_mon: PlayerPokemonModel,
-
-    pub(crate) fight_message: MoveStatus,
 }
 
 pub trait Payload {

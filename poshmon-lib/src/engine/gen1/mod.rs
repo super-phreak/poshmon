@@ -6,6 +6,7 @@ mod game;
 mod trainer;
 
 pub use pokemon::Pokemon;
+pub use pokemon::PokemonModel;
 pub use pokemon::StatXP;
 pub use pokemon::BasePokemon;
 pub use pokemon::EvolutionInfo;

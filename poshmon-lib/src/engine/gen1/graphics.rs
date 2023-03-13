@@ -127,6 +127,10 @@ impl Sprite {
         (self.width, self.height)
     }
 
+    pub fn get_sprite_data(&self) -> (i32, i32, String) {
+        (self.width, self.height, self.data.clone())
+    }
+
 
 
 }

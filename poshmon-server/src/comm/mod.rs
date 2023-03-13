@@ -2,10 +2,10 @@ pub mod structs;
 
 extern crate poshmon_lib;
 use poshmon_lib::{
-    networking::{Packet, Communication, Datagram, SessionToken}
+    networking::{Packet, Communication, Datagram, SessionToken}, engine::gen1::Pokemon
 };
 
-use crate::{engine::{structs::{Pokemon, GameState, PokeTeam, DataFieldNotFoundError}, data::Data, create_pokemon}};
+use crate::{engine::{structs::{DataFieldNotFoundError}, data::Data, create_pokemon}};
 
 use self::structs::{
     Peer,
