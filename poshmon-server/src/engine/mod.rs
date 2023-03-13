@@ -1,15 +1,8 @@
-use std::{cmp};
 use std::collections::HashMap;
-use std::error::Error;
 use std::fs::File;
 use std::io::{BufReader, BufRead};
-use std::sync::{Mutex, Arc, RwLock};
+use std::sync::{Arc, RwLock};
 use poshmon_lib::engine::gen1::{BasePokemon, PokeMove, PokeType};
-// use rand::Rng;
-use uuid::Uuid;
-use self::structs:: {
-    PokemonNotFoundError, 
-};
 
 use self::data::{Data, Pokedex, Typedex, build_type, build_pokemon, Games, Movedex, build_moves, WordList};
 
@@ -20,7 +13,7 @@ pub fn init_engine(data: HashMap<&str, serde_json::Value>, words_file: File) -> 
     let mut pokedex: HashMap<u8, Arc<BasePokemon>> = HashMap::new();
     let mut movedex: HashMap<u8, Arc<PokeMove>> = HashMap::new();
     let mut typedex: HashMap<u8, Arc<PokeType>> = HashMap::new();
-    let games = Games::new(Mutex::new(HashMap::new()));
+    let games = Games::new(RwLock::new(HashMap::new()));
     let mut wordlist: Vec<String> = Vec::new();
 
     if let Some(config) = data.get("conf") {

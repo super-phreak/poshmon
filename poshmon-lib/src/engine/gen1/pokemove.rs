@@ -13,3 +13,9 @@ pub struct PokeMove {
     pub pp: i32,
     pub priority: i32,
 }
+
+impl Default for PokeMove {
+    fn default() -> Self {
+        Self { id: 255, name: "NONE".to_string(), effect: 0, power: 0, move_type: Default::default(), accuracy: 0, pp: 0, priority: -255 }
+    }
+}

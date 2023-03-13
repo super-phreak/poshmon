@@ -13,5 +13,12 @@ pub struct PokeType {
 #[derive(Debug, PartialEq, Clone)]
 pub enum MoveType {
     Physical,
-    Special
+    Special,
+    Error,
+}
+
+impl Default for PokeType {
+    fn default() -> Self {
+        PokeType { index: 255, name: "NONE".to_string(), category: MoveType::Error, strong: Vec::new(), weak: Vec::new(), no_effect: Vec::new() }
+    }
 }

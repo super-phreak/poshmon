@@ -2,20 +2,20 @@ pub mod structs;
 
 extern crate poshmon_lib;
 use poshmon_lib::{
-    networking::{Packet, Communication, Datagram, SessionToken}, engine::gen1::Pokemon
+    networking::{Packet, Communication, Datagram, SessionToken}, engine::gen1::{Pokemon, PokemonModel}
 };
 
-use crate::{engine::{structs::{DataFieldNotFoundError}, data::Data, create_pokemon}};
+use crate::engine::data::Data;
 
 use self::structs::{
     Peer,
-    ServerConfig, GameStateModel, PlayerPokemonModel,
+    ServerConfig,
 };
 
 use std::{
         net::SocketAddr,
         error::Error,
-        sync::{Arc, Mutex, RwLock},
+        sync::{Arc, Mutex, RwLock, PoisonError, RwLockReadGuard},
         collections::HashMap,
     };
 
@@ -35,68 +35,22 @@ fn new_peer(addr: SocketAddr, name: Option<String>, tx: UnboundedSender<Message>
     return peer;
 }
 
-fn create_pokemon_model(mon: &RwLock<Pokemon>) -> Result<PlayerPokemonModel, Box<dyn Error>> {
-    if let Ok(pokemon) = mon.read() {
-        Ok(PlayerPokemonModel{
-            id: pokemon.base.pokedex,
-            nickname: pokemon.nickname.clone(),
-            level: pokemon.level,
-            hp: pokemon.hp,
-            current_hp: pokemon.current_hp,
-            attack: pokemon.attack,
-            defense: pokemon.defense,
-            speed: pokemon.speed,
-            special: pokemon.special,
-            guid: pokemon.guid.to_string(),
-            moves: vec![pokemon.move1.as_ref().map_or(None, |mv| Some(mv.id)),pokemon.move2.as_ref().map_or(None, |mv| Some(mv.id)),pokemon.move3.as_ref().map_or(None, |mv| Some(mv.id)),pokemon.move4.as_ref().map_or(None, |mv| Some(mv.id))],
-        })
-    } else {
-        return Err(DataFieldNotFoundError.into());
+fn _create_pokemon_model(mon: &RwLock<Pokemon>, reduced: bool) -> Result<PokemonModel, PoisonError<RwLockReadGuard<Pokemon>>> {
+    match mon.read() {
+        Ok(mon) => Ok(mon.to_model(reduced)),
+        Err(e) => Err(e),
     }
 }
 
-fn get_team_from_ids(ids: Vec<i64>, data: Data) -> Result<PokeTeam, Box<dyn Error>> {
-    let mut team: Vec<Arc<RwLock<Pokemon>>> = Vec::new();
-    for id in ids {
-        team.push(Arc::new(RwLock::new(create_pokemon(id as u8, data.clone())?)));
-    }
-    return Ok(PokeTeam::new(team));
-}
+// fn get_team_from_ids(ids: Vec<i64>, data: Data) -> Result<PokeTeam, Box<dyn Error>> {
+//     let mut team: Vec<Arc<RwLock<Pokemon>>> = Vec::new();
+//     for id in ids {
+//         team.push(Arc::new(RwLock::new(create_pokemon(id as u8, data.clone())?)));
+//     }
+//     return Ok(PokeTeam::new(team));
+// }
 
-fn build_pokemodel(team: PokeTeam, player: bool) -> Vec<PlayerPokemonModel> {
-    _ = player;
-    let mut team_model = Vec::new();
-    for mon in team.iter() {
-        if let Ok(pokemodel) = create_pokemon_model(&mon.clone()) {
-            team_model.push(pokemodel);
-        }
-    }
-
-    return team_model;
-}
-
-fn get_gamestate(session_id: & String, move_id: i32, data: Data) -> Result<GameStateModel, Box<dyn Error>> {
-    match data.games.lock().unwrap().get(session_id) {
-        Some(game) => {
-            if let Ok(mut fight) = game.write() {
-                fight.fight(data.movedex.get(&(move_id as u8)).unwrap(), data.movedex.get(&(1 as u8)).unwrap());
-                Ok(GameStateModel{ player_mon: create_pokemon_model(&fight.active1)?, enemy_mon: create_pokemon_model(&fight.active2)?, fight_message: fight.last_fight.lock().unwrap().unwrap().player1_movestatus })
-            } else {
-                Err(DataFieldNotFoundError.into())
-            }
-        },
-        None => Err(DataFieldNotFoundError.into()),
-    }
-}
-
-fn build_game(player1_team: PokeTeam, player2_team: PokeTeam) -> Result<GameState, Box<dyn Error>> {
-    _ = player1_team;
-    _ = player2_team;
-    todo!();
-    //return Ok(GameState {game_code: "Testy Testy".to_string(), player1_team: player1_team.clone(), player2_team: player2_team.clone(), active1: player1_team.get(0).ok_or_else(|| DataFieldNotFoundError)?.clone(), active2: player2_team.get(1).ok_or_else(|| DataFieldNotFoundError)?.clone(), last_fight: Mutex::new(None), player1_ready: RwLock::new(true), player2_ready: RwLock::new(true) });
-}
-
-pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: SocketAddr, data: Data) {
+pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: SocketAddr, _data: Data) {
     println!("Incoming TCP connection from: {}", addr);
 
     let ws_stream = tokio_tungstenite::accept_async(raw_stream)
@@ -125,21 +79,11 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
         if let Ok(cmd_in) = cmd  {
             msg_out = match cmd_in {
                 Datagram::CreateGame {  } => Packet::new(token, Datagram::Awk { session_id: "dfad".to_string(), cmd_response: "dafd".to_string() }),
-                Datagram::SubmitTeam {session_id, client_id, name, team } => {
-                    let team2: Vec<i64> = vec![25,25];
-                    _ = name;
-                    if let Ok(game) = build_game(get_team_from_ids(team, data.clone()).ok().unwrap(), get_team_from_ids(team2, data.clone()).ok().unwrap()) {
-                        let game = Arc::new(RwLock::new(game));
-                        data.games.lock().unwrap().insert(session_id.clone(), game.clone());
-                        Packet::new(token,Datagram::GetTeam { session_id: session_id, client_id: client_id, name: "Josh".to_string(), })//team: build_pokemodel(game.clone().read().unwrap().player1.team.clone(), true) })
-                    } else {
-                        Packet::new(token,Datagram::Awk { session_id: session_id, cmd_response: "Failure to submit team".to_string() })
-                    }
-                },
-                Datagram::SendMove { session_id, client_id, pokemon_guid: _, move_id } => Packet::new(token, Datagram::BattleResult { /*gamestate: get_gamestate(&"1234".to_string(),move_id,data.clone()).ok().unwrap(),*/ session_id, client_id }),
-                Datagram::GetTeam { session_id, client_id, name } => todo!(),
-                Datagram::Awk { session_id, cmd_response } => todo!(),
-                Datagram::BattleResult { client_id, session_id } => todo!(),
+                Datagram::SubmitTeam {session_id: _, client_id: _, name: _, team: _ } => Packet::new(token, Datagram::Awk { session_id: "test".to_string(), cmd_response: "test".to_string() }),
+                Datagram::SendMove { session_id: _, client_id: _, pokemon_guid: _, move_id: _ } => Packet::new(token, Datagram::Awk { session_id: "test".to_string(), cmd_response: "test".to_string() }), //{ /*gamestate: get_gamestate(&"1234".to_string(),move_id,data.clone()).ok().unwrap(),*/ session_id, client_id }),
+                Datagram::GetTeam { session_id: _, client_id: _, name: _ } => Packet::new(token, Datagram::Awk { session_id: "test".to_string(), cmd_response: "test".to_string() }),
+                Datagram::Awk { session_id: _, cmd_response: _ } => Packet::new(token, Datagram::Awk { session_id: "test".to_string(), cmd_response: "test".to_string() }),
+                //Datagram::BattleResult { client_id, session_id } => todo!(),
                 //Commands::Chat { client_id, recipient, chat_msg } => Response::
                 //_ => (Message::from(format!("Player Invalid CMD")), Message::from(format!("You sent invalid cmd"))),
             };
@@ -184,8 +128,8 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
 
 pub fn create_server_config(port: Option<u16>) -> Result<ServerConfig, Box<dyn Error>> {
     let config = ServerConfig{
-        ip: local_ipaddress::get().ok_or("127.0.0.1")?,
-        port: port.ok_or(8080).unwrap(),
+        ip: local_ipaddress::get().unwrap_or("127.0.0.1".to_string()),
+        port: port.unwrap_or(8080),
         peers: PeerMap::new(Mutex::new(HashMap::new())),
     };
     return Ok(config);

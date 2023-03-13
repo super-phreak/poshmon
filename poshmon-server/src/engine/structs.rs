@@ -12,11 +12,19 @@ impl fmt::Display for PokemonNotFoundError {
 impl Error for PokemonNotFoundError {}
 
 #[derive(Debug, Clone)]
-pub struct DataFieldNotFoundError;
+pub struct DataFieldNotFoundError {
+    field: String,
+}
+
+impl DataFieldNotFoundError {
+    pub fn new(field: &str) -> Self {
+        DataFieldNotFoundError { field: field.to_string() }
+    }
+}
 
 impl fmt::Display for DataFieldNotFoundError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "The data field could not be found")
+        write!(f, "The data field {} could not be found", self.field)
     }
 }
 

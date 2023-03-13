@@ -68,7 +68,7 @@ pub enum EvolutionInfo {
     Trade { index: u8 },
 }
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct BasePokemon {
     pub index: u8,
     pub pokedex: u8,
@@ -96,6 +96,126 @@ pub struct BasePokemon {
     pub weight: u16,
 
     pub evolution_info: Arc<Vec<EvolutionInfo>>,
+}
+
+impl BasePokemon {
+    pub fn debug_graphic(&self) -> String {
+        let base = self.debug_info();
+
+        let mut output = String::new();
+
+        let (canvas_width, canvas_height): (usize, usize) = match term_size::dimensions() {
+            Some(size) => (size.0, (self.front_sprite.get_bounds().1*4) as usize),
+            None => (45,45),
+        };
+        let viewport = Viewport::new(canvas_width-45, canvas_height, 0, 0);
+
+        let front_sprite = self.front_sprite.draw_sprite(false, Some(viewport));
+
+        let sprite: Vec<&str> = front_sprite.lines().collect();
+        let print_len = cmp::max(base.len(), sprite.len() as usize);
+        output.push_str(format!("{:<54}{}", base[0], sprite[0]).as_str());
+        for i in 1..print_len as usize {
+            let sprite_line = match sprite.get(i) {
+                Some(line) => line,
+                None => "",
+            };
+
+            let stat_line = match base.get(i) {
+                Some(line) => line,
+                None => "",
+            };
+            
+            output.push_str(format!("\n{:<54}{}", stat_line, sprite_line).as_str());
+        }
+        output
+    }
+
+    fn debug_info(&self) -> Vec<String> {
+        let mut base: Vec<String> = Vec::new();
+        let header: String = format!("{} <p{:03}|i{:03}>", self.species, self.pokedex, self.index);
+        base.push(format!("{:^50}", self.name.clone()));
+        base.push(format!("{:^50}", header));
+        let type2: String = match &self.type2 {
+            Some(poketype) => poketype.name.clone(),
+            None => "NONE".to_owned(),
+        };
+        //base.push(format!("{:<8}{:<7}{:<9}  {:<7}{}", "", "Type1:", self.type1.name, "Type2:", type2));
+        //base.push("".to_string());
+        base.push(format!("{:<4}{}{:12}{}", "", "-----STATS-----", "", "-----INFO-----"));
+        base.push(format!("{:<4}{:<11}{:>4}{:12}{}{:>9}", "", "HP:", self.base_hp, "", "Typ1:", self.type1.name));
+        base.push(format!("{:<4}{:<11}{:>4}{:12}{}{:>9}", "", "Attack:", self.base_attack, "", "Typ2:", type2));
+        base.push(format!("{:<4}{:<11}{:>4}{:12}{:<10}{:>4}", "", "Defense", self.base_defense, "", "CatchRate:", self.catch_rate));
+        base.push(format!("{:<4}{:<11}{:>4}{:12}{:<10}{:>4}", "", "Speed:", self.base_speed, "", "Weight:", self.weight));
+        base.push(format!("{:<4}{:<11}{:>4}{:12}{:<10}{:>4}", "", "Special:", self.base_special, "", "Feet:", self.height/12));
+        base.push(format!("{:<4}{:<11}{:>4}{:12}{:<10}{:>4}", "", "Total:", self.base_hp + self.base_attack + self.base_defense + self.base_speed + self.base_special, "", "Inches:", self.height%12));
+        
+        
+        base.push("".to_string());
+        base.push(format!("{:^50}", "-----DEFAULT MOVES-----"));
+        let default_move1 = match self.default_moves.get(0) {
+            Some(pokemove) => pokemove.name.clone(),
+            None => "  ---".to_owned(),
+        };
+        let default_move2 = match self.default_moves.get(1) {
+            Some(pokemove) => pokemove.name.clone(),
+            None => "  ---".to_owned(),
+        };
+        let default_move3 = match self.default_moves.get(2) {
+            Some(pokemove) => pokemove.name.clone(),
+            None => "  ---".to_owned(),
+        };
+        let default_move4 = match self.default_moves.get(3) {
+            Some(pokemove) => pokemove.name.clone(),
+            None => "  ---".to_owned(),
+        };
+
+        base.push(format!("{:<9}{:^14}{:<2}{:^14}", "", default_move1, "", default_move3));
+        base.push(format!("{:<9}{:^14}{:<2}{:^14}", "", default_move2, "", default_move4));
+
+
+        
+        base.push("".to_string());
+        base.push(format!("{:^50}", "-----LEARNED MOVES-----"));
+        
+        let mut columns: [Vec<String>; 3] = [Vec::new(), Vec::new(), Vec::new()];
+
+        let mut index = 0;
+        for (level, pokemove) in self.learned_moves.iter()  {
+            columns[index%3].push(format!("{:2}: {}", level, pokemove.name.clone()));
+            index = (index + 1) % 3;
+        }
+
+        let rows = cmp::max(cmp::max(columns[0].len(), columns[1].len()), columns[2].len());
+        for row in 0..rows {
+            let val0 = columns[0].get(row).unwrap_or(&"".to_string()).clone();
+            let val1 = columns[1].get(row).unwrap_or(&"".to_string()).clone();
+            let val2 = columns[2].get(row).unwrap_or(&"".to_string()).clone();
+
+            base.push(format!("{:<18}{:<18}{:<18}", val0, val1, val2))
+        }
+
+        base.push("".to_string());
+        base.push(format!("{:^50}", "------TAUGHT MOVES-----"));
+
+        let mut columns: [Vec<String>; 3] = [Vec::new(), Vec::new(), Vec::new()];
+
+        let mut index = 0;
+        for pokemove in self.taught_moves.iter()  {
+            columns[index%3].push(pokemove.name.clone());
+            index = (index + 1) % 3;
+        }
+
+        let rows = cmp::max(cmp::max(columns[0].len(), columns[1].len()), columns[2].len());
+        for row in 0..rows {
+            let val0 = columns[0].get(row).unwrap_or(&"".to_string()).clone();
+            let val1 = columns[1].get(row).unwrap_or(&"".to_string()).clone();
+            let val2 = columns[2].get(row).unwrap_or(&"".to_string()).clone();
+
+            base.push(format!("{:<18}{:<18}{:<18}", val0, val1, val2))
+        }
+        base
+    }
 }
 
 //#[derive(Debug)]
@@ -358,6 +478,7 @@ impl Pokemon {
         let (attack, defense) = match pokemove.move_type.category {
             MoveType::Physical => (self.attack, defender.defense),
             MoveType::Special => (self.special, defender.special),
+            MoveType::Error => (1,1)
         };
 
         let random = rng.gen_range(217..=255);
