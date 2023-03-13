@@ -214,6 +214,19 @@ impl BasePokemon {
 
             base.push(format!("{:<18}{:<18}{:<18}", val0, val1, val2))
         }
+
+        base.push("".to_string());
+        base.push(format!("{:^50}", "-----EVOLUTIONS-----"));
+        for info in self.evolution_info.iter() {
+            let info = match info {
+                EvolutionInfo::None => "None",
+                EvolutionInfo::LevelUp { level, index } => todo!(),
+                EvolutionInfo::Item { item_id, index } => todo!(),
+                EvolutionInfo::Trade { index } => todo!(),
+            };
+
+            base.push(format!("{}{}", "", info))
+        }
         base
     }
 }
