@@ -62,11 +62,44 @@ pub enum Stat {
 
 #[derive(Debug)]
 pub enum EvolutionInfo {
-    None,
     LevelUp { level: u8, index: u8 },
     Item { item_id: u8, index: u8},
     Trade { index: u8 },
 }
+
+impl EvolutionInfo {
+    pub fn evo_id(&self) -> u8 {
+        match self {
+            EvolutionInfo::LevelUp { level: _, index } => *index,
+            EvolutionInfo::Item { item_id: _, index } => *index,
+            EvolutionInfo::Trade { index } => *index,
+        }
+    }
+}
+
+impl PartialEq for EvolutionInfo {
+    fn eq(&self, other: &Self) -> bool {
+        match (self, other) {
+            (Self::LevelUp { level: lvl_l, index: _ }, Self::LevelUp { level: lvl_r, index: _ }) => lvl_l == lvl_r,
+            (Self::Item { item_id: item_l, index: _ }, Self::Item { item_id: item_r, index: _ }) => item_l == item_r,
+            (Self::Trade { index: _ }, Self::Trade { index: _ }) => true,
+            _ => false,
+        }
+    }
+}
+
+impl std::cmp::PartialOrd for EvolutionInfo {
+    fn partial_cmp(&self, other: &Self) -> Option<cmp::Ordering> {
+        match (self, other) {
+            (Self::LevelUp { level: lvl_l, index: _ }, Self::LevelUp { level: lvl_r, index: _ }) => Some(lvl_l.cmp(lvl_r)),
+            (Self::Item { item_id: item_l, index: _ }, Self::Item { item_id: item_r, index: _ }) => Some(item_l.cmp(item_r)),
+            (Self::Trade { index: _ }, Self::Trade { index: _ }) => Some(cmp::Ordering::Equal),
+            _ => None,
+        }
+    }
+}
+
+
 
 #[derive(Clone)]
 pub struct BasePokemon {
@@ -98,6 +131,12 @@ pub struct BasePokemon {
     pub evolution_info: Arc<Vec<EvolutionInfo>>,
 }
 
+impl PartialEq for BasePokemon {
+    fn eq(&self, other: &Self) -> bool {
+        self.index == other.index && self.pokedex == other.pokedex && self.name == other.name && self.catch_rate == other.catch_rate && self.base_hp == other.base_hp && self.base_attack == other.base_attack && self.base_defense == other.base_defense && self.base_speed == other.base_speed && self.base_special == other.base_special && self.type1 == other.type1 && self.type2 == other.type2 && self.pokedex_entry == other.pokedex_entry && self.species == other.species && self.height == other.height && self.weight == other.weight && self.evolution_info == other.evolution_info
+    }
+}
+
 impl BasePokemon {
     pub fn debug_graphic(&self) -> String {
         let base = self.debug_info();
@@ -114,8 +153,7 @@ impl BasePokemon {
 
         let sprite: Vec<&str> = front_sprite.lines().collect();
         let print_len = cmp::max(base.len(), sprite.len() as usize);
-        output.push_str(format!("{:<54}{}", base[0], sprite[0]).as_str());
-        for i in 1..print_len as usize {
+        for i in 0..print_len as usize {
             let sprite_line = match sprite.get(i) {
                 Some(line) => line,
                 None => "",
@@ -126,7 +164,7 @@ impl BasePokemon {
                 None => "",
             };
             
-            output.push_str(format!("\n{:<54}{}", stat_line, sprite_line).as_str());
+            output.push_str(format!("{:<54}{}\n", stat_line, sprite_line).as_str());
         }
         output
     }
@@ -217,16 +255,20 @@ impl BasePokemon {
 
         base.push("".to_string());
         base.push(format!("{:^50}", "-----EVOLUTIONS-----"));
-        for info in self.evolution_info.iter() {
-            let info = match info {
-                EvolutionInfo::None => "None",
-                EvolutionInfo::LevelUp { level, index } => todo!(),
-                EvolutionInfo::Item { item_id, index } => todo!(),
-                EvolutionInfo::Trade { index } => todo!(),
-            };
+        if self.evolution_info.len() > 1 {
+            for info in self.evolution_info.iter() {
+                let info = match info {
+                    EvolutionInfo::LevelUp { level, index } => format!("Level Up ({}): i{}", level, index),
+                    EvolutionInfo::Item { item_id, index } => format!("Used Item ({}): i{}", item_id, index),
+                    EvolutionInfo::Trade { index } => format!("Trade: i{}", index),
+                };
 
-            base.push(format!("{}{}", "", info))
+                base.push(format!("{}{:^50}", "", info))
+            }
+        } else {
+            base.push(format!("{:^50}", "None"))
         }
+        base.push(String::new());
         base
     }
 }

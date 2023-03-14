@@ -1,6 +1,6 @@
 use std::{sync::Arc, collections::HashMap};
 
-use poshmon_lib::engine::gen1::{graphics, EvolutionInfo, PermStatus, VolatileStatus};
+use poshmon_lib::engine::gen1::{graphics, PermStatus, VolatileStatus};
 
 fn main() {
     use poshmon_lib::engine::gen1::{BasePokemon, Pokemon, PokeType, MoveType, PokeMove, StatXP, graphics::Sprite};
@@ -119,7 +119,7 @@ fn main() {
         species: "DRILL".to_owned(),
         height: 6*12+3,
         weight: 2650,
-        evolution_info: Arc::new(vec!(EvolutionInfo::None)),
+        evolution_info: Arc::new(vec!()),
     });
 
     let mut rhydon = Pokemon::new(base_rhydon.clone(), None, Some(10), Some("BREAKPOINT".to_owned()), StatXP::Max);
@@ -146,7 +146,7 @@ fn main() {
         species: "PARENT".to_owned(),
         height: 7*12+3,
         weight: 1760,
-        evolution_info: Arc::new(vec!(EvolutionInfo::None)),
+        evolution_info: Arc::new(vec!()),
     });
 
     let mut kangaskhan = Pokemon::new(base_kangaskhan.clone(), None, Some(100), None, StatXP::Max);

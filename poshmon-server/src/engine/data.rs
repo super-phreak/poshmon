@@ -94,10 +94,6 @@ fn get_evolution_info(evolution_json: serde_json::Value) -> Result<Vec<Evolution
             Err(e) => return Err(e),
         }
     }
-    match info_vec.len() {
-        0 => info_vec.push(EvolutionInfo::None),
-        _ => (),
-    }
 
     Ok(info_vec)
 }

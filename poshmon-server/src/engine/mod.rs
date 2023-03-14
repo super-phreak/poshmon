@@ -51,7 +51,7 @@ pub fn init_engine(data: HashMap<&str, serde_json::Value>, words_file: File) -> 
     if let Some(pokemon) = data.get("pokemon") {
         for pokemon_json in pokemon.as_array().unwrap().to_owned() {
             match build_pokemon(pokemon_json, typedex.clone(), movedex.clone()) {
-                Ok(new_mon) => _ = pokedex.insert(new_mon.pokedex, Arc::new(new_mon)),
+                Ok(new_mon) => _ = pokedex.insert(new_mon.index, Arc::new(new_mon)),
                 Err(e) => println!("{} was the error", e),
             }
         }

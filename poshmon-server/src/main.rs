@@ -3,13 +3,11 @@ mod comm;
 
 use comm::create_server_config;
 use std::fs::File;
-use rand::Rng;
+use rand::seq::IteratorRandom;
 //use tokio::{io as tokio_io, task};
 use tokio::net::{TcpListener};
 use std::error::Error;
-use std::{
-    collections::HashMap,
-};
+use std::collections::HashMap;
 
 use dotenv::dotenv;
 
@@ -62,7 +60,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     //println!("Types: {:#?}", &typedex_vec.into_iter().find(|x| x.index == 23));
     assert_eq!(engine.pokedex.len(), 151, "Pokedex length should be {} but {} was found", 151, engine.pokedex.len());
 
-    println!("{}", engine.pokedex.get(&(rng.gen_range(1..=engine.pokedex.len()) as u8)).unwrap().debug_graphic());
+    println!("{}", engine.pokedex.values().choose(&mut rng).unwrap().debug_graphic());
 
     let server_configs = create_server_config(Some(8080))?;
     println!("{:#?}", server_configs);
