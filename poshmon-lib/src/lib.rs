@@ -11,7 +11,8 @@ mod tests {
         let team = Datagram::Awk {session_id: token.session_id.to_string(), cmd_response: "Failure to submit team".to_string()};
         let packet = Packet::new(token.clone(), team);
         println!("{}", packet.to_json_str());
-        assert!(packet.verify(token).is_ok())
+        let token = base64::encode(token.session_key);
+        assert!(packet.verify(&token).is_ok())
 
     }
 }

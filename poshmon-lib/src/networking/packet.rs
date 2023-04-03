@@ -1,12 +1,12 @@
 use std::{error::Error, fmt};
 
-use base64::encode;
+use base64::{encode, decode};
 use serde::{Serialize, Deserialize};
 use hmac::Mac;
 use tokio_tungstenite::tungstenite;
 use tungstenite::protocol::Message;
 
-use crate::{networking::key::{SessionToken, HmacSha256}, networking::Datagram};
+use crate::{networking::{key::{SessionToken, HmacSha256}, Datagram}};
 
 const CURRENT_ALGO: &'static str = "HS256";
 const PACKET_TYPE: &'static str = "PMT";
@@ -20,7 +20,7 @@ pub trait Communication {
 #[derive(Serialize, Deserialize)]
 pub struct Packet {
     header: Header,
-    data: Datagram,
+    pub data: Datagram,
     signature: String,
 }
 
@@ -51,12 +51,18 @@ impl Packet {
         Packet { header, data, signature }
     }
 
-    pub fn verify(&self, token: SessionToken) -> Result<(), InvalidPacketError> {
+    pub fn verify(&self, token: &String) -> Result<(), InvalidPacketError> {
         let header_b64 = encode(Header::new().stringify());
         let body_b64 = encode(&self.data.to_json_str());
-
+        let key = match decode(token) {
+            Ok(k) => Ok(k),
+            Err(_) => Err(InvalidPacketError),
+        }?;
         let msg = format!("{}.{}",header_b64,body_b64);
-        let mut mac = HmacSha256::new(&token.session_key);
+        let mut mac = match HmacSha256::new_from_slice(&key) {
+            Ok(m) => Ok(m),
+            Err(_) => Err(InvalidPacketError)
+        }?;
         println!("{}", &msg);
         mac.update(msg.as_bytes());
         let signature = mac.finalize();

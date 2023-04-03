@@ -59,8 +59,10 @@ pub fn init_engine(data: HashMap<&str, serde_json::Value>, words_file: File) -> 
 
     let pokedex = Pokedex::new(pokedex);
 
+    let debug: Arc<RwLock<HashMap<String, String>>> = Arc::new(RwLock::new(HashMap::new()));
 
-    return Data { pokedex, movedex, typedex, games, wordlist };
+
+    return Data { pokedex, movedex, typedex, games, wordlist, debug };
 }
 
 

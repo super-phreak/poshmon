@@ -5,7 +5,7 @@ use poshmon_lib::{
     networking::{Packet, Communication, Datagram, SessionToken}, engine::gen1::{Pokemon, PokemonModel}
 };
 
-use crate::engine::data::Data;
+use crate::engine::{data::Data, structs::DataFieldNotFoundError};
 
 use self::structs::{
     Peer,
@@ -50,7 +50,7 @@ fn _create_pokemon_model(mon: &RwLock<Pokemon>, reduced: bool) -> Result<Pokemon
 //     return Ok(PokeTeam::new(team));
 // }
 
-pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: SocketAddr, _data: Data) {
+pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: SocketAddr, data: Data) {
     println!("Incoming TCP connection from: {}", addr);
 
     let ws_stream = tokio_tungstenite::accept_async(raw_stream)
@@ -68,17 +68,33 @@ pub async fn handle_connection(peer_map: PeerMap, raw_stream: TcpStream, addr: S
 
     let incoming_msg = incoming.try_for_each(|msg| {
         println!("Received a message from {}: {}", &addr, &msg.to_text().unwrap());
-        let values: Result<Datagram, serde_json::Error> = serde_json::from_str(msg.to_text().unwrap());
-        match values {
-            Ok(v) => println!("Deserialzed value to {:#?}" , v),
-            Err(e) => println!("Errored {}", e),
-        }
-        let cmd: Result<Datagram, _> = serde_json::from_str(msg.to_text().unwrap());
+        let unwrapped_msg = match msg.to_text() {
+            Ok(msg) => msg.to_owned(),
+            Err(e) => format!("errored_out {}", e),
+        };
+        let packet: Result<Packet, serde_json::Error> = serde_json::from_str(&unwrapped_msg);
+        let cmd = match packet {
+            Ok(pack) => {
+                match data.debug.read() {
+                    Ok(debug_map) => {
+                        let false_str = "false".to_owned();
+                        let token_id = debug_map.get("session_id").unwrap_or(&false_str);
+                        match pack.verify(token_id).is_ok() {
+                            true => Ok(pack.data),
+                            false => Err(DataFieldNotFoundError::new("Datagram")),
+                        }
+                    },
+                    Err(_) => Err(DataFieldNotFoundError::new("Debug Session ID")),
+                }
+            }
+            Err(_) => Err(DataFieldNotFoundError::new("Signature")),
+        };
+
         let msg_out;
         let token = SessionToken::new("testuser".to_owned());
         if let Ok(cmd_in) = cmd  {
             msg_out = match cmd_in {
-                Datagram::CreateGame {  } => Packet::new(token, Datagram::Awk { session_id: "dfad".to_string(), cmd_response: "dafd".to_string() }),
+                Datagram::JoinGame { username: _, game_id: _ } => Packet::new(token, Datagram::Awk { session_id: "dfad".to_string(), cmd_response: "dafd".to_string() }),
                 Datagram::SubmitTeam {session_id: _, client_id: _, name: _, team: _ } => Packet::new(token, Datagram::Awk { session_id: "test".to_string(), cmd_response: "test".to_string() }),
                 Datagram::SendMove { session_id: _, client_id: _, pokemon_guid: _, move_id: _ } => Packet::new(token, Datagram::Awk { session_id: "test".to_string(), cmd_response: "test".to_string() }), //{ /*gamestate: get_gamestate(&"1234".to_string(),move_id,data.clone()).ok().unwrap(),*/ session_id, client_id }),
                 Datagram::GetTeam { session_id: _, client_id: _, name: _ } => Packet::new(token, Datagram::Awk { session_id: "test".to_string(), cmd_response: "test".to_string() }),

@@ -3,8 +3,9 @@ use serde::{Serialize, Deserialize};
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(tag = "fn", rename_all = "snake_case")]
 pub enum Datagram {
-    CreateGame {
-        
+    JoinGame {
+        username: String,
+        game_id: String,
     },
     SubmitTeam {
         session_id: String, 

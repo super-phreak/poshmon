@@ -54,6 +54,10 @@ impl SessionToken {
             session_key,
         }
     }
+
+    pub fn key_as_string(&self) -> String {
+        base64::encode(self.session_key)
+    }
 }
 
 impl Serialize for SessionToken {
@@ -71,7 +75,7 @@ impl Serialize for SessionToken {
 
 impl Debug for SessionToken {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("SessionToken").field("session_id", &self.session_id.to_string()).field("username", &self.username).field("session_key", &hex::encode(&self.session_key)).finish()
+        f.debug_struct("SessionToken").field("session_id", &self.session_id.to_string()).field("username", &self.username).field("session_key", &base64::encode(&self.session_key)).finish()
     }
 }
 

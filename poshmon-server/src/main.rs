@@ -57,6 +57,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     data.insert("moves", movedex_json);
 
     let engine = init_engine(data, words_file);
+    
     //println!("Types: {:#?}", &typedex_vec.into_iter().find(|x| x.index == 23));
     assert_eq!(engine.pokedex.len(), 151, "Pokedex length should be {} but {} was found", 151, engine.pokedex.len());
 
@@ -67,6 +68,17 @@ async fn main() -> Result<(), Box<dyn Error>>{
 
     let addr = format!("{}:{}", server_configs.ip, server_configs.port);
     let state = server_configs.peers;
+
+    //for debug purposes generate a stand alone token.
+    let session = poshmon_lib::networking::SessionToken::new("ductape".to_owned());
+
+    if let Ok(mut debug_map) = engine.debug.write() {
+        debug_map.insert("session_id".to_owned(), session.session_id.to_string());
+        debug_map.insert("session_token".to_owned(), session.key_as_string());
+    }
+    //engine.debug.insert("session_id".to_owned(), session.session_id.to_string());
+
+    println!("Session: {:#?}", session);
 
     // Create the event loop and TCP listener we'll accept connections on.
     let try_socket = TcpListener::bind(&addr).await;

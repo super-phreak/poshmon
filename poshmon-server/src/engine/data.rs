@@ -18,6 +18,7 @@ pub struct Data{
     pub typedex: Typedex,
     pub games: Games,
     pub wordlist: WordList,
+    pub debug: Arc<RwLock<HashMap<String, String>>>
 }
 
 pub(super) fn build_pokemon(pokemon_json: serde_json::Value, typedex: Typedex, movedex: Movedex) -> Result<BasePokemon, Box<dyn Error>> {
