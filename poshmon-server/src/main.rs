@@ -61,7 +61,7 @@ async fn main() -> Result<(), Box<dyn Error>>{
     //println!("Types: {:#?}", &typedex_vec.into_iter().find(|x| x.index == 23));
     assert_eq!(engine.pokedex.len(), 151, "Pokedex length should be {} but {} was found", 151, engine.pokedex.len());
 
-    println!("{}", engine.pokedex.values().choose(&mut rng).unwrap().debug_graphic());
+    println!("{}", engine.pokedex.values().choose(&mut rng).unwrap().as_ref().debug_graphic());
 
     let server_configs = create_server_config(Some(8080))?;
     println!("{:#?}", server_configs);
