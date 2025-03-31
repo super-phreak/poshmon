@@ -1,4 +1,4 @@
-use std::{sync::{Arc, RwLock, RwLockWriteGuard}};
+use std::sync::{Arc, RwLock, RwLockWriteGuard};
 
 use super::{Pokemon, graphics::Sprite};
 

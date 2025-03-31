@@ -48,7 +48,7 @@ impl GameState {
         Ok(battle_msg)
     }
 
-    fn get_priority(player1_move: &PokeMove, player2_move: &PokeMove, p1_speed: i32, p2_speed: i32, tie_break: bool) -> Priority{
+    fn get_priority(player1_move: &PokeMove, player2_move: &PokeMove, p1_speed: i32, p2_speed: i32, tie_break: bool) -> Priority {
         if player1_move.priority > player2_move.priority {
             Priority::Player1First
         } else if player1_move.priority < player2_move.priority {
