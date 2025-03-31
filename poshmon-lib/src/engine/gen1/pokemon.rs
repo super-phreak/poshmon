@@ -6,7 +6,7 @@ use std::{
 use rand::Rng;
 use uuid::Uuid;
 
-use crate::engine::gen1::MoveType;
+use crate::engine::{gen1::MoveType, generics::SpriteData};
 
 use super::{
     PokeType, 
@@ -107,8 +107,8 @@ pub struct BasePokemon {
     pub pokedex: u8,
     pub name: String,
     pub catch_rate: u8,
-    pub front_sprite: Sprite,
-    pub back_sprite: Sprite,
+    pub front_sprite: SpriteData,
+    pub back_sprite: SpriteData,
 
     pub base_hp: i32,
     pub base_attack: i32,
@@ -138,36 +138,36 @@ impl PartialEq for BasePokemon {
 }
 
 impl BasePokemon {
-    pub fn debug_graphic(&self) -> String {
-        let base = self.debug_info();
+    // pub fn debug_graphic(&self) -> String {
+    //     let base = self.debug_info();
 
-        let mut output = String::new();
+    //     let mut output = String::new();
 
-        let (canvas_width, canvas_height): (usize, usize) = match term_size::dimensions() {
-            Some(size) => (size.0, (self.front_sprite.get_bounds().1*4) as usize),
-            None => (45,45),
-        };
-        let viewport = Viewport::new(canvas_width-45, canvas_height, 0, 0);
+    //     let (canvas_width, canvas_height): (usize, usize) = match term_size::dimensions() {
+    //         Some(size) => (size.0, (self.front_sprite.get_bounds().1*4) as usize),
+    //         None => (45,45),
+    //     };
+    //     let viewport = Viewport::new(canvas_width-45, canvas_height, 0, 0);
 
-        let front_sprite = self.front_sprite.draw_sprite(false, Some(viewport));
+    //     let front_sprite = self.front_sprite.draw_sprite(false, Some(viewport));
 
-        let sprite: Vec<&str> = front_sprite.lines().collect();
-        let print_len = cmp::max(base.len(), sprite.len() as usize);
-        for i in 0..print_len as usize {
-            let sprite_line = match sprite.get(i) {
-                Some(line) => line,
-                None => "",
-            };
+    //     let sprite: Vec<&str> = front_sprite.lines().collect();
+    //     let print_len = cmp::max(base.len(), sprite.len() as usize);
+    //     for i in 0..print_len as usize {
+    //         let sprite_line = match sprite.get(i) {
+    //             Some(line) => line,
+    //             None => "",
+    //         };
 
-            let stat_line = match base.get(i) {
-                Some(line) => line,
-                None => "",
-            };
+    //         let stat_line = match base.get(i) {
+    //             Some(line) => line,
+    //             None => "",
+    //         };
             
-            output.push_str(format!("{:<54}{}\n", stat_line, sprite_line).as_str());
-        }
-        output
-    }
+    //         output.push_str(format!("{:<54}{}\n", stat_line, sprite_line).as_str());
+    //     }
+    //     output
+    // }
 
     fn debug_info(&self) -> Vec<String> {
         let mut base: Vec<String> = Vec::new();
@@ -576,150 +576,150 @@ impl Pokemon {
         }
     }
 
-    pub fn debug_pkmn_structure(&self, trainer_id: i32) -> String {
-        let type2_index = match &self.basemon.type2 {
-            Some(type2) => type2.index,
-            None => self.basemon.type1.index,
-        };
-        let (move1_index, move1_pp) = match &self.move1 {
-            Some(move1) => (move1.data.id, move1.current_pp),
-            None => (0,0),
-        };
-        let (move2_index, move2_pp) = match &self.move2 {
-            Some(mov) => (mov.data.id, mov.current_pp),
-            None => (0,0),
-        };
-        let (move3_index, move3_pp) = match &self.move3 {
-            Some(mov) => (mov.data.id, mov.current_pp),
-            None => (0,0),
-        };        
-        let (move4_index, move4_pp) = match &self.move4 {
-            Some(mov) => (mov.data.id, mov.current_pp),
-            None => (0,0),
-        };
+    // pub fn debug_pkmn_structure(&self, trainer_id: i32) -> String {
+    //     let type2_index = match &self.basemon.type2 {
+    //         Some(type2) => type2.index,
+    //         None => self.basemon.type1.index,
+    //     };
+    //     let (move1_index, move1_pp) = match &self.move1 {
+    //         Some(move1) => (move1.data.id, move1.current_pp),
+    //         None => (0,0),
+    //     };
+    //     let (move2_index, move2_pp) = match &self.move2 {
+    //         Some(mov) => (mov.data.id, mov.current_pp),
+    //         None => (0,0),
+    //     };
+    //     let (move3_index, move3_pp) = match &self.move3 {
+    //         Some(mov) => (mov.data.id, mov.current_pp),
+    //         None => (0,0),
+    //     };        
+    //     let (move4_index, move4_pp) = match &self.move4 {
+    //         Some(mov) => (mov.data.id, mov.current_pp),
+    //         None => (0,0),
+    //     };
         
-        format!("{:02x}{:04x}{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}{:04x}{:06x}{:04x}{:04x}{:04x}{:04x}{:04x}{:04x}{:02x}{:02x}{:02x}{:02x}{:02x}{:04x}{:04x}{:04x}{:04x}{:04x}", 
-            self.basemon.index,
-            self.current_hp,
-            self.level,
-            00, // Zero for degub purposes means healthy. todo!()
-            self.basemon.type1.index,
-            type2_index,
-            self.basemon.catch_rate,
-            move1_index,
-            move2_index,
-            move3_index,
-            move4_index,
-            trainer_id,
-            self.xp,
-            self.hp_ev,
-            self.attack_ev,
-            self.defense_ev,
-            self.speed_ev,
-            self.special_ev,
-            self.iv,
-            move1_pp,
-            move2_pp,
-            move3_pp,
-            move4_pp,
-            self.level,
-            self.hp,
-            self.attack,
-            self.defense,
-            self.speed,
-            self.special
-        )
-    }
+    //     format!("{:02x}{:04x}{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}{:04x}{:06x}{:04x}{:04x}{:04x}{:04x}{:04x}{:04x}{:02x}{:02x}{:02x}{:02x}{:02x}{:04x}{:04x}{:04x}{:04x}{:04x}", 
+    //         self.basemon.index,
+    //         self.current_hp,
+    //         self.level,
+    //         00, // Zero for degub purposes means healthy. todo!()
+    //         self.basemon.type1.index,
+    //         type2_index,
+    //         self.basemon.catch_rate,
+    //         move1_index,
+    //         move2_index,
+    //         move3_index,
+    //         move4_index,
+    //         trainer_id,
+    //         self.xp,
+    //         self.hp_ev,
+    //         self.attack_ev,
+    //         self.defense_ev,
+    //         self.speed_ev,
+    //         self.special_ev,
+    //         self.iv,
+    //         move1_pp,
+    //         move2_pp,
+    //         move3_pp,
+    //         move4_pp,
+    //         self.level,
+    //         self.hp,
+    //         self.attack,
+    //         self.defense,
+    //         self.speed,
+    //         self.special
+    //     )
+    // }
 
-    pub fn print_battle_stats(&self, player: bool) -> String {
-        let sprite = match player {
-            true => &self.basemon.back_sprite,
-            false => &self.basemon.front_sprite,
-        };
+    // // pub fn debug_print_battle_stats(&self, player: bool) -> String {
+    //     let sprite = match player {
+    //         true => &self.basemon.back_sprite,
+    //         false => &self.basemon.front_sprite,
+    //     };
         
 
-        let (canvas_width, canvas_height): (usize, usize) = match term_size::dimensions() {
-            Some(size) => match player {
-                true => (size.0, (sprite.get_bounds().1*4-1) as usize),
-                false => (size.0, (sprite.get_bounds().1*4) as usize),
-            }
-            None => (45,45),
-        };
-        let viewport = Viewport::new(canvas_width-45, canvas_height, 0, 0);
-        let sprite = sprite.draw_sprite(false, Some(viewport));
-        let sprite: Vec<&str> = sprite.lines().collect();
-        let mut stats: Vec<String> = Vec::new();
-        let mut output: String = "".to_owned();
+    //     let (canvas_width, canvas_height): (usize, usize) = match term_size::dimensions() {
+    //         Some(size) => match player {
+    //             true => (size.0, (sprite.get_bounds().1*4-1) as usize),
+    //             false => (size.0, (sprite.get_bounds().1*4) as usize),
+    //         }
+    //         None => (45,45),
+    //     };
+    //     let viewport = Viewport::new(canvas_width-45, canvas_height, 0, 0);
+    //     let sprite = sprite.draw_sprite(false, Some(viewport));
+    //     let sprite: Vec<&str> = sprite.lines().collect();
+    //     let mut stats: Vec<String> = Vec::new();
+    //     let mut output: String = "".to_owned();
 
-        if self.name == self.basemon.name {
-            stats.push(format!("{}", self.name));
-        } else {
-            stats.push(format!("{:<10} ({})", self.name, self.basemon.name));
-        }
-        stats.push(format!("{:^45}", self.guid.to_string()));
-        stats.push(format!("  {:<15}{:>3}", "Level:", self.level));
-        stats.push(format!("  {:<15}", "---Status---"));
-        stats.push(format!("    {:<13}{:?}", "Perm:", self.status.0));
-        stats.push(format!("    {:<13}{:?}", "Volatile:", self.status.1));
-        stats.push("  ---Stats---".to_string());
-        stats.push(format!("    {:<9}{:>3}/{:>3} (0x{:04X})", "HP:", self.current_hp, self.hp, self.hp_ev));
-        stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Attack:", self.attack, self.attack_ev));
-        stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Defence:", self.defense, self.defense_ev));
-        stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Speed:", self.speed, self.speed_ev));
-        stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Special:", self.special, self.special_ev));
-        stats.push(format!("    {:<13}0x{:04X}", "IVs:", self.iv, ));
-        stats.push("  ---Moves---".to_string());
+    //     if self.name == self.basemon.name {
+    //         stats.push(format!("{}", self.name));
+    //     } else {
+    //         stats.push(format!("{:<10} ({})", self.name, self.basemon.name));
+    //     }
+    //     stats.push(format!("{:^45}", self.guid.to_string()));
+    //     stats.push(format!("  {:<15}{:>3}", "Level:", self.level));
+    //     stats.push(format!("  {:<15}", "---Status---"));
+    //     stats.push(format!("    {:<13}{:?}", "Perm:", self.status.0));
+    //     stats.push(format!("    {:<13}{:?}", "Volatile:", self.status.1));
+    //     stats.push("  ---Stats---".to_string());
+    //     stats.push(format!("    {:<9}{:>3}/{:>3} (0x{:04X})", "HP:", self.current_hp, self.hp, self.hp_ev));
+    //     stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Attack:", self.attack, self.attack_ev));
+    //     stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Defence:", self.defense, self.defense_ev));
+    //     stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Speed:", self.speed, self.speed_ev));
+    //     stats.push(format!("    {:<13}{:>3} (0x{:04X})", "Special:", self.special, self.special_ev));
+    //     stats.push(format!("    {:<13}0x{:04X}", "IVs:", self.iv, ));
+    //     stats.push("  ---Moves---".to_string());
 
-        //Move info
-        let mut move_data: Vec<(String, String, i32, i32, String)> = Vec::new();
-        move_data.push(
-            match &self.move1 {
-                Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
-                None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
-            }
-        );
-        move_data.push(
-            match &self.move2 {
-                Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
-                None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
-            }
-        );
-        move_data.push(
-            match &self.move3 {
-                Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
-                None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
-            }
-        );
-        move_data.push(
-            match &self.move4 {
-                Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
-                None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
-            }
-        );
-        for moves in move_data {
-            stats.push(format!("    {:<13}{:>2}/{:>2}", moves.0, moves.3, moves.2));
-            stats.push(format!("      Type: {:<8} PWR: {}", moves.4, moves.1));
-        }
+    //     //Move info
+    //     let mut move_data: Vec<(String, String, i32, i32, String)> = Vec::new();
+    //     move_data.push(
+    //         match &self.move1 {
+    //             Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
+    //             None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
+    //         }
+    //     );
+    //     move_data.push(
+    //         match &self.move2 {
+    //             Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
+    //             None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
+    //         }
+    //     );
+    //     move_data.push(
+    //         match &self.move3 {
+    //             Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
+    //             None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
+    //         }
+    //     );
+    //     move_data.push(
+    //         match &self.move4 {
+    //             Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.power.to_string(), pokemove.data.pp, pokemove.current_pp, pokemove.data.move_type.name.clone()),
+    //             None => ("None".to_owned(),"-".to_owned(),0,0,"-".to_owned()),
+    //         }
+    //     );
+    //     for moves in move_data {
+    //         stats.push(format!("    {:<13}{:>2}/{:>2}", moves.0, moves.3, moves.2));
+    //         stats.push(format!("      Type: {:<8} PWR: {}", moves.4, moves.1));
+    //     }
         
         
         
-        let print_len = cmp::max(stats.len(), sprite.len() as usize);
-        output.push_str(format!("{:^45}{}", stats[0], sprite[0]).as_str());
-        for i in 1..print_len as usize {
-            let sprite_line = match sprite.get(i) {
-                Some(line) => line,
-                None => "",
-            };
+    //     let print_len = cmp::max(stats.len(), sprite.len() as usize);
+    //     output.push_str(format!("{:^45}{}", stats[0], sprite[0]).as_str());
+    //     for i in 1..print_len as usize {
+    //         let sprite_line = match sprite.get(i) {
+    //             Some(line) => line,
+    //             None => "",
+    //         };
 
-            let stat_line = match stats.get(i) {
-                Some(line) => line,
-                None => "",
-            };
+    //         let stat_line = match stats.get(i) {
+    //             Some(line) => line,
+    //             None => "",
+    //         };
             
-            output.push_str(format!("\n{:<45}{}", stat_line, sprite_line).as_str());
-        }
-        output
-    }
+    //         output.push_str(format!("\n{:<45}{}", stat_line, sprite_line).as_str());
+    //     }
+    //     output
+    // }
 
     pub fn to_model(&self, reduced: bool) -> PokemonModel {
         match reduced {
@@ -791,19 +791,19 @@ impl Pokemon {
     }
 }
 
-impl Display for Pokemon {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.print_battle_stats(false))
-    }
-}
+// impl Display for Pokemon {
+//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+//         write!(f, "{}", self.print_battle_stats(false))
+//     }
+// }
 
 pub enum PokemonModel {
     Reduced {
         index: u8,
         pokedex: u8,
         name: String,
-        front_sprite: (i32,i32,String),
-        back_sprite: (i32,i32,String),
+        front_sprite: (i32, i32, String),
+        back_sprite: (i32, i32, String),
 
         guid: String,
         nickname: String,
@@ -817,8 +817,8 @@ pub enum PokemonModel {
         index: u8,
         pokedex: u8,
         name: String,
-        front_sprite: (i32,i32,String),
-        back_sprite: (i32,i32,String),
+        front_sprite: (i32, i32, String),
+        back_sprite: (i32, i32, String),
 
         guid: String,
         nickname: String,

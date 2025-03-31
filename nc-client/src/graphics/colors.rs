@@ -59,7 +59,7 @@ impl Pallet {
 
     pub fn print_pallet(&self) {
         let buf: String = self.pallet.clone().into_iter().collect();
-        println!("Pallet: {}", buf)
+        println!("Pallet: {} <Colors: {}, BitDepth: {}>", buf, self.total_colors, self.bit_depth)
     }
 
 }

@@ -80,16 +80,16 @@ impl Sprite {
         return Ok(sprite_data);
     }
 
-    fn render_sprite(&self, flip: bool) -> Result<Vec<u8>, Box<dyn Error>>{
+    pub fn render_sprite(&self, flip: bool) -> Result<Vec<u8>, Box<dyn Error>>{
         // let (flip_sign, flip_offest) = match flip {
         //     true => (-1, self.width*TILE_SIDE_RAW),
         //     false => (1,0),
         // };
         let decompressed_sprite: Vec<u8> = self.decompress_sprite()?;
-        let mut v_buff: Vec<u8> = vec![0;(self.height*self.width*TILE_SIZE_RAW) as usize];
+        let mut v_buff: Vec<u8> = vec![0;(self.height*self.width*64) as usize];
         
-        for index in 0..self.height*TILE_SIZE_RAW {
-            let bound = self.width*TILE_SIDE_RAW;
+        for index in 0..self.height*8 {
+            let bound = self.width*8;
             if let Some(bits) = decompressed_sprite.get((index*bound) as usize..(index*bound+bound) as usize) {
                 let mut bits = bits.to_vec();
                 if flip {bits.reverse();}
@@ -164,6 +164,7 @@ fn draw_canvas(frame_buffer: Vec<u8>, height: i32, width: i32, viewport: Viewpor
     let canvas_width = cmp::min(viewport.width, (width*TILE_SIDE_RAW) as usize);
     let canvas_height = cmp::min(viewport.height, (height*TILE_SIDE_RAW/2) as usize);
     let mut buffer = "".to_string();
+    println!("DEBUG: {}", frame_buffer.len());
     for row in viewport.offset_y..canvas_height {
         for col in viewport.offset_x..canvas_width {
             buffer.push_str(PIXELS[
