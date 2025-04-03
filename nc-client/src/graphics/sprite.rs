@@ -5,46 +5,30 @@ use base64::DecodeError;
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct Sprite {
-    width: i32,
-    height: i32,
-    data: String,
+    pub width: u32,
+    pub height: u32,
+    pub colors: u32,
+    pub bit_depth: u32,
+    pub tile_size: u32,
+    data: Vec<u8>,
 }
 
 impl Sprite {
-    pub fn new(width: i32, height: i32, data: String) -> Self{
-        Sprite { width, height, data }
+    pub fn new(width: u32, height: u32, colors: u32, tile_size: u32, data: String) -> Result<Self, Box<dyn Error>>{
+        let bit_depth = u32::BITS - (colors-1).leading_zeros();
+        let sprite_data = decompress_sprite(&bit_depth, &colors, data)?;
+        Ok(Sprite { width, height, colors, bit_depth, tile_size, data: sprite_data })
     }
 
-    fn decompress_sprite(&self) -> Result<Vec<u8>, DecodeError> {
-        let mut sprite_data: Vec<u8> = Vec::new();
-        let sprite_bytes = base64::decode(self.data.clone())?;
-        for bytenum in 0..sprite_bytes.len() {
-            match sprite_bytes.get(bytenum) {
-                Some(byte) => {
-                    for div in 0..4 {
-                        sprite_data.insert(bytenum * 4 + div, (*byte >> (6 - (div * 2))) & 3);
-                    }
-                },
-                None => todo!(),
-            }
+    
 
-        }
-        //println!("sprite_map {:?}:{} -> {}",sprite_bytes[0..32],sprite_bytes.len(),self.height*self.width*TILE_SIZE_RAW);
+    pub fn to_vbuff(&self, flip: bool) -> Result<Vec<u8>, Box<dyn Error>>{
+        //let decompressed_sprite: Vec<u8> = self.decompress_sprite()?;
+        let mut v_buff: Vec<u8> = vec![0;(self.height*self.width*self.tile_size*self.tile_size) as usize];
         
-        return Ok(sprite_data);
-    }
-
-    pub fn to_vbuff(&self, tile_size: i32, flip: bool) -> Result<Vec<u8>, Box<dyn Error>>{
-        // let (flip_sign, flip_offest) = match flip {
-        //     true => (-1, self.width*TILE_SIDE_RAW),
-        //     false => (1,0),
-        // };
-        let decompressed_sprite: Vec<u8> = self.decompress_sprite()?;
-        let mut v_buff: Vec<u8> = vec![0;(self.height*self.width*tile_size*tile_size) as usize];
-        
-        for index in 0..self.height*tile_size*tile_size {
-            let bound = self.width*tile_size;
-            if let Some(bits) = decompressed_sprite.get((index*bound) as usize..(index*bound+bound) as usize) {
+        for index in 0..self.height*self.tile_size*self.tile_size {
+            let bound = self.width*self.tile_size;
+            if let Some(bits) = self.data.get((index*bound) as usize..(index*bound+bound) as usize) {
                 let mut bits = bits.to_vec();
                 if flip {bits.reverse();}
                 for width in 0..bound {
@@ -56,37 +40,50 @@ impl Sprite {
         return Ok(v_buff)
     }
 
-    // pub fn print_sprite_to_term(&self) {
-    //     let sprite = self.render_sprite(false);
+    pub fn scale_sprite(&self, scale: u32) -> Result<Self, Box<dyn Error>> {
+        let mut scaled_sprite = vec![0;(self.height*self.width*self.tile_size*self.tile_size*scale*scale) as usize];
+        // for ($pixel=0;$pixel -lt $Sprite.data.Length;$pixel++) {
+        //     for ($scale_factor_row=0;$scale_factor_row -lt $Scale;$scale_factor_row++) {
+        //         for ($scale_factor_col=0;$scale_factor_col -lt $Scale;$scale_factor_col++) {
+        //             $sprite_scaled[(($pixel%($Sprite.width*$TILE_SIDE_RAW))*$Scale)+$scale_factor_col+(((([Math]::Floor($pixel/($Sprite.width*$TILE_SIDE_RAW)))*$Scale)+$scale_factor_row)*($Sprite.width*$TILE_SIDE_RAW*$Scale))] = $sprite.data[$pixel]
+        //         }
+        //     }
+        // }
+        
+        println!("{}", self.data.len());
 
-    //     match sprite {
-    //         Ok(sprite) => println!("{}", draw_canvas(sprite, self.width, self.height, Viewport::new((self.width*8) as usize, (self.height*4) as usize, 0, 0))),
-    //         Err(_) => println!("There was a decoding error in the sprite. Please check the data"),
-    //     }
-    // }
+        for pixel in 0..self.data.len() as u32 {
+            for scale_factor_row in 0..scale {
+                for scale_factor_col in 0..scale {
+                    scaled_sprite[(((pixel%(self.width*self.tile_size))*scale) + scale_factor_col + ((((pixel/(self.width*self.tile_size))*scale)+scale_factor_row)*(self.width*self.tile_size*scale))) as usize] = self.data[pixel as usize];
+                }
+            }
+        }
 
-    // pub fn draw_sprite(&self, flip: bool, viewport: Option<Viewport>) -> String {
-    //     let viewport = match viewport {
-    //         Some(v) => v,
-    //         None => Viewport::new((self.width*8) as usize, (self.height*4) as usize, 0, 0)
-    //     };
+        Ok(Sprite{ width: self.width*scale, height: self.height*scale, colors: self.colors, bit_depth: self.bit_depth, tile_size: self.tile_size, data: scaled_sprite })
+    }
 
-    //     match self.render_sprite(flip) {
-    //         Ok(sprite) => draw_canvas(sprite, self.height, self.width, viewport),
-    //         Err(_) => "There was an error decoding the sprite.".to_owned()
-    //     }
-    // }
-
-    pub fn get_bounds(&self) -> (i32, i32) {
+    pub fn get_bounds(&self) -> (u32, u32) {
         (self.width, self.height)
     }
 
-    pub fn get_sprite_data(&self) -> (i32, i32, String) {
-        (self.width, self.height, self.data.clone())
+}
+
+fn decompress_sprite(bit_depth: &u32, colors: &u32, data: String) -> Result<Vec<u8>, DecodeError> {
+    let mut sprite_data: Vec<u8> = Vec::new();
+    let sprite_bytes = base64::decode(data)?;
+    for bytenum in 0..sprite_bytes.len() as u32 {
+        match sprite_bytes.get(bytenum as usize) {
+            Some(byte) => {
+                for div in 0..*colors {
+                    sprite_data.insert((bytenum * colors + div) as usize, ((*byte >> (6 - (div * bit_depth))) & ((1 << bit_depth)-1)) as u8);
+                }
+            },
+            None => todo!(),
+        }
+
     }
-
-
-
+    return Ok(sprite_data);
 }
 
 // impl Display for Sprite {

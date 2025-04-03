@@ -8,6 +8,7 @@ term_size = "0.3.2"
 serde_json = "1.0.93"
 serde = { version = "1.0.152", features = ["derive"] }
 base64 = "0.13.0"
+crossterm = "0.28.1"
 
 [dependencies.poshmon-lib]
 path = "../poshmon-lib"
