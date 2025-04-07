@@ -1,7 +1,6 @@
 mod pokemon;
 mod poketype;
 mod pokemove;
-pub mod graphics;
 mod game;
 mod trainer;
 

@@ -1,12 +1,12 @@
 use std::{error::Error, fmt};
 
-use base64::{encode, decode};
+use base64::prelude::*;
 use serde::{Serialize, Deserialize};
 use hmac::Mac;
 use tokio_tungstenite::tungstenite;
 use tungstenite::protocol::Message;
 
-use crate::{networking::{key::{SessionToken, HmacSha256}, Datagram}};
+use crate::networking::{key::{SessionToken, HmacSha256}, Datagram};
 
 const CURRENT_ALGO: &'static str = "HS256";
 const PACKET_TYPE: &'static str = "PMT";
@@ -27,10 +27,10 @@ pub struct Packet {
 impl Packet {
     fn derive_signature(header: &Header, data: &String, session_token: &SessionToken) -> String {
         //Construct the header string.
-        let header_b64 = encode(header.stringify());
+        let header_b64 = BASE64_STANDARD.encode(header.stringify());
 
         //For serialize the Packet should always be a response as it is an outgoing message.
-        let body_b64 = encode(data);
+        let body_b64 = BASE64_STANDARD.encode(data);
         let msg = format!("{}.{}",header_b64,body_b64);
 
         //Sign the message as two b64 strings concatenated by a period.
@@ -39,7 +39,7 @@ impl Packet {
         let signature = mac.finalize();
         
         //Encode the signature into b64
-        encode(signature.into_bytes().to_vec())
+        BASE64_STANDARD.encode(signature.into_bytes().to_vec())
 
     }
 
@@ -52,9 +52,9 @@ impl Packet {
     }
 
     pub fn verify(&self, token: &String) -> Result<(), InvalidPacketError> {
-        let header_b64 = encode(Header::new().stringify());
-        let body_b64 = encode(&self.data.to_json_str());
-        let key = match decode(token) {
+        let header_b64 = BASE64_STANDARD.encode(Header::new().stringify());
+        let body_b64 = BASE64_STANDARD.encode(&self.data.to_json_str());
+        let key = match BASE64_STANDARD.decode(token) {
             Ok(k) => Ok(k),
             Err(_) => Err(InvalidPacketError),
         }?;
@@ -68,7 +68,7 @@ impl Packet {
         let signature = mac.finalize();
 
         let bytes: Vec<u8> = signature.into_bytes().to_vec();
-        let b64bytes = encode(bytes);
+        let b64bytes = BASE64_STANDARD.encode(bytes);
         println!("{}",b64bytes);
 
         if &self.signature == &b64bytes {

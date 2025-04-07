@@ -1,6 +1,6 @@
 use std::{collections::HashMap, sync::{Arc, RwLock}, error::Error};
 
-use poshmon_lib::engine::gen1::{BasePokemon, PokeType, MoveType, GameState, PokeMove, graphics::Sprite, EvolutionInfo};
+use poshmon_lib::engine::{gen1::{BasePokemon, EvolutionInfo, GameState, MoveType, PokeMove, PokeType}, generics::SpriteData};
 
 use super::structs::DataFieldNotFoundError;
 
@@ -58,11 +58,11 @@ fn populate_movedex(movedex: Movedex, moves: Vec<u8>) -> Result<Arc<Vec<Arc<Poke
     return Ok(Arc::new(teachable_movedex));
 }
 
-fn create_sprite(sprite_json: serde_json::Value) -> Result<Sprite, DataFieldNotFoundError> {
-    let width: i32 = sprite_json["width"].as_i64().ok_or_else( move || DataFieldNotFoundError::new("width")).and_then(|x| x.try_into().map_err(|_| DataFieldNotFoundError::new("width")))?;
-    let height: i32 = sprite_json["height"].as_i64().ok_or_else(|| DataFieldNotFoundError::new("height")).and_then(|x| x.try_into().map_err(|_| DataFieldNotFoundError::new("height")))?;
+fn create_sprite(sprite_json: serde_json::Value) -> Result<SpriteData, DataFieldNotFoundError> {
+    let width: u32 = sprite_json["width"].as_i64().ok_or_else( move || DataFieldNotFoundError::new("width")).and_then(|x| x.try_into().map_err(|_| DataFieldNotFoundError::new("width")))?;
+    let height: u32 = sprite_json["height"].as_i64().ok_or_else(|| DataFieldNotFoundError::new("height")).and_then(|x| x.try_into().map_err(|_| DataFieldNotFoundError::new("height")))?;
     let data: String = sprite_json["data"].as_str().ok_or_else(|| DataFieldNotFoundError::new("data"))?.to_string();
-    Ok(Sprite::new(width, height, data, "".to_string()))
+    Ok(SpriteData::new(width, height, 4, 8, data, "".to_string()))
 }
 
 fn get_height(pokedex_json: serde_json::Value) -> Result<u16, DataFieldNotFoundError> {

@@ -11,10 +11,6 @@ use crate::engine::{gen1::MoveType, generics::SpriteData};
 use super::{
     PokeType, 
     pokemove::PokeMove, 
-    graphics::{
-        Sprite, 
-        Viewport
-    }, 
     game::BattleMessage
 };
 
@@ -27,17 +23,17 @@ pub enum PermStatus {
     Paralyzed,
     Poisoned,
     Burned,
-    Sleep {turn: i32},
+    Sleep {turn: u32},
     Frozen,
 }
 
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum VolatileStatus {
     None,
-    Confused {turn: i32},
-    BadlyPoisoned {turn: i32},
+    Confused {turn: u32},
+    BadlyPoisoned {turn: u32},
     Seeded,
-    Bound {turn: i32},
+    Bound {turn: u32},
     Flinch,
 }
 
@@ -110,11 +106,11 @@ pub struct BasePokemon {
     pub front_sprite: SpriteData,
     pub back_sprite: SpriteData,
 
-    pub base_hp: i32,
-    pub base_attack: i32,
-    pub base_defense: i32,
-    pub base_speed: i32,
-    pub base_special: i32,
+    pub base_hp: u32,
+    pub base_attack: u32,
+    pub base_defense: u32,
+    pub base_speed: u32,
+    pub base_special: u32,
 
     pub type1: Arc<PokeType>,
     pub type2: Option<Arc<PokeType>>,
@@ -281,21 +277,21 @@ pub struct Pokemon {
 
     pub name: String,
 
-    pub level: i32,
+    pub level: u32,
     pub xp: u32,
-    pub hp: i32,
-    pub attack: i32,
-    pub defense: i32,
-    pub speed: i32,
-    pub special: i32,
+    pub hp: u32,
+    pub attack: u32,
+    pub defense: u32,
+    pub speed: u32,
+    pub special: u32,
 
     pub iv: u16,
 
-    pub hp_ev: i32,
-    pub attack_ev: i32,
-    pub defense_ev: i32,
-    pub speed_ev: i32,
-    pub special_ev: i32,
+    pub hp_ev: u32,
+    pub attack_ev: u32,
+    pub defense_ev: u32,
+    pub speed_ev: u32,
+    pub special_ev: u32,
 
     pub move1: Option<InstantiatedMove>,
     pub move2: Option<InstantiatedMove>,
@@ -303,17 +299,17 @@ pub struct Pokemon {
     pub move4: Option<InstantiatedMove>,
 
     pub status: (PermStatus, VolatileStatus),
-    pub current_hp: i32,
+    pub current_hp: u32,
 
 }
 
 pub enum Health {
     Full,
-    Percent(i32),
-    Add(i32),
-    AddPercent(i32),
-    Subtract(i32),
-    SubtractPercent(i32),
+    Percent(u32),
+    Add(u32),
+    AddPercent(u32),
+    Subtract(u32),
+    SubtractPercent(u32),
     Zero,
 }
 
@@ -330,21 +326,21 @@ enum Effective {
 pub enum StatXP {
     Max,
     Zero,
-    HP(i32),
-    Attack(i32),
-    Defense(i32),
-    Speed(i32),
-    Special(i32),
-    All(i32,i32,i32,i32,i32)
+    HP(u32),
+    Attack(u32),
+    Defense(u32),
+    Speed(u32),
+    Special(u32),
+    All(u32,u32,u32,u32,u32)
 }
 
 pub struct InstantiatedMove {
     pub data: Arc<PokeMove>,
-    pub current_pp: i32,
+    pub current_pp: u32,
 }
 
 impl InstantiatedMove {
-    pub fn new(data: Arc<PokeMove>, current_pp: i32) -> Self {
+    pub fn new(data: Arc<PokeMove>, current_pp: u32) -> Self {
         InstantiatedMove { data, current_pp }
     }
 }
@@ -363,7 +359,7 @@ _NotVeryEffectiveText::
  */
 
 impl Pokemon {
-    pub fn new(base: Arc<BasePokemon>, ivs: Option<u16>, level: Option<i32>, nickname: Option<String>, stat_xp: StatXP) -> Self {
+    pub fn new(base: Arc<BasePokemon>, ivs: Option<u16>, level: Option<u32>, nickname: Option<String>, stat_xp: StatXP) -> Self {
         let level = match level {
             Some(l) => l,
             None => 100,
@@ -417,7 +413,7 @@ impl Pokemon {
         }
     }
 
-    pub fn get_stat(&self, stat: Stat) -> i32 {
+    pub fn get_stat(&self, stat: Stat) -> u32 {
         match stat {
             Stat::Hp => self.hp,
             Stat::Attack => self.attack,
@@ -427,30 +423,30 @@ impl Pokemon {
         }
     }
 
-    fn get_iv (mask: Stat, iv: u16) -> i32 {
+    fn get_iv (mask: Stat, iv: u16) -> u32 {
         match mask {
-            Stat::Attack => return ((iv & 0xF000) >> 12)  as i32,
-            Stat::Defense => return ((iv & 0x0F00) >> 8) as i32,
-            Stat::Speed => return ((iv & 0x00F0) >> 4) as i32,
-            Stat::Special => return (iv & 0x000F) as i32,
-            Stat::Hp => return (((iv & 0x1000) >> 9) + ((iv & 0x0100) >> 6) + ((iv & 0x0010) >> 3) + ((iv & 0x0001))) as i32,
+            Stat::Attack => return ((iv & 0xF000) >> 12)  as u32,
+            Stat::Defense => return ((iv & 0x0F00) >> 8) as u32,
+            Stat::Speed => return ((iv & 0x00F0) >> 4) as u32,
+            Stat::Special => return (iv & 0x000F) as u32,
+            Stat::Hp => return (((iv & 0x1000) >> 9) + ((iv & 0x0100) >> 6) + ((iv & 0x0010) >> 3) + ((iv & 0x0001))) as u32,
         }
     }
 
-    fn stat_calculator(base: i32, iv: i32, statxp: i32, level: i32) -> i32 {
-        let statxp: i32 = (statxp as f32).sqrt().ceil() as i32;
-        let statxp: i32 = cmp::min(statxp, 255);
+    fn stat_calculator(base: u32, iv: u32, statxp: u32, level: u32) -> u32 {
+        let statxp: u32 = (statxp as f32).sqrt().ceil() as u32;
+        let statxp: u32 = cmp::min(statxp, 255);
         return (((((base+iv) * 2) + (statxp/4))*level)/100)+5;
     }
     
-    fn hp_calculator(base: i32, iv: i32, statxp: i32, level: i32) -> i32 {
+    fn hp_calculator(base: u32, iv: u32, statxp: u32, level: u32) -> u32 {
         return Self::stat_calculator(base, iv, statxp, level) + level + 5;
     }
 
     pub fn set_hp(&mut self, hp: Health) -> PermStatus {
         self.current_hp = match hp {
             Health::Full => self.hp,
-            Health::Percent(per) => (self.hp*per)/100,
+            Health::Percent(per) => (self.hp * per)/100,
             Health::Add(heal) => cmp::min(self.current_hp+heal,self.hp),
             Health::Subtract(dmg) => cmp::max(self.current_hp-dmg,0),
             Health::AddPercent(per) => cmp::min(self.current_hp+(self.hp*per)/100,self.hp),
@@ -481,7 +477,7 @@ impl Pokemon {
         }
     }
 
-    fn dmg_calc(crit: bool, level: i32, power: i32, attack: i32, defense: i32, stab: bool, effective: &Effective, random: i32) -> i32 {
+    fn dmg_calc(crit: bool, level: u32, power: u32, attack: u32, defense: u32, stab: bool, effective: &Effective, random: u32) -> u32 {
         
         let (attack, defense) = match (attack, defense) {
             (att,def) if att > 255 || def > 255 => (att/4, def/4),
@@ -521,12 +517,12 @@ impl Pokemon {
         dmg * random / 255
     }
 
-    pub fn attack(&mut self, defender: &Pokemon, pokemove: &PokeMove) -> (Vec<BattleMessage>, i32) {
-        let mut rng = rand::thread_rng();
+    pub fn attack(&mut self, defender: &Pokemon, pokemove: &PokeMove) -> (Vec<BattleMessage>, u32) {
+        let mut rng = rand::rng();
 
         let stab: bool = self.basemon.type1 == pokemove.move_type || self.basemon.type2.as_ref() == Some(&pokemove.move_type);
 
-        let crit: bool = rng.gen_range(0..=255) <= self.basemon.base_speed/2;
+        let crit: bool = rng.random_range(0..=255) <= self.basemon.base_speed/2;
 
         let effective: Effective = Self::get_effective(&pokemove.move_type, &defender);
 
@@ -536,12 +532,12 @@ impl Pokemon {
             MoveType::Error => (1,1)
         };
 
-        let random = rng.gen_range(217..=255);
+        let random = rng.random_range(217..=255);
 
         let dmg = Self::dmg_calc(crit, self.level, pokemove.power, attack, defense, stab, &effective, random);
 
         
-        let did_hit = rng.gen_range(0..=255) < pokemove.accuracy;
+        let did_hit = rng.random_range(0..=255) < pokemove.accuracy;
 
         let mut messages: Vec<BattleMessage> = Vec::new();
         match did_hit {
@@ -739,7 +735,7 @@ impl Pokemon {
                 volatile_status: self.status.1  
             },
             false => {
-                let mut move_data: Vec<(String, String, i32, i32, i32)> = Vec::new();
+                let mut move_data: Vec<(String, String, u32, u32, u32)> = Vec::new();
                 move_data.push(
                     match &self.move1 {
                         Some(pokemove) => (pokemove.data.name.clone(), pokemove.data.move_type.name.clone(), pokemove.data.power, pokemove.data.pp, pokemove.current_pp),
@@ -802,14 +798,14 @@ pub enum PokemonModel {
         index: u8,
         pokedex: u8,
         name: String,
-        front_sprite: (i32, i32, String),
-        back_sprite: (i32, i32, String),
+        front_sprite: (u32, u32, String),
+        back_sprite: (u32, u32, String),
 
         guid: String,
         nickname: String,
-        level: i32,
-        current_hp: i32,
-        max_hp: i32,
+        level: u32,
+        current_hp: u32,
+        max_hp: u32,
         perm_status: PermStatus,
         volatile_status: VolatileStatus,
     },
@@ -817,23 +813,23 @@ pub enum PokemonModel {
         index: u8,
         pokedex: u8,
         name: String,
-        front_sprite: (i32, i32, String),
-        back_sprite: (i32, i32, String),
+        front_sprite: (u32, u32, String),
+        back_sprite: (u32, u32, String),
 
         guid: String,
         nickname: String,
-        level: i32,
-        current_hp: i32,
-        max_hp: i32,
+        level: u32,
+        current_hp: u32,
+        max_hp: u32,
         perm_status: PermStatus,
         volatile_status: VolatileStatus,
 
-        attack: i32,
-        defense: i32,
-        speed: i32,
-        special: i32,
+        attack: u32,
+        defense: u32,
+        speed: u32,
+        special: u32,
         
-        move_data: Vec<(String, String, i32, i32, i32)>
+        move_data: Vec<(String, String, u32, u32, u32)>
     }
 }
 
@@ -841,7 +837,7 @@ impl PokemonModel {
     pub fn get_display_prefix(&self) -> Vec<String> {
         let mut stats: Vec<String> = Vec::new();
         match self {
-            PokemonModel::Reduced { index, pokedex, name, front_sprite, back_sprite: _, 
+            PokemonModel::Reduced { index, pokedex, name, front_sprite: _, back_sprite: _, 
                                     guid, nickname, level, current_hp, max_hp, 
                                     perm_status, volatile_status } => {
                     let header = match name == nickname {
@@ -857,16 +853,8 @@ impl PokemonModel {
                     stats.push(format!("{:^30}", "-----Status-----"));
                     stats.push(format!("  {:<13}{:?}", "Perm:", perm_status));
                     stats.push(format!("  {:<13}{:?}", "Volatile:", volatile_status));
-                
-                let (canvas_width, canvas_height): (usize, usize) = match term_size::dimensions() {
-                    Some(size) => (size.0, (front_sprite.1*4) as usize),
-                    None => (45,45),
-                };
-                let viewport = Viewport::new(canvas_width-45, canvas_height, 0, 0);
-
-                stats.push(Sprite::new(front_sprite.0, front_sprite.1, front_sprite.2.clone(), nickname.clone()).draw_sprite(false, Some(viewport)));
             },
-            PokemonModel::Full { index, pokedex, name, front_sprite: _, back_sprite, 
+            PokemonModel::Full { index, pokedex, name, front_sprite: _, back_sprite: _, 
                                  guid, nickname, level, current_hp, max_hp, perm_status, 
                                  volatile_status, attack, defense, speed, special, move_data } => {
                 let header = match name == nickname {
@@ -900,15 +888,6 @@ impl PokemonModel {
                     stats.push(format!("  {:<20}{:>2}/{:>2}", moves.0, moves.4, moves.3));
                     stats.push(format!("    Type: {:<8} PWR: {:>3}", moves.1, power));
                 }
-
-                //(size.0, (sprite.get_bounds().1*4-1) as usize)
-                let (canvas_width, canvas_height): (usize, usize) = match term_size::dimensions() {
-                    Some(size) => (size.0, (back_sprite.1*4-1) as usize),
-                    None => (45,45),
-                };
-                let viewport = Viewport::new(canvas_width-45, canvas_height, 0, 0);
-
-                stats.push(Sprite::new(back_sprite.0, back_sprite.1, back_sprite.2.clone(), nickname.clone()).draw_sprite(false, Some(viewport)));
             }
         };
         stats

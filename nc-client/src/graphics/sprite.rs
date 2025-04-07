@@ -1,7 +1,8 @@
 use std::error::Error;
 
+use poshmon_lib::engine::generics::SpriteData;
 use serde::Deserialize;
-use base64::DecodeError;
+use base64::{prelude::*, DecodeError};
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct Sprite {
@@ -20,10 +21,7 @@ impl Sprite {
         Ok(Sprite { width, height, colors, bit_depth, tile_size, data: sprite_data })
     }
 
-    
-
     pub fn to_vbuff(&self, flip: bool) -> Result<Vec<u8>, Box<dyn Error>>{
-        //let decompressed_sprite: Vec<u8> = self.decompress_sprite()?;
         let mut v_buff: Vec<u8> = vec![0;(self.height*self.width*self.tile_size*self.tile_size) as usize];
         
         for index in 0..self.height*self.tile_size*self.tile_size {
@@ -42,14 +40,6 @@ impl Sprite {
 
     pub fn scale_sprite(&self, scale: u32) -> Result<Self, Box<dyn Error>> {
         let mut scaled_sprite = vec![0;(self.height*self.width*self.tile_size*self.tile_size*scale*scale) as usize];
-        // for ($pixel=0;$pixel -lt $Sprite.data.Length;$pixel++) {
-        //     for ($scale_factor_row=0;$scale_factor_row -lt $Scale;$scale_factor_row++) {
-        //         for ($scale_factor_col=0;$scale_factor_col -lt $Scale;$scale_factor_col++) {
-        //             $sprite_scaled[(($pixel%($Sprite.width*$TILE_SIDE_RAW))*$Scale)+$scale_factor_col+(((([Math]::Floor($pixel/($Sprite.width*$TILE_SIDE_RAW)))*$Scale)+$scale_factor_row)*($Sprite.width*$TILE_SIDE_RAW*$Scale))] = $sprite.data[$pixel]
-        //         }
-        //     }
-        // }
-        
         println!("{}", self.data.len());
 
         for pixel in 0..self.data.len() as u32 {
@@ -69,14 +59,26 @@ impl Sprite {
 
 }
 
+impl TryFrom<SpriteData> for Sprite {
+
+    type Error = &'static str;
+
+    fn try_from(sprite_data: SpriteData) -> Result<Self, Self::Error> {
+        match Sprite::new(sprite_data.width, sprite_data.height, sprite_data.colors, sprite_data.tile_size, sprite_data.data) {
+            Ok(sprite) => Ok(sprite),
+            Err(_) => Err("Invalid Sprite Data"),
+        }
+    }
+}
+
 fn decompress_sprite(bit_depth: &u32, colors: &u32, data: String) -> Result<Vec<u8>, DecodeError> {
     let mut sprite_data: Vec<u8> = Vec::new();
-    let sprite_bytes = base64::decode(data)?;
+    let sprite_bytes = BASE64_STANDARD.decode(data)?;
     for bytenum in 0..sprite_bytes.len() as u32 {
         match sprite_bytes.get(bytenum as usize) {
             Some(byte) => {
                 for div in 0..*colors {
-                    sprite_data.insert((bytenum * colors + div) as usize, ((*byte >> (6 - (div * bit_depth))) & ((1 << bit_depth)-1)) as u8);
+                    sprite_data.insert((bytenum * colors + div) as usize, ((*byte >> ((8-bit_depth) - (div * bit_depth))) & ((1 << bit_depth)-1)) as u8);
                 }
             },
             None => todo!(),
@@ -85,15 +87,3 @@ fn decompress_sprite(bit_depth: &u32, colors: &u32, data: String) -> Result<Vec<
     }
     return Ok(sprite_data);
 }
-
-// impl Display for Sprite {
-//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-//         let sprite = self.render_sprite(true);
-
-//         let sprite: String = match sprite {
-//             Ok(sprite) => draw_canvas(sprite, self.height, self.width, Viewport::new((self.width*8) as usize, (self.height*4) as usize, 0,0)),
-//             Err(_) => "There was a decoding error in the sprite. Please check the data".to_owned(),
-//         };
-//         write!(f, "{}:{}\n\t{}x{} tiles (flipped)\n{}", self.name, self.id.to_string(),self.height,self.width,sprite)
-//     }
-// }

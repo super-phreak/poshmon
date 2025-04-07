@@ -1,12 +1,14 @@
 use std::sync::{Arc, RwLock, RwLockWriteGuard};
 
-use super::{Pokemon, graphics::Sprite};
+use crate::engine::generics::SpriteData;
+
+use super::Pokemon;
 
 pub struct Trainer {
     pub name: String,
     pub id: u16,
     pokemon_team: Arc<RwLock<Vec<Pokemon>>>,
-    pub sprite: Arc<Sprite>,
+    pub sprite: Arc<SpriteData>,
 }
 
 impl Trainer {

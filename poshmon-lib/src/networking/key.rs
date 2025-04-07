@@ -1,4 +1,4 @@
-use crypto_common::{KeySizeUser, Key, rand_core::OsRng, KeyInit};
+use crypto_common::{rand_core::{CryptoRng, RngCore, OsRng}, Key, KeyInit, KeySizeUser};
 use hmac::Hmac;
 use sha2::Sha256;
 use core::fmt::Debug;
@@ -6,6 +6,7 @@ use std::fmt::Display;
 use digest::consts::U16;
 use serde::ser::{Serialize, Serializer, SerializeStruct};
 use uuid::Uuid;
+use base64::prelude::*;
 
 pub type HmacSha256 = Hmac<Sha256>;
 
@@ -28,11 +29,13 @@ impl KeyInit for Salt {
         }
     }
 
-    fn generate_key(mut rng: impl rand::CryptoRng + rand::RngCore) -> Key<Self> {
+    fn generate_key(mut rng: impl CryptoRng + RngCore) -> Key<Self> { 
         let mut key = Key::<Self>::default();
         rng.fill_bytes(&mut key);
         key
     }
+
+
 }
 
 #[derive(Clone)]
@@ -56,7 +59,7 @@ impl SessionToken {
     }
 
     pub fn key_as_string(&self) -> String {
-        base64::encode(self.session_key)
+        BASE64_STANDARD.encode(&self.session_key)
     }
 }
 
@@ -75,7 +78,7 @@ impl Serialize for SessionToken {
 
 impl Debug for SessionToken {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("SessionToken").field("session_id", &self.session_id.to_string()).field("username", &self.username).field("session_key", &base64::encode(&self.session_key)).finish()
+        f.debug_struct("SessionToken").field("session_id", &self.session_id.to_string()).field("username", &self.username).field("session_key", &BASE64_STANDARD.encode(&self.session_key)).finish()
     }
 }
 

@@ -6,11 +6,11 @@ use super::PokeType;
 pub struct PokeMove {
     pub id: u8,
     pub name: String,
-    pub effect: i32,
-    pub power: i32,
+    pub effect: u32,
+    pub power: u32,
     pub move_type: Arc<PokeType>,
-    pub accuracy: i32,
-    pub pp: i32,
+    pub accuracy: u32,
+    pub pp: u32,
     pub priority: i32,
 }
 

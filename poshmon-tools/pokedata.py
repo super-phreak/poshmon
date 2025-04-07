@@ -106,17 +106,19 @@ class GBDataPacket:
 
 class Sprite:
 
-    def __init__(self,addr,width,height,data) -> None:
+    def __init__(self,addr,width,height,colors,tile_size,data) -> None:
         self.addr = addr
         self.width = width
         self.height = height
+        self.colors = colors
+        self.tile_size = tile_size
         self.data = data
 
     def __str__(self):
         return f"[Loc: {self.addr} => Width: {self.width}, Height: {self.height}]"
 
     def to_json(self) -> dict:
-        return {'width': self.width, 'height': self.height, 'data': self.to_base64()}
+        return {'width': self.width, 'height': self.height, 'colors': self.colors, 'tile_size': self.tile_size, 'data': self.to_base64()}
 
     @classmethod
     def __expandRLEPacket(cls, bit_length, value) -> BitString:
@@ -277,7 +279,7 @@ class Sprite:
 
         sprite_data = cls.__combineBuffers(bit_planes,high_bit_plane)
 
-        return cls(addr,width,height,sprite_data)
+        return cls(addr,width,height,4,8,sprite_data)
 
     @classmethod
     def decode1BPP(cls,addr,width,height):
@@ -292,7 +294,7 @@ class Sprite:
 
         sprite_data = cls.__combineBuffers(bit_planes,1)
         
-        return cls(addr,width,height,sprite_data)
+        return cls(addr,width,height,4,8,sprite_data)
 
 
     @classmethod
@@ -308,7 +310,7 @@ class Sprite:
 
         sprite_data = cls.__combineBuffers(bit_planes,1)
         
-        return cls(addr,width,height,sprite_data)
+        return cls(addr,width,height,4,8,sprite_data)
 
     @classmethod
     def decode_base64_sprite(cls, base64_sprite,width,height):
@@ -326,7 +328,7 @@ class Sprite:
         for i in range(0,int(len(sprite_array)),width*8):
             sprite.append(sprite_array[i:i+(width*8)])
 
-        return cls(Addr(0,0),width,height,sprite)
+        return cls(Addr(0,0),width,height,4,8,sprite)
 
 
 class GBText:

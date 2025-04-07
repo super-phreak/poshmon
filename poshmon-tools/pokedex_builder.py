@@ -16,5 +16,5 @@ for index in range(len(pokedata.datamap['Index to Pokedex'])):
 #Add Mew in After the fact
 pokedex.append(Pokemon.from_addr(Addr(0x01,0x425B),21).to_json())
 
-with open('data/pokedex.json', 'w') as pokedex_file:
+with open('../data/pokedex.json', 'w') as pokedex_file:
     json.dump(pokedex, pokedex_file, indent=2)

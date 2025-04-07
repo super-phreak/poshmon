@@ -14,7 +14,7 @@ pub struct GameState {
 
 impl GameState {
     pub fn fight(&mut self, player1_move: &PokeMove, player2_move: &PokeMove) -> Result<Vec<BattleMessage>, GameStateErrors> {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         
         let mut team1 = self.trainer1.get_team_as_mut();
         let mut team2 = self.trainer2.get_team_as_mut();
@@ -24,7 +24,7 @@ impl GameState {
 
         let mut battle_msg: Vec<BattleMessage> = Vec::new();
 
-        match Self::get_priority(player1_move, player2_move, p1_pkmn.speed, p2_pkmn.speed, rng.gen_bool(0.5)) {
+        match Self::get_priority(player1_move, player2_move, p1_pkmn.speed, p2_pkmn.speed, rng.random_bool(0.5)) {
             Priority::Player1First => {
                 let (mut p1msg, p1dmg) = p1_pkmn.attack(&p2_pkmn, player1_move);
                 battle_msg.append(&mut p1msg);
@@ -48,7 +48,7 @@ impl GameState {
         Ok(battle_msg)
     }
 
-    fn get_priority(player1_move: &PokeMove, player2_move: &PokeMove, p1_speed: i32, p2_speed: i32, tie_break: bool) -> Priority {
+    fn get_priority(player1_move: &PokeMove, player2_move: &PokeMove, p1_speed: u32, p2_speed: u32, tie_break: bool) -> Priority {
         if player1_move.priority > player2_move.priority {
             Priority::Player1First
         } else if player1_move.priority < player2_move.priority {
