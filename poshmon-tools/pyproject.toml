@@ -1,15 +1,21 @@
-[tool.poetry]
+[project]
 name = "poshmon-tools"
 version = "0.1.0"
 description = ""
-authors = ["super-phreak <joshpelino@gmail.com>"]
+authors = [
+    {name = "Super Phreak",email = "joshpelino@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "tqdm (>=4.67.1,<5.0.0)",
+    "bitstring (>=4.3.1,<5.0.0)",
+    "flask (>=3.1.0,<4.0.0)"
+]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-bitstring = "^3.1.9"
-
-[tool.poetry.dev-dependencies]
+[tool.poetry]
+packages = [{include = "poshmon_tools", from = "src"}]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"

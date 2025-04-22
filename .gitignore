@@ -5,6 +5,7 @@ poshmon-tools/lib
 poshmon-tools/pyvenv.cfg
 poshmon-tools/share
 poshmon-tools/lib64
+poshmon-tools/poetry.lock
 
 #Local env test
 client-tests/
